@@ -2,17 +2,55 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import s from "./RegistrationForm.module.scss";
 import {Link} from "react-router-dom";
-
+import doRequest from "../actions/doRequest";
+import {useDispatch} from "react-redux";
+import axios from "axios";
+import {setAboutUser, setUserTokens} from "../../redux/slices/userSlice";
 
 const RegistrationForm = () => {
-	
+	const dispatch = useDispatch()
 	const {register, handleSubmit, formState: {errors, isValid}} = useForm({
 		mode: 'onChange'
 	})
-	const onSubmit = (data) => {
-		console.log(data.date)
+	const onSubmit = async (data) => {
+		
+		const newDate = new Date(data.birth_date)
+		const years = newDate.getFullYear()
+		const month = newDate.getMonth() + 1
+		const day = newDate.getDay()
+		
+		if (Number(years) > 1970) {
+			
+			data.birth_date = `${years}-${month}-${day}`
+			
+			await axios.post('http://127.0.0.1:8000/api/v1/auth/users/', data)
+		} else {
+			alert('Долбоеб!!! Введи правильную дату')
+		}
+		
+		await axios.post('http://127.0.0.1:8000/api/v1/token/', {
+			email: data.email,
+			password: data.password,
+		})
+			.then(res => {
+				localStorage.setItem('accessToken',res.data.access)
+				localStorage.setItem('refreshToken',res.data.refresh)
+			})
+			.catch(err => console.log(err.response))
+		
+		// doRequest('http://127.0.0.1:8000/api/v1/auth/users/',
+		// 	null,null,'POST',data)
+		// 	.then(res =>
+		// 		// localStorage.setItem('accessToken',)
+		// 		// dispatch(res.data))
+		// 	console.log(res.data)
+		// 	)
+		// 	.catch(err => err.response.status)
+		//
+		// window.location.href = '/'
+		
+		
 	}
-	
 	
 	
 	return (
@@ -57,14 +95,25 @@ const RegistrationForm = () => {
 				<div className={s.date__gender}>
 					<label className={s.label__inputs}>
 						
-						{errors?.date ? <div className={s.error__send}>{errors.date.message}</div> : 'Дата рождения'}
+						{errors?.birth_date ?
+							<div className={s.error__send}>
+								{errors.birth_date.message}</div>
+							: 'Дата рождения'}
 						
 						<input
 							className={s.input__date}
 							type='date'
-							style={errors?.date && {borderColor: 'red'}}
-							{...register('date', {
+							style={errors?.birth_date && {borderColor: 'red'}}
+							{...register('birth_date', {
 								required: 'Необходимо заполнить',
+								min: {
+									value: 1970,
+									message: 'Дата рождения некорректна'
+								},
+								max: {
+									value: new Date(),
+									message: 'Выбранная дата превышает реальную'
+								},
 								valueAsDate: true,
 							})}
 						
@@ -76,7 +125,7 @@ const RegistrationForm = () => {
 								id='male'
 								className={s.input__radio}
 								type='radio'
-								value='male'
+								value='m'
 								style={errors?.gender && {borderColor: 'red'}}
 								{...register('gender', {
 									required: 'Необходимо заполнить',
@@ -96,7 +145,7 @@ const RegistrationForm = () => {
 								id='female'
 								className={s.input__radio}
 								type='radio'
-								value='female'
+								value='f'
 								{...register('gender', {
 									required: 'Необходимо заполнить',
 									

@@ -54,13 +54,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/react_projects/losti-chat",
+    "last_opened_file_path": "D:/losti-chat",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+    "settings.editor.selected.configurable": "AtomConfig"
   },
   "keyToStringList": {
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
@@ -105,6 +105,8 @@
       <workItem from="1674341684451" duration="7254000" />
       <workItem from="1674400899924" duration="1230000" />
       <workItem from="1674408951828" duration="775000" />
+      <workItem from="1674469311282" duration="621000" />
+      <workItem from="1674482156097" duration="23233000" />
     </task>
     <servers />
   </component>
