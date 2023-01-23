@@ -1,0 +1,120 @@
+@charset "UTF-8";
+.wrapper {
+  flex-grow: 5;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0 9px 9px 0;
+  position: relative;
+}
+
+.wrapper__input {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.input input {
+  border: 1px solid #1a73e8;
+  outline: none;
+  width: 85%;
+  border-radius: 8px;
+  padding: 8px;
+  transition: all 0.3s;
+}
+.input svg {
+  width: 24px;
+  height: 24px;
+  fill: #1a73e8;
+  transition: all 0.3s;
+}
+.input svg:hover {
+  transform: rotate(15deg) scale(1.1);
+}
+
+.download__file {
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+.download__file svg {
+  transition: all 0.3s;
+  width: 24px;
+  height: 24px;
+  fill: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+.download__file svg:hover {
+  transform: rotate(-45deg) scale(1.1);
+}
+
+.header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+.header:before {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  width: 3%;
+  height: 8px;
+  z-index: 10;
+  background-color: #FFFFFF;
+}
+
+.left__side {
+  display: flex;
+  align-items: center;
+}
+.left__side img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: calc(20px + 1.5vw);
+  height: calc(20px + 1.5vw);
+  transition: all 0.3s;
+  border: 1px solid rgb(0, 0, 0);
+  margin-right: 10px;
+}
+
+.person__info h1 {
+  margin: 0;
+  padding: 0;
+  font-size: calc(16px + 0.5vw);
+  color: #000000;
+}
+.person__info p {
+  font-size: calc(10px + 0.1vw);
+  margin: 0;
+  color: green;
+}
+.person__info p:after {
+  content: "•";
+  margin-left: 5px;
+}
+
+.right_side {
+  display: flex;
+  align-items: center;
+}
+.right_side svg {
+  transition: all 0.3s;
+  width: 24px;
+  height: 24px;
+  fill: black;
+  border-radius: 50%;
+  border: 1px solid transparent;
+}
+.right_side svg:hover {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/*# sourceMappingURL=Chat.module.css.map */

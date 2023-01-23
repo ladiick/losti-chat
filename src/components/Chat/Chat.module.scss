@@ -1,0 +1,146 @@
+.wrapper{
+	flex-grow: 5;
+	//background-color: rgb(244, 244, 246);
+	border-left: 1px solid rgba(0,0,0,0.2);
+	border-radius: 0 9px 9px 0;
+	position: relative;
+	//background: url("login_img3.jpg") center/130% no-repeat;
+
+
+}
+.wrapper__input{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 20px 10px;
+	border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.input{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+
+	input{
+
+		border: 1px solid #1a73e8;
+		outline: none;
+		width: 85%;
+		border-radius: 8px;
+		padding: 8px;
+		transition: all .3s;
+		//box-shadow: 1px 3px 8px 0 rgba(34, 60, 80, 0.4);
+		//box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.4);
+
+	}
+
+	svg{
+		width: 24px;
+		height: 24px;
+		fill: #1a73e8;
+		transition: all .3s;
+		&:hover{
+			transform: rotate(15deg) scale(1.1);
+
+
+		}
+	}
+}
+
+.download__file{
+	transform: rotate(45deg);
+	cursor: pointer;
+	svg{
+		transition: all .3s;
+		width: 24px;
+		height: 24px;
+		fill: rgba(0,0,0,0.5);
+		border-radius: 50%;
+
+		&:hover{
+			transform: rotate(-45deg) scale(1.1);
+
+		}
+	}
+}
+
+.header{
+	padding: 10px 15px;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	//border-bottom: 1px solid #1a73e8;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	border-radius: 10px;
+
+	&:before{
+		content: '';
+		position: absolute;
+		bottom: -1px;
+		right: 0;
+		width: 3%;
+		height: 8px;
+		z-index: 10;
+		//transform: translateX(-4%);
+		background-color: #FFFFFF;
+	;
+	}
+}
+
+.left__side{
+	display: flex;
+	align-items: center;
+	img{
+		border-radius: 50%;
+		object-fit: cover;
+		width: calc(20px + 1.5vw);
+		height: calc(20px + 1.5vw);
+		transition: all .3s;
+		border: 1px solid rgba(0,0,0,1);
+		margin-right: 10px;
+
+	}
+}
+
+.person__info{
+	h1{
+		margin: 0;
+		padding: 0;
+		font-size: calc(16px + 0.5vw);
+		color: #000000;
+	}
+	p{
+		font-size: calc(10px + 0.1vw);
+		margin: 0;
+		color: green;
+
+		&:after{
+			content: '•';
+			margin-left: 5px;
+		}
+	}
+}
+
+
+.right_side{
+	display: flex;
+	align-items: center;
+	svg{
+		
+		transition: all .3s;
+		width: 24px;
+		height: 24px;
+		fill: black;
+		border-radius: 50%;
+		border: 1px solid transparent;
+
+		&:hover{
+			border: 1px solid rgba(0,0,0,0.2);
+
+		}
+	}
+}
+
+
+
+

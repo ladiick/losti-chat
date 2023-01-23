@@ -1,0 +1,19 @@
+.block__messages {
+  height: 75%;
+  margin: 15px 0;
+  padding: 20px;
+  margin-right: 10px;
+  overflow-y: auto;
+}
+.block__messages::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+.block__messages::-webkit-scrollbar {
+  width: 4px;
+}
+.block__messages::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/*# sourceMappingURL=Communication.module.css.map */

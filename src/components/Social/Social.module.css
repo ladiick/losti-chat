@@ -1,0 +1,40 @@
+.wrapper {
+  flex-grow: 0.5;
+  margin-left: 63px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 15px 30px 15px;
+}
+
+.block__search {
+  position: relative;
+  margin-bottom: 22px;
+}
+.block__search svg {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 5px;
+  left: 8px;
+  transition: all 0.3s;
+  z-index: 12;
+}
+.block__search input {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: none;
+  transition: all 0.3s;
+  width: 100%;
+  border-radius: 8px;
+  padding: 8px 8px 8px 35px;
+}
+.block__search:hover input {
+  transform: scale(1.02);
+  border: 1px solid #1a73e8;
+  box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.4);
+}
+.block__search:hover svg {
+  left: 6px;
+  fill: #1a73e8;
+}
+
+/*# sourceMappingURL=Social.module.css.map */

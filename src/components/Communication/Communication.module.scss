@@ -1,0 +1,12 @@
+.block__messages {
+	height: 75%;
+	margin: 15px 0;
+	//background: rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	margin-right: 10px;
+	overflow-y:auto ;
+	&::-webkit-scrollbar-track {border-radius: 4px;}
+	&::-webkit-scrollbar {width: 4px;}
+	&::-webkit-scrollbar-thumb {border-radius: 4px;background: rgba(0,0,0,0.2);}
+
+}

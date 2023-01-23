@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="df6f94e0-5d33-4bff-8b92-750270cccee8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Chat/Chat.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Chat/Chat.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Pages/Authorization/Authorization.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Pages/Authorization/Authorization.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Pages/Main/Main.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Pages/Main/Main.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/People/People.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/People/People.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Social/Social.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Social/Social.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/assets/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2KHhZYIePNOiYYu9EBdaD3RqUNq" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/react_projects/losti-chat",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "SCSS"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\react_projects\losti-chat\src\components\Chat" />
+      <recent name="D:\react_projects\losti-chat\src\components\Social" />
+      <recent name="D:\react_projects\losti-chat\src\components\assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\react_projects\losti-chat\src\Pages\Main" />
+      <recent name="D:\react_projects\losti-chat\src\components\Chat" />
+      <recent name="D:\react_projects\losti-chat\src" />
+      <recent name="D:\react_projects\losti-chat\src\components" />
+      <recent name="D:\react_projects\losti-chat\src\components\Pages\Authorization" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="df6f94e0-5d33-4bff-8b92-750270cccee8" name="Changes" comment="" />
+      <created>1673637475518</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673637475518</updated>
+      <workItem from="1673637477808" duration="1987000" />
+      <workItem from="1673639570295" duration="2260000" />
+      <workItem from="1673700729337" duration="23170000" />
+      <workItem from="1673778040985" duration="311000" />
+      <workItem from="1673780235525" duration="18107000" />
+      <workItem from="1673874246353" duration="17000" />
+      <workItem from="1673883664763" duration="1217000" />
+      <workItem from="1673886561519" duration="16288000" />
+      <workItem from="1673953126543" duration="20790000" />
+      <workItem from="1674044512655" duration="15081000" />
+      <workItem from="1674223391419" duration="372000" />
+      <workItem from="1674223786789" duration="900000" />
+      <workItem from="1674341684451" duration="7254000" />
+      <workItem from="1674400899924" duration="1230000" />
+      <workItem from="1674408951828" duration="775000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

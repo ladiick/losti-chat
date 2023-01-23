@@ -1,0 +1,65 @@
+.wrapper {
+  height: 100%;
+}
+
+.container {
+  max-width: 1076px;
+  margin: 0px auto;
+}
+
+.content {
+  display: flex;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.name__company {
+  width: 100%;
+}
+.name__company span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.name__company span:before {
+  position: absolute;
+  content: "";
+  border: 1px solid #1a73e8;
+  border-radius: 10px;
+  bottom: 10px;
+  width: 20%;
+  left: 50%;
+  transform: translateX(-36%);
+  animation: width 6s infinite alternate ease-in-out;
+}
+@keyframes width {
+  to {
+    width: 5%;
+  }
+  from {
+    width: 11%;
+  }
+}
+.name__company span h1 {
+  font-size: calc(16px + 0.2vw);
+}
+.name__company span img {
+  width: 32px;
+  height: 32px;
+  animation: logo 6s infinite alternate ease-in-out;
+}
+@keyframes logo {
+  to {
+    opacity: 0.2;
+    transform: rotate(0deg);
+  }
+  from {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=Main.module.css.map */

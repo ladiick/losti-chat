@@ -1,0 +1,34 @@
+.message {
+  text-align: right;
+  padding: 0 15px;
+}
+.message:not(:last-child) {
+  margin-bottom: 50px;
+}
+.message span {
+  background-color: #1a73e8;
+  border-radius: 16px;
+  padding: 6px 16px;
+  color: #FFFFFF;
+  position: relative;
+}
+.message span:before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: #1a73e8;
+  border-radius: 50%;
+  right: -12px;
+  bottom: -6px;
+}
+.message span .message__time {
+  position: absolute;
+  bottom: -16px;
+  right: 10px;
+  font-size: 12px;
+  font-weight: 300;
+  color: #707070;
+}
+
+/*# sourceMappingURL=Message.module.css.map */
