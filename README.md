@@ -1,5 +1,5 @@
 
-## <span center>The backend is https://github.com/Love-Time/LostiChat</span>
+## <span style="text-align: center">The backend is https://github.com/Love-Time/LostiChat</span>
 
 # Getting Started with Create React App
 
