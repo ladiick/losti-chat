@@ -153,7 +153,10 @@
 
 .error__send {
   color: red;
-  font-size: calc(14px + 0.2vw);
+  font-size: calc(12px + 0.2vw);
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 @media (max-width: 900px) {
