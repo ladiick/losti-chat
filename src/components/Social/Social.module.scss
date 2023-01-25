@@ -1,11 +1,12 @@
 .wrapper{
-	flex-grow: 0.5;
-	margin-left: 63px;
+	flex-grow:0.5 ;
 	display: flex;
 	flex-direction: column;
 	padding: 30px 15px 30px 15px;
 	//box-shadow: -10px 0px 10px -6px rgba(0, 0, 0, 0.3) inset;
 
+	background-color: rgba(0, 0, 0, 0);
+	box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4) inset;
 
 }
 

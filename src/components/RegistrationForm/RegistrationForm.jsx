@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import doRequest from "../actions/doRequest";
 import {useDispatch} from "react-redux";
 import axios from "axios";
-import {setAboutUser, setUserTokens} from "../../redux/slices/userSlice";
+import {setAboutUser, setIsAuth, setUserTokens} from "../../redux/slices/userSlice";
 
 const RegistrationForm = () => {
 	const dispatch = useDispatch()
@@ -19,36 +19,10 @@ const RegistrationForm = () => {
 		const month = newDate.getMonth() + 1
 		const day = newDate.getDay()
 		
-		if (Number(years) > 1970) {
-			
-			data.birth_date = `${years}-${month}-${day}`
-			
-			await axios.post('http://127.0.0.1:8000/api/v1/auth/users/', data)
-		} else {
-			alert('Долбоеб!!! Введи правильную дату')
-		}
+		data.birth_date = `${years}-${month}-${day}`
+		await axios.post('http://127.0.0.1:8000/api/v1/auth/users/', data)
 		
-		await axios.post('http://127.0.0.1:8000/api/v1/token/', {
-			email: data.email,
-			password: data.password,
-		})
-			.then(res => {
-				localStorage.setItem('accessToken',res.data.access)
-				localStorage.setItem('refreshToken',res.data.refresh)
-			})
-			.catch(err => console.log(err.response))
-		
-		// doRequest('http://127.0.0.1:8000/api/v1/auth/users/',
-		// 	null,null,'POST',data)
-		// 	.then(res =>
-		// 		// localStorage.setItem('accessToken',)
-		// 		// dispatch(res.data))
-		// 	console.log(res.data)
-		// 	)
-		// 	.catch(err => err.response.status)
-		//
-		// window.location.href = '/'
-		
+		window.location.href = '/authorization'
 		
 	}
 	

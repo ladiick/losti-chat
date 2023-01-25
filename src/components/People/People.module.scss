@@ -1,21 +1,22 @@
 
 .block__people {
-	flex-grow: 2;
-	height: 100%;
+	//flex-grow: 2;
+	//height: 95%;
 	//margin-top: 34px;
 	border-radius: 8px;
 	border: 1px solid rgba(0, 0, 0, 0.2);
-	padding: 10px 4px 25px 10px;
-	max-height: 549px;
-	overflow: hidden;
+	padding: 10px 4px 25px 0;
+	max-height: calc(500px + 4vw);
+	//overflow: hidden;
 
 	.title__people {
 		width: 100%;
 		//flex-grow: 10;
 		margin: 0;
-		padding: 0;
-		font-size: calc(16px + 0.5vw);
+
+		font-size: calc(14px + 0.5vw);
 		color: black;
+		padding-left: 10px;
 	}
 
 	transition: all .3s;
@@ -29,10 +30,11 @@
 
 .wrapper__items {
 	overflow-y: auto;
-	//overflow-x:hidden ;
-	height: 95%;
-	padding: 0 10px 30px 10px;
-	margin-top: 15px;
+	overflow-x: hidden;
+	max-height: 95%;
+
+	padding: 10px 10px 30px 10px;
+	margin-top: 10px;
 	transition: all .3s;
 
 	&::-webkit-scrollbar-track {

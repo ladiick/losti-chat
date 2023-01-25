@@ -1,7 +1,7 @@
 .block__messages {
   height: 75%;
   margin: 15px 0;
-  padding: 20px;
+  padding: 10px;
   margin-right: 10px;
   overflow-y: auto;
 }

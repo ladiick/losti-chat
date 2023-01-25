@@ -14,28 +14,28 @@
   margin-right: 10px;
   border-radius: 50%;
   object-fit: cover;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
 }
 .block__people__item:before {
   content: "";
   position: absolute;
-  width: 50%;
+  width: 30%;
   border-bottom: 3px solid #1a73e8;
   z-index: 10;
   bottom: -1.5px;
   border-radius: 4px;
   left: 0;
-  transform: translateX(50%);
+  transform: translateX(-150%);
   transition: all 0.3s;
 }
 .block__people__item:hover {
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.4);
-  border: 1px solid transparent;
+  border-color: transparent;
 }
 .block__people__item:hover:before {
-  width: 80%;
-  transform: translateX(12.5%);
+  width: 50%;
+  transform: translateX(50%);
 }
 
 .info__message {
@@ -75,7 +75,10 @@
   align-self: flex-end;
   font-size: calc(10px + 0.1vw);
   color: #000000;
-  border-radius: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 4px;
+  background-color: red;
 }
 
 /*# sourceMappingURL=PeopleItem.module.css.map */
