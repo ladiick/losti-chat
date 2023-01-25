@@ -6,7 +6,7 @@
 	border-radius: 8px;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	padding: 10px 4px 25px 0;
-	max-height: calc(500px + 4vw);
+	min-height: calc(500px + 4vw);
 	//overflow: hidden;
 
 	.title__people {

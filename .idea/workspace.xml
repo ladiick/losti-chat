@@ -5,47 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df6f94e0-5d33-4bff-8b92-750270cccee8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Logout/Logout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/slices/peopleSlice.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend" beforeDir="false" afterPath="$PROJECT_DIR$/backend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Main/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Main/Main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Main/Main.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Main/Main.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Main/Main.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Main/Main.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Main/Main.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Main/Main.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chat/Chat.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chat/Chat.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chat/Chat.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chat/Chat.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/Communication.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Communication/Communication.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/Communication.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Communication/Communication.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Message/Message.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Message/Message.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Message/Message.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Message/Message.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/People/People.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/People/People.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/People.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.module.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/People/People.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Social/Social.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Social/Social.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Social/Social.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Social/Social.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Social/Social.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Social/Social.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/assets/logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/slices/userSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/slices/userSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
