@@ -2,6 +2,8 @@ import s from './AuthorizationForm.module.scss'
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import React from "react";
+import axios from "axios";
+import {setIsAuth} from "../../redux/slices/userSlice";
 
 const AuthorizationForm = () => {
 	const {register, handleSubmit, formState: {errors, isValid}} = useForm(
@@ -10,8 +12,20 @@ const AuthorizationForm = () => {
 		}
 	)
 	
-	const onSubmit = (data) => {
-	
+	const onSubmit = async (data) => {
+		
+		
+		await axios.post('http://127.0.0.1:8000/api/v1/token/', {
+			email: data.email,
+			password: data.password,
+		})
+			.then(res => {
+				localStorage.setItem('accessToken',res.data.access)
+				localStorage.setItem('refreshToken',res.data.refresh)
+				window.location.href = '/'
+				
+			})
+			.catch(err => console.log(err.response))
 	
 	}
 	
@@ -66,7 +80,7 @@ const AuthorizationForm = () => {
 				
 				<button className={s.btn_submit} disabled={!isValid}>Авторизоваться</button>
 				<span className={s.btn__desc}>У вас нет аккаунта?
-					<Link to='/'>Зарегистрируйтесь здесь.</Link></span>
+					<Link to='/registration'>Зарегистрируйтесь здесь.</Link></span>
 			
 			</form>
 		</div>

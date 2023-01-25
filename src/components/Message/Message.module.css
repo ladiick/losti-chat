@@ -1,34 +1,26 @@
-.message {
+.message__wrapper {
   text-align: right;
   padding: 0 15px;
 }
-.message:not(:last-child) {
-  margin-bottom: 50px;
+.message__wrapper:not(:last-child) {
+  margin-bottom: 40px;
 }
-.message span {
+.message__wrapper .message {
   background-color: #1a73e8;
-  border-radius: 16px;
-  padding: 6px 16px;
+  border-radius: 16px 8px 0px 16px;
+  padding: 3px 9px;
   color: #FFFFFF;
   position: relative;
+  font-size: calc(11px + 0.1vw);
 }
-.message span:before {
+.message__wrapper .message .message__info {
   position: absolute;
-  content: "";
-  width: 10px;
-  height: 10px;
-  background-color: #1a73e8;
-  border-radius: 50%;
-  right: -12px;
-  bottom: -6px;
-}
-.message span .message__time {
-  position: absolute;
-  bottom: -16px;
-  right: 10px;
-  font-size: 12px;
+  bottom: -12px;
+  right: 0;
+  font-size: calc(8px + 0.1vw);
   font-weight: 300;
   color: #707070;
+  display: flex;
 }
 
 /*# sourceMappingURL=Message.module.css.map */

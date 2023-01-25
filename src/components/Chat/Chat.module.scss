@@ -6,7 +6,6 @@
 	position: relative;
 	//background: url("login_img3.jpg") center/130% no-repeat;
 
-
 }
 .wrapper__input{
 	position: absolute;
@@ -93,8 +92,8 @@
 	img{
 		border-radius: 50%;
 		object-fit: cover;
-		width: calc(20px + 1.5vw);
-		height: calc(20px + 1.5vw);
+		width: calc(20px + 1vw);
+		height: calc(20px + 1vw);
 		transition: all .3s;
 		border: 1px solid rgba(0,0,0,1);
 		margin-right: 10px;
@@ -106,7 +105,7 @@
 	h1{
 		margin: 0;
 		padding: 0;
-		font-size: calc(16px + 0.5vw);
+		font-size: calc(16px + 0.1vw);
 		color: #000000;
 	}
 	p{
@@ -141,6 +140,23 @@
 	}
 }
 
+
+.notAuth{
+	flex-grow: 5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	h1{
+		font-weight: 500;
+		font-size: calc(16px + 0.5vh);
+		padding-right: 20px;
+	}
+	 svg{
+		 width: calc(24px + 1vw);
+		 height: calc(24px + 1vw);
+
+	 }
+}
 
 
 

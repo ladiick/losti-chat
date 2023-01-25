@@ -4,7 +4,8 @@ import {Routes, Route} from "react-router-dom";
 import Main from "./Pages/Main/Main";
 import Authorization from "./Pages/Authorization/Authorization";
 import Registration from "./Pages/Registration/Registration";
-import {setAboutUser, setUserRefreshToken, setUserAccessToken} from "./redux/slices/userSlice";
+import {Logout} from "./components/Logout/Logout";
+import {setAboutUser, setUserRefreshToken, setUserAccessToken, setIsAuth} from "./redux/slices/userSlice";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {useEffect} from "react";
@@ -26,6 +27,7 @@ function App() {
 				})
 					.then(res => {
 						dispatch(setAboutUser(res.data))
+						dispatch(setIsAuth(true))
 					})
 					.catch(() => {
 						axios.post('http://127.0.0.1:8000/api/v1/token/refresh/', {
@@ -52,7 +54,7 @@ function App() {
 			<Route path='/' element={<Main/>}/>
 			<Route path='/authorization' element={<Authorization/>}/>
 			<Route path='/registration' element={<Registration/>}/>
-		
+			<Route path='/logout' element={<Logout/>}/>
 		</Routes>
 	);
 }

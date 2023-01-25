@@ -6,11 +6,14 @@ const Message = ()=>{
 
 	return(
 
-		<div className={s.message}>
+		<div className={s.message__wrapper}>
 
-			<span>
-				message
-				<div className={s.message__time}>Today, 8.34pm</div>
+			<span className={s.message}>
+				mkngjnhjfgnj
+				<div className={s.message__info}>
+					<span className={s.message__day}>Today,</span>
+					<span className={s.message__time}>8.34pm</span>
+				</div>
 			</span>
 
 

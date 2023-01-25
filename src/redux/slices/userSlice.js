@@ -5,6 +5,7 @@ const initialState = {
 		access: '',
 		refresh: '',
 	},
+	isAuth: false,
 	aboutUser: {}
 }
 
@@ -20,9 +21,11 @@ const userSlice = createSlice({
 		setUserRefreshToken: (state,action)=>{
 			state.tokens.refresh = action.payload
 		},
-		
 		setAboutUser: (state,action)=>{
 			state.aboutUser = action.payload
+		},
+		setIsAuth: (state,action)=>{
+			state.isAuth = action.payload
 		}
 		
 }
@@ -30,6 +33,10 @@ const userSlice = createSlice({
 	
 })
 
-export const { setUserTokens,setAboutUser, setUserRefreshToken,setUserAccessToken } = userSlice.actions
+export const {
+	setUserTokens,setAboutUser,
+	setUserRefreshToken,setUserAccessToken,
+	setIsAuth,
+} = userSlice.actions
 
 export default userSlice.reducer

@@ -12,16 +12,11 @@ const Main = () => {
 			<div className={s.wrapper}>
 				
 				<div className={s.container}>
-					<div className={s.name__company}>
-					<span>
-						<img src={logo} alt='logo'/>
-						<h1>LOSTI-CHAT</h1>
-					</span>
-					</div>
 					<div className={s.content}>
 						<Navigation/>
-						<Social/>
-						<Chat/>
+							<Social/>
+							<Chat/>
+						
 					</div>
 				</div>
 			</div>
