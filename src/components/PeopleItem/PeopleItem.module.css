@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .block__people__item {
   display: flex;
   align-items: center;
@@ -57,6 +58,10 @@
 .name__lastMessage p {
   font-size: calc(10px + 0.1vw);
   margin: 0;
+  max-width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden;
   color: #575656;
 }
 
@@ -73,12 +78,15 @@
 }
 .wrapper__time span {
   align-self: flex-end;
+  padding-top: 1.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: calc(10px + 0.1vw);
-  color: #000000;
-  width: 10px;
-  height: 10px;
-  border-radius: 4px;
-  background-color: red;
+  color: #FFFFFF;
+  border-radius: 18px;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 50%;
 }
 
 /*# sourceMappingURL=PeopleItem.module.css.map */

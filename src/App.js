@@ -33,7 +33,6 @@ function App() {
 						axios.post('http://127.0.0.1:8000/api/v1/token/refresh/', {
 							refresh: userRefreshToken
 						}).then(res => {
-							console.log(res.data)
 							localStorage.setItem('accessToken', res.data.access)
 							dispatch(setUserAccessToken(localStorage.getItem('accessToken')))
 						})
