@@ -3,17 +3,12 @@
 
 
 .wrapper__navigation {
-
-	//background-color: rgba(26, 115, 232, 1);
+	//width: 25%;
 	background-color: rgba(0, 0, 0, 0.8);
 	display: inherit;
 	align-items: center;
 	border-radius: 9px 0 0 9px;
-	padding: 0px 10px;
-	//position: absolute;
-	//top: 0;
-	//left: 0;
-	//height: 100%;
+	padding: 0 10px;
 	transition: all .3s;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 1) inset;
 

@@ -5,6 +5,8 @@
 	border: 1px solid rgba(0,0,0,0.2);
 	padding: 6px;
 	border-radius: 8px;
+	cursor: pointer;
+
 
 	&:not(:last-child){
 		margin-bottom: 12px;
@@ -45,11 +47,52 @@
 
 }
 
+.block__people__item__active{
+	display: flex;
+	align-items: center;
+	transition: all .3s;
+	border: 1px solid rgba(0,0,0,1);
+	padding: 6px;
+	border-radius: 8px;
+	cursor: pointer;
+
+	&:not(:last-child){
+		margin-bottom: 12px;
+	}
+
+	img {
+		margin-right: 10px;
+		border-radius: 50%;
+		object-fit: cover;
+		width: 36px;
+		height: 36px;
+
+	}
+	position: relative;
+	&:before {
+		content: "";
+		position: absolute;
+		width: 50%;
+		border-bottom: 3px solid #1a73e8;
+		z-index: 10;
+		bottom: -1.5px;
+		border-radius: 4px;
+		left: 0;
+		transform: translateX(50%);
+		transition: all .3s;
+	}
+
+}
+
 .info__message {
 	display: flex;
 	//align-items: center;
 	//justify-content: space-between;
 	width: 100%;
+	img{
+		width: 36px;
+		height: 36px;
+	}
 }
 
 

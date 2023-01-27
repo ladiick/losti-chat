@@ -1,33 +1,62 @@
 import s from './Chat.module.scss'
-import photo from '../assets/my_photo.jpg'
+import photo from '../assets/photo.svg'
 import Communication from "../Communication/Communication";
 import {useSelector} from "react-redux";
-
-
-
+import message from '../assets/messages.svg'
 
 const Chat = () => {
 	
-	const isAuth = useSelector(state=>state.user.isAuth)
+	const isAuth = useSelector(state => state.user.isAuth)
+	const people = useSelector(state => state.people.people)
+	const peopleChecked = useSelector(state => state.people.peopleChecked)
 	
-	if(!isAuth){
+	let currentPeople = people
+		.map(obj => {
+			if (obj.sender.pk === peopleChecked) {
+				return obj.sender
+			}
+			if (obj.recipient.pk === peopleChecked) {
+				return obj.recipient
+			}
+			
+		})
+
+	
+	
+	if (!isAuth) {
 		return (
 			<div className={s.notAuth}>
 				
 				<h1>Необходимо авторизоваться</h1>
-				<svg viewBox="0 0 128 128" ><path d="M64,0a64,64,0,1,0,64,64A64.07,64.07,0,0,0,64,0Zm0,122a58,58,0,1,1,58-58A58.07,58.07,0,0,1,64,122Z"/><path d="M92.12,35.79a3,3,0,0,0-4.24,0L64,59.75l-23.87-24A3,3,0,0,0,35.88,40L59.76,64,35.88,88a3,3,0,0,0,4.25,4.24L64,68.25l23.88,24A3,3,0,0,0,92.13,88L68.24,64,92.13,40A3,3,0,0,0,92.12,35.79Z"/></svg>
+				<svg viewBox="0 0 128 128">
+					<path d="M64,0a64,64,0,1,0,64,64A64.07,64.07,0,0,0,64,0Zm0,122a58,58,0,1,1,58-58A58.07,58.07,0,0,1,64,122Z"/>
+					<path
+						d="M92.12,35.79a3,3,0,0,0-4.24,0L64,59.75l-23.87-24A3,3,0,0,0,35.88,40L59.76,64,35.88,88a3,3,0,0,0,4.25,4.24L64,68.25l23.88,24A3,3,0,0,0,92.13,88L68.24,64,92.13,40A3,3,0,0,0,92.12,35.79Z"/>
+				</svg>
 			</div>
-			
+		
 		)
 	}
+	if(peopleChecked=== null){
+		return(
+			<div className={s.emptity__chat}>
+				<div className={s.emptity__content}>
+				<img src={message} alt='message'/>
+				<span>Выберите чат</span>
+				
+			</div>
+			</div>
+		)
+	}
+	
 	
 	return (
 		<div className={s.wrapper}>
 			<header className={s.header}>
 				<div className={s.left__side}>
-					<img src={photo} alt="logo"/>
+					<img src={currentPeople[0].image ? currentPeople[0].image : photo} alt="logo"/>
 					<div className={s.person__info}>
-						<h1>ladick</h1>
+						<h1>{currentPeople[0].first_name} {currentPeople[0].last_name}</h1>
 						<p>Online</p>
 					</div>
 				</div>

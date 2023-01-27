@@ -3,7 +3,7 @@
   display: inherit;
   align-items: center;
   border-radius: 9px 0 0 9px;
-  padding: 0px 10px;
+  padding: 0 10px;
   transition: all 0.3s;
   box-shadow: 0 0 20px 0 rgb(0, 0, 0) inset;
 }

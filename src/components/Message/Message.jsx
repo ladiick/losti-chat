@@ -1,18 +1,42 @@
 import s from './Message.module.scss';
+import {useEffect,useRef} from "react";
 
 
-const Message = ()=>{
+const Message = ({message,time,who})=>{
 
-
+	const reTime = (time)=>{
+		const days = ['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС']
+		
+		const messageTime = new Date(time)
+		if(messageTime.getMinutes() < 10){
+			return `${days[messageTime.getDay()-1]} ${messageTime.getHours()}:0${messageTime.getMinutes()}`
+		}
+		return `${days[messageTime.getDay()-1]} ${messageTime.getHours()}:${messageTime.getMinutes()}`
+		
+		
+	}
+	const refBlock = useRef(null);
+	
+	useEffect(()=>{
+		refBlock.current.scrollIntoView(false)
+	},[])
+	
 	return(
 
-		<div className={s.message__wrapper}>
+		<div
+			
+			style={who === 'sender' ? {textAlign:'left'} : {textAlign: 'right'}}
+			className={s.message__wrapper}>
 
-			<span className={s.message}>
-				mkngjnhjfgnj
-				<div className={s.message__info}>
-					<span className={s.message__day}>Today,</span>
-					<span className={s.message__time}>8.34pm</span>
+			<span
+				className={who === 'sender' ? s.message__left : s.message__right}>
+				
+				{message}
+				<div
+					ref={refBlock}
+					className={who === 'sender' ? s.message__info__left : s.message__info__right}>
+					<span className={s.message__day}>{reTime(time)}</span>
+					{/*<span className={s.message__time}>{time}</span>*/}
 				</div>
 			</span>
 
@@ -22,6 +46,7 @@ const Message = ()=>{
 }
 
 export default Message
+
 
 
 

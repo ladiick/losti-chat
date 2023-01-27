@@ -1,5 +1,6 @@
 import s from './Authorization.module.scss'
-import imgLogin from './login_img3.jpg'
+// import imgLogin from './login_img3.jpg'
+import imgLogin from './20943566.jpg'
 import logo from '../../components/assets/logo.svg'
 import AuthorizationForm from "../../components/AuthorizationForm/AuthorizationForm";
 import {Link} from "react-router-dom";

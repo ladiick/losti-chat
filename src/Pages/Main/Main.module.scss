@@ -11,13 +11,13 @@
 	//top: 50%;
 	//left: 50%;
 	//transform: translate(-50%,-50%);
-	min-width: calc(750px + 20vw);
+	width: 1076px;
 
 
 }
 
 .content {
-	min-height: calc(636px + 3vw);
+	max-height: 90vh;
 	display: flex;
 	//justify-content: space-between;
 	//min-height: 600px;

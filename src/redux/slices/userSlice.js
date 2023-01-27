@@ -2,8 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
 	tokens: {
-		access: '',
-		refresh: '',
+		access: localStorage.getItem('accessToken'),
+		refresh: localStorage.getItem('refreshToken'),
 	},
 	isAuth: false,
 	aboutUser: {}
