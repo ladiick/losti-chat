@@ -9,6 +9,7 @@ import {setAboutUser, setUserRefreshToken, setUserAccessToken, setIsAuth} from "
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {useEffect} from "react";
+import PeopleItem from "./components/PeopleItem/PeopleItem";
 
 function App() {
 	
@@ -17,8 +18,8 @@ function App() {
 	const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
 	
 	useEffect(() => {
-		dispatch(setUserAccessToken(localStorage.getItem('accessToken')))
-		dispatch(setUserRefreshToken(localStorage.getItem('refreshToken')))
+		// dispatch(setUserAccessToken(localStorage.getItem('accessToken')))
+		// dispatch(setUserRefreshToken(localStorage.getItem('refreshToken')))
 		if (userAccessToken) {
 			
 			const getMySelf = async () => {
@@ -53,7 +54,8 @@ function App() {
 			<Route path='/' element={<Main/>}/>
 			<Route path='/authorization' element={<Authorization/>}/>
 			<Route path='/registration' element={<Registration/>}/>
-			<Route path='/logout' element={<Logout/>}/>
+			<Route path='/:messageId' element={<PeopleItem />}/>
+			<Route path='/logout' element={<Logout />}/>
 		</Routes>
 	);
 }

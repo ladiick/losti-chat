@@ -3,17 +3,20 @@ import axios from "axios";
 
 export const fetchPeople = createAsyncThunk(
 	'people/fetchPeople',
-	async (userAccessToken)=>{
+	async (userAccessToken) => {
+		
 		// const {userAccessToken} = params
 		const res = await axios.get('http://127.0.0.1:8000/api/v1/dialogs/', {
 			headers: {Authorization: `JWT ${userAccessToken}`}
 		})
-			return res.data
+		
+		return res.data
 	}
 )
 
 const initialState = {
 	people: [],
+	peopleChecked: null,
 	status: 'loading',
 }
 
@@ -22,7 +25,13 @@ export const peopleSlice = createSlice({
 	name: 'people',
 	initialState,
 	
-	reducers: {},
+	reducers: {
+		
+		setPeopleChecked: (state, action) => {
+			state.peopleChecked = action.payload
+		}
+		
+	},
 	
 	extraReducers: {
 		[fetchPeople.pending]: (state) => {
@@ -43,6 +52,6 @@ export const peopleSlice = createSlice({
 	
 })
 
-export const {} = peopleSlice.actions
+export const {setPeopleChecked} = peopleSlice.actions
 
 export default peopleSlice.reducer

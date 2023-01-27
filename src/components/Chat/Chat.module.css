@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .wrapper {
-  flex-grow: 5;
+  width: 50%;
+  flex-grow: 1;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0 9px 9px 0;
   position: relative;
@@ -81,7 +82,6 @@
   width: calc(20px + 1vw);
   height: calc(20px + 1vw);
   transition: all 0.3s;
-  border: 1px solid rgb(0, 0, 0);
   margin-right: 10px;
 }
 
@@ -118,7 +118,8 @@
 }
 
 .notAuth {
-  flex-grow: 5;
+  width: 50%;
+  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,6 +132,52 @@
 .notAuth svg {
   width: calc(24px + 1vw);
   height: calc(24px + 1vw);
+}
+
+.emptity__chat {
+  width: 50%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptity__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.emptity__content img {
+  width: 56px;
+  height: 56px;
+}
+.emptity__content span {
+  font-size: 18px;
+  position: relative;
+  padding: 0 5px;
+}
+.emptity__content span:after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 19px;
+  border-top: 2px solid #1a73e8;
+  border-right: 2px solid #1a73e8;
+  border-bottom: 2px solid #1a73e8;
+  top: -1px;
+  right: 0;
+}
+.emptity__content span:before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 19px;
+  border-top: 2px solid #1a73e8;
+  border-left: 2px solid #1a73e8;
+  border-bottom: 2px solid #1a73e8;
+  top: -1px;
+  left: 0;
 }
 
 /*# sourceMappingURL=Chat.module.css.map */

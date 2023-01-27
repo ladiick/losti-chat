@@ -1,17 +1,19 @@
 import s from './AuthorizationForm.module.scss'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import React from "react";
 import axios from "axios";
-import {setIsAuth} from "../../redux/slices/userSlice";
-
+import {useDispatch} from "react-redux";
+import {setIsAuth, setUserAccessToken, setUserRefreshToken} from "../../redux/slices/userSlice";
 const AuthorizationForm = () => {
+	const dispatch = useDispatch()
 	const {register, handleSubmit, formState: {errors, isValid}} = useForm(
 		{
 			mode: 'onChange'
 		}
 	)
 	
+	const navigation = useNavigate()
 	const onSubmit = async (data) => {
 		
 		
@@ -22,8 +24,11 @@ const AuthorizationForm = () => {
 			.then(res => {
 				localStorage.setItem('accessToken',res.data.access)
 				localStorage.setItem('refreshToken',res.data.refresh)
-				window.location.href = '/'
+				dispatch(setUserAccessToken(res.data.access))
+				dispatch(setUserRefreshToken(res.data.refresh))
 				
+				dispatch(setIsAuth(true))
+				navigation('/')
 			})
 			.catch(err => console.log(err.response))
 	

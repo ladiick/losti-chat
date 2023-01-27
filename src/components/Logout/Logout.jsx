@@ -1,5 +1,6 @@
 import {useDispatch} from "react-redux";
 import {setIsAuth} from "../../redux/slices/userSlice";
+import {useNavigate} from "react-router-dom";
 
 
 export const Logout = () => {

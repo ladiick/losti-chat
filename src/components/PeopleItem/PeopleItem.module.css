@@ -6,6 +6,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 6px;
   border-radius: 8px;
+  cursor: pointer;
   position: relative;
 }
 .block__people__item:not(:last-child) {
@@ -39,9 +40,46 @@
   transform: translateX(50%);
 }
 
+.block__people__item__active {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+}
+.block__people__item__active:not(:last-child) {
+  margin-bottom: 12px;
+}
+.block__people__item__active img {
+  margin-right: 10px;
+  border-radius: 50%;
+  object-fit: cover;
+  width: 36px;
+  height: 36px;
+}
+.block__people__item__active:before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  border-bottom: 3px solid #1a73e8;
+  z-index: 10;
+  bottom: -1.5px;
+  border-radius: 4px;
+  left: 0;
+  transform: translateX(50%);
+  transition: all 0.3s;
+}
+
 .info__message {
   display: flex;
   width: 100%;
+}
+.info__message img {
+  width: 36px;
+  height: 36px;
 }
 
 .name__lastMessage {

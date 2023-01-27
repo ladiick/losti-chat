@@ -3,31 +3,40 @@ import photo from "../assets/my_photo.jpg";
 import {useSelector} from "react-redux";
 
 
-const PeopleItem = ({firstName, lastName, message, time, img}) => {
+const PeopleItem = ({firstName, lastName, message, time, img, id,handlerPeople,handlerCurrentPeople}) => {
 	
 	
 	const reTime = (time) => {
-		
+		const monthRus = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек']
 		const currentTime = new Date()
-		// const currentDay = currentTime.getDay()
-		// const currentMonth = currentTime.getMonth() + 1
-		// const currentYear = currentTime.getFullYear()
+		
 		const messageTime = new Date(time)
-		// const messageDay = messageTime.getDay()
-		// const messageMonth = messageTime.getMonth() + 1
-		// const messageYear = messageTime.getFullYear()
+		
+		
 		let generalTime = null
 		if(currentTime.getDay() === messageTime.getDay()){
 			generalTime = `${messageTime.getHours()}:${messageTime.getMinutes()}`
 		}
+		
+		if(currentTime.getDate()-1 === messageTime.getDate()-1){
+			generalTime = `Вчера`
+		}
+		
+		if(currentTime.getDay()-1 !== messageTime.getDay()-1){
+			generalTime = `${messageTime.getDate()} ${monthRus[messageTime.getMonth()]}`
+		}
+		
 		return generalTime
 		
 	}
 	
+	const peopleChecked = useSelector(state => state.people.peopleChecked)
+	
 	return (
 		
-		
-		<div className={s.block__people__item}>
+		<div
+			onClick={handlerPeople}
+			className={peopleChecked === id ? s.block__people__item__active : s.block__people__item}>
 			<div className={s.info__message}>
 				<img src={img ? img : photo} alt='avatar'/>
 				<div className={s.name__lastMessage}>
