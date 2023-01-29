@@ -23,7 +23,11 @@ export const messageSlice = createSlice({
 	name: 'message',
 	initialState,
 	
-	reducers: {},
+	reducers: {
+		setMessage: (state,action)=>{
+			state.message.unshift(action.payload)
+		}
+	},
 	
 	extraReducers: {
 		[fetchMessage.pending]: (state) => {
@@ -44,6 +48,6 @@ export const messageSlice = createSlice({
 	
 })
 
-export const {} = messageSlice.actions
+export const {setMessage} = messageSlice.actions
 
 export default messageSlice.reducer

@@ -12,7 +12,7 @@
 .message__left {
 
 	display: inline-block;
-	background-color: gray;
+	background-color: rgba(0,0,0,0.4);
 	padding: 6px 9px;
 	color: #FFFFFF;
 	position: relative;
@@ -34,9 +34,10 @@
 
 .message__info__left{
 	position: absolute;
-	bottom: -12px;
-	left: 0;
-	font-size: calc(8px + 0.1vw);
+	//top: 50%;
+	transform: translateY(-50%);
+	right: -10%;
+	font-size: calc(10px + 0.1vw);
 	font-weight: 300;
 	color: #707070;
 	display: flex;
@@ -44,11 +45,13 @@
 }
 .message__info__right{
 	position: absolute;
-	bottom: -12px;
-	right: 0;
+	top: 12px;
+	left: -45px;
 	font-size: calc(8px + 0.1vw);
 	font-weight: 300;
 	color: #707070;
 	display: flex;
+	transform: translateY(-50%);
+
 
 }

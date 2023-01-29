@@ -3,26 +3,26 @@ import photo from "../assets/my_photo.jpg";
 import {useSelector} from "react-redux";
 
 
-const PeopleItem = ({firstName, lastName, message, time, img, id,handlerPeople,handlerCurrentPeople}) => {
+const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople, handlerCurrentPeople}) => {
 	
 	
 	const reTime = (time) => {
-		const monthRus = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек']
+		const monthRus = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек']
 		const currentTime = new Date()
 		
 		const messageTime = new Date(time)
 		
 		
 		let generalTime = null
-		if(currentTime.getDay() === messageTime.getDay()){
+		if (currentTime.getDay() === messageTime.getDay()) {
 			generalTime = `${messageTime.getHours()}:${messageTime.getMinutes()}`
 		}
 		
-		if(currentTime.getDate()-1 === messageTime.getDate()-1){
+		if (currentTime.getDate() - 1 === messageTime.getDate()) {
 			generalTime = `Вчера`
 		}
 		
-		if(currentTime.getDay()-1 !== messageTime.getDay()-1){
+		if (currentTime.getDay() - 1 !== messageTime.getDay() - 1) {
 			generalTime = `${messageTime.getDate()} ${monthRus[messageTime.getMonth()]}`
 		}
 		

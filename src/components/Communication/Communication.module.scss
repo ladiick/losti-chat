@@ -1,9 +1,10 @@
 .block__messages {
-	height: 77%;
-	margin: 15px 0;
+	//height: 77%;
+	//margin: 15px 0;
 	//background: rgba(0, 0, 0, 0.1);
-	padding: 10px;
-	margin-right: 10px;
+	margin-right: 4px;
+	padding: 10px 0;
+	//margin-right: 10px;
 	overflow-y:auto ;
 	&::-webkit-scrollbar-track {border-radius: 4px;}
 	&::-webkit-scrollbar {width: 4px;}

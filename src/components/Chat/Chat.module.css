@@ -5,11 +5,12 @@
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0 9px 9px 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .wrapper__input {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   padding: 20px 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
@@ -19,6 +20,12 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+.input form {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .input input {
   border: 1px solid #1a73e8;
@@ -178,6 +185,23 @@
   border-bottom: 2px solid #1a73e8;
   top: -1px;
   left: 0;
+}
+
+.input__file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.button__send {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=Chat.module.css.map */

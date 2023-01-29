@@ -1,26 +1,41 @@
 import s from './Chat.module.scss'
 import photo from '../assets/photo.svg'
 import Communication from "../Communication/Communication";
-import {useSelector} from "react-redux";
-import message from '../assets/messages.svg'
+import {useDispatch, useSelector} from "react-redux";
+import message__logo from '../assets/messages.svg'
+import {useForm} from "react-hook-form";
+import axios from "axios";
+import {setMessage} from "../../redux/slices/messageSlice";
+import {updatePeople} from "../../redux/slices/peopleSlice";
 
 const Chat = () => {
-	
+	const dispatch = useDispatch()
 	const isAuth = useSelector(state => state.user.isAuth)
 	const people = useSelector(state => state.people.people)
 	const peopleChecked = useSelector(state => state.people.peopleChecked)
+	const userAccessToken = useSelector(state => state.user.tokens.access)
+	const peopleCurrent = useSelector(state => state.people.peopleCurrent)
+	const message = useSelector(state => state.people.message)
+	const index = useSelector(state => state.people.index)
 	
-	let currentPeople = people
-		.map(obj => {
-			if (obj.sender.pk === peopleChecked) {
-				return obj.sender
+	const {register, handleSubmit,reset} = useForm()
+	
+	const sendMessage = (data) => {
+		data.recipient = peopleChecked
+		console.log(data)
+		axios.post('http://127.0.0.1:8000/api/v1/dialog/message/', data, {
+			headers: {
+				Authorization: `JWT ${userAccessToken}`,
 			}
-			if (obj.recipient.pk === peopleChecked) {
-				return obj.recipient
-			}
+		}).then(res=> {
+			dispatch(setMessage(res.data))
+			dispatch(updatePeople({index:index, obj:res.data}))
 			
 		})
-
+		reset()
+		
+		
+	}
 	
 	
 	if (!isAuth) {
@@ -37,14 +52,13 @@ const Chat = () => {
 		
 		)
 	}
-	if(peopleChecked=== null){
-		return(
+	if (peopleChecked === null) {
+		return (
 			<div className={s.emptity__chat}>
 				<div className={s.emptity__content}>
-				<img src={message} alt='message'/>
-				<span>Выберите чат</span>
-				
-			</div>
+					<img src={message__logo} alt='message'/>
+					<span>Выберите чат</span>
+				</div>
 			</div>
 		)
 	}
@@ -54,9 +68,9 @@ const Chat = () => {
 		<div className={s.wrapper}>
 			<header className={s.header}>
 				<div className={s.left__side}>
-					<img src={currentPeople[0].image ? currentPeople[0].image : photo} alt="logo"/>
+					<img src={peopleCurrent.image ? peopleCurrent.image : photo} alt="logo"/>
 					<div className={s.person__info}>
-						<h1>{currentPeople[0].first_name} {currentPeople[0].last_name}</h1>
+						<h1>{peopleCurrent.first_name} {peopleCurrent.last_name}</h1>
 						<p>Online</p>
 					</div>
 				</div>
@@ -73,21 +87,34 @@ const Chat = () => {
 			
 			<div className={s.wrapper__input}>
 				<div className={s.input}>
-					<div className={s.download__file}>
-						<svg height="48" viewBox="0 0 48 48">
-							<path
-								d="M33 12v23c0 4.42-3.58 8-8 8s-8-3.58-8-8v-25c0-2.76 2.24-5 5-5s5 2.24 5 5v21c0 1.1-.89 2-2 2-1.11 0-2-.9-2-2v-19h-3v19c0 2.76 2.24 5 5 5s5-2.24 5-5v-21c0-4.42-3.58-8-8-8s-8 3.58-8 8v25c0 6.08 4.93 11 11 11s11-4.92 11-11v-23h-3z"/>
-							<path d="M0 0h48v48h-48z" fill="none"/>
-						</svg>
-					
-					</div>
-					<input type="text" placeholder='Write a message...'/>
-					<svg viewBox="0 0 24 24"><title/>
-						<path
-							d="M22.984.638a.5.5,0,0,0-.718-.559L1.783,10.819a1.461,1.461,0,0,0-.1,2.527h0l4.56,2.882a.25.25,0,0,0,.3-.024L18.7,5.336a.249.249,0,0,1,.361.342L9.346,17.864a.25.25,0,0,0,.062.367L15.84,22.3a1.454,1.454,0,0,0,2.19-.895Z"/>
-						<path
-							d="M7.885,19.182a.251.251,0,0,0-.385.211c0,1.056,0,3.585,0,3.585a1,1,0,0,0,1.707.707l2.018-2.017a.251.251,0,0,0-.043-.388Z"/>
-					</svg>
+					<form onSubmit={handleSubmit(sendMessage)}>
+						<label className={s.download__file}>
+							<svg height="48" viewBox="0 0 48 48">
+								<path
+									d="M33 12v23c0 4.42-3.58 8-8 8s-8-3.58-8-8v-25c0-2.76 2.24-5 5-5s5 2.24 5 5v21c0 1.1-.89 2-2 2-1.11 0-2-.9-2-2v-19h-3v19c0 2.76 2.24 5 5 5s5-2.24 5-5v-21c0-4.42-3.58-8-8-8s-8 3.58-8 8v25c0 6.08 4.93 11 11 11s11-4.92 11-11v-23h-3z"/>
+								<path d="M0 0h48v48h-48z" fill="none"/>
+							</svg>
+							<input type='file' className={s.input__file}
+							       {...register('files')}
+							
+							/>
+						</label>
+						
+						<input
+							type="text"
+							placeholder='Write a message...'
+							
+							{...register('message')}
+						/>
+						<button className={s.button__send}>
+							<svg viewBox="0 0 24 24"><title/>
+								<path
+									d="M22.984.638a.5.5,0,0,0-.718-.559L1.783,10.819a1.461,1.461,0,0,0-.1,2.527h0l4.56,2.882a.25.25,0,0,0,.3-.024L18.7,5.336a.249.249,0,0,1,.361.342L9.346,17.864a.25.25,0,0,0,.062.367L15.84,22.3a1.454,1.454,0,0,0,2.19-.895Z"/>
+								<path
+									d="M7.885,19.182a.251.251,0,0,0-.385.211c0,1.056,0,3.585,0,3.585a1,1,0,0,0,1.707.707l2.018-2.017a.251.251,0,0,0-.043-.388Z"/>
+							</svg>
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -2,7 +2,13 @@ import s from './People.module.scss'
 import PeopleItem from "../PeopleItem/PeopleItem";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchPeople, setPeopleChecked} from "../../redux/slices/peopleSlice";
+import {
+	fetchPeople,
+	setCurrentPeople, setIndex,
+	setMessage,
+	setPeopleChecked,
+	updatePeople
+} from "../../redux/slices/peopleSlice";
 import PeopleItemSceleton from "../PeopleItem/PeopleItemSceleton";
 import {fetchMessage} from "../../redux/slices/messageSlice";
 import favorite from '../assets/favorite.svg'
@@ -25,18 +31,20 @@ const People = () => {
 		
 	}, [isAuth, userAccessToken]);
 	
-	const handlerPeople = (id) => {
-		dispatch(setPeopleChecked(id))
-		
-		dispatch(fetchMessage({userAccessToken, id}))
+	const handlerPeople = async (id,current__obj,obj,index) => {
+		await dispatch(setIndex(index))
+		await dispatch(setPeopleChecked(id))
+		await dispatch(setCurrentPeople(current__obj))
+		await dispatch(fetchMessage({userAccessToken, id}))
 	}
+	
 	
 	
 	
 	return (
 		<div className={s.block__people}>
 			
-			<h1 className={s.title__people}>Сообщения</h1>
+			<h1 className={s.title__people}>Люди</h1>
 			
 			
 			<div className={s.wrapper__items}>
@@ -50,20 +58,20 @@ const People = () => {
 				}
 				
 				
-				{people.map((obj, index) => obj.sender.pk === myId && obj.recipient.pk !== myId ?
+				{people.map((obj, index) => obj.sender.pk === myId && obj.recip.pk !== myId ?
 					<PeopleItem
-						key={obj.recipient.pk}
-						id={obj.recipient.pk}
-						firstName={obj.recipient.first_name}
-						lastName={obj.recipient.last_name}
+						key={obj.recip.pk}
+						id={obj.recip.pk}
+						firstName={obj.recip.first_name}
+						lastName={obj.recip.last_name}
 						message={`Вы: ${obj.message}`}
 						
 						time={obj.time}
-						img={obj.recipient.image}
-						handlerPeople={() => handlerPeople(obj.recipient.pk)}
+						img={obj.recip.image}
+						handlerPeople={() => handlerPeople(obj.recip.pk,obj.recip,obj,index)}
 					/>
 					
-					: obj.sender.pk === myId && obj.recipient.pk === myId
+					: obj.sender.pk === myId && obj.recip.pk === myId
 						
 						?
 						<PeopleItem
@@ -74,10 +82,8 @@ const People = () => {
 							message={obj.message}
 							time={obj.time}
 							img={favorite}
-							handlerPeople={() => handlerPeople(obj.sender.pk)}
+							handlerPeople={() => handlerPeople(obj.sender.pk,obj.sender,obj,index)}
 						/>
-						
-						
 						:
 						<PeopleItem
 							key={obj.sender.pk}
@@ -87,7 +93,7 @@ const People = () => {
 							message={obj.message}
 							time={obj.time}
 							img={obj.sender.image}
-							handlerPeople={() => handlerPeople(obj.sender.pk)}
+							handlerPeople={() => handlerPeople(obj.sender.pk,obj.sender,obj,index)}
 						/>
 				)}
 			
