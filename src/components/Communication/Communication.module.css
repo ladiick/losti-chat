@@ -1,8 +1,6 @@
 .block__messages {
-  height: 77%;
-  margin: 15px 0;
-  padding: 10px;
-  margin-right: 10px;
+  margin-right: 4px;
+  padding: 10px 0;
   overflow-y: auto;
 }
 .block__messages::-webkit-scrollbar-track {

@@ -17,6 +17,9 @@ export const fetchPeople = createAsyncThunk(
 const initialState = {
 	people: [],
 	peopleChecked: null,
+	peopleCurrent: {},
+	updatePeople: {},
+	index: null,
 	status: 'loading',
 }
 
@@ -29,7 +32,18 @@ export const peopleSlice = createSlice({
 		
 		setPeopleChecked: (state, action) => {
 			state.peopleChecked = action.payload
+		},
+		setCurrentPeople:(state,action)=>{
+			state.peopleCurrent = action.payload
+		},
+		updatePeople: (state, action)=>{
+			state.people.splice(action.payload.index,1)
+			state.people.unshift(action.payload.obj)
+		},
+		setIndex:(state,action)=>{
+			state.index = action.payload
 		}
+		
 		
 	},
 	
@@ -52,6 +66,6 @@ export const peopleSlice = createSlice({
 	
 })
 
-export const {setPeopleChecked} = peopleSlice.actions
+export const {setPeopleChecked,setCurrentPeople,updatePeople,setIndex} = peopleSlice.actions
 
 export default peopleSlice.reducer

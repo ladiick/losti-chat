@@ -1,31 +1,39 @@
 import s from './Message.module.scss';
-import {useEffect,useRef} from "react";
+import {useEffect, useRef} from "react";
 
 
-const Message = ({message,time,who})=>{
-
-	const reTime = (time)=>{
-		const days = ['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС']
+const Message = ({message, time, who}) => {
+	
+	const reTime = (time) => {
+		const days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']
 		
 		const messageTime = new Date(time)
-		if(messageTime.getMinutes() < 10){
-			return `${days[messageTime.getDay()-1]} ${messageTime.getHours()}:0${messageTime.getMinutes()}`
-		}
-		return `${days[messageTime.getDay()-1]} ${messageTime.getHours()}:${messageTime.getMinutes()}`
+		const currentTime = new Date()
 		
+		if (currentTime.getDate() === messageTime.getDate()) {
+			if (messageTime.getMinutes() < 10) {
+				return `${messageTime.getHours()}:0${messageTime.getMinutes()}`
+			}
+			return `${messageTime.getHours()}:${messageTime.getMinutes()}`
+		} else {
+			if (messageTime.getMinutes() < 10) {
+				return `${days[messageTime.getDay() - 1]} ${messageTime.getHours()}:0${messageTime.getMinutes()}`
+			}
+			return `${days[messageTime.getDay() - 1]} ${messageTime.getHours()}:${messageTime.getMinutes()}`
+		}
 		
 	}
 	const refBlock = useRef(null);
 	
-	useEffect(()=>{
+	useEffect(() => {
 		refBlock.current.scrollIntoView(false)
-	},[])
+	}, [])
 	
-	return(
-
+	return (
+		
 		<div
 			
-			style={who === 'sender' ? {textAlign:'left'} : {textAlign: 'right'}}
+			style={who === 'sender' ? {textAlign: 'left'} : {textAlign: 'right'}}
 			className={s.message__wrapper}>
 
 			<span
@@ -39,8 +47,8 @@ const Message = ({message,time,who})=>{
 					{/*<span className={s.message__time}>{time}</span>*/}
 				</div>
 			</span>
-
-
+		
+		
 		</div>
 	)
 }

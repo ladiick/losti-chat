@@ -1,6 +1,7 @@
 import s from "./Communication.module.scss";
 import Message from "../Message/Message";
 import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
 const Communication = ()=>{
 	
 	const dispatch = useDispatch()
@@ -9,8 +10,9 @@ const Communication = ()=>{
 	
 	let message2 = [...message]
 	
-	
-	
+	useEffect(()=>{
+		message2 = [...message]
+	},[message])
 	
 	return(
 		
