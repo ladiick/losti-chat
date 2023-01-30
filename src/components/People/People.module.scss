@@ -1,17 +1,14 @@
 
 .block__people {
-	//flex-grow: 2;
-	//height: 95%;
-	//margin-top: 34px;
+
 	border-radius: 8px;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	padding: 10px 4px 25px 0;
 	min-height: calc(100px + 32vw);
-	//overflow: hidden;
+
 
 	.title__people {
 		width: 100%;
-		//flex-grow: 10;
 		margin: 0;
 
 		font-size: calc(14px + 0.5vw);
@@ -21,10 +18,7 @@
 
 	transition: all .3s;
 
-	&:hover {
-		box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.4);
-
-	}
+	
 
 }
 

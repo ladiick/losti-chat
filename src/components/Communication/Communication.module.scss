@@ -3,12 +3,19 @@
 	//margin: 15px 0;
 	//background: rgba(0, 0, 0, 0.1);
 	margin-right: 4px;
-	padding: 10px 0;
+	padding: 15px 0;
 	//margin-right: 10px;
 	overflow-y:auto ;
 	&::-webkit-scrollbar-track {border-radius: 4px;}
 	&::-webkit-scrollbar {width: 4px;}
 	&::-webkit-scrollbar-thumb {border-radius: 4px;background: rgba(0,0,0,0.2);}
-
+	position: relative;
 	//background-color: rgba(0,0,0,0.1);
+}
+.date{
+	width: 100%;
+	position: sticky;
+	left: 50%;
+	text-align: center;
+	top: 0;
 }

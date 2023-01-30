@@ -93,6 +93,8 @@
 .name__company {
   width: 100%;
   margin-top: 30px;
+  background-color: #fff;
+  border-radius: 8px;
 }
 .name__company span {
   display: flex;
@@ -103,7 +105,7 @@
 .name__company span:before {
   position: absolute;
   content: "";
-  border: 1px solid #FFFFFF;
+  border: 1px solid #1a73e8;
   border-radius: 10px;
   bottom: 10px;
   width: 20%;
@@ -123,7 +125,7 @@
 .name__company span h1 {
   font-size: calc(12px + 0.3vw);
   color: #FFFFFF;
-  background-image: linear-gradient(135deg, #fff 45%, #1a73e8 45%);
+  background-image: linear-gradient(90deg, #000000 55%, #1a73e8 40%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

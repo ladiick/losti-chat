@@ -69,7 +69,7 @@ const AuthorizationForm = () => {
 					<input
 						className={s.input__password}
 						type='password'
-						placeholder='Password'
+						placeholder='Введите больше 5 символов'
 						style={errors?.password && {borderColor:'red'}}
 						{...(register('password', {
 							required: 'Необходимо заполнить',
