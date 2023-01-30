@@ -61,8 +61,8 @@
   justify-content: center;
 }
 .form__title img {
-  width: calc(16px + 1vw);
-  height: calc(16px + 1vw);
+  width: calc(24px + 1vw);
+  height: calc(24px + 1vw);
   margin-right: calc(5px + 0.1vw);
   animation: logo 3s infinite alternate ease-in-out;
 }
@@ -147,7 +147,10 @@
   }
   .wrapper__form {
     width: auto;
-    padding: 0 30px;
+    padding: 20px 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px -5px;
   }
 }
 

@@ -1,7 +1,8 @@
 .block__messages {
   margin-right: 4px;
-  padding: 10px 0;
+  padding: 15px 0;
   overflow-y: auto;
+  position: relative;
 }
 .block__messages::-webkit-scrollbar-track {
   border-radius: 4px;
@@ -12,6 +13,14 @@
 .block__messages::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.2);
+}
+
+.date {
+  width: 100%;
+  position: sticky;
+  left: 50%;
+  text-align: center;
+  top: 0;
 }
 
 /*# sourceMappingURL=Communication.module.css.map */

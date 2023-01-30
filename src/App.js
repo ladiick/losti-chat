@@ -30,14 +30,15 @@ function App() {
 						dispatch(setAboutUser(res.data))
 						dispatch(setIsAuth(true))
 					})
-					.catch(() => {
-						axios.post('http://127.0.0.1:8000/api/v1/token/refresh/', {
-							refresh: userRefreshToken
-						}).then(res => {
-							localStorage.setItem('accessToken', res.data.access)
-							dispatch(setUserAccessToken(localStorage.getItem('accessToken')))
-						})
-						
+					.catch((error) => {
+						if(error.response.status === 401) {
+							axios.post('http://127.0.0.1:8000/api/v1/token/refresh/', {
+								refresh: userRefreshToken
+							}).then(res => {
+								localStorage.setItem('accessToken', res.data.access)
+								dispatch(setUserAccessToken(localStorage.getItem('accessToken')))
+							})
+						}
 					})
 				
 			}

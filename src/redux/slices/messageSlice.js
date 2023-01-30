@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
+import {reDate} from "../../components/actions/reDate";
 
 export const fetchMessage = createAsyncThunk(
 	'message/fetchMessage',
@@ -8,8 +9,7 @@ export const fetchMessage = createAsyncThunk(
 		const res = await axios.get(`http://127.0.0.1:8000/api/v1/dialog/${id}/`, {
 			headers: {Authorization: `JWT ${userAccessToken}`}
 		})
-		
-		return res.data
+		return reDate(res.data)
 	}
 )
 

@@ -204,4 +204,11 @@
   cursor: pointer;
 }
 
+.sceletons {
+  margin-right: 4px;
+  padding: 10px 0;
+  overflow-y: auto;
+  height: 100%;
+}
+
 /*# sourceMappingURL=Chat.module.css.map */

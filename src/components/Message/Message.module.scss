@@ -4,9 +4,18 @@
 	&:not(:last-child){
 		margin-bottom: 40px;
 	}
-	padding: 0 15px;
+	padding: 0 10px;
 }
 
+.message__enter_date{
+	position: sticky;
+	top: 0;
+	z-index: 12;
+	&:not(:last-child){
+		margin-bottom: 40px;
+	}
+	padding: 0 10px;
+}
 
 
 .message__left {
@@ -34,19 +43,22 @@
 
 .message__info__left{
 	position: absolute;
-	//top: 50%;
-	transform: translateY(-50%);
-	right: -10%;
+	top: -8px;
+	left: 0;
+	width: 25px;
 	font-size: calc(10px + 0.1vw);
 	font-weight: 300;
 	color: #707070;
 	display: flex;
+	transform: translateY(-50%);
 
 }
 .message__info__right{
 	position: absolute;
-	top: 12px;
-	left: -45px;
+	top: -8px;
+	right: 0;
+	width: 25px;
+	text-align: right;
 	font-size: calc(8px + 0.1vw);
 	font-weight: 300;
 	color: #707070;
@@ -54,4 +66,17 @@
 	transform: translateY(-50%);
 
 
+}
+.enterDate{
+
+}
+
+.date__block{
+	margin: 0;
+	background-color: #FFFFFF;
+	padding: 5px;
+	font-size: 10px;
+	border-radius: 10px;
+	color: black;
+	border: 1px solid rgba(0,0,0,0.2);
 }

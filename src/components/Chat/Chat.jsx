@@ -7,22 +7,22 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 import {setMessage} from "../../redux/slices/messageSlice";
 import {updatePeople} from "../../redux/slices/peopleSlice";
+import CommunicationSceleton from "../Communication/CommunicationSceleton";
+import PeopleItemSceleton from "../PeopleItem/PeopleItemSceleton";
+import {Link} from "react-router-dom";
 
 const Chat = () => {
 	const dispatch = useDispatch()
 	const isAuth = useSelector(state => state.user.isAuth)
-	const people = useSelector(state => state.people.people)
 	const peopleChecked = useSelector(state => state.people.peopleChecked)
 	const userAccessToken = useSelector(state => state.user.tokens.access)
 	const peopleCurrent = useSelector(state => state.people.peopleCurrent)
-	const message = useSelector(state => state.people.message)
 	const index = useSelector(state => state.people.index)
-	
+	const status = useSelector(state=> state.message.status)
 	const {register, handleSubmit,reset} = useForm()
 	
 	const sendMessage = (data) => {
 		data.recipient = peopleChecked
-		console.log(data)
 		axios.post('http://127.0.0.1:8000/api/v1/dialog/message/', data, {
 			headers: {
 				Authorization: `JWT ${userAccessToken}`,
@@ -37,12 +37,11 @@ const Chat = () => {
 		
 	}
 	
-	
 	if (!isAuth) {
 		return (
 			<div className={s.notAuth}>
 				
-				<h1>Необходимо авторизоваться</h1>
+				<Link to={'/authorization'}><h1>Необходимо авторизоваться</h1></Link>
 				<svg viewBox="0 0 128 128">
 					<path d="M64,0a64,64,0,1,0,64,64A64.07,64.07,0,0,0,64,0Zm0,122a58,58,0,1,1,58-58A58.07,58.07,0,0,1,64,122Z"/>
 					<path
@@ -83,6 +82,14 @@ const Chat = () => {
 				
 				</div>
 			</header>
+			
+			{status === 'loading' && (
+				<div className={s.sceletons}>
+					{[...new Array(3)]
+						.map((_, index) => <CommunicationSceleton key={index}/>)}
+				</div>)
+			}
+			
 			<Communication/>
 			
 			<div className={s.wrapper__input}>

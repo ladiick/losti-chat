@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df6f94e0-5d33-4bff-8b92-750270cccee8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Communication/CommunicationSceleton.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/actions/reDate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/actions/reTime.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/actions/refreshToken.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend" beforeDir="false" afterPath="$PROJECT_DIR$/backend" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chat/Chat.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chat/Chat.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chat/Chat.module.css.map" afterDir="false" />
@@ -20,10 +29,20 @@
       <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Message/Message.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Message/Message.module.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Message/Message.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/People.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/People.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/People.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.module.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/People.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/assets/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/assets/logo.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/slices/messageSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/slices/messageSlice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/slices/peopleSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/slices/peopleSlice.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,25 +63,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/losti-chat&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/losti-chat",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;SCSS&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "SCSS"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\react_projects\losti-chat\src\components\Chat" />
@@ -110,6 +129,9 @@
       <workItem from="1674816309525" duration="31608000" />
       <workItem from="1674904010698" duration="9584000" />
       <workItem from="1674994261164" duration="900000" />
+      <workItem from="1675073688431" duration="3904000" />
+      <workItem from="1675081149515" duration="2521000" />
+      <workItem from="1675110173642" duration="2172000" />
     </task>
     <servers />
   </component>
