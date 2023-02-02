@@ -10,6 +10,7 @@ import {updatePeople} from "../../redux/slices/peopleSlice";
 import CommunicationSceleton from "../Communication/CommunicationSceleton";
 import PeopleItemSceleton from "../PeopleItem/PeopleItemSceleton";
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 const Chat = () => {
 	const dispatch = useDispatch()
@@ -18,20 +19,94 @@ const Chat = () => {
 	const userAccessToken = useSelector(state => state.user.tokens.access)
 	const peopleCurrent = useSelector(state => state.people.peopleCurrent)
 	const index = useSelector(state => state.people.index)
-	const status = useSelector(state=> state.message.status)
-	const {register, handleSubmit,reset} = useForm()
+	const status = useSelector(state => state.message.status)
+	
+	const {register, handleSubmit, reset} = useForm()
+	
+	
+	const [socket, setSocket] = useState(null)
+	const [statusSocket, setStatusSocket] = useState('pending')
+	
+	
+	useEffect(() => {
+		let ws = null
+		const closeHandler = () => {
+			alert('Chanel is closed')
+			setTimeout(createChannel,3000)
+		}
+		const createChannel = () => {
+			
+				ws?.removeEventListener('close',closeHandler)
+				ws?.close()
+			
+			
+			ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/?token=${userAccessToken}`)
+			
+			ws.onopen = () => {
+				ws.send(JSON.stringify({
+					request_id: new Date().getTime(),
+					action: 'dialog_activity',
+				}))
+			}
+			
+			ws.addEventListener('close', closeHandler)
+			setSocket(ws)
+			
+		}
+		createChannel()
+		
+		return ()=>{
+			ws.removeEventListener('close',closeHandler)
+			ws.close()
+		}
+		
+	}, []);
+	
+	
+	useEffect(() => {
+		let openHandler = () => {
+			setStatusSocket('ready')
+		}
+		
+		socket?.addEventListener('open', openHandler)
+		return ()=>{
+			socket?.removeEventListener('open',openHandler)
+		}
+		
+	}, [socket]);
+	
 	
 	const sendMessage = (data) => {
-		data.recipient = peopleChecked
-		axios.post('http://127.0.0.1:8000/api/v1/dialog/message/', data, {
-			headers: {
-				Authorization: `JWT ${userAccessToken}`,
-			}
-		}).then(res=> {
-			dispatch(setMessage(res.data))
-			dispatch(updatePeople({index:index, obj:res.data}))
-			
-		})
+		if (!data.message) {
+			return
+		}
+		
+		// data.recipient_id = peopleChecked
+		
+		// axios.post('ws://127.0.0.1:8000/api/v1/dialog/message/', data, {
+		// 	headers: {
+		// 		Authorization: `JWT ${userAccessToken}`,
+		// 	}
+		// }).then(res=> {
+		// 	dispatch(setMessage(res.data))
+		// 	dispatch(updatePeople({index:index, obj:res.data}))
+		//
+		// })
+		// reset()
+		
+		
+		socket?.send(
+			JSON.stringify(
+				{
+					request_id: new Date().getTime(),
+					message: data.message,
+					action: 'create_dialog_message',
+					recipient: peopleChecked,
+					
+				}
+			)
+		)
+		console.log(socket)
 		reset()
 		
 		
@@ -90,7 +165,7 @@ const Chat = () => {
 				</div>)
 			}
 			
-			<Communication/>
+			<Communication socket={socket}/>
 			
 			<div className={s.wrapper__input}>
 				<div className={s.input}>

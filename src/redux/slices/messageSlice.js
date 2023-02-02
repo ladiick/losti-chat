@@ -13,6 +13,7 @@ export const fetchMessage = createAsyncThunk(
 	}
 )
 
+
 const initialState = {
 	message: [],
 	status: 'loading',

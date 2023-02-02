@@ -10,12 +10,17 @@ import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {useEffect} from "react";
 import PeopleItem from "./components/PeopleItem/PeopleItem";
+import { io } from 'socket.io-client'
 
 function App() {
 	
 	const dispatch = useDispatch()
 	const userAccessToken = useSelector((state) => state.user.tokens.access)
 	const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
+	
+	useEffect(()=>{
+	
+	},[])
 	
 	useEffect(() => {
 		// dispatch(setUserAccessToken(localStorage.getItem('accessToken')))

@@ -2,7 +2,6 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import s from "./RegistrationForm.module.scss";
 import {Link} from "react-router-dom";
-import doRequest from "../actions/doRequest";
 import {useDispatch} from "react-redux";
 import axios from "axios";
 import {setAboutUser, setIsAuth, setUserTokens} from "../../redux/slices/userSlice";
