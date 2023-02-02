@@ -23,7 +23,6 @@ export const reTime = (time) => {
 	if (currentTime.getDay() - 1 !== messageTime.getDay() - 1) {
 		generalTime = `${messageTime.getDate()} ${monthRus[messageTime.getMonth()]}`
 	}
-	console.log(generalTime)
 	return generalTime
 	
 }
