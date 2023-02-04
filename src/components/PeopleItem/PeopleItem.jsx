@@ -2,8 +2,9 @@ import s from "./PeopleItem.module.scss";
 import photo from "../assets/my_photo.jpg";
 import {useSelector} from "react-redux";
 import {reTime} from "../actions/reTime";
-
-const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople, handlerCurrentPeople}) => {
+import {useEffect} from "react";
+const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople}) => {
+	
 	
 	
 	
@@ -22,7 +23,7 @@ const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople,
 				</div>
 				
 				<div className={s.wrapper__time}>
-					<p className={s.time}>{reTime(time)}</p>
+					<p className={s.time}>{reTime(time,'people')}</p>
 					{/*<span className={s.quantity__message}>2</span>*/}
 					<span>1</span>
 				

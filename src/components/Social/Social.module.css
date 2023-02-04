@@ -29,12 +29,9 @@
   padding: 8px 8px 8px 35px;
 }
 .block__search:hover input {
-  transform: scale(1.02);
   border: 1px solid #1a73e8;
-  box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.4);
 }
 .block__search:hover svg {
-  left: 6px;
   fill: #1a73e8;
 }
 

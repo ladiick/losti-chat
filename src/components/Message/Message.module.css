@@ -1,9 +1,12 @@
 .message__wrapper {
-  text-align: right;
   padding: 0 10px;
+  position: relative;
 }
 .message__wrapper:not(:last-child) {
-  margin-bottom: 40px;
+  margin-bottom: 35px;
+}
+.message__wrapper:last-child {
+  margin-bottom: 0;
 }
 
 .message__enter_date {
@@ -64,13 +67,20 @@
 }
 
 .date__block {
+  display: inline-block;
   margin: 0;
   background-color: #FFFFFF;
-  padding: 5px;
+  padding: 4px;
   font-size: 10px;
   border-radius: 10px;
-  color: black;
+  color: #000000;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 70px;
+}
+
+.scroll__block {
+  margin-top: -40px;
+  background-color: black;
 }
 
 /*# sourceMappingURL=Message.module.css.map */

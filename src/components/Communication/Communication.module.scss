@@ -1,22 +1,41 @@
 .block__messages {
-	//height: 77%;
 	height: 100%;
-	//margin: 15px 0;
-	//background: rgba(0, 0, 0, 0.1);
 	margin-right: 4px;
 	padding: 15px 0;
 	//margin-right: 10px;
-	overflow-y:auto ;
-	&::-webkit-scrollbar-track {border-radius: 4px;}
-	&::-webkit-scrollbar {width: 4px;}
-	&::-webkit-scrollbar-thumb {border-radius: 4px;background: rgba(0,0,0,0.2);}
+
 	position: relative;
 	//background-color: rgba(0,0,0,0.1);
+	overflow-y:auto ;
+	transition: all .3s;
+	&::-webkit-scrollbar-track {
+		transition: all .3s;
+		border-radius: 4px;
+
+	}
+	&::-webkit-scrollbar {
+		transition: all .3s;
+		width: 4px;
+
+	}
+	&::-webkit-scrollbar-thumb {
+		transition: all .3s;
+		border-radius: 4px;
+		background: transparent;
+
+	}
+
+	&:hover{
+		overflow: auto;
+		&::-webkit-scrollbar-track {border-radius: 4px;}
+		&::-webkit-scrollbar {width: 4px;}
+		&::-webkit-scrollbar-thumb {border-radius: 4px;background: rgba(0,0,0,0.2);}
+	}
 }
-.date{
-	width: 100%;
-	position: sticky;
-	left: 50%;
-	text-align: center;
-	top: 0;
-}
+//.date{
+//	width: 100%;
+//	position: sticky;
+//	left: 50%;
+//	text-align: center;
+//	top: 0;
+//}

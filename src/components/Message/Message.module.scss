@@ -1,10 +1,13 @@
 
 .message__wrapper {
-	text-align: right;
-	&:not(:last-child){
-		margin-bottom: 40px;
-	}
 	padding: 0 10px;
+	&:not(:last-child){
+		margin-bottom: 35px;
+	}
+	&:last-child{
+		margin-bottom:0 ;
+	}
+	position: relative;
 }
 
 .message__enter_date{
@@ -27,8 +30,10 @@
 	position: relative;
 	font-size: calc(11px + 0.1vw);
 	border-radius: 8px 10px 10px 0;
+
 }
 .message__right {
+
 	display: inline-block;
 	text-align: left;
 	max-width: 60%;
@@ -67,16 +72,21 @@
 
 
 }
-.enterDate{
-
-}
 
 .date__block{
+	display: inline-block;
 	margin: 0;
 	background-color: #FFFFFF;
-	padding: 5px;
+	padding: 4px;
 	font-size: 10px;
 	border-radius: 10px;
-	color: black;
+	color: #000000;
 	border: 1px solid rgba(0,0,0,0.2);
+	width: 70px;
+}
+
+.scroll__block{
+	margin-top: -40px;
+
+	background-color: black;
 }
