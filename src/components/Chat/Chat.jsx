@@ -4,25 +4,19 @@ import Communication from "../Communication/Communication";
 import {useDispatch, useSelector} from "react-redux";
 import message__logo from '../assets/messages.svg'
 import {useForm} from "react-hook-form";
-import axios from "axios";
-import {setMessage} from "../../redux/slices/messageSlice";
-import {updatePeople} from "../../redux/slices/peopleSlice";
 import CommunicationSceleton from "../Communication/CommunicationSceleton";
-import PeopleItemSceleton from "../PeopleItem/PeopleItemSceleton";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-
+import favorite from '../assets/favorite.svg'
 const Chat = () => {
 	const dispatch = useDispatch()
 	const isAuth = useSelector(state => state.user.isAuth)
 	const peopleChecked = useSelector(state => state.people.peopleChecked)
 	const userAccessToken = useSelector(state => state.user.tokens.access)
 	const peopleCurrent = useSelector(state => state.people.peopleCurrent)
-	const index = useSelector(state => state.people.index)
 	const status = useSelector(state => state.message.status)
 	
 	const {register, handleSubmit, reset} = useForm()
-	
 	
 	const [socket, setSocket] = useState(null)
 	const [statusSocket, setStatusSocket] = useState('pending')
@@ -32,22 +26,14 @@ const Chat = () => {
 		let ws = null
 		const closeHandler = () => {
 			alert('Chanel is closed')
-			setTimeout(createChannel,3000)
+			setTimeout(createChannel, 3000)
 		}
 		const createChannel = () => {
 			
-				ws?.removeEventListener('close',closeHandler)
-				ws?.close()
-			
+			ws?.removeEventListener('close', closeHandler)
+			ws?.close()
 			
 			ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/?token=${userAccessToken}`)
-			
-			ws.onopen = () => {
-				ws.send(JSON.stringify({
-					request_id: new Date().getTime(),
-					action: 'dialog_activity',
-				}))
-			}
 			
 			ws.addEventListener('close', closeHandler)
 			setSocket(ws)
@@ -55,8 +41,8 @@ const Chat = () => {
 		}
 		createChannel()
 		
-		return ()=>{
-			ws.removeEventListener('close',closeHandler)
+		return () => {
+			ws.removeEventListener('close', closeHandler)
 			ws.close()
 		}
 		
@@ -69,8 +55,8 @@ const Chat = () => {
 		}
 		
 		socket?.addEventListener('open', openHandler)
-		return ()=>{
-			socket?.removeEventListener('open',openHandler)
+		return () => {
+			socket?.removeEventListener('open', openHandler)
 		}
 		
 	}, [socket]);
@@ -106,7 +92,7 @@ const Chat = () => {
 				}
 			)
 		)
-		console.log(socket)
+		
 		reset()
 		
 		
@@ -142,10 +128,10 @@ const Chat = () => {
 		<div className={s.wrapper}>
 			<header className={s.header}>
 				<div className={s.left__side}>
-					<img src={peopleCurrent.image ? peopleCurrent.image : photo} alt="logo"/>
+					<img src={peopleCurrent.pk === 1 ? favorite : peopleCurrent.image ? peopleCurrent.image : photo} alt="logo"/>
 					<div className={s.person__info}>
-						<h1>{peopleCurrent.first_name} {peopleCurrent.last_name}</h1>
-						<p>Online</p>
+						<h1>{peopleCurrent.pk === 1 ? 'Избранное' : peopleCurrent.first_name} {peopleCurrent.last_name}</h1>
+						{/*<p>Online</p>*/}
 					</div>
 				</div>
 				<div className={s.right_side}>
@@ -184,12 +170,11 @@ const Chat = () => {
 						
 						<input
 							type="text"
-							placeholder='Write a message...'
-							
+							placeholder='Напишите сообщение...'
 							{...register('message')}
 						/>
-						<button className={s.button__send}>
-							<svg viewBox="0 0 24 24"><title/>
+						<button className={s.button__send} disabled={statusSocket === 'pending'}>
+							<svg viewBox="0 0 24 24">
 								<path
 									d="M22.984.638a.5.5,0,0,0-.718-.559L1.783,10.819a1.461,1.461,0,0,0-.1,2.527h0l4.56,2.882a.25.25,0,0,0,.3-.024L18.7,5.336a.249.249,0,0,1,.361.342L9.346,17.864a.25.25,0,0,0,.062.367L15.84,22.3a1.454,1.454,0,0,0,2.19-.895Z"/>
 								<path

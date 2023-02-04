@@ -1,13 +1,11 @@
 import s from './People.module.scss'
 import PeopleItem from "../PeopleItem/PeopleItem";
-import {useEffect} from "react";
+import {useEffect,useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	fetchPeople,
 	setCurrentPeople, setIndex,
-	setMessage,
 	setPeopleChecked,
-	updatePeople
 } from "../../redux/slices/peopleSlice";
 import PeopleItemSceleton from "../PeopleItem/PeopleItemSceleton";
 import {fetchMessage} from "../../redux/slices/messageSlice";
@@ -20,22 +18,21 @@ const People = () => {
 	const myId = useSelector(state => state.user.aboutUser.id)
 	const status = useSelector(state => state.people.status)
 	
-	const peopleChecked = useSelector(state => state.people.peopleChecked)
 	
 	const dispatch = useDispatch()
 	useEffect(() => {
-		
 		if (isAuth && userAccessToken) {
 			dispatch(fetchPeople(userAccessToken))
 		}
-		
 	}, [isAuth, userAccessToken]);
 	
-	const handlerPeople = async (id,current__obj,obj,index) => {
-		await dispatch(setIndex(index))
-		await dispatch(setPeopleChecked(id))
-		await dispatch(setCurrentPeople(current__obj))
-		await dispatch(fetchMessage({userAccessToken, id}))
+	
+	
+	const handlerPeople = (id,current__obj,obj,index) => {
+		 dispatch(setIndex(index))
+		 dispatch(setPeopleChecked(id))
+		 dispatch(setCurrentPeople(current__obj))
+		 dispatch(fetchMessage({userAccessToken, id}))
 	}
 	
 	
@@ -65,7 +62,6 @@ const People = () => {
 						firstName={obj.recip.first_name}
 						lastName={obj.recip.last_name}
 						message={`Вы: ${obj.message}`}
-						
 						time={obj.time}
 						img={obj.recip.image}
 						handlerPeople={() => handlerPeople(obj.recip.pk,obj.recip,obj,index)}

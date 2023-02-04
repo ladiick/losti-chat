@@ -32,6 +32,17 @@
 }
 .wrapper__items::-webkit-scrollbar-thumb {
   border-radius: 4px;
+  background: transparent;
+}
+.wrapper__items:hover::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+.wrapper__items:hover::-webkit-scrollbar {
+  width: 4px;
+  transition: all 0.3s;
+}
+.wrapper__items:hover::-webkit-scrollbar-thumb {
+  border-radius: 4px;
   background: rgba(0, 0, 0, 0.2);
 }
 

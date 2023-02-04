@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
+import _ from "underscore";
 
 export const fetchPeople = createAsyncThunk(
 	'people/fetchPeople',
@@ -33,17 +34,29 @@ export const peopleSlice = createSlice({
 		setPeopleChecked: (state, action) => {
 			state.peopleChecked = action.payload
 		},
-		setCurrentPeople:(state,action)=>{
+		setCurrentPeople: (state, action) => {
 			state.peopleCurrent = action.payload
 		},
-		updatePeople: (state, action)=>{
-			state.people.splice(action.payload.index,1)
-			state.people.unshift(action.payload.obj)
-		},
-		setIndex:(state,action)=>{
+		setIndex: (state, action) => {
 			state.index = action.payload
+		},
+		updatePeople(state, action) {
+			// state.people[action.payload.index] = action.payload.data
+			let arr1 = [action.payload.data.sender.pk,action.payload.data.recip.pk].sort()
+			let peopleIndex = state.people.findIndex(obj => {
+				let arr2 = [obj.sender.pk,obj.recip.pk].sort()
+				return _.isEqual(arr1,arr2)
+				//_.isEqual(arr1,arr2)
+			})
+			if(peopleIndex === -1){
+				state.people.unshift(action.payload.data)
+			}else{
+				state.people.splice(peopleIndex, 1)
+				state.people.unshift(action.payload.data)
+			}
+			
+			
 		}
-		
 		
 	},
 	
@@ -66,6 +79,6 @@ export const peopleSlice = createSlice({
 	
 })
 
-export const {setPeopleChecked,setCurrentPeople,updatePeople,setIndex} = peopleSlice.actions
+export const {setPeopleChecked, setCurrentPeople, updatePeople, setIndex} = peopleSlice.actions
 
 export default peopleSlice.reducer

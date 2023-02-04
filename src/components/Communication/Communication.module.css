@@ -2,26 +2,35 @@
   height: 100%;
   margin-right: 4px;
   padding: 15px 0;
-  overflow-y: auto;
   position: relative;
+  overflow-y: auto;
+  transition: all 0.3s;
 }
 .block__messages::-webkit-scrollbar-track {
+  transition: all 0.3s;
   border-radius: 4px;
 }
 .block__messages::-webkit-scrollbar {
+  transition: all 0.3s;
   width: 4px;
 }
 .block__messages::-webkit-scrollbar-thumb {
+  transition: all 0.3s;
+  border-radius: 4px;
+  background: transparent;
+}
+.block__messages:hover {
+  overflow: auto;
+}
+.block__messages:hover::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+.block__messages:hover::-webkit-scrollbar {
+  width: 4px;
+}
+.block__messages:hover::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.2);
-}
-
-.date {
-  width: 100%;
-  position: sticky;
-  left: 50%;
-  text-align: center;
-  top: 0;
 }
 
 /*# sourceMappingURL=Communication.module.css.map */
