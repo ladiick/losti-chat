@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import './App.css';
 import {Routes, Route} from "react-router-dom";
 import Main from "./Pages/Main/Main";
@@ -10,52 +10,53 @@ import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {useEffect} from "react";
 import PeopleItem from "./components/PeopleItem/PeopleItem";
-import { io } from 'socket.io-client'
+import useWebsocket from "./components/hooks/useWebsocket";
+import {updateAccessToken} from "./components/actions/updateAccessToken";
+
+export const MyContext = React.createContext()
 
 function App() {
-	
 	const dispatch = useDispatch()
 	const userAccessToken = useSelector((state) => state.user.tokens.access)
 	const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
 	
-	useEffect(()=>{
+	const [socket, statusSocket, newMessage] = useWebsocket(userAccessToken)
 	
-	},[])
+	const isAuth = useSelector(state => state.user.isAuth)
+	
 	
 	useEffect(() => {
-		// dispatch(setUserAccessToken(localStorage.getItem('accessToken')))
-		// dispatch(setUserRefreshToken(localStorage.getItem('refreshToken')))
 		if (userAccessToken) {
-			
 			const getMySelf = async () => {
-				await axios.get('http://127.0.0.1:8000/api/v1/auth/users/me/', {
-					headers: {Authorization: `JWT ${userAccessToken}`}
-				})
-					.then(res => {
-						dispatch(setAboutUser(res.data))
-						dispatch(setIsAuth(true))
+				
+				try {
+					const res = await axios.get('http://127.0.0.1:8000/api/v1/auth/users/me/', {
+						headers: {Authorization: `JWT ${userAccessToken}`}
 					})
-					.catch((error) => {
-						if(error.response.status === 401) {
-							axios.post('http://127.0.0.1:8000/api/v1/token/refresh/', {
-								refresh: userRefreshToken
-							}).then(res => {
-								localStorage.setItem('accessToken', res.data.access)
-								dispatch(setUserAccessToken(localStorage.getItem('accessToken')))
-							})
-						}
-					})
+					dispatch(setAboutUser(res.data))
+					dispatch(setIsAuth(true))
+				} catch(err){
+					console.log(err)
+					if(err.response.status === 401){
+						const token = await updateAccessToken(userRefreshToken)
+						
+						dispatch(setUserAccessToken(token))
+						
+					}
+				}
+				
 				
 			}
-			
 			getMySelf()
+		
 		}
 		
 	}, [userAccessToken]);
 	
 	
+	
 	return (
-		
+		<MyContext.Provider value={{socket,statusSocket,newMessage}}>
 		<Routes>
 			<Route path='/' element={<Main/>}/>
 			<Route path='/authorization' element={<Authorization/>}/>
@@ -63,6 +64,7 @@ function App() {
 			<Route path='/:messageId' element={<PeopleItem />}/>
 			<Route path='/logout' element={<Logout />}/>
 		</Routes>
+		</MyContext.Provider>
 	);
 }
 
