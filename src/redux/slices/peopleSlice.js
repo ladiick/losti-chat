@@ -19,7 +19,6 @@ const initialState = {
 	people: [],
 	peopleChecked: null,
 	peopleCurrent: {},
-	updatePeople: {},
 	index: null,
 	status: 'loading',
 }
@@ -48,13 +47,21 @@ export const peopleSlice = createSlice({
 				return _.isEqual(arr1,arr2)
 				//_.isEqual(arr1,arr2)
 			})
+			
 			if(peopleIndex === -1){
+				state.index+=1
 				state.people.unshift(action.payload.data)
 			}else{
 				state.people.splice(peopleIndex, 1)
 				state.people.unshift(action.payload.data)
-			}
+				if(peopleIndex > state.index){
+					state.index+=1
+				}
 			
+			}
+			if(action.payload.data.sender === action.payload.myId) {
+				state.index = 0
+			}
 			
 		}
 		

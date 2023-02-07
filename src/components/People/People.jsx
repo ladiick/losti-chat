@@ -1,6 +1,6 @@
 import s from './People.module.scss'
 import PeopleItem from "../PeopleItem/PeopleItem";
-import {useEffect,useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	fetchPeople,
@@ -11,7 +11,7 @@ import PeopleItemSceleton from "../PeopleItem/PeopleItemSceleton";
 import {fetchMessage} from "../../redux/slices/messageSlice";
 import favorite from '../assets/favorite.svg'
 
-const People = () => {
+const People = ({searchValue,setSearch}) => {
 	const userAccessToken = useSelector((state) => state.user.tokens.access)
 	const isAuth = useSelector(state => state.user.isAuth)
 	const people = useSelector(state => state.people.people)
@@ -27,15 +27,13 @@ const People = () => {
 	}, [isAuth, userAccessToken]);
 	
 	
-	
-	const handlerPeople = (id,current__obj,obj,index) => {
-		 dispatch(setIndex(index))
-		 dispatch(setPeopleChecked(id))
-		 dispatch(setCurrentPeople(current__obj))
-		 dispatch(fetchMessage({userAccessToken, id}))
+	const handlerPeople = (id, current__obj, obj, index) => {
+		dispatch(setIndex(index))
+		dispatch(setPeopleChecked(id))
+		dispatch(setCurrentPeople(current__obj))
+		dispatch(fetchMessage({userAccessToken, id}))
+		setSearch('')
 	}
-	
-	
 	
 	
 	return (
@@ -55,7 +53,17 @@ const People = () => {
 				}
 				
 				
-				{people.map((obj, index) => obj.sender.pk === myId && obj.recip.pk !== myId ?
+				{people.filter((people) => (
+					people.sender.pk === myId && people.recip.pk !== myId ?
+						people.recip.first_name.toLowerCase().includes(searchValue.toLowerCase())
+						||
+						people.recip.last_name.toLowerCase().includes(searchValue.toLowerCase())
+						:
+						people.sender.first_name.toLowerCase().includes(searchValue.toLowerCase())
+						||
+						people.sender.last_name.toLowerCase().includes(searchValue.toLowerCase())
+				
+				)).map((obj, index) => obj.sender.pk === myId && obj.recip.pk !== myId ?
 					<PeopleItem
 						key={obj.recip.pk}
 						id={obj.recip.pk}
@@ -64,7 +72,7 @@ const People = () => {
 						message={`Вы: ${obj.message}`}
 						time={obj.time}
 						img={obj.recip.image}
-						handlerPeople={() => handlerPeople(obj.recip.pk,obj.recip,obj,index)}
+						handlerPeople={() => handlerPeople(obj.recip.pk, obj.recip, obj, index)}
 					/>
 					
 					: obj.sender.pk === myId && obj.recip.pk === myId
@@ -78,7 +86,7 @@ const People = () => {
 							message={obj.message}
 							time={obj.time}
 							img={favorite}
-							handlerPeople={() => handlerPeople(obj.sender.pk,obj.sender,obj,index)}
+							handlerPeople={() => handlerPeople(obj.sender.pk, obj.sender, obj, index)}
 						/>
 						:
 						<PeopleItem
@@ -89,7 +97,7 @@ const People = () => {
 							message={obj.message}
 							time={obj.time}
 							img={obj.sender.image}
-							handlerPeople={() => handlerPeople(obj.sender.pk,obj.sender,obj,index)}
+							handlerPeople={() => handlerPeople(obj.sender.pk, obj.sender, obj, index)}
 						/>
 				)}
 			

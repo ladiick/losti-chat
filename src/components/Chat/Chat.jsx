@@ -172,6 +172,7 @@ const Chat = () => {
 							type="text"
 							placeholder='Напишите сообщение...'
 							{...register('message')}
+							autoComplete={'off'}
 						/>
 						<button className={s.button__send} disabled={statusSocket === 'pending'}>
 							<svg viewBox="0 0 24 24">
