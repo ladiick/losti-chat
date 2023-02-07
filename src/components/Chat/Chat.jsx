@@ -1,65 +1,61 @@
 import s from './Chat.module.scss'
 import photo from '../assets/photo.svg'
 import Communication from "../Communication/Communication";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import message__logo from '../assets/messages.svg'
 import {useForm} from "react-hook-form";
 import CommunicationSceleton from "../Communication/CommunicationSceleton";
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext} from "react";
 import favorite from '../assets/favorite.svg'
+import {MyContext} from "../../App";
 const Chat = () => {
-	const dispatch = useDispatch()
 	const isAuth = useSelector(state => state.user.isAuth)
-	const peopleChecked = useSelector(state => state.people.peopleChecked)
-	const userAccessToken = useSelector(state => state.user.tokens.access)
 	const peopleCurrent = useSelector(state => state.people.peopleCurrent)
 	const status = useSelector(state => state.message.status)
+	const myId = useSelector(state => state.user.aboutUser.id)
 	
 	const {register, handleSubmit, reset} = useForm()
+	const {socket,statusSocket} = useContext(MyContext);
 	
-	const [socket, setSocket] = useState(null)
-	const [statusSocket, setStatusSocket] = useState('pending')
-	
-	
-	useEffect(() => {
-		let ws = null
-		const closeHandler = () => {
-			alert('Chanel is closed')
-			setTimeout(createChannel, 3000)
-		}
-		const createChannel = () => {
-			
-			ws?.removeEventListener('close', closeHandler)
-			ws?.close()
-			
-			ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/?token=${userAccessToken}`)
-			
-			ws.addEventListener('close', closeHandler)
-			setSocket(ws)
-			
-		}
-		createChannel()
-		
-		return () => {
-			ws.removeEventListener('close', closeHandler)
-			ws.close()
-		}
-		
-	}, []);
-	
-	
-	useEffect(() => {
-		let openHandler = () => {
-			setStatusSocket('ready')
-		}
-		
-		socket?.addEventListener('open', openHandler)
-		return () => {
-			socket?.removeEventListener('open', openHandler)
-		}
-		
-	}, [socket]);
+	// const [socket, setSocket] = useState(null)
+	//
+	// useEffect(() => {
+	// 	let ws = null
+	// 	const closeHandler = () => {
+	// 		alert('Chanel is closed')
+	// 		setTimeout(createChannel, 3000)
+	// 	}
+	// 	const createChannel = () => {
+	//
+	// 		ws?.removeEventListener('close', closeHandler)
+	// 		ws?.close()
+	//
+	// 		ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/?token=${userAccessToken}`)
+	//
+	// 		ws.addEventListener('close', closeHandler)
+	// 		setSocket(ws)
+	//
+	// 	}
+	// 	createChannel()
+	//
+	// 	return () => {
+	// 		ws.removeEventListener('close', closeHandler)
+	// 		ws.close()
+	// 	}
+	//
+	// }, []);
+	// useEffect(() => {
+	// 	let openHandler = () => {
+	// 		setStatusSocket('ready')
+	// 	}
+	//
+	// 	socket?.addEventListener('open', openHandler)
+	// 	return () => {
+	// 		socket?.removeEventListener('open', openHandler)
+	// 	}
+	//
+	// }, [socket]);
 	
 	
 	const sendMessage = (data) => {
@@ -87,8 +83,8 @@ const Chat = () => {
 					request_id: new Date().getTime(),
 					message: data.message,
 					action: 'create_dialog_message',
-					recipient: peopleChecked,
-					
+					recipient: peopleCurrent.pk,
+
 				}
 			)
 		)
@@ -112,7 +108,7 @@ const Chat = () => {
 		
 		)
 	}
-	if (peopleChecked === null) {
+	if (!peopleCurrent.pk) {
 		return (
 			<div className={s.emptity__chat}>
 				<div className={s.emptity__content}>
@@ -128,9 +124,9 @@ const Chat = () => {
 		<div className={s.wrapper}>
 			<header className={s.header}>
 				<div className={s.left__side}>
-					<img src={peopleCurrent.pk === 1 ? favorite : peopleCurrent.image ? peopleCurrent.image : photo} alt="logo"/>
+					<img src={peopleCurrent.pk === myId ? favorite : peopleCurrent.image ? peopleCurrent.image : photo} alt="logo"/>
 					<div className={s.person__info}>
-						<h1>{peopleCurrent.pk === 1 ? 'Избранное' : peopleCurrent.first_name} {peopleCurrent.last_name}</h1>
+						<h1>{peopleCurrent.pk === myId ? 'Избранное' : peopleCurrent.first_name} {peopleCurrent.last_name}</h1>
 						{/*<p>Online</p>*/}
 					</div>
 				</div>
@@ -152,7 +148,6 @@ const Chat = () => {
 			}
 			
 			<Communication socket={socket}/>
-			
 			<div className={s.wrapper__input}>
 				<div className={s.input}>
 					<form onSubmit={handleSubmit(sendMessage)}>
@@ -174,7 +169,7 @@ const Chat = () => {
 							{...register('message')}
 							autoComplete={'off'}
 						/>
-						<button className={s.button__send} disabled={statusSocket === 'pending'}>
+						<button className={s.button__send} disabled={statusSocket === 'pending'} >
 							<svg viewBox="0 0 24 24">
 								<path
 									d="M22.984.638a.5.5,0,0,0-.718-.559L1.783,10.819a1.461,1.461,0,0,0-.1,2.527h0l4.56,2.882a.25.25,0,0,0,.3-.024L18.7,5.336a.249.249,0,0,1,.361.342L9.346,17.864a.25.25,0,0,0,.062.367L15.84,22.3a1.454,1.454,0,0,0,2.19-.895Z"/>

@@ -7,17 +7,18 @@ export const fetchPeople = createAsyncThunk(
 	async (userAccessToken) => {
 		
 		// const {userAccessToken} = params
+		
 		const res = await axios.get('http://127.0.0.1:8000/api/v1/dialogs/', {
 			headers: {Authorization: `JWT ${userAccessToken}`}
 		})
-		
 		return res.data
+		
+		
 	}
 )
 
 const initialState = {
 	people: [],
-	peopleChecked: null,
 	peopleCurrent: {},
 	index: null,
 	status: 'loading',
@@ -41,25 +42,25 @@ export const peopleSlice = createSlice({
 		},
 		updatePeople(state, action) {
 			// state.people[action.payload.index] = action.payload.data
-			let arr1 = [action.payload.data.sender.pk,action.payload.data.recip.pk].sort()
+			let arr1 = [action.payload.data.sender.pk, action.payload.data.recip.pk].sort()
 			let peopleIndex = state.people.findIndex(obj => {
-				let arr2 = [obj.sender.pk,obj.recip.pk].sort()
-				return _.isEqual(arr1,arr2)
+				let arr2 = [obj.sender.pk, obj.recip.pk].sort()
+				return _.isEqual(arr1, arr2)
 				//_.isEqual(arr1,arr2)
 			})
 			
-			if(peopleIndex === -1){
-				state.index+=1
+			if (peopleIndex === -1) {
+				state.index += 1
 				state.people.unshift(action.payload.data)
-			}else{
+			} else {
 				state.people.splice(peopleIndex, 1)
 				state.people.unshift(action.payload.data)
-				if(peopleIndex > state.index){
-					state.index+=1
+				if (peopleIndex > state.index) {
+					state.index += 1
 				}
-			
+				
 			}
-			if(action.payload.data.sender === action.payload.myId) {
+			if (action.payload.data.sender === action.payload.myId) {
 				state.index = 0
 			}
 			

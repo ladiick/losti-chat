@@ -2,13 +2,12 @@ import s from "./PeopleItem.module.scss";
 import photo from "../assets/my_photo.jpg";
 import {useSelector} from "react-redux";
 import {reTime} from "../actions/reTime";
-import {useEffect} from "react";
 const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople}) => {
 	
 	
 	
 	
-	const peopleChecked = useSelector(state => state.people.peopleChecked)
+	const peopleChecked = useSelector(state => state.people.peopleCurrent.pk)
 	
 	return (
 		

@@ -1,17 +1,16 @@
 import s from './People.module.scss'
 import PeopleItem from "../PeopleItem/PeopleItem";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	fetchPeople,
-	setCurrentPeople, setIndex,
-	setPeopleChecked,
+	setCurrentPeople, setIndex
 } from "../../redux/slices/peopleSlice";
 import PeopleItemSceleton from "../PeopleItem/PeopleItemSceleton";
 import {fetchMessage} from "../../redux/slices/messageSlice";
 import favorite from '../assets/favorite.svg'
 
-const People = ({searchValue,setSearch}) => {
+const People = ({searchValue, setSearch}) => {
 	const userAccessToken = useSelector((state) => state.user.tokens.access)
 	const isAuth = useSelector(state => state.user.isAuth)
 	const people = useSelector(state => state.people.people)
@@ -27,9 +26,8 @@ const People = ({searchValue,setSearch}) => {
 	}, [isAuth, userAccessToken]);
 	
 	
-	const handlerPeople = (id, current__obj, obj, index) => {
+	const handlerPeople = (id, current__obj, index) => {
 		dispatch(setIndex(index))
-		dispatch(setPeopleChecked(id))
 		dispatch(setCurrentPeople(current__obj))
 		dispatch(fetchMessage({userAccessToken, id}))
 		setSearch('')
@@ -72,7 +70,7 @@ const People = ({searchValue,setSearch}) => {
 						message={`Вы: ${obj.message}`}
 						time={obj.time}
 						img={obj.recip.image}
-						handlerPeople={() => handlerPeople(obj.recip.pk, obj.recip, obj, index)}
+						handlerPeople={() => handlerPeople(obj.recip.pk, obj.recip, index)}
 					/>
 					
 					: obj.sender.pk === myId && obj.recip.pk === myId
@@ -86,8 +84,9 @@ const People = ({searchValue,setSearch}) => {
 							message={obj.message}
 							time={obj.time}
 							img={favorite}
-							handlerPeople={() => handlerPeople(obj.sender.pk, obj.sender, obj, index)}
+							handlerPeople={() => handlerPeople(obj.sender.pk, obj.sender, index)}
 						/>
+						
 						:
 						<PeopleItem
 							key={obj.sender.pk}
@@ -97,7 +96,7 @@ const People = ({searchValue,setSearch}) => {
 							message={obj.message}
 							time={obj.time}
 							img={obj.sender.image}
-							handlerPeople={() => handlerPeople(obj.sender.pk, obj.sender, obj, index)}
+							handlerPeople={() => handlerPeople(obj.sender.pk, obj.sender, index)}
 						/>
 				)}
 			
