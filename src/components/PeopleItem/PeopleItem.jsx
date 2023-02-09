@@ -2,10 +2,8 @@ import s from "./PeopleItem.module.scss";
 import photo from "../assets/my_photo.jpg";
 import {useSelector} from "react-redux";
 import {reTime} from "../actions/reTime";
-const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople}) => {
-	
-	
-	
+
+const PeopleItem = ({firstName, lastName, message, time, img, id,friend, handlerPeople}) => {
 	
 	const peopleChecked = useSelector(state => state.people.peopleCurrent.pk)
 	
@@ -18,7 +16,12 @@ const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople}
 				<img src={img ? img : photo} alt='avatar'/>
 				<div className={s.name__lastMessage}>
 					<h2>{firstName} {lastName}</h2>
-					<p>{message}</p>
+					{
+						friend !== 'friend'?
+						<p>{message}</p>
+					:
+							<span className={s.writeAMessage}>Написать сообщение</span>
+					}
 				</div>
 				
 				<div className={s.wrapper__time}>

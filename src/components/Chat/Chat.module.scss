@@ -1,8 +1,8 @@
 .wrapper {
 	width: 50%;
 	flex-grow: 1;
-	//background-color: rgb(244, 244, 246);
-	border-left: 1px solid rgba(0, 0, 0, 0.2);
+	background-color: #282828;
+
 	border-radius: 0 9px 9px 0;
 	position: relative;
 	//background: url("login_img3.jpg") center/130% no-repeat;
@@ -11,17 +11,43 @@
 	justify-content: space-between;
 }
 
+.load {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	border: 3px solid #4f4e4e;
+	border-top: 3px solid #1a73e8;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	animation: spin 1s linear infinite;
+
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}
+
 .wrapper__input {
 
 	width: 100%;
-	padding: 20px 10px;
-	border-top: 1px solid rgba(0, 0, 0, 0.2);
+	//border-top: 1px solid #1a73e8;
+	background: rgba(255, 255, 255, 0.05);
+
 }
 
 .input {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	padding: 10px;
 
 	form {
 		width: 100%;
@@ -31,12 +57,14 @@
 	}
 
 	input {
-
-		border: 1px solid #1a73e8;
+		padding: 10px;
+		color: #FFFFFF;
+		background: rgba(255, 255, 255, 0.08);
+		border-radius: 8px;
+		border: none;
 		outline: none;
 		width: 85%;
-		border-radius: 8px;
-		padding: 8px;
+		//padding: 8px;
 		transition: all .3s;
 		//box-shadow: 1px 3px 8px 0 rgba(34, 60, 80, 0.4);
 		//box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.4);
@@ -65,13 +93,16 @@
 		transition: all .3s;
 		width: 24px;
 		height: 24px;
-		fill: rgba(0, 0, 0, 0.5);
+		fill: rgba(255, 255, 255, 0.3);
 		border-radius: 50%;
 
 		&:hover {
 			transform: rotate(-45deg) scale(1.1);
 
+			fill: rgba(255, 255, 255, 0.5);
+
 		}
+
 	}
 }
 
@@ -80,21 +111,8 @@
 	display: flex;
 	justify-content: space-between;
 	position: relative;
-	//border-bottom: 1px solid #1a73e8;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);;
 
-	&:before {
-		content: '';
-		position: absolute;
-		bottom: -1px;
-		right: 0;
-		width: 3%;
-		height: 8px;
-		z-index: 10;
-		//transform: translateX(-4%);
-		background-color: #FFFFFF;;
-	}
 }
 
 .left__side {
@@ -118,7 +136,7 @@
 		margin: 0;
 		padding: 0;
 		font-size: calc(14px + 0.1vw);
-		color: #000000;
+		color: #FFFFFF;
 		font-weight: 500;
 	}
 
@@ -162,18 +180,70 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: #282828;
 
-	h1 {
-		font-weight: 500;
-		font-size: calc(16px + 0.5vh);
-		padding-right: 20px;
+	a {
+		text-decoration: none;
 	}
 
-	svg {
-		width: calc(24px + 1vw);
-		height: calc(24px + 1vw);
+	.wrapper__notAuth {
 
+		text-align: center;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		padding: 25px;
+		background-color: #202020;
+		border-radius: 12px;
+
+		h1 {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			font-weight: 500;
+			font-size: calc(16px + 0.5vh);
+			color: #FFFFFF;
+
+			span {
+				margin-top: 10px;
+				color: #888888;
+				font-size: 14px;
+			}
+		}
+
+		svg {
+			width: calc(24px + 1vw);
+			height: calc(24px + 1vw);
+			fill: red;
+			margin-left: 10px;
+		}
+
+		transition: all 0.3s;
+
+
+		.links {
+			width: 100%;
+			margin: 10px 0;
+			display: flex;
+			justify-content: space-between;
+
+			a {
+				text-decoration: none;
+				color: white;
+				padding: 10px;
+				background-color: #1a73e8;
+				border-radius: 8px;
+
+				&:not(:last-child) {
+					margin-right: 10px;
+				}
+			}
+
+
+		}
 	}
+
+
 }
 
 .emptity__chat {
@@ -182,6 +252,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: #282828;
+
 }
 
 .emptity__content {
@@ -196,39 +268,13 @@
 	}
 
 	span {
-		font-size: 18px;
-		position: relative;
-		padding: 0 5px;
-		//background-color: ;
-		&:after {
-			content: '';
-			position: absolute;
-			width: 10px;
-			height: 19px;
-			border-top: 2px solid #1a73e8;
-			border-right: 2px solid #1a73e8;
-			border-bottom: 2px solid #1a73e8;
+		font-size: 14px;
+		padding: 5px 10px;
+		background-color: rgba(255, 255, 255, 0.08);
+		color: #FFFFFF;
+		border-radius: 17px;
+		margin-top: 5px;
 
-			top: -1px;
-			right: 0;
-		}
-
-		&:before {
-			content: '';
-			position: absolute;
-			width: 10px;
-			height: 19px;
-			border-top: 2px solid #1a73e8;
-			border-left: 2px solid #1a73e8;
-
-			border-bottom: 2px solid #1a73e8;
-
-
-			top: -1px;
-			left: 0;
-
-
-		}
 	}
 }
 
@@ -249,11 +295,21 @@
 
 .button__send {
 	cursor: pointer;
+
+	svg {
+		transition: all 0.3s;
+		fill: rgba(255, 255, 255, 0.3);
+
+		&:hover {
+			fill: rgba(255, 255, 255, 0.5);
+
+		}
+	}
 }
 
-.sceletons{
+.sceletons {
 	margin-right: 4px;
 	padding: 10px 0;
-	overflow-y:auto;
+	overflow-y: auto;
 	height: 100%;
 }

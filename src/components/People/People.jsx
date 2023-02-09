@@ -6,12 +6,13 @@ import {
 	fetchPeople,
 	setCurrentPeople, setIndex
 } from "../../redux/slices/peopleSlice";
-import PeopleItemSceleton from "../PeopleItem/PeopleItemSceleton";
 import {fetchMessage} from "../../redux/slices/messageSlice";
 import favorite from '../assets/favorite.svg'
 
 const People = ({searchValue, setSearch}) => {
 	const userAccessToken = useSelector((state) => state.user.tokens.access)
+	const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
+	
 	const isAuth = useSelector(state => state.user.isAuth)
 	const people = useSelector(state => state.people.people)
 	const myId = useSelector(state => state.user.aboutUser.id)
@@ -21,7 +22,7 @@ const People = ({searchValue, setSearch}) => {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		if (isAuth && userAccessToken) {
-			dispatch(fetchPeople(userAccessToken))
+			dispatch(fetchPeople({userAccessToken,userRefreshToken}))
 		}
 	}, [isAuth, userAccessToken]);
 	
@@ -36,19 +37,10 @@ const People = ({searchValue, setSearch}) => {
 	
 	return (
 		<div className={s.block__people}>
-			
-			<h1 className={s.title__people}>Люди</h1>
-			
-			
 			<div className={s.wrapper__items}>
-				
-				
-				{status === 'loading' && (
-					<div className={s.sceletons}>
-						{[...new Array(7)]
-							.map((_, index) => <PeopleItemSceleton key={index}/>)}
-					</div>)
-				}
+				{status === 'loading'  && (
+					<div className={s.load}></div>
+				)}
 				
 				
 				{people.filter((people) => (

@@ -4,11 +4,12 @@ import ContentLoader from 'react-content-loader'
 const PeopleItemSceleton = () => {
 	return (
 		<ContentLoader
+			speed={2}
 			height={50}
-			width={275}
-			viewBox="0 0 275 50"
+			width={300}
+			viewBox="0 0 300 50"
 			backgroundColor="#f3f3f3"
-			foregroundColor="#ecebeb"
+			foregroundColor="orange"
 		>
 			<rect x="0" y="0" rx="0" ry="0" width="274" height="1" />
 			<rect x="0" y="0" rx="0" ry="0" width="1" height="49" />

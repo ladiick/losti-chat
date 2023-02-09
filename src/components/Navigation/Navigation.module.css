@@ -1,11 +1,53 @@
+.overlay {
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 9px;
+  opacity: 0;
+}
+
+.overlay__active {
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 9px;
+  opacity: 1;
+}
+
 .wrapper__navigation {
-  background-color: rgba(0, 0, 0, 0.8);
-  display: inherit;
-  align-items: center;
+  transition: all 0.3s;
+  flex-grow: 1;
+  background-color: #212121;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
   border-radius: 9px 0 0 9px;
   padding: 0 10px;
+  opacity: 0;
+}
+
+.wrapper__navigation__active {
   transition: all 0.3s;
-  box-shadow: 0 0 20px 0 rgb(0, 0, 0) inset;
+  flex-grow: 1;
+  width: 300px;
+  background-color: #212121;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 9px 0 0 9px;
+  padding: 0 10px;
+  z-index: 100;
+  opacity: 1;
 }
 
 .nav__content {
@@ -34,17 +76,6 @@
   padding: 6px;
   position: relative;
   border-radius: 10px;
-}
-.list__item:before {
-  position: absolute;
-  content: "";
-  top: 50%;
-  left: -15px;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  background-color: #1a73e8;
 }
 .list__item svg {
   width: 20px;
@@ -141,6 +172,10 @@
   from {
     transform: rotate(360deg);
   }
+}
+
+.active li {
+  background-color: #1a73e8;
 }
 
 /*# sourceMappingURL=Navigation.module.css.map */

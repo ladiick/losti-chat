@@ -24,41 +24,48 @@
 .message__left {
 
 	display: inline-block;
-	background-color: rgba(0,0,0,0.4);
-	padding: 6px 9px;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 9px;
 	color: #FFFFFF;
+	max-width: 45%;
+	word-break: break-all;
+
 	position: relative;
-	font-size: calc(11px + 0.1vw);
+	font-size: calc(11px + 0.2vw);
 	border-radius: 8px 10px 10px 0;
 
 }
 .message__right {
-
+	word-break: break-all;
 	display: inline-block;
 	text-align: left;
-	max-width: 60%;
+	max-width: 45%;
 	background-color: #1a73e8;
-	padding: 6px 9px;
+	padding: 9px;
 	color: #FFFFFF;
 	position: relative;
-	font-size: calc(11px + 0.1vw);
+	font-size: calc(11px + 0.2vw);
 	border-radius: 10px 8px 0 10px;
 
 }
 
 .message__info__left{
+	word-break: normal;
+
 	position: absolute;
 	top: -8px;
 	left: 0;
 	width: 25px;
 	font-size: calc(10px + 0.1vw);
 	font-weight: 300;
-	color: #707070;
+	color: #888888;
 	display: flex;
 	transform: translateY(-50%);
 
 }
 .message__info__right{
+	word-break: normal;
+
 	position: absolute;
 	top: -8px;
 	right: 0;
@@ -66,7 +73,7 @@
 	text-align: right;
 	font-size: calc(8px + 0.1vw);
 	font-weight: 300;
-	color: #707070;
+	color: #888888;
 	display: flex;
 	transform: translateY(-50%);
 
@@ -76,12 +83,12 @@
 .date__block{
 	display: inline-block;
 	margin: 0;
-	background-color: #FFFFFF;
-	padding: 4px;
+
+	padding: 5px;
 	font-size: 10px;
 	border-radius: 10px;
-	color: #000000;
-	border: 1px solid rgba(0,0,0,0.2);
+	color: #FFFFFF;
+	background: #3c3f41;
 	width: 70px;
 }
 

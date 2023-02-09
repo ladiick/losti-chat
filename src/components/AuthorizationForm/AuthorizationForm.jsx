@@ -5,6 +5,7 @@ import React from "react";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {setIsAuth, setUserAccessToken, setUserRefreshToken} from "../../redux/slices/userSlice";
+import {HOST} from "../api/HOST";
 const AuthorizationForm = () => {
 	const dispatch = useDispatch()
 	const {register, handleSubmit, formState: {errors, isValid}} = useForm(
@@ -17,7 +18,7 @@ const AuthorizationForm = () => {
 	const onSubmit = async (data) => {
 		
 		
-		await axios.post('http://127.0.0.1:8000/api/v1/token/', {
+		await axios.post(`${HOST}/api/v1/token/`, {
 			email: data.email,
 			password: data.password,
 		})

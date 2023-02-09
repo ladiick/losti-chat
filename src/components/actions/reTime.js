@@ -1,8 +1,5 @@
-import message from "../Message/Message";
-import {isBoolean} from "underscore";
 
 export const reTime = (time, flag = '') => {
-	const monthRus = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек']
 	const currentTime = new Date()
 	const messageTime = new Date(time)
 	

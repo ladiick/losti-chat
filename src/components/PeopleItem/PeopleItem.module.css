@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   transition: all 0.3s;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 6px;
   border-radius: 8px;
   cursor: pointer;
@@ -15,38 +14,34 @@
   margin-right: 10px;
   border-radius: 50%;
   object-fit: cover;
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
 }
 .block__people__item:before {
   content: "";
   position: absolute;
   width: 30%;
-  border-bottom: 3px solid #1a73e8;
+  border-bottom: 3px solid transparent;
   z-index: 10;
   bottom: -1.5px;
   border-radius: 4px;
   left: 0;
-  transform: translateX(-150%);
   transition: all 0.3s;
-}
-.block__people__item:hover {
-  box-shadow: 0 0 10px -4px rgba(0, 0, 0, 0.4) inset;
 }
 .block__people__item:hover:before {
   width: 50%;
   transform: translateX(50%);
+  border-bottom: 3px solid #1a73e8;
 }
 
 .block__people__item__active {
   display: flex;
   align-items: center;
   transition: all 0.3s;
-  border: 1px solid rgb(0, 0, 0);
   padding: 6px;
   border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 0 10px -4px rgba(0, 0, 0, 0.4) inset;
+  background: rgba(255, 255, 255, 0.0605);
   position: relative;
 }
 .block__people__item__active:not(:last-child) {
@@ -56,8 +51,8 @@
   margin-right: 10px;
   border-radius: 50%;
   object-fit: cover;
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
 }
 .block__people__item__active:before {
   content: "";
@@ -77,8 +72,8 @@
   width: 100%;
 }
 .info__message img {
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
 }
 
 .name__lastMessage {
@@ -91,15 +86,16 @@
   margin: 0;
   font-weight: 400;
   font-size: calc(14px + 0.1vw);
+  color: #FFFFFF;
 }
 .name__lastMessage p {
   font-size: calc(10px + 0.1vw);
   margin: 0;
-  max-width: 100px;
+  max-width: 120px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  color: #575656;
+  color: #888888;
 }
 
 .wrapper__time {
@@ -112,6 +108,7 @@
   font-size: calc(10px + 0.1vw);
   font-weight: 400;
   margin: 0;
+  color: #888888;
 }
 .wrapper__time span {
   align-self: flex-end;
@@ -122,8 +119,17 @@
   font-size: calc(10px + 0.1vw);
   color: #FFFFFF;
   border-radius: 18px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #1a73e8;
   width: 15px;
+}
+
+.writeAMessage {
+  color: #1a73e8;
+  font-size: calc(10px + 0.2vw);
+  transition: all 0.3s;
+}
+.writeAMessage:hover {
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=PeopleItem.module.css.map */

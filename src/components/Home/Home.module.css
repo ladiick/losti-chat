@@ -1,17 +1,11 @@
-.wrapper {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .container {
   margin: 0 auto;
-  width: 1076px;
+  width: calc(1024px + 10vw);
+  position: relative;
 }
 
 .content {
-  max-height: 90vh;
+  height: 100vh;
   display: flex;
   border: 1px solid #aaa;
   border-radius: 10px;
@@ -19,4 +13,4 @@
   position: relative;
 }
 
-/*# sourceMappingURL=Main.module.css.map */
+/*# sourceMappingURL=Home.module.css.map */

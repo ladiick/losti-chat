@@ -1,0 +1,25 @@
+.overlay {
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 9px;
+  opacity: 0;
+}
+
+.overlay__active {
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 9px;
+  opacity: 1;
+}
+
+/*# sourceMappingURL=Modul.module.css.map */

@@ -12,6 +12,7 @@ import {useEffect} from "react";
 import PeopleItem from "./components/PeopleItem/PeopleItem";
 import useWebsocket from "./components/hooks/useWebsocket";
 import {updateAccessToken} from "./components/actions/updateAccessToken";
+import Friends from "./Pages/Friends/Friends";
 
 export const MyContext = React.createContext()
 
@@ -59,9 +60,9 @@ function App() {
 		<MyContext.Provider value={{socket,statusSocket,newMessage}}>
 		<Routes>
 			<Route path='/' element={<Main/>}/>
+			<Route path='/friends' element={<Friends/>}/>
 			<Route path='/authorization' element={<Authorization/>}/>
 			<Route path='/registration' element={<Registration/>}/>
-			<Route path='/:messageId' element={<PeopleItem />}/>
 			<Route path='/logout' element={<Logout />}/>
 		</Routes>
 		</MyContext.Provider>
