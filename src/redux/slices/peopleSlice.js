@@ -1,18 +1,26 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import _ from "underscore";
+import {HOST} from "../../components/api/HOST";
+import {updateAccessToken} from "../../components/actions/updateAccessToken";
+import {setUserAccessToken} from "./userSlice";
 
 export const fetchPeople = createAsyncThunk(
 	'people/fetchPeople',
-	async (userAccessToken) => {
-		
-		// const {userAccessToken} = params
-		
-		const res = await axios.get('http://127.0.0.1:8000/api/v1/dialogs/', {
-			headers: {Authorization: `JWT ${userAccessToken}`}
-		})
-		return res.data
-		
+	async ({userAccessToken,userRefreshToken},{dispatch}) => {
+		try {
+			const res = await axios.get(`${HOST}/api/v1/dialogs/`, {
+				headers: {Authorization: `JWT ${userAccessToken}`}
+			})
+			return res.data
+			
+		}
+		catch (err) {
+			if (err.response.status === 401) {
+				const token = await updateAccessToken(userRefreshToken)
+				dispatch(setUserAccessToken(token))
+			}
+		}
 		
 	}
 )

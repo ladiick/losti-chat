@@ -1,15 +1,28 @@
 import s from './Navigation.module.scss'
 import photo from '../assets/my_photo.jpg'
-import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import logo from "../assets/logo.svg";
+import {openNavBar} from "../../redux/slices/navigationSlice";
+import {useEffect} from "react";
 
 const Navigation = () => {
+	const dispatch = useDispatch()
 	const isAuth = useSelector(state => state.user.isAuth)
+	const isVisible = useSelector(state => state.navigation.nav)
+	const classActive = ({isActive}) => isActive ? s.active : ''
+	
+	
+	useEffect(() => {
+		dispatch(openNavBar(false))
+	}, []);
+	
 	
 	return (
+		
 		<>
-			<div className={s.wrapper__navigation}>
+			<div className={isVisible ? s.overlay__active : s.overlay} onClick={() => dispatch(openNavBar(!isVisible))}></div>
+			<div className={isVisible ? s.wrapper__navigation__active : s.wrapper__navigation}>
 				<nav className={s.nav__content}>
 					<div className={s.name__company}>
 					<span>
@@ -20,14 +33,14 @@ const Navigation = () => {
 					<ul className={s.list__items}>
 						
 						{isAuth ?
-							<Link to='/profile' title='Профиль'>
+							<NavLink to='/profile' title='Профиль' className={classActive}>
 								<li className={s.list__item}>
 									<img src={photo} alt='logo'/>
 									<h2>
 										Моя страница
 									</h2>
 								</li>
-							</Link>
+							</NavLink>
 							:
 							<li className={s.list__item}>
 								<svg strokeWidth="1" viewBox="0 0 24 24" fill='none'>
@@ -48,18 +61,24 @@ const Navigation = () => {
 						
 						{
 							isAuth &&
-							<Link to='/' title='Сообщения'>
+							<NavLink to='/' title='Сообщения' className={classActive}>
 								<li className={s.list__item}>
-									<svg fill='transparent' stroke='white' enableBackground="new 0 0 24 24" height="24px" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24px"><g><path d="M5.1,22.1c-0.5,0-0.9-0.1-1.4-0.2c-0.3-0.1-0.6-0.3-0.8-0.5l-0.1-0.1c-0.1-0.1-0.2-0.3-0.2-0.4c0-0.2,0.1-0.3,0.3-0.4   c0.8-0.4,1.5-1.1,1.9-1.9C4.9,18.5,5,18.4,5,18.3c-2.8-1.7-4.5-4.4-4.5-7.3c0-5,5.2-9.2,11.5-9.2S23.5,6,23.5,11   c0,5-5.2,9.2-11.5,9.2c-0.6,0-1.3,0-1.9-0.1C8.6,21.4,6.8,22.1,5.1,22.1z"/></g></svg>
+									<svg fill='transparent' stroke='white' enableBackground="new 0 0 24 24" height="24px" id="Layer_1"
+									     version="1.1" viewBox="0 0 24 24" width="24px">
+										<g>
+											<path
+												d="M5.1,22.1c-0.5,0-0.9-0.1-1.4-0.2c-0.3-0.1-0.6-0.3-0.8-0.5l-0.1-0.1c-0.1-0.1-0.2-0.3-0.2-0.4c0-0.2,0.1-0.3,0.3-0.4   c0.8-0.4,1.5-1.1,1.9-1.9C4.9,18.5,5,18.4,5,18.3c-2.8-1.7-4.5-4.4-4.5-7.3c0-5,5.2-9.2,11.5-9.2S23.5,6,23.5,11   c0,5-5.2,9.2-11.5,9.2c-0.6,0-1.3,0-1.9-0.1C8.6,21.4,6.8,22.1,5.1,22.1z"/>
+										</g>
+									</svg>
 									<h2>
 										Сообщения
 									</h2>
 								</li>
-							</Link>}
+							</NavLink>}
 						
 						{
 							isAuth &&
-							<Link to='/' title='Друзья'>
+							<NavLink to='/friends' title='Друзья' className={classActive}>
 								<li className={s.list__item}>
 									<svg fill='white' viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
 										<g data-name="Layer 20" id="Layer_20">
@@ -79,12 +98,12 @@ const Navigation = () => {
 										Друзья
 									</h2>
 								</li>
-							</Link>}
+							</NavLink>}
 						
 						{
 							isAuth &&
 							
-							(<Link to='/settings' title='Настройки'>
+							(<NavLink to='/settings' title='Настройки' className={classActive}>
 								<li className={s.list__item}>
 									<svg fill='white' viewBox="0 0 128 128">
 										<path d="M64,39A25,25,0,1,0,89,64,25,25,0,0,0,64,39Zm0,44A19,19,0,1,1,83,64,19,19,0,0,1,64,83Z"/>
@@ -95,13 +114,13 @@ const Navigation = () => {
 										Настройки
 									</h2>
 								</li>
-							</Link>)
+							</NavLink>)
 							
 						}
 						
 						
 						{isAuth ?
-							<Link to='/logout' title='Выход'>
+							<NavLink to='/logout' title='Выход' className={classActive}>
 								<li className={s.list__item}>
 									
 									
@@ -119,10 +138,10 @@ const Navigation = () => {
 								
 								</li>
 							
-							</Link>
+							</NavLink>
 							
 							:
-							<Link to='/authorization' title='Авторизоваться'>
+							<NavLink to='/authorization' title='Авторизоваться' className={classActive}>
 								<li className={s.list__item}>
 									
 									
@@ -145,7 +164,7 @@ const Navigation = () => {
 									</h2>
 								
 								</li>
-							</Link>
+							</NavLink>
 						}
 					</ul>
 				</nav>

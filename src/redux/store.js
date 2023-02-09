@@ -2,7 +2,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import user from "./slices/userSlice";
 import people from './slices/peopleSlice'
 import message from "./slices/messageSlice";
-import socket from "./slices/socketSlice";
+import navigation from "./slices/navigationSlice";
 export const store = configureStore({
 	
 	
@@ -10,6 +10,6 @@ export const store = configureStore({
 		user,
 		people,
 		message,
-		socket
+		navigation
 	}
 })

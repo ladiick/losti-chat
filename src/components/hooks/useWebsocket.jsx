@@ -39,7 +39,7 @@ const useWebsocket = (userAccessToken) => {
 			}
 		}
 		
-	}, [isAuth]);
+	}, [isAuth,userAccessToken]);
 	
 	useEffect(() => {
 		let openHandler = () => {

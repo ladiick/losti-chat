@@ -4,7 +4,7 @@ import s from "./RegistrationForm.module.scss";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import axios from "axios";
-import {setAboutUser, setIsAuth, setUserTokens} from "../../redux/slices/userSlice";
+import {HOST} from "../api/HOST";
 
 const RegistrationForm = () => {
 	const dispatch = useDispatch()
@@ -19,7 +19,7 @@ const RegistrationForm = () => {
 		const day = newDate.getDay()
 		
 		data.birth_date = `${years}-${month}-${day}`
-		await axios.post('http://127.0.0.1:8000/api/v1/auth/users/', data)
+		await axios.post(`${HOST}/api/v1/auth/users/`, data)
 		
 		window.location.href = '/authorization'
 		
