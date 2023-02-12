@@ -13,6 +13,7 @@ import PeopleItem from "./components/PeopleItem/PeopleItem";
 import useWebsocket from "./components/hooks/useWebsocket";
 import {updateAccessToken} from "./components/actions/updateAccessToken";
 import Friends from "./Pages/Friends/Friends";
+import {HOST} from "./components/api/HOST";
 
 export const MyContext = React.createContext()
 
@@ -31,7 +32,7 @@ function App() {
 			const getMySelf = async () => {
 				
 				try {
-					const res = await axios.get('http://127.0.0.1:8000/api/v1/auth/users/me/', {
+					const res = await axios.get(`http://${HOST}/api/v1/auth/users/me/`, {
 						headers: {Authorization: `JWT ${userAccessToken}`}
 					})
 					dispatch(setAboutUser(res.data))
@@ -40,7 +41,6 @@ function App() {
 					console.log(err)
 					if(err.response.status === 401){
 						const token = await updateAccessToken(userRefreshToken)
-						
 						dispatch(setUserAccessToken(token))
 						
 					}

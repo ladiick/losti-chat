@@ -305,6 +305,12 @@
 
 		}
 	}
+	&:disabled{
+		background-color: yellow;
+		svg{
+			fill: red;
+		}
+	}
 }
 
 .sceletons {

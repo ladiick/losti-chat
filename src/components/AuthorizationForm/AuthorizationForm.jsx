@@ -18,7 +18,7 @@ const AuthorizationForm = () => {
 	const onSubmit = async (data) => {
 		
 		
-		await axios.post(`${HOST}/api/v1/token/`, {
+		await axios.post(`http://${HOST}/api/v1/token/`, {
 			email: data.email,
 			password: data.password,
 		})
@@ -31,7 +31,7 @@ const AuthorizationForm = () => {
 				dispatch(setIsAuth(true))
 				navigation('/')
 			})
-			.catch(err => console.log(err.response))
+			.catch(err => console.log('Ошибка',err))
 	
 	}
 	

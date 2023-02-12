@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {updatePeople} from "../../redux/slices/peopleSlice";
 import {useDispatch, useSelector} from "react-redux";
+import {HOST} from "../api/HOST";
 
 const useWebsocket = (userAccessToken) => {
 	const dispatch = useDispatch()
@@ -25,7 +26,7 @@ const useWebsocket = (userAccessToken) => {
 			ws?.removeEventListener('close', closeHandler)
 			ws?.close()
 			
-			ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/?token=${userAccessToken}`)
+			ws = new WebSocket(`ws://${HOST}/ws/chat/?token=${userAccessToken}`)
 			
 			ws.addEventListener('close', closeHandler)
 			setSocket(ws)

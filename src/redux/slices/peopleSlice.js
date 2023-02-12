@@ -9,7 +9,7 @@ export const fetchPeople = createAsyncThunk(
 	'people/fetchPeople',
 	async ({userAccessToken,userRefreshToken},{dispatch}) => {
 		try {
-			const res = await axios.get(`${HOST}/api/v1/dialogs/`, {
+			const res = await axios.get(`http://${HOST}/api/v1/dialogs/`, {
 				headers: {Authorization: `JWT ${userAccessToken}`}
 			})
 			return res.data
@@ -25,9 +25,32 @@ export const fetchPeople = createAsyncThunk(
 	}
 )
 
+export const findPeople =  createAsyncThunk(
+	'people/findPeople',
+	async ({userAccessToken,userRefreshToken},{dispatch})=>{
+		try {
+			const res = await axios.get(`http://${HOST}/api/v1/findPeople/`, {
+				headers: {Authorization: `JWT ${userAccessToken}`}
+			})
+			return res.data
+		}
+		catch (err) {
+			console.log(err)
+			if(err.response.status === 401){
+				const token = await updateAccessToken(userRefreshToken)
+				dispatch(setUserAccessToken(token))
+				
+			}
+		}
+	}
+)
+
+
 const initialState = {
 	people: [],
+	peopleAll: [],
 	peopleCurrent: {},
+	peopleCurrentAll: {},
 	index: null,
 	status: 'loading',
 }
@@ -39,11 +62,14 @@ export const peopleSlice = createSlice({
 	
 	reducers: {
 		
-		setPeopleChecked: (state, action) => {
-			state.peopleChecked = action.payload
+		setNullPeople(state,action){
+			state.people = action.payload
 		},
 		setCurrentPeople: (state, action) => {
 			state.peopleCurrent = action.payload
+		},
+		setCurrentPeopleAll: (state, action) => {
+			state.peopleCurrentAll = action.payload
 		},
 		setIndex: (state, action) => {
 			state.index = action.payload
@@ -88,13 +114,27 @@ export const peopleSlice = createSlice({
 		[fetchPeople.rejected]: (state) => {
 			state.status = 'error'
 			state.people = []
+		},
+		[findPeople.pending]: (state) => {
+			state.status = 'loading'
+			state.peopleAll = []
+		},
+		[findPeople.fulfilled]: (state, action) => {
+			state.status = 'success'
+			state.peopleAll = action.payload
+		},
+		[findPeople.rejected]: (state) => {
+			state.status = 'error'
+			state.peopleAll = []
 		}
+		
+		
 		
 	}
 	
 	
 })
 
-export const {setPeopleChecked, setCurrentPeople, updatePeople, setIndex} = peopleSlice.actions
+export const {setPeopleChecked, setCurrentPeople, updatePeople, setIndex,setNullPeople,setCurrentPeopleAll} = peopleSlice.actions
 
 export default peopleSlice.reducer

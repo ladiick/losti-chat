@@ -19,7 +19,7 @@ const RegistrationForm = () => {
 		const day = newDate.getDay()
 		
 		data.birth_date = `${years}-${month}-${day}`
-		await axios.post(`${HOST}/api/v1/auth/users/`, data)
+		await axios.post(`http://${HOST}/api/v1/auth/users/`, data)
 		
 		window.location.href = '/authorization'
 		

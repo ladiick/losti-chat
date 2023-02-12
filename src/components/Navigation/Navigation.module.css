@@ -1,43 +1,38 @@
 .overlay {
   transition: all 0.3s;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  border-radius: 9px;
   opacity: 0;
 }
 
 .overlay__active {
   transition: all 0.3s;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 9px;
   opacity: 1;
 }
 
 .wrapper__navigation {
   transition: all 0.3s;
-  flex-grow: 1;
-  background-color: #212121;
+  background-color: transparent;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
-  border-radius: 9px 0 0 9px;
-  padding: 0 10px;
   opacity: 0;
+  width: 200px;
 }
 
 .wrapper__navigation__active {
   transition: all 0.3s;
-  flex-grow: 1;
   width: 300px;
   background-color: #212121;
   position: absolute;
