@@ -7,7 +7,7 @@ export const fetchMessage = createAsyncThunk(
 	'message/fetchMessage',
 	async (params)=>{
 		const {userAccessToken,id} = params
-		const res = await axios.get(`${HOST}/api/v1/dialog/${id}/`, {
+		const res = await axios.get(`http://${HOST}/api/v1/dialog/${id}/`, {
 			headers: {Authorization: `JWT ${userAccessToken}`}
 		})
 		return reDate(res.data)

@@ -3,30 +3,35 @@ import s from './AllPeople.module.scss'
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import {useDispatch, useSelector} from "react-redux";
 import PeopleItem from "../PeopleItem/PeopleItem";
-import {fetchPeople, setCurrentPeople, setIndex} from "../../redux/slices/peopleSlice";
-import {fetchMessage} from "../../redux/slices/messageSlice";
+import {
+	findPeople,
+	setCurrentPeopleAll,
+	setIndex,
+} from "../../redux/slices/peopleSlice";
 
 const AllPeople = () => {
 	const [searchValue, setSearch] = useState('');
-	const people = useSelector(state => state.people.people)
+	const people = useSelector(state => state.people.peopleAll)
 	const userAccessToken = useSelector((state) => state.user.tokens.access)
 	const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
 	
 	const isAuth = useSelector(state => state.user.isAuth)
 	const myId = useSelector(state => state.user.aboutUser.id)
-	
 	const dispatch = useDispatch()
 	
 	useEffect(() => {
 		if (isAuth && userAccessToken) {
-			dispatch(fetchPeople({userAccessToken,userRefreshToken}))
+			dispatch(findPeople({userAccessToken,userRefreshToken}))
+		}
+		return ()=>{
+			dispatch(setCurrentPeopleAll({}))
+			
 		}
 	}, [isAuth, userAccessToken]);
 	
 	const handlerPeople = (current__obj, index) => {
-		console.log(current__obj)
 		dispatch(setIndex(index))
-		dispatch(setCurrentPeople(current__obj))
+		dispatch(setCurrentPeopleAll(current__obj))
 		setSearch('')
 	}
 	
@@ -48,45 +53,21 @@ const AllPeople = () => {
 			<div className={s.block__people}>
 				<div className={s.wrapper__items}>
 					
-					{people.filter(people =>
-						people.sender.pk === myId && people.recip.pk !== myId ?
-							people.recip.first_name.toLowerCase().includes(searchValue.toLowerCase())
+					{people?.filter(people =>
+							people?.first_name.toLowerCase().includes(searchValue.toLowerCase())
 							||
-							people.recip.last_name.toLowerCase().includes(searchValue.toLowerCase())
-							:
-							people.sender.first_name.toLowerCase().includes(searchValue.toLowerCase())
-							||
-							people.sender.last_name.toLowerCase().includes(searchValue.toLowerCase())
+							people?.last_name.toLowerCase().includes(searchValue.toLowerCase())
 					).map((obj, index) =>
-						obj.sender.pk === myId && obj.recip.pk === myId ?
-							''
-							:
-							obj.sender.pk === myId ?
 								<PeopleItem
-									key={obj.id}
-									id={obj.recip.pk}
-									firstName={obj.recip.first_name}
-									lastName={obj.recip.last_name}
-									time={obj.time}
-									img={obj.recip.image}
+									key={obj.pk}
+									id={obj.pk}
+									firstName={obj.first_name}
+									lastName={obj.last_name}
+									img={obj.image}
 									friend={'friend'}
-									handlerPeople={() => handlerPeople(obj.recip, index)}
+									handlerPeople={() => handlerPeople(obj, index)}
 								/>
-								:
-								obj.recip.pk === myId ?
-									<PeopleItem
-										key={obj.sender.pk}
-										id={obj.sender.pk}
-										firstName={obj.sender.first_name}
-										lastName={obj.sender.last_name}
-										time={obj.time}
-										img={obj.sender.image}
-										friend={'friend'}
-										
-										handlerPeople={() => handlerPeople(obj.sender, index)}
-									/>
-									:
-									''
+								
 					)}
 				</div>
 			</div>

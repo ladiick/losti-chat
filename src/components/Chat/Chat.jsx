@@ -4,9 +4,8 @@ import Communication from "../Communication/Communication";
 import {useSelector} from "react-redux";
 import message__logo from '../assets/messages.svg'
 import {useForm} from "react-hook-form";
-import CommunicationSceleton from "../Communication/CommunicationSceleton";
 import {Link} from "react-router-dom";
-import {useContext} from "react";
+import {useContext, useEffect, useRef} from "react";
 import favorite from '../assets/favorite.svg'
 import {MyContext} from "../../App";
 
@@ -19,8 +18,16 @@ const Chat = () => {
 	const {register, handleSubmit, reset} = useForm()
 	const {socket, statusSocket} = useContext(MyContext);
 	
-	
+	// const refInput = useRef(null);
+	//
+	// useEffect(()=>{
+	// 	console.log(refInput.current)
+	// 	if(peopleCurrent.pk) refInput.current.focus()
+	//
+	// },[peopleCurrent.pk])
+	//
 	const sendMessage = (data) => {
+		console.log(data)
 		if (!data.message) {
 			return
 		}
@@ -40,6 +47,7 @@ const Chat = () => {
 		reset()
 		
 	}
+	
 	
 	if (!isAuth) {
 		return (
@@ -81,6 +89,7 @@ const Chat = () => {
 	}
 	
 	
+	
 	return (
 		<div className={s.wrapper}>
 			<header className={s.header}>
@@ -106,7 +115,7 @@ const Chat = () => {
 				<div className={s.load}></div>)
 			}
 			
-			<Communication socket={socket}/>
+			<Communication/>
 			<div className={s.wrapper__input}>
 				<div className={s.input}>
 					<form onSubmit={handleSubmit(sendMessage)}>
@@ -127,6 +136,7 @@ const Chat = () => {
 							placeholder='Напишите сообщение...'
 							{...register('message')}
 							autoComplete={'off'}
+							
 						/>
 						<button className={s.button__send} disabled={statusSocket === 'pending'}>
 							<svg viewBox="0 0 24 24">

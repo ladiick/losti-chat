@@ -4,7 +4,7 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	fetchPeople,
-	setCurrentPeople, setIndex
+	setCurrentPeople, setCurrentPeopleAll, setIndex, setNullCurrentPeopleAll, setNullPeople
 } from "../../redux/slices/peopleSlice";
 import {fetchMessage} from "../../redux/slices/messageSlice";
 import favorite from '../assets/favorite.svg'
@@ -23,6 +23,9 @@ const People = ({searchValue, setSearch}) => {
 	useEffect(() => {
 		if (isAuth && userAccessToken) {
 			dispatch(fetchPeople({userAccessToken,userRefreshToken}))
+		}
+		return ()=>{
+			dispatch(setCurrentPeople({}))
 		}
 	}, [isAuth, userAccessToken]);
 	
@@ -43,15 +46,15 @@ const People = ({searchValue, setSearch}) => {
 				)}
 				
 				
-				{people.filter((people) => (
+				{people?.filter((people) => (
 					people.sender.pk === myId && people.recip.pk !== myId ?
-						people.recip.first_name.toLowerCase().includes(searchValue.toLowerCase())
+						people?.recip.first_name.toLowerCase().includes(searchValue.toLowerCase())
 						||
-						people.recip.last_name.toLowerCase().includes(searchValue.toLowerCase())
+						people?.recip.last_name.toLowerCase().includes(searchValue.toLowerCase())
 						:
-						people.sender.first_name.toLowerCase().includes(searchValue.toLowerCase())
+						people?.sender.first_name.toLowerCase().includes(searchValue.toLowerCase())
 						||
-						people.sender.last_name.toLowerCase().includes(searchValue.toLowerCase())
+						people?.sender.last_name.toLowerCase().includes(searchValue.toLowerCase())
 				
 				)).map((obj, index) => obj.sender.pk === myId && obj.recip.pk !== myId ?
 					<PeopleItem
