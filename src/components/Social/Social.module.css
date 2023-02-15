@@ -1,11 +1,8 @@
 .wrapper {
   width: 35%;
-  border-radius: 12px;
+  border-radius: 12px 0 0 12px;
   padding: 30px 15px 30px 15px;
-  background-color: #202020;
-  margin-right: 20px;
-  box-shadow: 5px 0 10px -6px rgba(0, 0, 0, 0.4);
-  border: 1px solid #434343;
+  border: 1px solid #202020;
 }
 .wrapper .text {
   display: block;

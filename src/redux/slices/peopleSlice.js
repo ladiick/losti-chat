@@ -62,6 +62,9 @@ export const peopleSlice = createSlice({
 	initialState,
 	
 	reducers: {
+		setAddFriend(state,action){
+			state.peopleAll.splice(action.payload,1)
+		},
 		
 		setNullPeople(state,action){
 			state.people = action.payload
@@ -136,6 +139,6 @@ export const peopleSlice = createSlice({
 	
 })
 
-export const {setPeopleChecked, setCurrentPeople, updatePeople, setIndex,setNullPeople,setCurrentPeopleAll} = peopleSlice.actions
+export const {setPeopleChecked, setCurrentPeople, updatePeople, setIndex,setNullPeople,setCurrentPeopleAll,setAddFriend} = peopleSlice.actions
 
 export default peopleSlice.reducer

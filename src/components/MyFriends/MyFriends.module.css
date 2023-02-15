@@ -1,10 +1,9 @@
 .wrapper {
-  background-color: #202020;
   color: #ffffff;
   border-radius: 12px;
-  border: 1px solid #434343;
+  border: 1px solid #202020;
   padding: 30px 15px 0;
-  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
 }
 .wrapper header {
   display: flex;

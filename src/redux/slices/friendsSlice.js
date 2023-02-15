@@ -13,7 +13,6 @@ export const fetchFriends = createAsyncThunk(
 			const res = await axios.get(`http://${HOST}/api/v1/friends/`, {
 				headers: {Authorization: `JWT ${userAccessToken}`}
 			})
-			console.log(res)
 			return res.data
 			
 		}
@@ -32,7 +31,6 @@ export const fetchFriendsRequests = createAsyncThunk(
 			const res = await axios.get(`http://${HOST}/api/v1/friends/requests/`, {
 				headers: {Authorization: `JWT ${userAccessToken}`}
 			})
-			console.log(res)
 			
 			return res.data
 			
@@ -60,10 +58,12 @@ export const friendsSlice = createSlice({
 	initialState,
 	
 	reducers: {
-		
-		setRequestFriend(state,action){
-			state.requestCurrentFriend = action.payload
-		}
+		updateFriends(state,action){
+			state.friends.push(action.payload)
+		},
+		setAddFriendRequest(state,action){
+			state.friendsRequests.splice(action.payload,1)
+		},
 	
 	},
 	
@@ -103,6 +103,6 @@ export const friendsSlice = createSlice({
 	
 })
 
-export const {setRequestFriend} = friendsSlice.actions
+export const {setAddFriendRequest,updateFriends} = friendsSlice.actions
 
 export default friendsSlice.reducer

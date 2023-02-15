@@ -5,7 +5,7 @@ import {openModalBlock} from "../../redux/slices/navigationSlice";
 import {useDispatch} from "react-redux";
 import BtnRequestsFriend from "../BtnRequestsFriend/BtnRequestsFriend";
 
-const FriendsItem = ({obj,requests,handlerCurrentRequest}) => {
+const FriendsItem = ({obj,requests,handlerCancel,handlerAccept}) => {
 	const dispatch = useDispatch()
 	
 	return (
@@ -19,7 +19,7 @@ const FriendsItem = ({obj,requests,handlerCurrentRequest}) => {
 					onClick={() => dispatch(openModalBlock(true))}>Написать сообщение</span>
 				
 					:
-					<BtnRequestsFriend handlerCurrentRequest={handlerCurrentRequest}/>
+					<BtnRequestsFriend handlerCancel={handlerCancel} handlerAccept={handlerAccept}/>
 					
 				}
 			</div>

@@ -1,8 +1,11 @@
 import React, {useEffect} from 'react';
 import s from './FriendRequests.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {fetchFriendsRequests, setRequestFriend} from "../../redux/slices/friendsSlice";
+import {fetchFriendsRequests, setAddFriendRequest, updateFriends} from "../../redux/slices/friendsSlice";
 import FriendsItem from "../FriendsItem/FriendsItem";
+import axios from "axios";
+import {HOST} from "../api/HOST";
+
 const FriendRequests = () => {
 	const friendRequests = useSelector(state => state.friends.friendsRequests)
 	
@@ -14,20 +17,43 @@ const FriendRequests = () => {
 	
 	useEffect(() => {
 		if (isAuth && userAccessToken) {
-			dispatch(fetchFriendsRequests({userAccessToken,userRefreshToken}))
+			dispatch(fetchFriendsRequests({userAccessToken, userRefreshToken}))
 		}
-		return ()=>{
+		return () => {
 			// dispatch(setCurrentPeopleAll({}))
 			
 		}
 	}, [isAuth, userAccessToken]);
 	
 	
-	const handlerCurrentRequest = (obj)=>{
-		console.log(obj)
-		dispatch(setRequestFriend(obj))
+
+	
+	const handlerAccept = (obj,index)=>{
+		axios.post(`http://${HOST}/api/v1/friends/`, {
+				second_user: obj.friend.pk
+			},
+			{
+				headers: {Authorization: `JWT ${userAccessToken}`},
+			}).then(res => {
+			dispatch(setAddFriendRequest(index))
+			dispatch(updateFriends(obj))
+		})
+	}
+	const handlerCancel = (obj,index)=>{
+		
+		axios.patch(`http://${HOST}/api/v1/friends/${obj.friend.pk}/denied/`,{},
+			{
+				headers: {Authorization: `JWT ${userAccessToken}`},
+			}).then(res => {
+			dispatch(setAddFriendRequest(index))
+		})
+		
 	}
 	
+	
+	if(!friendRequests.length){
+		return
+	}
 	
 	return (
 		<div className={s.wrapper}>
@@ -40,13 +66,16 @@ const FriendRequests = () => {
 			<div className={s.block__friendRequests}>
 				
 				{
-					friendRequests.map(obj=> <FriendsItem key={obj.pk} obj={obj} requests={'requests'} handlerCurrentRequest={()=>handlerCurrentRequest(obj)}/>)
+					friendRequests.map((obj,index) => <FriendsItem
+						key={obj.pk} obj={obj} requests={'requests'}
+						handlerAccept={() => handlerAccept(obj,index)}
+						handlerCancel={()=>handlerCancel(obj,index)}
+					/>)
 				}
-				
+			
 			</div>
-			
-			
-			
+		
+		
 		</div>
 	);
 };

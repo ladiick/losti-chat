@@ -1,11 +1,15 @@
 import React from 'react';
 import s from "./BtnRequestsFriend.module.scss";
 
-const BtnRequestsFriend = ({handlerCurrentRequest}) => {
+const BtnRequestsFriend = ({handlerCancel,handlerAccept}) => {
+	
+	
+	
+	
 	return (
-		<div className={s.btn__requests} onClick={handlerCurrentRequest}>
-			<button className={s.btn__accept}>Принять</button>
-			<button className={s.btn__cancel}>Отклонить</button>
+		<div className={s.btn__requests}>
+			<button className={s.btn__accept} onClick={handlerAccept}>Принять</button>
+			<button className={s.btn__cancel} onClick={handlerCancel}>Отклонить</button>
 		</div>
 	);
 };
