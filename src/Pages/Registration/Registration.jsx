@@ -1,9 +1,10 @@
 import React from 'react';
-import s from "../Authorization/Authorization.module.scss";
+import s from './Registration.module.scss';
 import {Link} from "react-router-dom";
 import logo from "../../components/assets/logo.svg";
 import imgLogin from "../Authorization/login_img3.jpg";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+
 
 const Registration = () => {
 	return (

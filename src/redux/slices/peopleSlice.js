@@ -17,6 +17,7 @@ export const fetchPeople = createAsyncThunk(
 		}
 		catch (err) {
 			if (err.response.status === 401) {
+				console.log(err)
 				const token = await updateAccessToken(userRefreshToken)
 				dispatch(setUserAccessToken(token))
 			}

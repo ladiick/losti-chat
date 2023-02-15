@@ -77,7 +77,8 @@ const Chat = () => {
 		
 		)
 	}
-	if (!peopleCurrent.pk) {
+
+	if (!peopleCurrent?.pk) {
 		return (
 			<div className={s.emptity__chat}>
 				<div className={s.emptity__content}>

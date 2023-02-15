@@ -1,0 +1,31 @@
+.wrapper__item {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #434343;
+	padding: 10px 0;
+	img {
+		margin-right: 15px;
+		border-radius: 50%;
+		object-fit: cover;
+		width: 80px;
+		height: 80px;
+	}
+	h1{
+		font-size: 13px;
+	}
+
+	.info__user{
+		display: flex;
+		flex-direction: column;
+	}
+}
+.writeAMessage{
+	color: #1a73e8;
+	font-size: calc(10px + 0.2vw);
+	transition: all 0.3s;
+	&:hover{
+		text-decoration: underline;
+	}
+}
+
+

@@ -5,7 +5,6 @@ import Navigation from "../Navigation/Navigation";
 const Home = ({children}) => {
 	return (
 		<div className={s.wrapper}>
-			
 			<div className={s.container}>
 				<Navigation />
 				<div className={s.content}>

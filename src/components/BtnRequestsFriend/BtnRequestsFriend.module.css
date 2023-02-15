@@ -1,0 +1,29 @@
+.btn__requests {
+  margin-top: 8px;
+}
+
+.btn__accept {
+  color: #ffffff;
+  background-color: #1a73e8;
+  padding: 5px 12px;
+  border-radius: 8px;
+  margin-right: 10px;
+  transition: all 0.3s;
+  font-size: 13px;
+}
+.btn__accept:hover {
+  background-color: #135cbc;
+}
+
+.btn__cancel {
+  color: #FFFFFF;
+  padding: 5px 12px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  font-size: 13px;
+}
+.btn__cancel:hover {
+  background-color: #434343;
+}
+
+/*# sourceMappingURL=BtnRequestsFriend.module.css.map */

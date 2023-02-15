@@ -1,62 +1,23 @@
-.overlay {
-  transition: all 0.3s;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-}
-
-.overlay__active {
-  transition: all 0.3s;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background-color: rgba(0, 0, 0, 0.4);
-  opacity: 1;
-}
-
 .wrapper__navigation {
   transition: all 0.3s;
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  opacity: 0;
-  width: 200px;
-}
-
-.wrapper__navigation__active {
-  transition: all 0.3s;
-  width: 300px;
-  background-color: #212121;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  border-radius: 9px 0 0 9px;
-  padding: 0 10px;
-  z-index: 100;
-  opacity: 1;
+  width: 280px;
+  margin-right: 20px;
 }
 
 .nav__content {
+  border: 1px solid #424242;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
   transition: all 0.3s;
+  padding: 15px 10px;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.4);
 }
 
 .list__items {
   display: flex;
   flex-direction: column;
-  padding-top: 30px;
 }
 .list__items a {
   text-decoration: none;
@@ -67,10 +28,10 @@
   display: flex;
   align-items: center;
   color: #FFFFFF;
-  margin-bottom: 20px;
   padding: 6px;
   position: relative;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 .list__item svg {
   width: 20px;
@@ -78,18 +39,18 @@
   transition: all 0.3s;
 }
 .list__item h2 {
-  font-size: calc(12px + 0.3vw);
+  font-size: calc(12px + 0.1vw);
   font-weight: 400;
   color: #FFFFFF;
   margin: 0;
-  padding-left: 5px;
+  padding-left: 10px;
   transition: all 0.3s;
 }
 .list__item img {
   border-radius: 50%;
   object-fit: cover;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   transition: all 0.3s;
   border: 1px solid rgb(255, 255, 255);
 }
@@ -117,45 +78,19 @@
 }
 
 .name__company {
-  width: 100%;
-  margin-top: 30px;
-  background-color: #fff;
-  border-radius: 8px;
+  margin: 0 auto;
 }
 .name__company span {
   display: flex;
   align-items: center;
-  justify-content: center;
   position: relative;
-}
-.name__company span:before {
-  position: absolute;
-  content: "";
-  border: 1px solid #1a73e8;
-  border-radius: 10px;
-  bottom: 10px;
-  width: 20%;
-  left: 50%;
-  transform: translateX(-38%);
-  animation: width 6s infinite alternate ease-in-out;
-}
-@keyframes width {
-  to {
-    width: 20%;
-    border-color: #1a73e8;
-  }
-  from {
-    width: 58%;
-  }
 }
 .name__company span h1 {
   font-size: calc(12px + 0.3vw);
   color: #FFFFFF;
-  background-image: linear-gradient(90deg, #000000 55%, #1a73e8 40%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  padding-left: 5px;
 }
-.name__company span img {
+.name__company span svg {
   width: 24px;
   height: 24px;
   animation: logo 6s infinite alternate ease-in-out;

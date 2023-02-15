@@ -8,6 +8,7 @@ import {
 } from "../../redux/slices/peopleSlice";
 import {fetchMessage} from "../../redux/slices/messageSlice";
 import favorite from '../assets/favorite.svg'
+import { openChatBlock } from '../../redux/slices/navigationSlice'
 
 const People = ({searchValue, setSearch}) => {
 	const userAccessToken = useSelector((state) => state.user.tokens.access)
@@ -30,11 +31,13 @@ const People = ({searchValue, setSearch}) => {
 	}, [isAuth, userAccessToken]);
 	
 	
-	const handlerPeople = (id, current__obj, index) => {
-		dispatch(setIndex(index))
-		dispatch(setCurrentPeople(current__obj))
-		dispatch(fetchMessage({userAccessToken, id}))
+	const handlerPeople =  (id, current__obj, index) => {
+		 dispatch(setIndex(index))
+		 dispatch(setCurrentPeople(current__obj))
+		 dispatch(fetchMessage({userAccessToken, id}))
+		 dispatch(openChatBlock(false))
 		setSearch('')
+
 	}
 	
 	
