@@ -1,16 +1,27 @@
 .container {
-  margin: 0 auto;
+  margin: 20px auto;
   width: calc(1024px + 10vw);
   position: relative;
+  display: flex;
+}
+@media (max-width: 768px) {
+  .container {
+    width: 420px;
+  }
 }
 
 .content {
-  height: 100vh;
+  width: 100%;
   display: flex;
-  border: 1px solid #aaa;
-  border-radius: 10px;
-  box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.4);
   position: relative;
+}
+@media (max-width: 768px) {
+  .content {
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 
 /*# sourceMappingURL=Home.module.css.map */

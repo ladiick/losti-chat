@@ -1,0 +1,15 @@
+.btn__wrapper {
+  display: flex;
+  border-radius: 50%;
+  transition: all 0.3s;
+  padding: 8px;
+}
+.btn__wrapper img {
+  width: 24px;
+  height: 24px;
+}
+.btn__wrapper:hover {
+  background-color: #434343;
+}
+
+/*# sourceMappingURL=BtnAddFriend.module.css.map */

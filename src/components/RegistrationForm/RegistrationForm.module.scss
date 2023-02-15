@@ -78,7 +78,7 @@
 }
 
 
-.input__email {
+.input {
 
 	margin-top: 8px;
 	outline: none;
@@ -102,58 +102,58 @@
 	}
 }
 
-.input__password {
-	margin-top: 8px;
-	outline: none;
+// .input {
+// 	margin-top: 8px;
+// 	outline: none;
 
-	padding: 9px 10px;
-	background: #FFFFFF;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 8px;
-	transition: all .3s;
+// 	padding: 9px 10px;
+// 	background: #FFFFFF;
+// 	border: 1px solid rgba(0, 0, 0, 0.2);
+// 	border-radius: 8px;
+// 	transition: all .3s;
 
-	&:focus {
-		border: 1px solid #1a73e8;
-
-
-	}
-
-	&:hover {
-		border: 1px solid #1a73e8;
-
-		transform: scale(1.02);
-		box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.4);
+// 	&:focus {
+// 		border: 1px solid #1a73e8;
 
 
-	}
+// 	}
 
-}
+// 	&:hover {
+// 		border: 1px solid #1a73e8;
 
-.input__date {
-	margin-top: 8px;
-	outline: none;
-
-	padding: 9px 10px;
-	background: #FFFFFF;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 8px;
-	transition: all .3s;
-
-	&:focus {
-		border: 1px solid #1a73e8;
+// 		transform: scale(1.02);
+// 		box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.4);
 
 
-	}
+// 	}
 
-	&:hover {
-		border: 1px solid #1a73e8;
+// }
 
-		transform: scale(1.02);
-		box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.4);
+// .input {
+// 	margin-top: 8px;
+// 	outline: none;
+
+// 	padding: 9px 10px;
+// 	background: #FFFFFF;
+// 	border: 1px solid rgba(0, 0, 0, 0.2);
+// 	border-radius: 8px;
+// 	transition: all .3s;
+
+// 	&:focus {
+// 		border: 1px solid #1a73e8;
 
 
-	}
-}
+// 	}
+
+// 	&:hover {
+// 		border: 1px solid #1a73e8;
+
+// 		transform: scale(1.02);
+// 		box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.4);
+
+
+// 	}
+// }
 
 
 .btn_submit {

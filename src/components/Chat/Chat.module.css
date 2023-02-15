@@ -1,13 +1,19 @@
 @charset "UTF-8";
 .wrapper {
-  width: 50%;
-  flex-grow: 1;
+  width: 65%;
   background-color: #282828;
-  border-radius: 0 9px 9px 0;
+  border-radius: 12px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4);
+  border: 1px solid #434343;
+}
+@media (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+  }
 }
 
 .load {
@@ -145,6 +151,9 @@
   align-items: center;
   justify-content: center;
   background-color: #282828;
+  border-radius: 12px;
+  box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4);
+  border: 1px solid #434343;
 }
 .notAuth a {
   text-decoration: none;
@@ -202,6 +211,9 @@
   align-items: center;
   justify-content: center;
   background-color: #282828;
+  border-radius: 12px;
+  box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4);
+  border: 1px solid #434343;
 }
 
 .emptity__content {

@@ -9,7 +9,7 @@ export const reTime = (time, flag = '') => {
 		minute: '2-digit',
 	}
 	const options2 = {
-		weekday: 'long',
+		weekday: 'short',
 		day: '2-digit',
 		
 	}
@@ -17,7 +17,6 @@ export const reTime = (time, flag = '') => {
 		weekday: 'short',
 		day: '2-digit',
 		year: 'numeric',
-		
 	}
 	
 	

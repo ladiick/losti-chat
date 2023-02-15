@@ -1,12 +1,49 @@
 .wrapper {
-	flex-grow: 0.3;
-	border-radius: 9px 0 0 9px;
-
+	width: 35%;
+	margin-left: 20px;
+	border-radius: 12px;
 	padding: 30px 15px 30px 15px;
-	background-color: #202020;
-	box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4) inset;
+	//background-color: #282828;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+
+	border: 1px solid #434343;
+	max-height: 50%;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar-track {
+		transition: all .3s;
+		border-radius: 4px;
+
+	}
+	&::-webkit-scrollbar {
+		transition: all .3s;
+		width: 4px;
+
+	}
+	&::-webkit-scrollbar-thumb {
+		transition: all .3s;
+		border-radius: 4px;
+		background: transparent;
+
+	}
+
+	&:hover{
+		overflow: auto;
+		&::-webkit-scrollbar-track {border-radius: 4px;}
+		&::-webkit-scrollbar {width: 4px;}
+		&::-webkit-scrollbar-thumb {border-radius: 4px;background: rgba(255, 255, 255, 0.5442);}
+	}
 }
 
+
+.title__block {
+	color: #FFFFFF;
+	margin: 0;
+	margin-bottom: 10px;
+
+	font-size: 16px;
+	font-weight: 400;
+}
 
 .block__search {
 	position: relative;
@@ -37,7 +74,6 @@
 		font-size: 14px;
 
 
-
 	}
 
 	&:hover {
@@ -53,13 +89,14 @@
 
 }
 
-.block__people{
+.block__people {
 	border-radius: 8px;
 	padding: 10px 4px 25px 0;
-	min-height: calc(100px + 32vw);
+	//min-height: calc(100px + 32vw);
 	position: relative;
 	transition: all .3s;
 }
+
 .wrapper__items {
 	overflow-y: auto;
 	overflow-x: hidden;

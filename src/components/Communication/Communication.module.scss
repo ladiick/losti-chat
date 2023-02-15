@@ -1,12 +1,12 @@
 .block__messages {
-	height: 100%;
+	max-height: 75vh;
 	margin-right: 4px;
 	padding: 15px 0;
 	//margin-right: 10px;
 
 	position: relative;
 	//background-color: rgba(0,0,0,0.1);
-	overflow-y:auto ;
+	overflow-y:auto;
 	transition: all .3s;
 	&::-webkit-scrollbar-track {
 		transition: all .3s;
