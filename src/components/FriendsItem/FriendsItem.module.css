@@ -1,7 +1,6 @@
 .wrapper__item {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #434343;
   padding: 10px 0;
 }
 .wrapper__item img {

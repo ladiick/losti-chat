@@ -1,38 +1,11 @@
 .wrapper {
-  width: 35%;
-  margin-left: 20px;
-  border-radius: 12px;
-  padding: 30px 15px 30px 15px;
+  border-radius: 16px;
+  padding: 30px 15px 0 15px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
-  border: 1px solid #202020;
-  max-height: 30vh;
-  overflow-y: auto;
-}
-.wrapper::-webkit-scrollbar-track {
-  transition: all 0.3s;
-  border-radius: 4px;
-}
-.wrapper::-webkit-scrollbar {
-  transition: all 0.3s;
-  width: 4px;
-}
-.wrapper::-webkit-scrollbar-thumb {
-  transition: all 0.3s;
-  border-radius: 4px;
-  background: transparent;
-}
-.wrapper:hover {
-  overflow: auto;
-}
-.wrapper:hover::-webkit-scrollbar-track {
-  border-radius: 4px;
-}
-.wrapper:hover::-webkit-scrollbar {
-  width: 4px;
-}
-.wrapper:hover::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.5442);
+  max-height: 60%;
+  border: 1px solid #434343;
+  position: sticky;
+  top: 10px;
 }
 
 .title__block {
@@ -76,42 +49,27 @@
 }
 
 .block__people {
-  border-radius: 8px;
-  padding: 10px 4px 25px 0;
   position: relative;
   transition: all 0.3s;
-}
-
-.wrapper__items {
+  max-height: 90%;
   overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 10px 0 30px 0;
-  transition: all 0.3s;
 }
-.wrapper__items::-webkit-scrollbar-track {
+.block__people::-webkit-scrollbar-track {
   border-radius: 4px;
 }
-.wrapper__items::-webkit-scrollbar {
+.block__people::-webkit-scrollbar {
   width: 4px;
   transition: all 0.3s;
 }
-.wrapper__items::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background: transparent;
-}
-.wrapper__items:hover::-webkit-scrollbar-track {
-  border-radius: 4px;
-}
-.wrapper__items:hover::-webkit-scrollbar {
-  width: 4px;
-  transition: all 0.3s;
-}
-.wrapper__items:hover::-webkit-scrollbar-thumb {
+.block__people::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.5442);
+}
+
+.btn__allpeople {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 .alert {

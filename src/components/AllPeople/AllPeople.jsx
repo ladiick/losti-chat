@@ -8,6 +8,7 @@ import {
 import AllPeopleItem from "../AllPeopleItem/AllPeopleItem";
 import axios from "axios";
 import {HOST} from "../api/HOST";
+import searchFriends from "../SearchFriends/SearchFriends";
 
 const AllPeople = () => {
 	const people = useSelector(state => state.people.peopleAll)
@@ -53,6 +54,7 @@ const AllPeople = () => {
 	
 	return (
 		<div className={s.wrapper}>
+			
 			<div className={alert ? s.alert__active : s.alert}>
 				Заявка отправлена
 			</div>
@@ -60,7 +62,6 @@ const AllPeople = () => {
 			
 			
 			<div className={s.block__people}>
-				<div className={s.wrapper__items}>
 					
 					{people?.map((obj, index) =>
 						<AllPeopleItem
@@ -69,8 +70,13 @@ const AllPeople = () => {
 							handlerPeople={() => handlerPeople(index, obj)}
 						/>
 					)}
-				</div>
 			</div>
+			
+			{/*<div*/}
+			{/*	className={s.btn__allpeople}*/}
+			{/*	onClick={()=>dispatch(searchFriends(true))}>*/}
+			{/*	Показать всех*/}
+			{/*</div>*/}
 		
 		</div>
 	);

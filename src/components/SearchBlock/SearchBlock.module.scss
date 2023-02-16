@@ -28,9 +28,12 @@
 		color: #FFFFFF;
 		font-size: 14px;
 
-		&:focus{
+		&:focus {
 			border-bottom: 2px solid #1a73e8;
 
+		}
+		&:focus + svg{
+			fill: #1a73e8;
 		}
 
 

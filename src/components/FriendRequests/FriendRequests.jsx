@@ -5,10 +5,11 @@ import {fetchFriendsRequests, setAddFriendRequest, updateFriends} from "../../re
 import FriendsItem from "../FriendsItem/FriendsItem";
 import axios from "axios";
 import {HOST} from "../api/HOST";
+import {Link, useLocation} from "react-router-dom";
 
-const FriendRequests = () => {
+const FriendRequests = ({allRequests}) => {
 	const friendRequests = useSelector(state => state.friends.friendsRequests)
-	
+	const location = useLocation()
 	const dispatch = useDispatch()
 	const userAccessToken = useSelector((state) => state.user.tokens.access)
 	const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
@@ -26,9 +27,7 @@ const FriendRequests = () => {
 	}, [isAuth, userAccessToken]);
 	
 	
-
-	
-	const handlerAccept = (obj,index)=>{
+	const handlerAccept = (obj, index) => {
 		axios.post(`http://${HOST}/api/v1/friends/`, {
 				second_user: obj.friend.pk
 			},
@@ -39,9 +38,9 @@ const FriendRequests = () => {
 			dispatch(updateFriends(obj))
 		})
 	}
-	const handlerCancel = (obj,index)=>{
+	const handlerCancel = (obj, index) => {
 		
-		axios.patch(`http://${HOST}/api/v1/friends/${obj.friend.pk}/denied/`,{},
+		axios.patch(`http://${HOST}/api/v1/friends/${obj.friend.pk}/denied/`, {},
 			{
 				headers: {Authorization: `JWT ${userAccessToken}`},
 			}).then(res => {
@@ -50,30 +49,40 @@ const FriendRequests = () => {
 		
 	}
 	
-	
-	if(!friendRequests.length){
+	if (!friendRequests.length) {
 		return
 	}
 	
 	return (
-		<div className={s.wrapper}>
+		<div className={location.pathname !== '/friends/requests' ? s.wrapper : s.wrapper__requests }>
 			<header className={s.wrapper__header}>
 				<span>
 					Заявки в друзья {friendRequests.length}
 				</span>
+				{location.pathname !== '/friends/requests' && <Link to={'/friends/requests'}>
+					Показать всех
+					<svg height="24px" version="1.1" viewBox="0 0 512 512" width="24px">
+						<polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/>
+					</svg>
+				</Link>}
 			</header>
 			
-			<div className={s.block__friendRequests}>
+			
 				
-				{
-					friendRequests.map((obj,index) => <FriendsItem
+				{allRequests === 'allRequests' ?
+					friendRequests.map((obj, index) => <FriendsItem
 						key={obj.pk} obj={obj} requests={'requests'}
-						handlerAccept={() => handlerAccept(obj,index)}
-						handlerCancel={()=>handlerCancel(obj,index)}
+						handlerAccept={() => handlerAccept(obj, index)}
+						handlerCancel={() => handlerCancel(obj, index)}
 					/>)
+					:
+					<FriendsItem obj={friendRequests[0]}
+					             requests={'requests'}
+					             handlerAccept={() => handlerAccept(friendRequests[0], 0)}
+					             handlerCancel={() => handlerCancel(friendRequests[0], 0)}/>
 				}
 			
-			</div>
+			
 		
 		
 		</div>
