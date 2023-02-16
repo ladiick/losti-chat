@@ -1,5 +1,6 @@
 .btn__wrapper {
   display: flex;
+  cursor: pointer;
   border-radius: 50%;
   transition: all 0.3s;
   padding: 8px;

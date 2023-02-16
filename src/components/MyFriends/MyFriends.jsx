@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchFriends, fetchFriendsRequests} from "../../redux/slices/friendsSlice";
 import FriendsItem from "../FriendsItem/FriendsItem";
 import SearchBlock from "../SearchBlock/SearchBlock";
+import {Link} from "react-router-dom";
+import {searchFriend} from "../../redux/slices/navigationSlice";
 
 function MyFriends() {
 	
@@ -22,6 +24,16 @@ function MyFriends() {
 	}, [isAuth, userAccessToken]);
 	
 	
+	if (!friends.length) {
+		return (
+			<div className={s.wrapper}>
+				<div className={s.friends__empty}>
+					У вас нет друзей! <Link to=''>Cкорее добавьте их</Link>
+				</div>
+			</div>
+		)
+	}
+	
 	return (
 		
 		<div className={s.wrapper}>
@@ -30,7 +42,7 @@ function MyFriends() {
 					<p>Все друзья</p>
 					<span>{friends.length}</span>
 				</div>
-				<div className={s.search__friends}>
+				<div className={s.search__friends} onClick={()=> dispatch(searchFriend(true))}>
 					<span>Найти друзей</span>
 				</div>
 			</header>

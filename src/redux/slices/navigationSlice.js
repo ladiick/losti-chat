@@ -2,9 +2,10 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 const initialState = {
-	nav: false,
+	
 	modal: false,
-	chat: true
+	chat: true,
+	searchFriend: false
 }
 
 
@@ -13,20 +14,21 @@ export const navigationSlice = createSlice({
 	initialState,
 	
 	reducers: {
-		openNavBar(state,action){
-			state.nav = action.payload
-		},
 		openModalBlock(state,action){
 			state.modal = action.payload
 		},
 		openChatBlock(state,action){
 			 state.chat = action.payload
-		}
+		},
+		searchFriend(state,action){
+			 state.searchFriend = action.payload
+		},
+		
 	}
 	
 	
 })
 
-export const {openNavBar,openModalBlock,openChatBlock} = navigationSlice.actions
+export const {openNavBar,openModalBlock,openChatBlock,searchFriend} = navigationSlice.actions
 
 export default navigationSlice.reducer

@@ -1,41 +1,17 @@
 .wrapper {
   color: #FFFFFF;
-  padding: 30px 15px;
-  border-radius: 12px;
+  padding: 30px 15px 20px 15px;
+  border-radius: 16px;
   border: 1px solid #434343;
   box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
   margin-bottom: 20px;
-  max-height: 50%;
-  overflow: auto;
-}
-.wrapper::-webkit-scrollbar-track {
-  transition: all 0.3s;
-  border-radius: 4px;
-}
-.wrapper::-webkit-scrollbar {
-  transition: all 0.3s;
-  width: 4px;
-}
-.wrapper::-webkit-scrollbar-thumb {
-  transition: all 0.3s;
-  border-radius: 4px;
-  background: transparent;
-}
-.wrapper:hover {
-  overflow: auto;
-}
-.wrapper:hover::-webkit-scrollbar-track {
-  border-radius: 4px;
-}
-.wrapper:hover::-webkit-scrollbar {
-  width: 4px;
-}
-.wrapper:hover::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.5442);
+  overflow: hidden;
 }
 .wrapper .wrapper__header {
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .wrapper .wrapper__header span {
   border: 1px solid #434343;
@@ -43,6 +19,66 @@
   background-color: #333333;
   padding: 5px;
   font-size: 13px;
+}
+.wrapper .wrapper__header a {
+  color: #1a73e8;
+  text-decoration: none;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+.wrapper .wrapper__header a svg {
+  width: 18px;
+  height: 18px;
+  fill: #e1e3e6;
+  transition: all 0.3s;
+}
+.wrapper .wrapper__header a:hover {
+  text-decoration: underline;
+}
+.wrapper .wrapper__header a:hover svg {
+  transform: translateX(5px);
+}
+
+.wrapper__requests {
+  color: #FFFFFF;
+  padding: 30px 15px;
+  border-radius: 12px;
+  border: 1px solid #434343;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+}
+.wrapper__requests .wrapper__header {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper__requests .wrapper__header span {
+  border: 1px solid #434343;
+  border-radius: 8px;
+  background-color: #333333;
+  padding: 5px;
+  font-size: 13px;
+}
+.wrapper__requests .wrapper__header a {
+  color: #1a73e8;
+  text-decoration: none;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+.wrapper__requests .wrapper__header a svg {
+  width: 18px;
+  height: 18px;
+  fill: #e1e3e6;
+  transition: all 0.3s;
+}
+.wrapper__requests .wrapper__header a:hover {
+  text-decoration: underline;
+}
+.wrapper__requests .wrapper__header a:hover svg {
+  transform: translateX(5px);
 }
 
 /*# sourceMappingURL=FriendRequests.module.css.map */

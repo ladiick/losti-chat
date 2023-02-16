@@ -1,17 +1,17 @@
 .wrapper {
 	width: 65%;
-	//flex-grow: 1;
-	background-color: #282828;
+	//background-color: #202020;
 
-	border-radius: 12px;
+	border-radius: 0 16px 16px 0;
 	position: relative;
-	//background: url("login_img3.jpg") center/130% no-repeat;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 
-	box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4);
+	//box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4);
 	border: 1px solid #434343;
+
+	border-left: none;
 
 	@media(max-width: 768px) {
 		width: 100%;
@@ -46,9 +46,8 @@
 .wrapper__input {
 
 	width: 100%;
-	//border-top: 1px solid #1a73e8;
 	background: rgba(255, 255, 255, 0.05);
-
+	border-radius: 0 0 15px 0;
 }
 
 .input {
@@ -188,12 +187,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #282828;
-	border-radius: 12px;
+
+	border-radius: 0 16px 16px 0;
+
 
 	box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4);
 
 	border: 1px solid #434343;
+	border-left: none;
 
 
 	a {
@@ -209,6 +210,8 @@
 		padding: 25px;
 		background-color: #202020;
 		border-radius: 12px;
+
+
 
 		h1 {
 			display: flex;
@@ -266,13 +269,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #282828;
-	border-radius: 12px;
 
-	box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4);
+	border-radius: 0 16px 16px 0;
+
+
 
 	border: 1px solid #434343;
-
+	border-left: none;
 
 }
 
