@@ -1,11 +1,12 @@
 import s from './MyFriends.module.scss'
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchFriends, fetchFriendsRequests} from "../../redux/slices/friendsSlice";
 import FriendsItem from "../FriendsItem/FriendsItem";
 import SearchBlock from "../SearchBlock/SearchBlock";
 import {Link} from "react-router-dom";
 import {searchFriend} from "../../redux/slices/navigationSlice";
+import Modul from "../Modul/Modul";
 
 function MyFriends() {
 	
@@ -35,8 +36,8 @@ function MyFriends() {
 	}
 	
 	return (
-		
 		<div className={s.wrapper}>
+			<Modul/>
 			<header>
 				<div className={s.quantity__friends}>
 					<p>Все друзья</p>
@@ -53,7 +54,7 @@ function MyFriends() {
 						obj.friend.first_name.toLowerCase().includes(searchValue.toLowerCase())
 						||
 						obj.friend.last_name.toLowerCase().includes(searchValue.toLowerCase())
-					)).map(obj => <FriendsItem key={obj.id} obj={obj}/>)
+					)).map((obj,index) => <FriendsItem key={obj.id} obj={obj} index={index}/>)
 				}
 			</div>
 		</div>

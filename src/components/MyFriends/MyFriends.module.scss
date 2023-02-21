@@ -1,6 +1,7 @@
 .wrapper{
 	//background-color: #202020;
 	//border-radius: 9px;
+	width: 100%;
 	color: #ffffff;
 	//padding: 30px 15px 30px 15px;
 	border-radius: 16px;
@@ -34,7 +35,7 @@
 
 .block__friends{
 	margin-top: 10px;
-	max-height: 50%;
+	max-height: 80%;
 
 	transition: all .3s;
 	overflow-y: auto;
@@ -89,7 +90,7 @@
 }
 
 .search__friends{
-	font-size: 14px;
+	font-size: 13px;
 
 	background-color: #e1e1e8;
 

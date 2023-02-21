@@ -1,107 +1,21 @@
-.block__login {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-  border: 1px solid #aaa;
-  box-shadow: 4px 4px 8px 2px rgba(34, 60, 80, 0.3);
-  min-width: 900px;
-}
-
-.wrapper__content {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.arrow__back {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  border-radius: 4px;
-  transition: all 0.3s;
-}
-.arrow__back svg {
-  transform: rotate(180deg);
-  transition: all 0.3s;
-}
-.arrow__back a {
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  color: black;
-  text-decoration: none;
-}
-.arrow__back a span {
-  margin-right: 8px;
-}
-.arrow__back:hover {
-  background: rgb(244, 244, 246);
-}
-.arrow__back:hover svg {
-  transform: rotate(180deg) scale(1.2);
-}
-
-.wrapper__form {
-  padding: 100px 40px;
-  width: 55%;
-}
-
 .form__title {
-  font-weight: 500;
-  font-size: calc(14px + 1vw);
-  color: #333333;
   text-align: center;
   margin: 0;
-  padding-top: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+}
+.form__title span {
+  font-weight: 500;
+  font-size: 18px;
+  color: #FFFFFF;
 }
 .form__title img {
-  width: calc(24px + 1vw);
-  height: calc(24px + 1vw);
-  margin-right: calc(5px + 0.1vw);
-  animation: logo 3s infinite alternate ease-in-out;
-}
-@keyframes logo {
-  to {
-    opacity: 0.2;
-    transform: rotate(0deg);
-  }
-  from {
-    opacity: 1;
-    transform: rotate(360deg);
-  }
-}
-
-.form__description {
-  font-weight: 400;
-  font-size: calc(10px + 0.2vw);
-  color: #828282;
-  margin-top: 25px;
-  text-align: center;
-}
-
-.form__line {
-  display: flex;
-  justify-content: center;
-  height: 1px;
-  width: 100%;
-  background: #E0E0E0;
-  border-radius: 4px;
-  align-items: center;
-  margin-top: 30px;
-}
-.form__line div {
-  display: flex;
-  background: white;
-  align-items: center;
-  font-size: calc(12px + 0.4vw);
-  height: 1px;
-  padding: 0 calc(12px + 1vw);
+  border-radius: 16px;
+  background-color: #1a73e8;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
 }
 
 .wrapper__img {
@@ -117,10 +31,6 @@
 @media (max-width: 900px) {
   .block__login {
     min-width: auto;
-    background: url("20943566.jpg");
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-size: cover;
   }
   .wrapper__form {
     width: auto;

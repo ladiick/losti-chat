@@ -8,7 +8,6 @@ const AllPeopleItem = ({obj,handlerPeople}) => {
 			<div className={s.about__user}>
 				<img src={obj.image ? obj.image : photo} alt="avatar"/>
 				<h3>{obj.first_name} {obj.last_name}</h3>
-			
 			</div>
 			<BtnAddFriend handlerPeople={handlerPeople} />
 		</div>

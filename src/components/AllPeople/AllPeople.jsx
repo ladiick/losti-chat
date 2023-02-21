@@ -11,46 +11,35 @@ import {HOST} from "../api/HOST";
 import searchFriends from "../SearchFriends/SearchFriends";
 
 const AllPeople = () => {
-	const people = useSelector(state => state.people.peopleAll)
-	const userAccessToken = useSelector((state) => state.user.tokens.access)
-	const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
-	const isAuth = useSelector(state => state.user.isAuth)
-	const myId = useSelector(state => state.user.aboutUser.id)
+	// const people = useSelector(state => state.people.peopleAll)
+	
 	
 	const [alert, setAlert] = useState(false);
 	
 	const dispatch = useDispatch()
 	
-	useEffect(() => {
-		if (isAuth && userAccessToken) {
-			dispatch(findPeople({userAccessToken, userRefreshToken}))
-		}
-		return () => {
-			dispatch(setCurrentPeopleAll({}))
-			
-		}
-	}, [isAuth, userAccessToken]);
 	
-	const handlerPeople = (index, obj) => {
-		axios.post(`http://${HOST}/api/v1/friends/`, {
-				second_user: obj.pk
-			},
-			{
-				headers: {Authorization: `JWT ${userAccessToken}`},
-			}).then(res => {
-			dispatch(setAddFriend(index))
-			notification()
-		})
-	}
 	
-	const notification = ()=>{
-		setAlert(true)
+	// const handlerPeople = (index, obj) => {
+	// 	axios.post(`http://${HOST}/api/v1/friends/`, {
+	// 			second_user: obj.pk
+	// 		},
+	// 		{
+	// 			headers: {Authorization: `JWT ${userAccessToken}`},
+	// 		}).then(res => {
+	// 		dispatch(setAddFriend(index))
+	// 		notification()
+	// 	})
+	// }
 	
-		setTimeout(()=>{
-			setAlert(false)
-		},3000)
-	}
-	
+	// const notification = ()=>{
+	// 	setAlert(true)
+	//
+	// 	setTimeout(()=>{
+	// 		setAlert(false)
+	// 	},3000)
+	// }
+	//
 	
 	return (
 		<div className={s.wrapper}>
@@ -58,19 +47,18 @@ const AllPeople = () => {
 			<div className={alert ? s.alert__active : s.alert}>
 				Заявка отправлена
 			</div>
-			<h1 className={s.title__block}>Возможные друзья</h1>
 			
 			
-			<div className={s.block__people}>
-					
-					{people?.map((obj, index) =>
-						<AllPeopleItem
-							key={obj.pk}
-							obj={obj}
-							handlerPeople={() => handlerPeople(index, obj)}
-						/>
-					)}
-			</div>
+			{/*<div className={s.block__people}>*/}
+			{/*		*/}
+			{/*		{people?.map((obj, index) =>*/}
+			{/*			<AllPeopleItem*/}
+			{/*				key={obj.pk}*/}
+			{/*				obj={obj}*/}
+			{/*				handlerPeople={() => handlerPeople(index, obj)}*/}
+			{/*			/>*/}
+			{/*		)}*/}
+			{/*</div>*/}
 			
 			{/*<div*/}
 			{/*	className={s.btn__allpeople}*/}

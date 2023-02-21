@@ -7,8 +7,6 @@ const ProfileInfo = () => {
 	const user = useSelector(state => state.user.aboutUser)
 	return (
 		<div className={s.wrapper}>
-			<BurgerMenu />
-
 			<div className={s.wrapper__block__info}>
 				<div className={s.block__info}>
 					<img src={photo} alt='logo' />

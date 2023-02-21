@@ -5,21 +5,23 @@ import {openModalBlock} from "../../redux/slices/navigationSlice";
 import photo from '../assets/my_photo.jpg'
 import {MyContext} from "../../App";
 import {setCurrentPeopleAll} from "../../redux/slices/peopleSlice";
+import friends, {setFriendsCurrent, setFriendsCurrentPk} from "../../redux/slices/friendsSlice";
 
 const Modul = () => {
 	
 	const dispatch = useDispatch()
-	const currentPeople = useSelector(state => state.people.peopleCurrentAll)
+	const friendsCurrent = useSelector(state => state.friends.friendsCurrent)
 	const modalActive = useSelector(state => state.navigation.modal)
 	const refTextArea = useRef(null);
 	const {socket} = useContext(MyContext);
 	const [textArea, setTextArea] = useState('');
 	
 	useEffect(() => {
+		console.log('njgg')
 		if(modalActive) {
 			refTextArea.current.focus()
 		}
-		
+
 	},[modalActive])
 	const onSubmit = (e) =>{
 		e.preventDefault()
@@ -31,30 +33,34 @@ const Modul = () => {
 					request_id: new Date().getTime(),
 					message: textArea,
 					action: 'create_dialog_message',
-					recipient: currentPeople.pk,
+					recipient: friendsCurrent.friend.pk,
 				}
 			)
 		)
 		
 		setTextArea('')
 		dispatch(openModalBlock(false))
-		dispatch(setCurrentPeopleAll({}))
+		dispatch(setFriendsCurrent({}))
 	}
 	
 	
 	return (
 		<>
 			<div className={modalActive ? s.overlay__active : s.overlay}
-			     onClick={() => dispatch(openModalBlock(false))}>
-				<div className={s.wrapper__content} onClick={(e) => e.stopPropagation()}>
+			     onClick={() => {
+				     dispatch(setFriendsCurrent({}))
+				     dispatch(openModalBlock(false))
+			     }}>
+				<div className={s.wrapper__content}
+				     onClick={(e) => e.stopPropagation()}>
 					<header>
 						<h2>Новое сообщение</h2>
 					</header>
 					<div className={s.content}>
 						<div className={s.wrapper__info__user}>
-							<img src={currentPeople.image ? currentPeople.image : photo} alt='logo'/>
+							<img src={friendsCurrent?.friend?.image ? friendsCurrent?.friend?.image : photo} alt='logo'/>
 							<div className={s.info__user}>
-								<h3>{currentPeople.first_name} {currentPeople.last_name}</h3>
+								<h3>{friendsCurrent?.friend?.first_name} {friendsCurrent?.friend?.last_name}</h3>
 							</div>
 						</div>
 						<form onSubmit={onSubmit}>

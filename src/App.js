@@ -18,7 +18,6 @@ import {
 	setIsAuth,
 	setUserAccessToken,
 } from './redux/slices/userSlice'
-import FriendsRequestsPage from "./Pages/FriendsRequestsPage/FriendsRequestsPage";
 
 export const MyContext = React.createContext()
 
@@ -44,6 +43,7 @@ function App() {
 					console.log(err)
 					if (err.response.status === 401) {
 						const token = await updateAccessToken(userRefreshToken)
+						console.log('token in App',token)
 						dispatch(setUserAccessToken(token))
 					}
 				}
@@ -59,7 +59,7 @@ function App() {
 				<Route path='/friends/*' element={<Friends/>}/>
 				<Route path='/authorization' element={<Authorization/>}/>
 				<Route path='/profile' element={<Profile/>}/>
-				<Route path='/registration' element={<Registration/>}/>
+				<Route path='/registration/*' element={<Registration/>}/>
 				<Route path='/logout' element={<Logout/>}/>
 			</Routes>
 		</MyContext.Provider>

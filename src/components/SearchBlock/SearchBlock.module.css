@@ -2,7 +2,7 @@
   position: relative;
 }
 .block__search svg {
-  fill: #FFFFFF;
+  fill: #828282;
   position: absolute;
   width: 20px;
   height: 20px;
@@ -13,22 +13,27 @@
   z-index: 12;
 }
 .block__search input {
-  border: none;
-  border-bottom: 2px solid rgb(79, 84, 84);
-  background: rgba(255, 255, 255, 0.0605);
+  border: 1px solid #434343;
+  background: #202020;
   border-radius: 6px;
   outline: none;
   transition: all 0.3s;
   width: 100%;
-  padding: 8px 35px 8px 8px;
+  padding: 8px 35px 8px 12px;
   color: #FFFFFF;
   font-size: 14px;
 }
 .block__search input:focus {
-  border-bottom: 2px solid #1a73e8;
+  border: 1px solid #1a73e8;
 }
 .block__search input:focus + svg {
   fill: #1a73e8;
+}
+.block__search:hover svg {
+  fill: #1a73e8;
+}
+.block__search:hover input {
+  border: 1px solid #1a73e8;
 }
 
 /*# sourceMappingURL=SearchBlock.module.css.map */
