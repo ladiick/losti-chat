@@ -19,7 +19,7 @@ const NavigateFriends = () => {
 					         className={location.pathname !== '/friends/requests' && classActive}>Мои друзья</NavLink>
 				</li>
 				<li className={s.nav__items}>
-					<NavLink to={friendRequests?.length ? 'requests' : '/*'} title='Заявки в друзья'
+					<NavLink to='requests' title='Заявки в друзья'
 					         className={classActive}>
 						<h1 className={s.friend__requests}>Заявки в друзья</h1>
 						{

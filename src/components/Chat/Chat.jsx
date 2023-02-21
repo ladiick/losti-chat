@@ -77,7 +77,7 @@ const Chat = () => {
 		
 		)
 	}
-
+	
 	if (!peopleCurrent?.pk) {
 		return (
 			<div className={s.emptity__chat}>
@@ -90,7 +90,6 @@ const Chat = () => {
 	}
 	
 	
-	
 	return (
 		<div className={s.wrapper}>
 			<header className={s.header}>
@@ -98,7 +97,8 @@ const Chat = () => {
 					<img src={peopleCurrent.pk === myId ? favorite : peopleCurrent.image ? peopleCurrent.image : photo}
 					     alt="logo"/>
 					<div className={s.person__info}>
-						<h1>{peopleCurrent.pk === myId ? 'Избранное' : peopleCurrent.first_name} {peopleCurrent.last_name}</h1>
+						<h1>
+							{peopleCurrent.pk === myId ? 'Избранное' : `${peopleCurrent.first_name} ${peopleCurrent.last_name}`} </h1>
 						{/*<p>Online</p>*/}
 					</div>
 				</div>
@@ -137,7 +137,7 @@ const Chat = () => {
 							placeholder='Напишите сообщение...'
 							{...register('message')}
 							autoComplete={'off'}
-							
+						
 						/>
 						<button className={s.button__send} disabled={statusSocket === 'pending'}>
 							<svg viewBox="0 0 24 24">

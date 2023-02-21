@@ -6,6 +6,7 @@ import axios from "axios";
 import {useDispatch} from "react-redux";
 import {setIsAuth, setUserAccessToken, setUserRefreshToken} from "../../redux/slices/userSlice";
 import {HOST} from "../api/HOST";
+
 const AuthorizationForm = () => {
 	const dispatch = useDispatch()
 	const {register, handleSubmit, formState: {errors, isValid}} = useForm(
@@ -23,16 +24,16 @@ const AuthorizationForm = () => {
 			password: data.password,
 		})
 			.then(res => {
-				localStorage.setItem('accessToken',res.data.access)
-				localStorage.setItem('refreshToken',res.data.refresh)
+				localStorage.setItem('accessToken', res.data.access)
+				localStorage.setItem('refreshToken', res.data.refresh)
 				dispatch(setUserAccessToken(res.data.access))
 				dispatch(setUserRefreshToken(res.data.refresh))
 				
 				dispatch(setIsAuth(true))
 				navigation('/')
 			})
-			.catch(err => console.log('Ошибка',err))
-	
+			.catch(err => console.log('Ошибка', err))
+		
 	}
 	
 	return (
@@ -43,10 +44,10 @@ const AuthorizationForm = () => {
 					{errors?.email ? <div className={s.error__send}>{errors.email.message}</div> : 'Электронная почта'}
 					
 					<input
-						className={s.input__email}
+						className={s.input}
 						type='text'
 						placeholder='Email'
-						style={errors?.email && {borderColor:'red'}}
+						style={errors?.email && {borderColor: 'red'}}
 						{...(register('email', {
 							required: 'Необходимо заполнить',
 							pattern: {
@@ -62,16 +63,16 @@ const AuthorizationForm = () => {
 				
 				<label className={s.label__inputs}>
 					<div className={s.fogot__password}>
-						{errors?.password ? <div className={s.error__send}>{errors.password.message}</div> : 'Пароль'}
+						{errors?.password ? <span className={s.error__send}>{errors.password.message}</span> : 'Пароль'}
 						<Link to='/'>Забыли пароль?</Link>
 					
 					</div>
 					
 					<input
-						className={s.input__password}
+						className={s.input}
 						type='password'
 						placeholder='Введите больше 5 символов'
-						style={errors?.password && {borderColor:'red'}}
+						style={errors?.password && {borderColor: 'red'}}
 						{...(register('password', {
 							required: 'Необходимо заполнить',
 							minLength: {
@@ -81,14 +82,17 @@ const AuthorizationForm = () => {
 						}))}
 					
 					/>
-					
-				</label>
 				
-				<button className={s.btn_submit} disabled={!isValid}>Авторизоваться</button>
-				<span className={s.btn__desc}>У вас нет аккаунта?
-					<Link to='/registration'>Зарегистрируйтесь здесь.</Link></span>
-			
+				</label>
+				<div>
+					<button className={s.btn_submit} disabled={!isValid}>Войти</button>
+					
+					<div className={s.orLogin}>или</div>
+					
+					<Link to='/registration' className={s.btn__desc}>Зарегистрироваться</Link>
+				</div>
 			</form>
+		
 		</div>
 	
 	)

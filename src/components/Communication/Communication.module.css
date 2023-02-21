@@ -2,6 +2,7 @@
   max-height: 75vh;
   margin-right: 4px;
   padding: 15px 0;
+  height: 100%;
   position: relative;
   overflow-y: auto;
   transition: all 0.3s;

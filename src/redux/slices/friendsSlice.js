@@ -44,12 +44,37 @@ export const fetchFriendsRequests = createAsyncThunk(
 	}
 )
 
+export const fetchPossibleFriends = createAsyncThunk(
+	'possibleFriends/fetchPossibleFriends',
+	async ({userAccessToken,userRefreshToken}, {dispatch})=>{
+		
+		try {
+			const res = await axios.get(`http://${HOST}/api/v1/friends/possible_friends/`, {
+				headers: {Authorization: `JWT ${userAccessToken}`}
+			})
+			
+			return res.data
+			
+		}
+		catch (err) {
+			if (err.response.status === 401) {
+				const token = await updateAccessToken(userRefreshToken)
+				dispatch(setUserAccessToken(token))
+			}
+		}
+	}
+)
+
 
 const initialState = {
 	friends : [],
 	friendsRequests: [],
+	possibleFriends: [],
 	requestCurrentFriend: {},
-	status: ''
+	friendsCurrent: {},
+	statusFriends: '',
+	statusFriendsRequests: '',
+	statusFriendsPossible: '',
 }
 
 
@@ -64,21 +89,24 @@ export const friendsSlice = createSlice({
 		setAddFriendRequest(state,action){
 			state.friendsRequests.splice(action.payload,1)
 		},
+		setFriendsCurrent(state,action){
+			state.friendsCurrent = action.payload
+		}
 	
 	},
 	
 	
 	extraReducers: {
 		[fetchFriends.pending]: (state) => {
-			state.status = 'loading'
+			state.statusFriends = 'loading'
 			state.friends = []
 		},
 		[fetchFriends.fulfilled]: (state, action) => {
-			state.status = 'success'
+			state.statusFriends = 'success'
 			state.friends = action.payload
 		},
 		[fetchFriends.rejected]: (state) => {
-			state.status = 'error'
+			state.statusFriends = 'error'
 			state.friends = []
 		},
 		
@@ -94,6 +122,20 @@ export const friendsSlice = createSlice({
 		[fetchFriendsRequests.rejected]: (state) => {
 			state.status = 'error'
 			state.friendsRequests = []
+		},
+		
+		
+		[fetchPossibleFriends.pending]: (state) => {
+			state.statusFriendsPossible = 'loading'
+			state.possibleFriends = []
+		},
+		[fetchPossibleFriends.fulfilled]: (state, action) => {
+			state.statusFriendsPossible = 'success'
+			state.possibleFriends = action.payload
+		},
+		[fetchPossibleFriends.rejected]: (state) => {
+			state.statusFriendsPossible = 'error'
+			state.possibleFriends = []
 		}
 		
 		
@@ -103,6 +145,6 @@ export const friendsSlice = createSlice({
 	
 })
 
-export const {setAddFriendRequest,updateFriends} = friendsSlice.actions
+export const {setAddFriendRequest,updateFriends,setFriendsCurrent} = friendsSlice.actions
 
 export default friendsSlice.reducer

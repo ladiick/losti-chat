@@ -6,7 +6,7 @@ const SearchBlock = ({searchValue,setSearch}) => {
 		<div className={s.block__search}>
 			
 			<input type='text'
-			       placeholder='Search'
+			       placeholder='Поиск'
 			       value={searchValue}
 			       onChange={(e) => setSearch(e.target.value)}
 			/>

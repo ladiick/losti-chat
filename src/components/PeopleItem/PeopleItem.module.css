@@ -42,7 +42,7 @@
   padding: 6px;
   border-radius: 8px;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.0605);
+  background: #303030;
   position: relative;
 }
 .block__people__item__active:not(:last-child) {

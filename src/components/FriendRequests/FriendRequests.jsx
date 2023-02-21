@@ -49,7 +49,15 @@ const FriendRequests = ({allRequests}) => {
 		
 	}
 	
-	if (!friendRequests.length) {
+	if (!friendRequests?.length && location.pathname === '/friends/requests') {
+		return (
+			
+			<div className={s.wrapper__requests}>
+				<div style={{textAlign: 'center',fontSize: 14}}>У вас нет заявок в друзья</div>
+			</div>
+		)
+	}
+	else if (!friendRequests.length){
 		return
 	}
 	

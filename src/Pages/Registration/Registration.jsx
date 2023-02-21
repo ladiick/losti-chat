@@ -1,48 +1,64 @@
 import React from 'react';
 import s from './Registration.module.scss';
-import {Link} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import logo from "../../components/assets/logo.svg";
-import imgLogin from "../Authorization/login_img3.jpg";
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+
+import RegistrationFormStep1 from "../../components/RegistrationForm/RegistrationFormStep1";
+import FormWrapper from "../../components/FormWrapper/FormWrapper";
+import RegistrationFormStep2 from "../../components/RegistrationFormStep2/RegistrationFormStep2";
+import RegistrationFormStep3 from "../../components/RegistrationFormStep3/RegistrationFormStep3";
+import RegistrationFormStep4 from "../../components/RegistrationFormStep4/RegistrationFormStep4";
 
 
 const Registration = () => {
+	const location = useLocation()
+	
 	return (
-		<div className={s.block__login}>
-			<div className={s.wrapper__content}>
-				<div className={s.arrow__back}>
-					<Link to='/'>
-						<svg height="24px" version="1.1" viewBox="0 0 512 512" width="24px">
-							<polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/>
-						</svg>
-						
-						<span>
-						Назад
-							</span>
-					</Link>
-				</div>
-				<div className={s.wrapper__form}>
-					<div className={s.wrapper__text}>
-						<h1 className={s.form__title}>
-							<img src={logo} alt='logo'/>LOSTI-CHAT
-						</h1>
-						<span className={s.form__line}><div>Регистрация</div></span>
-						<p className={s.form__description}>
-							Зарегистрируйтесь и начните пользоваться
-						</p>
-					</div>
-					
-					<RegistrationForm/>
+		<FormWrapper>
+			{location.pathname !== '/registration/about-user'
+				&& location.pathname !== '/registration/password'
+				&& location.pathname !== '/registration/confirmation-code' &&
+				
+				<div className={s.form__title}>
+				
+				<img src={logo} alt='logo'/>
 				
 				
-				</div>
-				<div className={s.wrapper__img}>
-					<img src={imgLogin} alt='pictures'/>
-				</div>
+				<span>Регистрация в LOSTI-CHAT</span>
+			
+			</div>}
+			
+			<div className={s.wrapper__steps}>
+				{
+					location.pathname !== '/registration/about-user'
+					&& location.pathname !== '/registration/password'
+					&& location.pathname !== '/registration/confirmation-code' &&
+					<h3>Ваша почта будет использована <br/> для входа в аккаунт</h3>}
+				{
+					location.pathname === '/registration/about-user'
+					&& location.pathname !== '/registration/password'
+					&& location.pathname !== '/registration/confirmation-code' ?
+						<h3>Информация о вас</h3> : ''}
+				{
+					location.pathname === '/registration/password' &&
+					<h3 style={{marginTop: 40}}>Ваш пароль будет использован <br/> для входа в аккаунт</h3>}
+				{
+					location.pathname === '/registration/confirmation-code' &&
+					<h3 style={{marginTop: 40}}>Введите код подтверждения</h3>}
+				
+				{location.pathname !== '/registration/about-user'
+					&& location.pathname !== '/registration/password'
+					&& location.pathname !== '/registration/confirmation-code'
+					&& <RegistrationFormStep1/>}
+				
+				<Routes>
+					<Route path='about-user' element={<RegistrationFormStep2/>}/>
+					<Route path='password' element={<RegistrationFormStep3/>}/>
+					<Route path='confirmation-code' element={<RegistrationFormStep4/>}/>
+				</Routes>
+			
 			</div>
-		
-		
-		</div>
+		</FormWrapper>
 	);
 };
 

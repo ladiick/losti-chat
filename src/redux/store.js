@@ -4,6 +4,7 @@ import people from './slices/peopleSlice'
 import message from "./slices/messageSlice";
 import navigation from "./slices/navigationSlice";
 import friends from "./slices/friendsSlice";
+import registration from "./slices/registrationStepsSlice";
 export const store = configureStore({
 	
 	
@@ -12,6 +13,7 @@ export const store = configureStore({
 		people,
 		message,
 		navigation,
-		friends
+		friends,
+		registration
 	}
 })

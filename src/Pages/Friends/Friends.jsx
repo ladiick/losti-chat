@@ -10,21 +10,11 @@ import {Route, Routes, useLocation} from "react-router-dom";
 import FriendsRequestsPage from "../FriendsRequestsPage/FriendsRequestsPage";
 import NavigateFriends from "../../components/NavigateFriends/NavigateFriends";
 import SearchFriends from "../../components/SearchFriends/SearchFriends";
+import PossibleFriends from "../../components/PossibleFriends/PossibleFriends";
 
 const Friends = () => {
 	
 	const location = useLocation()
-	// if(location.pathname === '/friends/requests'){
-	// 	return (
-	// 		<Home>
-	// 			<div className={s.wrapper__friends}>
-	// 				<FriendsRequestsPage />
-	// 			</div>
-	// 			<AllPeople />
-	// 			<Modul />
-	// 		</Home>
-	// 	)
-	// }
 	
 	return (
 		<>
@@ -38,10 +28,9 @@ const Friends = () => {
 				</div>
 				<div className={s.nav__block}>
 					<NavigateFriends/>
-					<AllPeople/>
+					<PossibleFriends />
 				</div>
 				<SearchFriends />
-				<Modul/>
 			</Home>
 		</>
 	)

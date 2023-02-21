@@ -1,0 +1,43 @@
+.form {
+	margin-top: 20px;
+	width: 100%;
+	height: 100%;
+	form{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: calc(100% - 52px);
+	}
+}
+
+.error__send {
+	color: red;
+	font-size: 14px;
+	width: 100%;
+}
+
+.btn_submit{
+	background: #1a73e8;
+	border-radius: 8px;
+	border: none;
+	width: 100%;
+	padding: 8px 10px;
+	transition: all .3s;
+	cursor: pointer;
+	color: #FFFFFF;
+	&:disabled{
+		color: #aaaaaa;
+		cursor: auto;
+		background: #202020;
+		box-shadow: none;
+
+
+	}
+}
+.wrapper__inputs{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
