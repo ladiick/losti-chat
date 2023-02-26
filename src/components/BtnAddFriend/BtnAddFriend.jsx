@@ -6,7 +6,7 @@ const BtnAddFriend = ({handlerPeople}) => {
 	
 	return (
 		<div className={s.btn__wrapper} onClick={handlerPeople}>
-			<img src={btn} alt=""/>
+			<img src={btn} alt="addFriend"/>
 		</div>
 	);
 };

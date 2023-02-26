@@ -1,12 +1,25 @@
 .form {
-	margin-top: 20px;
 	height: 100%;
 	form{
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: calc(100% - 50px);
+		height: 100%;
 	}
+}
+.wrapper__form{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.description__title{
+	text-align: center;
+	font-size: 14px;
+	color: #aaaaaa;
+	margin: 0;
+	font-weight: 400;
 }
 
 .date__gender {
@@ -20,12 +33,13 @@
 
 .wrapper__info{
 	display: flex;
+	align-items: center;
 }
 
 .field_names{
 	display: flex;
 	flex-direction: column;
-	width: 70%;
+	width: 100%;
 
 }
 
@@ -46,6 +60,8 @@
 	color: #FFFFFF;
 	border-radius: 0 8px 0 0;
 	transition: all .3s;
+	cursor: pointer;
+
 	&:focus{
 		border: 1px solid #1a73e8;
 	}
@@ -60,6 +76,7 @@
 	padding: 8px 10px;
 	background: #202020;
 	border: 1px solid #434343;
+	cursor: pointer;
 
 	color: #FFFFFF;
 	border-radius: 0 0 8px 0;
@@ -129,10 +146,10 @@
 	color: #FFFFFF;
 	&:disabled{
 		color: #aaaaaa;
-		cursor: auto;
+		//cursor: auto;
 		background: #202020;
 		box-shadow: none;
-
+		cursor: no-drop;
 
 	}
 }

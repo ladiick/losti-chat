@@ -6,6 +6,7 @@ import photo from '../assets/my_photo.jpg'
 import {MyContext} from "../../App";
 import {setCurrentPeopleAll} from "../../redux/slices/peopleSlice";
 import friends, {setFriendsCurrent, setFriendsCurrentPk} from "../../redux/slices/friendsSlice";
+import {toast} from "react-toastify";
 
 const Modul = () => {
 	
@@ -17,7 +18,7 @@ const Modul = () => {
 	const [textArea, setTextArea] = useState('');
 	
 	useEffect(() => {
-		console.log('njgg')
+		
 		if(modalActive) {
 			refTextArea.current.focus()
 		}

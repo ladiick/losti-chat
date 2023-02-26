@@ -18,6 +18,7 @@ import {
 	setIsAuth,
 	setUserAccessToken,
 } from './redux/slices/userSlice'
+import {toast, ToastContainer} from "react-toastify";
 
 export const MyContext = React.createContext()
 
@@ -39,11 +40,12 @@ function App() {
 					})
 					dispatch(setAboutUser(res.data))
 					dispatch(setIsAuth(true))
+					
 				} catch (err) {
 					console.log(err)
 					if (err.response.status === 401) {
 						const token = await updateAccessToken(userRefreshToken)
-						console.log('token in App',token)
+						console.log('token in App', token)
 						dispatch(setUserAccessToken(token))
 					}
 				}
@@ -53,16 +55,31 @@ function App() {
 	}, [userAccessToken])
 	
 	return (
-		<MyContext.Provider value={{socket, statusSocket, newMessage}}>
-			<Routes>
-				<Route path='/' element={<Main/>}/>
-				<Route path='/friends/*' element={<Friends/>}/>
-				<Route path='/authorization' element={<Authorization/>}/>
-				<Route path='/profile' element={<Profile/>}/>
-				<Route path='/registration/*' element={<Registration/>}/>
-				<Route path='/logout' element={<Logout/>}/>
-			</Routes>
-		</MyContext.Provider>
+		<>
+			<MyContext.Provider value={{socket, statusSocket, newMessage}}>
+				
+				<Routes>
+					<Route path='/' element={<Main/>}/>
+					<Route path='/friends/*' element={<Friends/>}/>
+					<Route path='/authorization' element={<Authorization/>}/>
+					<Route path='/profile' element={<Profile/>}/>
+					<Route path='/registration/*' element={<Registration/>}/>
+					<Route path='/logout' element={<Logout/>}/>
+				</Routes>
+			</MyContext.Provider>
+			<ToastContainer
+				position="top-center"
+				autoClose={1500}
+				hideProgressBar
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+			/>
+		</>
 	)
 }
 

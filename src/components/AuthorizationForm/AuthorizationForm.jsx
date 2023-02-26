@@ -40,6 +40,7 @@ const AuthorizationForm = () => {
 		
 		<div className={s.form}>
 			<form onSubmit={handleSubmit(onSubmit)}>
+				<div>
 				<label className={s.label__inputs}>
 					{errors?.email ? <div className={s.error__send}>{errors.email.message}</div> : 'Электронная почта'}
 					
@@ -90,6 +91,7 @@ const AuthorizationForm = () => {
 					<div className={s.orLogin}>или</div>
 					
 					<Link to='/registration' className={s.btn__desc}>Зарегистрироваться</Link>
+				</div>
 				</div>
 			</form>
 		

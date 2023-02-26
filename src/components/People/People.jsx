@@ -9,6 +9,7 @@ import {
 import {fetchMessage} from "../../redux/slices/messageSlice";
 import favorite from '../assets/favorite.svg'
 import { openChatBlock } from '../../redux/slices/navigationSlice'
+import {toast} from "react-toastify";
 
 const People = ({searchValue, setSearch}) => {
 	const userAccessToken = useSelector((state) => state.user.tokens.access)

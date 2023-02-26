@@ -1,23 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import s from "./RegistrationFormStep2.module.scss";
+import s from "./RegistrationFormStep4.module.scss";
 import {useForm} from "react-hook-form";
-import camera from '../assets/camera.svg'
+import camera from '../../assets/camera.svg'
 import RegistrationFormStepInfoUser from "../RegistrationFormStepInfoUser/RegistrationFormStepInfoUser";
-import check from '../assets/check_mark.svg'
+import check from '../../assets/check_mark.svg'
 import {useDispatch, useSelector} from "react-redux";
 import {redirect, useNavigate} from "react-router-dom";
-import {setRegistrationSteps} from "../../redux/slices/registrationStepsSlice";
+import {setRegistrationSteps} from "../../../redux/slices/registrationStepsSlice";
 import axios from "axios";
-import {HOST} from "../api/HOST";
+import {HOST} from "../../api/HOST";
 
-const RegistrationFormStep2 = () => {
+const RegistrationFormStep4 = () => {
 	const navigate = useNavigate()
 	const stepsInfo = useSelector(state => state.registration.stepsInfo)
 	const dispatch = useDispatch()
 	
 	useEffect(() => {
 		if (stepsInfo.password === "") {
-			navigate('/registration')
+			// navigate('/registration')
 		}
 	}, [])
 	
@@ -55,18 +55,19 @@ const RegistrationFormStep2 = () => {
 	console.log(watch('img'))
 	return (
 		<>
-			
 			<div className={s.form}>
 				<form noValidate onSubmit={handleSubmit(onSubmit)}>
+					<div className={s.wrapper__form}>
+						<h3 className={s.description__title}>Информация о вас</h3>
+						
 					<div className={s.wrapper__info}>
+						
 						<label className={s.label__img}>
 							<span style={watch('img')?.length  ? {borderColor: '#4bb24b'} : null}>
 								{
 									watch('img')?.length ? <img src={check} alt="check"/> : <img src={camera} alt="camera"/>
 								}
-								
-								
-								
+						
 							</span>
 							<input
 								type='file'
@@ -127,6 +128,7 @@ const RegistrationFormStep2 = () => {
 					</div>
 					
 					<RegistrationFormStepInfoUser errors={errors} register={register}/>
+					</div>
 					<button className={s.btn_submit} disabled={!isValid}>
 						Зарегистрироваться
 					</button>
@@ -137,4 +139,4 @@ const RegistrationFormStep2 = () => {
 	);
 };
 
-export default RegistrationFormStep2;
+export default RegistrationFormStep4;
