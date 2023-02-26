@@ -1,5 +1,4 @@
 .form {
-  margin-top: 20px;
   width: 100%;
   height: 100%;
 }
@@ -7,19 +6,38 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100% - 66px);
+  height: 100%;
+}
+
+.wrapper__form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.description__title {
+  text-align: center;
+  font-size: 14px;
+  color: #aaaaaa;
+  margin: 0;
+  font-weight: 400;
 }
 
 .label__inputs {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
   font-weight: 400;
   font-size: 14px;
   color: #aaaaaa;
 }
+.label__inputs:not(:last-child) {
+  margin-bottom: 20px;
+}
 
 .input {
+  cursor: pointer;
   margin-top: 8px;
   outline: none;
   padding: 8px 10px;
@@ -48,28 +66,9 @@
 }
 .btn_submit:disabled {
   color: #aaaaaa;
-  cursor: auto;
+  cursor: no-drop;
   background: #202020;
   box-shadow: none;
-}
-
-.orLogin {
-  margin: 20px 0;
-  color: #828282;
-  text-align: center;
-  font-size: 13px;
-}
-
-.btn__desc {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  background-color: #4bb24b;
-  padding: 8px 10px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #FFFFFF;
-  outline: none;
 }
 
 .error__send {
@@ -78,10 +77,4 @@
   width: 100%;
 }
 
-@media (max-width: 900px) {
-  .form {
-    backdrop-filter: blur(10px);
-  }
-}
-
-/*# sourceMappingURL=RegistrationFormStep1.module.css.map */
+/*# sourceMappingURL=RegistrationFormStep3.module.css.map */

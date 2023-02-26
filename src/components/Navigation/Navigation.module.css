@@ -95,15 +95,8 @@
 .name__company span svg {
   width: 24px;
   height: 24px;
-  animation: logo 6s infinite alternate ease-in-out;
-}
-@keyframes logo {
-  to {
-    transform: rotate(0deg);
-  }
-  from {
-    transform: rotate(360deg);
-  }
+  border-radius: 8px;
+  background-color: #1a73e8;
 }
 
 .active li {

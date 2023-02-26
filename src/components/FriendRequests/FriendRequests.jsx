@@ -57,7 +57,7 @@ const FriendRequests = ({allRequests}) => {
 			</div>
 		)
 	}
-	else if (!friendRequests.length){
+	else if (!friendRequests?.length){
 		return
 	}
 	
@@ -65,7 +65,7 @@ const FriendRequests = ({allRequests}) => {
 		<div className={location.pathname !== '/friends/requests' ? s.wrapper : s.wrapper__requests }>
 			<header className={s.wrapper__header}>
 				<span>
-					Заявки в друзья {friendRequests.length}
+					Заявки в друзья {friendRequests?.length}
 				</span>
 				{location.pathname !== '/friends/requests' && <Link to={'/friends/requests'}>
 					Показать всех

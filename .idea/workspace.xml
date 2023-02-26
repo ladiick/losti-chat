@@ -5,88 +5,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df6f94e0-5d33-4bff-8b92-750270cccee8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PossibleFriendsItem/PossibleFriendsItem.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PossibleFriendsItem/PossibleFriendsItem.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ProfileFriends/ProfileFriends.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ProfileFriends/ProfileFriends.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationFormStep1.module.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationFormStep2/RegistrationFormStep2.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationFormStep2/RegistrationFormStep2.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationFormStep3/RegistrationFormStep3.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationFormStep3/RegistrationFormStep3.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationFormStep4/RegistrationFormStep4.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationFormStep4/RegistrationFormStep4.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/assets/camera.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/assets/check_mark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/slices/registrationStepsSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.module.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.module.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend" beforeDir="false" afterPath="$PROJECT_DIR$/backend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/dump.rdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Friends/Friends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Friends/Friends.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/Profile.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/Profile.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Main/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Main/Main.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Registration/Registration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Registration/Registration.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Registration/Registration.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Registration/Registration.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Registration/Registration.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Registration/Registration.module.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Registration/Registration.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Registration/Registration.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeopleItem/AllPeopleItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AllPeopleItem/AllPeopleItem.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BurgerMenu/BurgerMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BurgerMenu/BurgerMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chat/Chat.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/Communication.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Communication/Communication.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/Communication.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Communication/Communication.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/Communication.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Communication/Communication.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BtnAddFriend/BtnAddFriend.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BtnAddFriend/BtnAddFriend.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FriendRequests/FriendRequests.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendRequests/FriendRequests.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/Home.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home/Home.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/Home.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home/Home.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Modul/Modul.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modul/Modul.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProfileInfo/ProfileInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProfileInfo/ProfileInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProfileInfo/ProfileInfo.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProfileInfo/ProfileInfo.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationFormStep1.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationForm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationFormStep1.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationForm.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationForm.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationFormStep1.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.module.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchFriends/SearchFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchFriends/SearchFriends.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/assets/logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/slices/friendsSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/slices/friendsSlice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/People.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationFormStep1.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationFormStep1.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationFormStep1.module.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm/RegistrationFormStep1.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep2/RegistrationFormStep2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep2/RegistrationFormStep2.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep2/RegistrationFormStep2.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.module.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep2/RegistrationFormStep2.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep3/RegistrationFormStep3.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep3/RegistrationFormStep3.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep3/RegistrationFormStep3.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.module.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep3/RegistrationFormStep3.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep4/RegistrationFormStep4.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep4/RegistrationFormStep4.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep4/RegistrationFormStep4.module.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStep4/RegistrationFormStep4.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,27 +83,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/losti-chat&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2022.3.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/react_projects/react_sneakers",
+    "list.type.of.created.stylesheet": "SCSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.3.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;SCSS&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "SCSS"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\react_projects\losti-chat\src\components\Chat" />
@@ -142,11 +111,11 @@
       <recent name="D:\react_projects\losti-chat\src\components\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\losti-chat" />
+      <recent name="D:\losti-chat\src\components\RegistrationSteps" />
       <recent name="D:\losti-chat\src\components\hooks" />
       <recent name="D:\losti-chat\backend" />
       <recent name="D:\losti-chat\src\components\assets" />
-      <recent name="D:\losti-chat\src" />
-      <recent name="D:\losti-chat\public" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -221,6 +190,12 @@
       <workItem from="1676820608964" duration="1744000" />
       <workItem from="1676841973202" duration="3248000" />
       <workItem from="1676901995422" duration="23372000" />
+      <workItem from="1677014664929" duration="6519000" />
+      <workItem from="1677023111887" duration="2932000" />
+      <workItem from="1677073038727" duration="246000" />
+      <workItem from="1677097383815" duration="2120000" />
+      <workItem from="1677181369078" duration="1070000" />
+      <workItem from="1677241614439" duration="985000" />
     </task>
     <servers />
   </component>

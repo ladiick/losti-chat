@@ -7,6 +7,7 @@ import AllPeopleItem from "../AllPeopleItem/AllPeopleItem";
 import axios from "axios";
 import {HOST} from "../api/HOST";
 import PossibleFriendsItem from "../PossibleFriendsItem/PossibleFriendsItem";
+import {toast} from "react-toastify";
 
 const PossibleFriends = () => {
 	const dispatch = useDispatch()
@@ -33,6 +34,16 @@ const PossibleFriends = () => {
 					headers: {Authorization: `JWT ${userAccessToken}`},
 				}).then(res => {
 				// dispatch(setAddFriend(index))
+				toast.success('🦄 Wow so easy!', {
+					position: "top-center",
+					autoClose: 1500,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "dark",
+				});
 			})
 		}
 	

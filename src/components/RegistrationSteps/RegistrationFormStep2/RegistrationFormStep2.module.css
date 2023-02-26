@@ -1,5 +1,4 @@
 .form {
-  margin-top: 20px;
   width: 100%;
   height: 100%;
 }
@@ -7,7 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100% - 52px);
+  height: 100%;
 }
 
 .error__send {
@@ -28,7 +27,7 @@
 }
 .btn_submit:disabled {
   color: #aaaaaa;
-  cursor: auto;
+  cursor: no-drop;
   background: #202020;
   box-shadow: none;
 }
@@ -37,8 +36,16 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
-/*# sourceMappingURL=RegistrationFormStep4.module.css.map */
+.description__title {
+  text-align: center;
+  font-size: 14px;
+  color: #aaaaaa;
+  margin: 0;
+  font-weight: 400;
+}
+
+/*# sourceMappingURL=RegistrationFormStep2.module.css.map */

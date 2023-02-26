@@ -5,6 +5,7 @@
   font-weight: 400;
   font-size: 14px;
   color: #aaaaaa;
+  cursor: pointer;
 }
 
 .date__gender {
@@ -14,6 +15,7 @@
 }
 
 .input {
+  cursor: pointer;
   margin-top: 8px;
   outline: none;
   padding: 8px 10px;
@@ -70,6 +72,7 @@
 .wrapper__gender .label__radios span {
   border: 1px solid #434343;
   padding: 8px 10px;
+  cursor: pointer;
   border-radius: 8px;
   height: 100%;
   transition: all 0.3s;
@@ -89,23 +92,7 @@
   font-size: 14px;
   color: #aaaaaa;
   margin-bottom: 8px;
-}
-
-.btn_submit {
-  background: #1a73e8;
-  border-radius: 8px;
-  border: none;
-  width: 100%;
-  color: #FFFFFF;
-  padding: 12px 10px;
-  transition: all 0.3s;
   cursor: pointer;
-}
-.btn_submit:disabled {
-  cursor: auto;
-  background: #202020;
-  transform: scale(1);
-  box-shadow: none;
 }
 
 .error__send {
