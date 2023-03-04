@@ -1,0 +1,59 @@
+
+
+
+.wrapper__steps{
+	height: 100%;
+	h3 {
+
+	}
+}
+
+
+@media (max-width: 900px) {
+	.block__login {
+		min-width: auto;
+		// background: url("20943566.jpg");
+		background-position: bottom;
+		background-repeat: no-repeat;
+		background-size: cover;
+
+	}
+
+
+	.wrapper__form {
+		width: auto;
+		padding: 40px;
+	}
+
+	.wrapper__img {
+		display: none;
+
+	}
+	.form__line {
+		background: #E0E0E0;
+
+		div {
+			background-color: #fafafb;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.block__login {
+		width: 100%;
+		height: 100%;
+
+	}
+	.wrapper__content {
+		justify-content: center;
+		align-items: center;
+
+	}
+	.wrapper__form {
+		width: auto;
+		padding: 20px 30px;
+		background: white;
+		border-radius: 10px;
+		box-shadow: 0 0 15px -5px;
+	}
+}

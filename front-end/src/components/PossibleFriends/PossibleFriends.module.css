@@ -1,0 +1,19 @@
+.wrapper {
+  border-radius: 16px;
+  padding: 30px 15px 30px 15px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+  max-height: 60%;
+  border: 1px solid #434343;
+  position: sticky;
+  top: 10px;
+}
+
+.title__block {
+  color: #FFFFFF;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/*# sourceMappingURL=PossibleFriends.module.css.map */

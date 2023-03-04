@@ -1,0 +1,15 @@
+.btn__wrapper{
+	display: flex;
+	cursor: pointer;
+	border-radius: 50%;
+	transition: all 0.3s;
+	padding: 8px;
+	img{
+		width: 24px;
+		height: 24px;
+	}
+	&:hover{
+		background-color: var(--borderColor);
+	}
+
+}

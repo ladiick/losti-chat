@@ -1,0 +1,31 @@
+.btn__requests{
+	margin-top: 8px;
+}
+
+.btn__accept{
+	cursor: pointer;
+	color: #ffffff;
+	background-color: var(--secondColor);
+	padding: 5px 12px;
+	border-radius: 8px;
+	margin-right: 10px;
+	transition: all 0.3s;
+	font-size: 13px;
+	&:hover{
+		background-color: darken(#1A73E8,10%);
+	}
+}
+.btn__cancel{
+	cursor: pointer;
+	color: #FFFFFF;
+	padding: 5px 12px;
+	border-radius: 8px;
+	transition: all 0.3s;
+	font-size: 13px;
+
+
+	&:hover{
+		background-color: #434343;
+	}
+
+}

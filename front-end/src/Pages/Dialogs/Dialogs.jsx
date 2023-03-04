@@ -1,0 +1,1 @@
+import React from 'react';import Home from "../../components/Home/Home";import Social from "../../components/Social/Social";import Chat from "../../components/Chat/Chat";const Dialogs = () => {    return (        <Home>            <Social/>            <Chat/>        </Home>    );};export default Dialogs;

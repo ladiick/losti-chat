@@ -1,0 +1,20 @@
+.wrapper {
+  width: 35%;
+  border-radius: 16px 0 0 16px;
+  padding: 30px 15px 30px 15px;
+  border: 1px solid #434343;
+}
+.wrapper .text {
+  display: block;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .wrapper {
+    flex-grow: 1;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
+
+/*# sourceMappingURL=Social.module.css.map */
