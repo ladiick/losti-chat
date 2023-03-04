@@ -1,0 +1,88 @@
+.wrapper {
+	border-radius: 16px;
+	background-color: var(--bgBlocksColor);
+	padding: 30px 15px 30px 15px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+	max-height: 60%;
+	border: 1px solid #434343;
+}
+
+
+.title__block {
+	color: var(--primaryColor);
+	margin: 0;
+	margin-bottom: 10px;
+
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.block__search {
+	position: relative;
+
+	svg {
+		fill: #FFFFFF;
+		position: absolute;
+		width: 24px;
+		height: 24px;
+		top: 5px;
+		right: 8px;
+		transition: all .3s;
+		z-index: 12;
+		//margin-right: 15px;
+	}
+
+	input {
+		border: none;
+		border-bottom: 2px solid rgb(79, 84, 84);
+		background: rgba(255, 255, 255, 0.0605);
+		border-radius: 6px;
+		outline: none;
+		transition: all .3s;
+		width: 100%;
+		//opacity: 0;
+		padding: 8px 35px 8px 8px;
+		color: var(--primaryColor);
+		font-size: 14px;
+
+
+	}
+
+	&:hover {
+		input {
+			border-bottom: 2px solid var(--secondColor);
+		}
+
+		svg {
+			fill: var(--secondColor);
+		}
+	}
+
+
+}
+
+.block__people {
+	position: relative;
+	transition: all .3s;
+	max-height: 90%;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar-track {
+		border-radius: 4px;
+	}
+
+	&::-webkit-scrollbar {
+		width: 4px;
+		transition: all .3s;
+
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 4px;
+		background: rgba(255, 255, 255, 0.5442);
+
+	}
+}
+
+
+

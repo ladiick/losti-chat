@@ -1,0 +1,44 @@
+.wrapper {
+
+  width: 35%;
+  border-radius: 16px 0 0 16px;
+  position: relative;
+  background-color: var(--bgBlocksColor);
+  padding: 30px 15px;
+
+  border: 1px solid #434343;
+
+  .text {
+    display: block;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+  }
+
+
+}
+
+.wrapper__load {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .load {
+    border: 3px solid #4f4e4e;
+    border-top: 3px solid var(--secondColor);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+  }
+}
