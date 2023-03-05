@@ -7,9 +7,9 @@ import {setUserAccessToken} from "./userSlice";
 
 export const fetchMessage = createAsyncThunk(
 	'message/fetchMessage',
-	async ({userAccessToken, userRefreshToken, dialogsId},{dispatch})=>{
+	async ({userAccessToken, userRefreshToken, id},{dispatch})=>{
 		try {
-			const res = await axios.get(`http://${HOST}/api/v1/dialog/${dialogsId}/`, {
+			const res = await axios.get(`http://${HOST}/api/v1/dialog/${id}/`, {
 				headers: {Authorization: `JWT ${userAccessToken}`}
 			})
 			return reDate(res.data)

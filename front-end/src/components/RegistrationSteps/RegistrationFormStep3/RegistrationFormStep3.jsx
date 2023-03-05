@@ -33,8 +33,7 @@ const RegistrationFormStep3 = () => {
 		
 		dispatch(setRegistrationSteps(data))
 		
-		navigate('/registration/about-user')
-		
+		// navigate('/registration/about-user')
 	}
 	
 	return (

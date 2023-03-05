@@ -112,10 +112,10 @@ const FriendRequests = ({allRequests}) => {
 						handlerCancel={() => handlerCancel(obj, index)}
 					/>)
 					:
-					<FriendsItem obj={friendRequests[0]}
+					<FriendsItem obj={friendRequests[0]|| ''}
 					             requests={'requests'}
-					             handlerAccept={() => handlerAccept(friendRequests[0], 0)}
-					             handlerCancel={() => handlerCancel(friendRequests[0], 0)}/>
+					             handlerAccept={() => handlerAccept(friendRequests[0]||'', 0)}
+					             handlerCancel={() => handlerCancel(friendRequests[0]||'', 0)}/>
 				}
 			
 			

@@ -5,7 +5,7 @@ import {useContext, useEffect, useRef, useState} from "react";
 import {fetchMessage, setMessage} from "../../redux/slices/messageSlice";
 import _ from "underscore";
 import {MyContext} from "../../App";
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 
 
 const Communication = () => {
@@ -18,13 +18,20 @@ const Communication = () => {
     const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
     const isAuth = useSelector(state => state.user.isAuth)
     const {newMessage} = useContext(MyContext);
-    const {dialogsId} = useParams()
 
-    useEffect(()=>{
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    useEffect(() => {
         if (isAuth && userAccessToken) {
-            dispatch(fetchMessage({userAccessToken, userRefreshToken, dialogsId}))
+            dispatch(fetchMessage(
+                {
+                    userAccessToken,
+                    userRefreshToken,
+                    id: searchParams.get('dialogs')
+                }))
         }
-    },[dialogsId])
+    }, [searchParams.get('dialogs')])
+
 
     useEffect(() => {
 
