@@ -1,6 +1,5 @@
-export const reDate = (data=[])=>{
-	
-	
+export const addTimeMessage = (data=[])=>{
+
 	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Субботу', 'Воскресенье']
 	let time = null
 	let timeObj = null

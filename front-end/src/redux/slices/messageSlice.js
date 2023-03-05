@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import {reDate} from "../../components/actions/reDate";
+import {addTimeMessage} from "../../components/actions/addTimeMessage";
 import {HOST} from "../../components/api/HOST";
 import {updateAccessToken} from "../../components/actions/updateAccessToken";
 import {setUserAccessToken} from "./userSlice";
@@ -12,7 +12,7 @@ export const fetchMessage = createAsyncThunk(
 			const res = await axios.get(`http://${HOST}/api/v1/dialog/${id}/`, {
 				headers: {Authorization: `JWT ${userAccessToken}`}
 			})
-			return reDate(res.data)
+			return addTimeMessage(res.data)
 		}
 		catch (err) {
 			if (err.response.status === 401) {
@@ -37,8 +37,19 @@ export const messageSlice = createSlice({
 	
 	reducers: {
 		setMessage: (state,action)=>{
-			state.message.unshift(action.payload)
-			
+			if(new Date(state.message[0].time).toLocaleDateString('ru') !== new Date(action.payload.time).toLocaleDateString('ru')){
+				state.message.unshift({
+					message: Date.now(),
+					type: 'Date',
+					time: Date.now()
+				})
+				state.message.unshift(action.payload)
+			}
+			else{
+				state.message.unshift(action.payload)
+			}
+
+
 		}
 	},
 	

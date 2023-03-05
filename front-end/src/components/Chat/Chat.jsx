@@ -27,8 +27,9 @@ const Chat = () => {
     //
     // },[peopleCurrent.pk])
     //
+
     const sendMessage = (data) => {
-        console.log(data)
+
         if (!data.message) {
             return
         }
