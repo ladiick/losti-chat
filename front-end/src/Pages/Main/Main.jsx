@@ -8,10 +8,10 @@ const Main = () => {
     const location = useLocation()
 
     return (
-        <Home>
+        <>
             <Social/>
             <Chat/>
-        </Home>
+        </>
     )
 }
 

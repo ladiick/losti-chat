@@ -4,7 +4,7 @@ import Communication from "../Communication/Communication";
 import {useSelector} from "react-redux";
 import message__logo from '../assets/messages.svg'
 import {useForm} from "react-hook-form";
-import {Link, useParams} from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
 import {useContext, useEffect, useRef} from "react";
 import favorite from '../assets/favorite.svg'
 import {MyContext} from "../../App";
@@ -14,9 +14,10 @@ const Chat = () => {
     const peopleCurrent = useSelector(state => state.people.peopleCurrent)
     const status = useSelector(state => state.message.status)
     const myId = useSelector(state => state.user.aboutUser.id)
-    const {dialogsId} = useParams()
     const {register, handleSubmit, reset} = useForm()
     const {socket, statusSocket} = useContext(MyContext);
+
+    const [searchParams,setSearchParams] = useSearchParams()
 
     // const refInput = useRef(null);
     //
@@ -38,7 +39,7 @@ const Chat = () => {
                     request_id: new Date().getTime(),
                     message: data.message,
                     action: 'create_dialog_message',
-                    recipient: dialogsId,
+                    recipient: searchParams.get('dialogs'),
 
                 }
             )
@@ -77,7 +78,7 @@ const Chat = () => {
         )
     }
 
-    if (!dialogsId) {
+    if (!searchParams.get('dialogs')) {
         return (
             <div className={s.emptity__chat}>
                 <div className={s.emptity__content}>
@@ -93,11 +94,11 @@ const Chat = () => {
         <div className={s.wrapper}>
             <header className={s.header}>
                 <div className={s.left__side}>
-                    <img src={dialogsId === myId ? favorite : peopleCurrent.image ? peopleCurrent.image : photo}
+                    <img src={searchParams.get('dialogs') === myId ? favorite : peopleCurrent.image ? peopleCurrent.image : photo}
                          alt="logo"/>
                     <div className={s.person__info}>
                         <h1>
-                            {dialogsId === myId ? 'Избранное' : `${peopleCurrent.first_name} ${peopleCurrent.last_name}`} </h1>
+                            {searchParams.get('dialogs') === myId ? 'Избранное' : `${peopleCurrent.first_name} ${peopleCurrent.last_name}`} </h1>
                         {/*<p>Online</p>*/}
                     </div>
                 </div>

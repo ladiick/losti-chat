@@ -21,7 +21,7 @@ const FriendsItem = ({obj,index, requests, handlerCancel, handlerAccept}) => {
 			{!!obj.friend.image ? <img src={obj.friend.image} alt="avatar"/>
 				:
 				<span className={s.empty__img} style={{backgroundColor: changeColor(index)}}
-				>{obj.friend.first_name[0]}{obj.friend.last_name[0]}</span>
+				>{obj.friend?.first_name[0]}{obj.friend?.last_name[0]}</span>
 			}
 			<div className={s.info__user}>
 				<h1>{obj.friend.first_name} {obj.friend.last_name}</h1>

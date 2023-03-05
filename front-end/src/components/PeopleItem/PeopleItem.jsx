@@ -4,19 +4,18 @@ import {useSelector} from "react-redux";
 import {reTime} from "../actions/reTime";
 
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
+import {logDOM} from "@testing-library/react";
 
 
-const PeopleItem = ({firstName, lastName, message, time, img, id, friend, handlerPeople}) => {
-	
-	const peopleChecked = useSelector(state => state.people.peopleCurrent.pk)
-	
-	
+const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople}) => {
+	const [searchParams,setSearchParams] = useSearchParams()
+
 	return (
-		<Link to={`/dialogs/${id}`} className={s.main__wrapper}>
+		<div className={s.main__wrapper}>
 			<div
 				onClick={handlerPeople}
-				className={peopleChecked === id ? s.block__people__item__active : s.block__people__item}>
+				className={searchParams.get('dialogs') == id ? s.block__people__item__active : s.block__people__item}>
 				<div className={s.info__message}>
 					<img src={img ? img : photo} alt='avatar'/>
 					<div className={s.name__lastMessage}>
@@ -30,7 +29,7 @@ const PeopleItem = ({firstName, lastName, message, time, img, id, friend, handle
 					</div>
 				</div>
 			</div>
-		</Link>
+		</div>
 	
 	)
 	

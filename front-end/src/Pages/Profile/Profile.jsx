@@ -1,11 +1,10 @@
-import Home from '../../components/Home/Home'
 import ProfileInfo from '../../components/ProfileInfo/ProfileInfo'
 import MyFriends from './../../components/MyFriends/MyFriends'
 import s from './Profile.module.scss'
 
 const Profile = () => {
 	return (
-		<Home>
+		<>
 			<div className={s.wrapper__friends}>
 				<ProfileInfo/>
 				<div className={s.my_friends__photo_block}>
@@ -16,7 +15,7 @@ const Profile = () => {
 					</div>
 				</div>
 			</div>
-		</Home>
+		</>
 	)
 }
 
