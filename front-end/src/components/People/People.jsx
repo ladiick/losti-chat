@@ -33,12 +33,13 @@ const People = ({searchValue, setSearch}) => {
     }, [isAuth, userAccessToken]);
 
 
+
+
     const handlerPeople = (current__obj, index) => {
         dispatch(setIndex(index))
-        dispatch(setCurrentPeople(current__obj))
+        // dispatch(setCurrentPeople(current__obj))
         // dispatch(openChatBlock(false))
         setSearchParams({dialogs: current__obj.pk})
-
         setSearch('')
     }
 
@@ -67,6 +68,7 @@ const People = ({searchValue, setSearch}) => {
                         time={obj.time}
                         img={obj.recip.image}
                         handlerPeople={() => handlerPeople(obj.recip, index)}
+                        obj={obj.recip}
                     />
 
                     : obj.sender.pk === myId && obj.recip.pk === myId
@@ -81,6 +83,7 @@ const People = ({searchValue, setSearch}) => {
                             time={obj.time}
                             img={favorite}
                             handlerPeople={() => handlerPeople(obj.sender, index)}
+                            obj={obj.sender}
                         />
 
                         :
@@ -93,6 +96,7 @@ const People = ({searchValue, setSearch}) => {
                             time={obj.time}
                             img={obj.sender.image}
                             handlerPeople={() => handlerPeople(obj.sender, index)}
+                            obj={obj.sender}
                         />
                 )}
 

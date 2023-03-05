@@ -20,7 +20,7 @@ const Communication = () => {
     const {newMessage} = useContext(MyContext);
 
     const [searchParams, setSearchParams] = useSearchParams()
-
+    // console.log(message[0]?.time)
     useEffect(() => {
         if (isAuth && userAccessToken) {
             dispatch(fetchMessage(
