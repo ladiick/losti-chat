@@ -20,7 +20,7 @@ function MyFriends() {
 
     useEffect(() => {
     	if (isAuth && userAccessToken) {
-    dispatch(fetchFriends({userAccessToken, userRefreshToken}))
+            dispatch(fetchFriends({userAccessToken, userRefreshToken}))
 
     	}
     }, [isAuth, userAccessToken]);

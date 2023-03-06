@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Route, Routes, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom'
-import './App.css'
+import './App.scss'
 import './normalize.css'
 import {updateAccessToken} from './components/actions/updateAccessToken'
 import {HOST} from './components/api/HOST'
@@ -20,7 +20,6 @@ import {
 import {ToastContainer} from "react-toastify";
 import Dialogs from "./Pages/Dialogs/Dialogs";
 import {Layout} from "./components/Layout/Layout";
-import {MyFriendLoader} from "./components/MyFriends/MyFriends";
 import NotFound from "./components/NotFound/NotFound";
 
 export const MyContext = React.createContext()
@@ -43,8 +42,9 @@ function App() {
     const dispatch = useDispatch()
     const userAccessToken = useSelector(state => state.user.tokens.access)
     const userRefreshToken = useSelector(state => state.user.tokens.refresh)
-    const [socket, statusSocket, newMessage] = useWebsocket(userAccessToken)
     const isAuth = useSelector(state => state.user.isAuth)
+
+    const [socket, statusSocket, newMessage] = useWebsocket(userAccessToken)
 
 
     useEffect(() => {

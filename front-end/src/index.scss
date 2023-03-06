@@ -1,4 +1,9 @@
 
+*,html,body{
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,12 +20,15 @@ code {
     monospace;
 }
 
-
-:root{
+:root {
   --bgBlocksColor: #131313;
   --primaryColor: #ffffff;
   --descriptionColor: #e1e3e6;
   --secondDescription: #828282;
   --secondColor: #1a73e8;
   --borderColor: #434343;
+  --bgColor: #202020;
+  --decription-color: #888888;
+  --navigate-color: #303030
 }
+

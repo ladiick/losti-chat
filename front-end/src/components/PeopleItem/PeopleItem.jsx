@@ -3,7 +3,7 @@ import photo from "../assets/my_photo.jpg";
 import {useDispatch, useSelector} from "react-redux";
 import {reTime} from "../actions/reTime";
 
-import React, {useEffect} from "react";
+import React, {memo, useEffect} from "react";
 import {Link, useSearchParams} from "react-router-dom";
 import {logDOM} from "@testing-library/react";
 import {setCurrentPeople} from "../../redux/slices/peopleSlice";
