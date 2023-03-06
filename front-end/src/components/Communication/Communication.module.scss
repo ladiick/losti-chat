@@ -6,7 +6,7 @@
 	height: 100%;
 	position: relative;
 	//background-color: rgba(0,0,0,0.1);
-	background-color: darken(#50505019,100%);
+	background-color: var(--bgBlocksColor);
 	overflow-y:auto;
 	transition: all .3s;
 	&::-webkit-scrollbar-track {

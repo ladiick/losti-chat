@@ -1,6 +1,6 @@
 import s from './People.module.scss'
 import PeopleItem from "../PeopleItem/PeopleItem";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
     fetchPeople,
