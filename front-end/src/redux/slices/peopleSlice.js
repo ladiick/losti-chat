@@ -8,20 +8,20 @@ import {setUserAccessToken} from "./userSlice";
 export const fetchPeople = createAsyncThunk(
 	'people/fetchPeople',
 	async ({userAccessToken,userRefreshToken},{dispatch}) => {
-		try {
-			const res = await axios.get(`http://${HOST}/api/v1/dialogs/`, {
-				headers: {Authorization: `JWT ${userAccessToken}`}
-			})
-			return res.data
-			
-		}
-		catch (err) {
-			if (err.response.status === 401) {
-				console.log(err)
-				const token = await updateAccessToken(userRefreshToken)
-				dispatch(setUserAccessToken(token))
-			}
-		}
+		// try {
+		// 	const res = await axios.get(`http://${HOST}/api/v1/dialogs/`, {
+		// 		headers: {Authorization: `JWT ${userAccessToken}`}
+		// 	})
+		// 	return res.data
+		//
+		// }
+		// catch (err) {
+		// 	if (err.response.status === 401) {
+		// 		console.log(err)
+		// 		const token = await updateAccessToken(userRefreshToken)
+		// 		dispatch(setUserAccessToken(token))
+		// 	}
+		// }
 		
 	}
 )
@@ -62,6 +62,10 @@ export const peopleSlice = createSlice({
 	initialState,
 	
 	reducers: {
+
+		addPeople(state,action){
+			state.people = action.payload
+		},
 		setAddFriend(state,action){
 			state.peopleAll.splice(action.payload,1)
 		},
@@ -71,9 +75,6 @@ export const peopleSlice = createSlice({
 		},
 		setCurrentPeople: (state, action) => {
 			state.peopleCurrent = action.payload
-		},
-		setCurrentPeopleAll: (state, action) => {
-			state.peopleCurrentAll = action.payload
 		},
 		setIndex: (state, action) => {
 			state.index = action.payload
@@ -107,18 +108,18 @@ export const peopleSlice = createSlice({
 	},
 	
 	extraReducers: {
-		[fetchPeople.pending]: (state) => {
-			state.status = 'loading'
-			state.people = []
-		},
-		[fetchPeople.fulfilled]: (state, action) => {
-			state.status = 'success'
-			state.people = action.payload
-		},
-		[fetchPeople.rejected]: (state) => {
-			state.status = 'error'
-			state.people = []
-		},
+		// [fetchPeople.pending]: (state) => {
+		// 	state.status = 'loading'
+		// 	state.people = []
+		// },
+		// [fetchPeople.fulfilled]: (state, action) => {
+		// 	state.status = 'success'
+		// 	state.people = action.payload
+		// },
+		// [fetchPeople.rejected]: (state) => {
+		// 	state.status = 'error'
+		// 	state.people = []
+		// },
 		[findPeople.pending]: (state) => {
 			state.status = 'loading'
 			state.peopleAll = []
@@ -139,6 +140,6 @@ export const peopleSlice = createSlice({
 	
 })
 
-export const {setPeopleChecked, setCurrentPeople, updatePeople, setIndex,setNullPeople,setCurrentPeopleAll,setAddFriend} = peopleSlice.actions
+export const {setCurrentPeople, updatePeople, setIndex,setAddFriend,addPeople} = peopleSlice.actions
 
 export default peopleSlice.reducer

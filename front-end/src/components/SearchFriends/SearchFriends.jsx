@@ -6,7 +6,7 @@ import SearchBlock from "../SearchBlock/SearchBlock";
 import AllPeopleItem from "../AllPeopleItem/AllPeopleItem";
 import axios from "axios";
 import {HOST} from "../api/HOST";
-import {findPeople, setAddFriend, setCurrentPeopleAll} from "../../redux/slices/peopleSlice";
+import {findPeople, setAddFriend} from "../../redux/slices/peopleSlice";
 import {Dialog} from "@headlessui/react";
 import {motion} from 'framer-motion'
 
@@ -24,10 +24,6 @@ const SearchFriends = () => {
     useEffect(() => {
         if (isAuth && userAccessToken) {
             dispatch(findPeople({userAccessToken, userRefreshToken}))
-        }
-        return () => {
-            dispatch(setCurrentPeopleAll({}))
-
         }
     }, [isAuth, userAccessToken]);
 

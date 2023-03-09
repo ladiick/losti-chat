@@ -1,6 +1,6 @@
 import s from './People.module.scss'
 import PeopleItem from "../PeopleItem/PeopleItem";
-import {useCallback, useEffect} from "react";
+import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
     fetchPeople,
@@ -8,21 +8,24 @@ import {
 } from "../../redux/slices/peopleSlice";
 import favorite from '../assets/favorite.svg'
 import {useSearchParams} from "react-router-dom";
-
+import {useGetPeopleQuery} from "../features/peopleApiSlice";
 
 const People = ({searchValue, setSearch}) => {
+    const dispatch = useDispatch()
+
     const userAccessToken = useSelector((state) => state.user.tokens.access)
     const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
 
     const isAuth = useSelector(state => state.user.isAuth)
-    const people = useSelector(state => state.people.people)
+    // const people = useSelector(state => state.people.people)
     const myId = useSelector(state => state.user.aboutUser.id)
 
     const [searchParams, setSearchParams] = useSearchParams()
 
     const dialogsQuery = searchParams.get('diaglogs') || ''
 
-    const dispatch = useDispatch()
+    const {data=[]} = useGetPeopleQuery()
+
     useEffect(() => {
         if (isAuth && userAccessToken) {
             dispatch(fetchPeople({userAccessToken, userRefreshToken}))
@@ -48,7 +51,7 @@ const People = ({searchValue, setSearch}) => {
     return (
         <div className={s.block__people}>
             <div className={s.wrapper__items}>
-                {people?.filter((people) => (
+                {data?.filter((people) => (
                     people.sender.pk === myId && people.recip.pk !== myId ?
                         people?.recip.first_name.toLowerCase().includes(searchValue.toLowerCase())
                         ||

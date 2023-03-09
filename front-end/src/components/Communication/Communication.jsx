@@ -8,6 +8,7 @@ import {MyContext} from "../../App";
 import {useParams, useSearchParams} from "react-router-dom";
 
 
+
 const Communication = () => {
     const dispatch = useDispatch()
     let message = useSelector(state => state.message.message)
@@ -20,7 +21,7 @@ const Communication = () => {
     const {newMessage} = useContext(MyContext);
 
     const [searchParams, setSearchParams] = useSearchParams()
-    // console.log(message[0]?.time)
+
     useEffect(() => {
         if (isAuth && userAccessToken) {
             dispatch(fetchMessage(
