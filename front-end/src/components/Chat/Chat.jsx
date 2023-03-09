@@ -8,7 +8,7 @@ import {Link, useSearchParams} from "react-router-dom";
 import {useContext, useEffect, useRef} from "react";
 import favorite from '../assets/favorite.svg'
 import {MyContext} from "../../App";
-
+import {motion} from 'framer-motion'
 const Chat = () => {
 
     const peopleCurrent = useSelector(state => state.people.peopleCurrent)
@@ -64,7 +64,17 @@ const Chat = () => {
 
 
     return (
-        <div className={s.wrapper}>
+        <motion.div
+            initial={{
+                opacity: 0,
+                x: -50
+            }}
+            animate={{
+                opacity:1,
+                x:0
+            }}
+
+            className={s.wrapper}>
             <header className={s.header}>
                 <div className={s.left__side}>
                     <img src={searchParams.get('dialogs') === myId ? favorite : peopleCurrent.image ? peopleCurrent.image : photo}
@@ -121,7 +131,7 @@ const Chat = () => {
                     </form>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

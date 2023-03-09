@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {updatePeople} from "../../redux/slices/peopleSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {HOST} from "../api/HOST";
+import {toast} from "react-toastify";
 
 const useWebsocket = (userAccessToken) => {
 	const dispatch = useDispatch()
@@ -18,7 +19,20 @@ const useWebsocket = (userAccessToken) => {
 		const closeHandler = () => {
 			// alert('Chanel is closed')
 			console.log('соединение разорванно я в ахуе')
-			setTimeout(createChannel, 3000)
+
+			setTimeout(()=>{
+				createChannel()
+				toast.error('Соединение разорвано,\n пытаюсь подключится', {
+					position: "top-center",
+					autoClose: 3000,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "light",
+				})
+			}, 3000)
 		}
 		const createChannel = () => {
 			
