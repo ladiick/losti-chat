@@ -5,211 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41990319-2012-4820-bfab-9488d0bd31c6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back-end/mro1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back-end/train_cardio.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end" beforeDir="false" afterPath="$PROJECT_DIR$/back-end" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/config/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dump.rdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/20943566.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/Authorization.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/human-figurines-using-ladder-reach-cracked-lit-lightbulb-as-idea-concept.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Authorization/login_img3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Friends/Friends.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Friends/Friends.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Friends/Friends.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Friends/Friends.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/FriendsRequestsPage/FriendsRequestsPage.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Main/Main.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Main/quino-al-BlMj6RYy3c0-unsplash.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/Profile.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/Profile.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/Profile.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/Profile.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Registration/Registration.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Registration/Registration.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Registration/Registration.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Registration/Registration.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeople/AllPeople.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeopleItem/AllPeopleItem.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeopleItem/AllPeopleItem.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeopleItem/AllPeopleItem.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AllPeopleItem/AllPeopleItem.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthorizationForm/AuthorizationForm.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BtnAddFriend/BtnAddFriend.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BtnAddFriend/BtnAddFriend.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BtnAddFriend/BtnAddFriend.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BtnAddFriend/BtnAddFriend.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BtnRequestsFriend/BtnRequestsFriend.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BtnRequestsFriend/BtnRequestsFriend.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BtnRequestsFriend/BtnRequestsFriend.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BtnRequestsFriend/BtnRequestsFriend.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BurgerMenu/BurgerMenu.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BurgerMenu/BurgerMenu.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BurgerMenu/BurgerMenu.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BurgerMenu/BurgerMenu.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/evie-s-w1JE5duY62M-unsplash.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chat/login_img3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/Communication.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/Communication.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/Communication.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/Communication.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Communication/CommunicationSceleton.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendRequests/FriendRequests.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendRequests/FriendRequests.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendRequests/FriendRequests.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendRequests/FriendRequests.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendsItem/FriendsItem.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/Home.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/Home.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/Home.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/Home.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Logout/Logout.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modul/Modul.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modul/Modul.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modul/Modul.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modul/Modul.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Notification/Notification.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Notification/Notification.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Notification/Notification.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Notification/Notification.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/People.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/People.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/People.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/People.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItem.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PeopleItem/PeopleItemSceleton.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriendsItem/PossibleFriendsItem.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriendsItem/PossibleFriendsItem.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriendsItem/PossibleFriendsItem.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriendsItem/PossibleFriendsItem.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProfileFriends/ProfileFriends.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProfileFriends/ProfileFriends.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProfileInfo/ProfileInfo.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProfileInfo/ProfileInfo.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProfileInfo/ProfileInfo.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProfileInfo/ProfileInfo.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStepInfoUser/RegistrationFormStepInfoUser.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBlock/SearchBlock.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchFriends/SearchFriends.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchFriends/SearchFriends.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchFriends/SearchFriends.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchFriends/SearchFriends.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Social/Social.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Social/Social.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Social/Social.module.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Social/Social.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Social/login_img3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/actions/reDate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/actions/reTime.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/actions/updateAccessToken.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/api/HOST.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/api/chatAPI.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/authorization__img/login_img.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/authorization__img/login_img2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/btnAddFriend.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/camera.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/check_mark.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/favorite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/messages.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/my_photo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/assets/photo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/hooks/useWebsocket.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/normalize.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/slices/friendsSlice.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/slices/messageSlice.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/slices/navigationSlice.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/slices/peopleSlice.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/slices/registrationStepsSlice.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/slices/userSlice.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/store.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,11 +28,15 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2MKqPfD4EbkqXBA3HhbuWB1fhUR" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -286,6 +93,15 @@
       <workItem from="1677843343023" duration="13054000" />
       <workItem from="1677875839684" duration="12726000" />
       <workItem from="1677931817712" duration="4152000" />
+      <workItem from="1678046047132" duration="7790000" />
+      <workItem from="1678113242847" duration="1829000" />
+      <workItem from="1678125576214" duration="4045000" />
+      <workItem from="1678188476716" duration="2975000" />
+      <workItem from="1678220281709" duration="11575000" />
+      <workItem from="1678360945254" duration="1384000" />
+      <workItem from="1678367146856" duration="393000" />
+      <workItem from="1678376554110" duration="1258000" />
+      <workItem from="1678378031690" duration="817000" />
     </task>
     <servers />
   </component>
