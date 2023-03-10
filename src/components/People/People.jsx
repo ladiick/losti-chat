@@ -1,47 +1,26 @@
 import s from './People.module.scss'
 import PeopleItem from "../PeopleItem/PeopleItem";
-import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    fetchPeople,
-    setCurrentPeople, setIndex
-} from "../../redux/slices/peopleSlice";
+import {setIndex} from "../../redux/slices/peopleSlice";
 import favorite from '../assets/favorite.svg'
 import {useSearchParams} from "react-router-dom";
 import {useGetPeopleQuery} from "../features/peopleApiSlice";
 
 const People = ({searchValue, setSearch}) => {
     const dispatch = useDispatch()
-
-    const userAccessToken = useSelector((state) => state.user.tokens.access)
-    const userRefreshToken = useSelector((state) => state.user.tokens.refresh)
-
-    const isAuth = useSelector(state => state.user.isAuth)
-    // const people = useSelector(state => state.people.people)
     const myId = useSelector(state => state.user.aboutUser.id)
-
     const [searchParams, setSearchParams] = useSearchParams()
-
+    const people = useSelector(state => state.people.people)
     const dialogsQuery = searchParams.get('diaglogs') || ''
 
-    const {data=[]} = useGetPeopleQuery()
-
-    useEffect(() => {
-        if (isAuth && userAccessToken) {
-            dispatch(fetchPeople({userAccessToken, userRefreshToken}))
-        }
-        return () => {
-            dispatch(setCurrentPeople({}))
-        }
-    }, [isAuth, userAccessToken]);
-
+    //*request
+    const {data,isLoading} = useGetPeopleQuery()
+    //*request
 
 
 
     const handlerPeople = (current__obj, index) => {
         dispatch(setIndex(index))
-        // dispatch(setCurrentPeople(current__obj))
-        // dispatch(openChatBlock(false))
         setSearchParams({dialogs: current__obj.pk})
         setSearch('')
     }
@@ -51,7 +30,10 @@ const People = ({searchValue, setSearch}) => {
     return (
         <div className={s.block__people}>
             <div className={s.wrapper__items}>
-                {data?.filter((people) => (
+                {isLoading && <div className={s.wrapper__load}>
+                    <div className={s.load}></div>
+                </div>}
+                {people?.filter((people) => (
                     people.sender.pk === myId && people.recip.pk !== myId ?
                         people?.recip.first_name.toLowerCase().includes(searchValue.toLowerCase())
                         ||

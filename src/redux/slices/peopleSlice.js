@@ -1,50 +1,7 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
+import {createSlice} from "@reduxjs/toolkit";
+
 import _ from "underscore";
-import {HOST} from "../../components/api/HOST";
-import {updateAccessToken} from "../../components/actions/updateAccessToken";
-import {setUserAccessToken} from "./userSlice";
 
-export const fetchPeople = createAsyncThunk(
-	'people/fetchPeople',
-	async ({userAccessToken,userRefreshToken},{dispatch}) => {
-		// try {
-		// 	const res = await axios.get(`http://${HOST}/api/v1/dialogs/`, {
-		// 		headers: {Authorization: `JWT ${userAccessToken}`}
-		// 	})
-		// 	return res.data
-		//
-		// }
-		// catch (err) {
-		// 	if (err.response.status === 401) {
-		// 		console.log(err)
-		// 		const token = await updateAccessToken(userRefreshToken)
-		// 		dispatch(setUserAccessToken(token))
-		// 	}
-		// }
-		
-	}
-)
-
-export const findPeople =  createAsyncThunk(
-	'people/findPeople',
-	async ({userAccessToken,userRefreshToken},{dispatch})=>{
-		try {
-			const res = await axios.get(`http://${HOST}/api/v1/findPeople/`, {
-				headers: {Authorization: `JWT ${userAccessToken}`}
-			})
-			return res.data
-		}
-		catch (err) {
-			console.log(err)
-			if(err.response.status === 401){
-				const token = await updateAccessToken(userRefreshToken)
-				dispatch(setUserAccessToken(token))
-				
-			}
-		}
-	}
-)
 
 
 const initialState = {
@@ -106,36 +63,7 @@ export const peopleSlice = createSlice({
 		}
 		
 	},
-	
-	extraReducers: {
-		// [fetchPeople.pending]: (state) => {
-		// 	state.status = 'loading'
-		// 	state.people = []
-		// },
-		// [fetchPeople.fulfilled]: (state, action) => {
-		// 	state.status = 'success'
-		// 	state.people = action.payload
-		// },
-		// [fetchPeople.rejected]: (state) => {
-		// 	state.status = 'error'
-		// 	state.people = []
-		// },
-		[findPeople.pending]: (state) => {
-			state.status = 'loading'
-			state.peopleAll = []
-		},
-		[findPeople.fulfilled]: (state, action) => {
-			state.status = 'success'
-			state.peopleAll = action.payload
-		},
-		[findPeople.rejected]: (state) => {
-			state.status = 'error'
-			state.peopleAll = []
-		}
-		
-		
-		
-	}
+
 	
 	
 })

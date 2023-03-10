@@ -4,12 +4,13 @@ import {NavLink, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {searchFriend} from "../../redux/slices/navigationSlice";
 import {motion} from 'framer-motion'
+import {useGetFriendsRequestsQuery} from "../features/friendsRequestsApiSlice";
 const NavigateFriends = () => {
 	const location = useLocation()
 	const dispatch = useDispatch()
 	const classActive = ({isActive}) => isActive ? s.active : ''
-	const friendRequests = useSelector(state => state.friends.friendsRequests)
-	
+	const {data: friendRequests = []} = useGetFriendsRequestsQuery()
+
 	return (
 		<motion.nav
 			initial={{

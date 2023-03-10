@@ -9,10 +9,10 @@ const RegistrationFormStep3 = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const stepsInfo = useSelector(state => state.registration.stepsInfo)
-	console.log(stepsInfo.code)
+
 	useEffect(() => {
 		if (stepsInfo.email === "") {
-			// navigate('/registration')
+			navigate('/registration')
 		}
 	}, [])
 	
@@ -33,7 +33,7 @@ const RegistrationFormStep3 = () => {
 		
 		dispatch(setRegistrationSteps(data))
 		
-		// navigate('/registration/about-user')
+		navigate('/registration/about-user')
 	}
 	
 	return (

@@ -1,1 +1,1 @@
-import React from 'react';import {Outlet} from "react-router-dom";import Home from "../Home/Home";const Layout = () => {    return (    <Home>        <Outlet/>    </Home>    );};export {Layout};
+import React, {useEffect} from 'react';import {Outlet} from "react-router-dom";import Home from "../Home/Home";import {useSelector} from "react-redux";import Authorization from "../../Pages/Authorization/Authorization";const Layout = () => {    return (        <Home>            <Outlet/>        </Home>    );};export {Layout};

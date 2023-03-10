@@ -15,6 +15,7 @@ const RegistrationFormStep2 = () => {
 	const [codeError, setCodeError] = useState('');
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+
 	useEffect(() => {
 		const val = values.join('')
 		if (val.length === 6) {

@@ -8,7 +8,6 @@ import {useSelector} from "react-redux";
 
 const Social = () => {
 	const [searchValue, setSearch] = useState('');
-	const status = useSelector(state => state.people.status)
 
 	
 	return (
@@ -17,11 +16,6 @@ const Social = () => {
 			<span className={s.text}>Сообщения</span>
 			{/*<BurgerMenu/>*/}
 			<SearchBlock searchValue={searchValue} setSearch={setSearch}/>
-			{status === 'loading'  && (
-				<div className={s.wrapper__load}>
-					<div className={s.load}></div>
-				</div>
-			) }
 			<People searchValue={searchValue} setSearch={setSearch}/>
 		</div>
 	

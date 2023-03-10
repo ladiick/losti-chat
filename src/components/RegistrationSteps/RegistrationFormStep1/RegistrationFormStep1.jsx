@@ -42,7 +42,7 @@ const RegistrationFormStep1 = () => {
             const res2 = await axios.post(`http://${HOST}/api/v1/auth/code/`, {
                 email: data.email
             })
-            console.log(res2)
+
             navigate('/registration/confirmation-code')
 
         }

@@ -15,9 +15,10 @@ const RegistrationFormStep4 = () => {
     const stepsInfo = useSelector(state => state.registration.stepsInfo)
     const dispatch = useDispatch()
     const [image, setImage] = useState("");
+
     useEffect(() => {
         if (stepsInfo.password === "") {
-            // navigate('/registration')
+            navigate('/registration')
         }
     }, [])
 
@@ -68,11 +69,9 @@ const RegistrationFormStep4 = () => {
         }
 
 
-        console.log('generalData', generalData)
-        // await axios.post(`http://${HOST}/api/v1/auth/users/`, generalData)
+        await axios.post(`http://${HOST}/api/v1/auth/users/`, generalData)
 
-
-        // navigate('/authorization')
+        navigate('/authorization')
     }
     return (<>
         <div className={s.form}>
