@@ -1,1 +1,33 @@
+.mobile__support {
+  width: 100%;
+  color: var(--primaryColor);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(12px + 0.1vw);
+  line-height: 20px;
 
+  span {
+    color: var(--secondColor);
+  }
+}
+
+.project__development {
+  color: var(--decription-color);
+  font-size: calc(12px + 0.1vw);
+  user-select: none;
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg{
+      margin-left: 6px;
+    }
+  }
+
+}

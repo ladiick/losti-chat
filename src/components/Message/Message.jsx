@@ -6,6 +6,13 @@ const TimeFunc = (time) => {
 
     const messageTime = new Date(time)
 
+    if(messageTime.getHours() === 0){
+        if (messageTime.getMinutes() < 10) {
+            return `0${messageTime.getHours()}:0${messageTime.getMinutes()}`
+        }
+        return `0${messageTime.getHours()}:${messageTime.getMinutes()}`
+    }
+
     if (messageTime.getMinutes() < 10) {
         return `${messageTime.getHours()}:0${messageTime.getMinutes()}`
     }

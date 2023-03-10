@@ -7,12 +7,43 @@
     <list default="true" id="41990319-2012-4820-bfab-9488d0bd31c6" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/back-end/mro1.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/back-end/train_cardio.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/features/findPeopleApiSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/features/friendsApiSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/features/friendsPossibleFriendsApiSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/features/friendsRequestsApiSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/features/userApiSlice.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end" beforeDir="false" afterPath="$PROJECT_DIR$/back-end" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/config/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Dialogs/Dialogs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Dialogs/Dialogs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Chat/Chat.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chat/Chat.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FormWrapper/FormWrapper.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FriendRequests/FriendRequests.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendRequests/FriendRequests.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Layout/Layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Layout/Layout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Logout/Logout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Logout/Logout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Message/Message.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Message/Message.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Message/Message.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyFriends/MyFriends.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigateFriends/NavigateFriends.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/People.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/People.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PossibleFriends/PossibleFriends.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchFriends/SearchFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchFriends/SearchFriends.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Social/Social.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Social/Social.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Social/Social.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Social/Social.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/api/apiSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/api/apiSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/slices/friendsSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/slices/friendsSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/slices/peopleSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/slices/peopleSlice.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,28 +72,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.14.2&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.14.2&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/react-projects/losti-chat/losti-chat&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "javascript.nodejs.core.library.configured.version": "18.14.2",
+    "javascript.nodejs.core.library.typings.version": "18.14.2",
+    "last_opened_file_path": "C:/react-projects/losti-chat/losti-chat",
+    "list.type.of.created.stylesheet": "SCSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\react-projects\losti-chat\losti-chat\src\components\features" />
       <recent name="C:\react-projects\losti-chat\losti-chat\back-end" />
     </key>
   </component>
@@ -101,7 +133,8 @@
       <workItem from="1678360945254" duration="1384000" />
       <workItem from="1678367146856" duration="393000" />
       <workItem from="1678376554110" duration="1258000" />
-      <workItem from="1678378031690" duration="817000" />
+      <workItem from="1678378031690" duration="13518000" />
+      <workItem from="1678444769298" duration="11128000" />
     </task>
     <servers />
   </component>

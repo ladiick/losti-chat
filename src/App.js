@@ -1,26 +1,22 @@
-import axios from 'axios'
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {Route, Routes, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom'
+import React from 'react'
+import {useSelector} from 'react-redux'
+import {Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom'
 import './App.scss'
 import './normalize.css'
-import {updateAccessToken} from './components/actions/updateAccessToken'
-import {HOST} from './components/api/HOST'
+
 import useWebsocket from './components/hooks/useWebsocket'
 import {Logout} from './components/Logout/Logout'
 import Authorization from './Pages/Authorization/Authorization'
 import Friends from './Pages/Friends/Friends'
 import Profile from './Pages/Profile/Profile'
 import Registration from './Pages/Registration/Registration'
-import {
-    setAboutUser,
-    setIsAuth,
-    setUserAccessToken,
-} from './redux/slices/userSlice'
+
 import {ToastContainer} from "react-toastify";
 import Dialogs from "./Pages/Dialogs/Dialogs";
 import {Layout} from "./components/Layout/Layout";
 import NotFound from "./components/NotFound/NotFound";
+import {BsPersonWorkspace} from "react-icons/bs";
+import {useGetUserQuery} from "./components/features/userApiSlice";
 
 export const MyContext = React.createContext()
 
@@ -39,34 +35,15 @@ const router = createBrowserRouter(createRoutesFromElements(
 ))
 
 function App() {
-    const dispatch = useDispatch()
+
     const userAccessToken = useSelector(state => state.user.tokens.access)
-    const userRefreshToken = useSelector(state => state.user.tokens.refresh)
-    const isAuth = useSelector(state => state.user.isAuth)
-
     const [socket, statusSocket, newMessage] = useWebsocket(userAccessToken)
+    useGetUserQuery()
 
 
-    useEffect(() => {
-        if (userAccessToken) {
-            const getMySelf = async () => {
-                try {
-                    const res = await axios.get(`http://${HOST}/api/v1/auth/users/me/`, {
-                        headers: {Authorization: `JWT ${userAccessToken}`},
-                    })
-                    dispatch(setAboutUser(res.data))
-                    dispatch(setIsAuth(true))
-
-                } catch (err) {
-                    if (err.response.status === 401) {
-                        const token = await updateAccessToken(userRefreshToken)
-                        dispatch(setUserAccessToken(token))
-                    }
-                }
-            }
-            getMySelf()
-        }
-    }, [userAccessToken])
+    if(window.screen.width < 1140){
+        return <h1 className='mobile__support'>На данный момент поддержки мобильных устройств нет😔<span> Идет разработка <BsPersonWorkspace/></span></h1>
+    }
 
     return (
         <>

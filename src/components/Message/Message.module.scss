@@ -31,7 +31,7 @@
 	word-break: break-all;
 
 	position: relative;
-	font-size: calc(9px + 0.1vw);
+	font-size: 13px;
 	border-radius: 8px 10px 10px 0;
 
 }
@@ -44,7 +44,8 @@
 	padding: 9px;
 	color: #FFFFFF;
 	position: relative;
-	font-size: calc(9px + 0.1vw);
+	font-size: 13px;
+
 
 	border-radius: 10px 8px 0 10px;
 
@@ -57,7 +58,7 @@
 	top: -8px;
 	left: 0;
 	width: 25px;
-	font-size: calc(8px + 0.1vw);
+	font-size: calc(10px + 0.1vw);
 	font-weight: 300;
 	color: #888888;
 	display: flex;
@@ -69,10 +70,10 @@
 
 	position: absolute;
 	top: -8px;
-	right: 0;
+	right: 6px;
 	width: 25px;
 	text-align: right;
-	font-size: calc(8px + 0.1vw);
+	font-size: calc(10px + 0.1vw);
 	font-weight: 300;
 	color: #888888;
 	display: flex;
