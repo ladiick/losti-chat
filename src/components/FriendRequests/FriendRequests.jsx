@@ -6,6 +6,7 @@ import {Link, useLocation} from "react-router-dom";
 import {motion} from 'framer-motion'
 import {useGetFriendsRequestsQuery} from "../features/friendsRequestsApiSlice";
 import {useAcceptFriendRequestsMutation, useCancelFriendRequestsMutation} from "../features/friendsApiSlice";
+import {toast} from "react-toastify";
 
 const FriendRequests = ({allRequests}) => {
 
@@ -18,12 +19,61 @@ const FriendRequests = ({allRequests}) => {
     //*requests*
 
     const handlerAccept = async (obj, index) => {
-        await acceptFriendRequests({
-            second_user: obj.friend.pk
-        }).unwrap()
+        try {
+            await acceptFriendRequests({
+                second_user: obj.friend.pk
+            }).unwrap()
+
+            toast.success('Заявка принята', {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+        catch(err){
+            toast.error('Не удалось принять заявку', {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
     }
     const handlerCancel = async (obj, index) => {
-        await cancelFriendRequests(obj.friend.pk).unwrap()
+        try {
+            await cancelFriendRequests(obj.friend.pk).unwrap()
+            toast.success('Заявка отклонена', {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+        catch(err){
+            toast.success('Не удалось отклонить', {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
     }
 
 

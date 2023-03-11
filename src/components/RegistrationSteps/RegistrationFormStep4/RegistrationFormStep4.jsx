@@ -18,7 +18,7 @@ const RegistrationFormStep4 = () => {
 
     useEffect(() => {
         if (stepsInfo.password === "") {
-            navigate('/registration')
+            // navigate('/registration')
         }
     }, [])
 

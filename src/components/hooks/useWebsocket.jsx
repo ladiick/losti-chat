@@ -3,6 +3,8 @@ import {updatePeople} from "../../redux/slices/peopleSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {HOST} from "../api/HOST";
 import {toast} from "react-toastify";
+import {updateAccessToken} from "../actions/updateAccessToken";
+import {setUserAccessToken, setUserTokens} from "../../redux/slices/userSlice";
 
 const useWebsocket = (userAccessToken) => {
 	const dispatch = useDispatch()
@@ -10,38 +12,46 @@ const useWebsocket = (userAccessToken) => {
 	const [statusSocket, setStatusSocket] = useState('pending')
 	const [newMessage, setNewMessage] = useState(null);
 	const isAuth = useSelector(state => state.user.isAuth)
-	
+	const refresh = useSelector(state => state.user.tokens.refresh)
 	const myId = useSelector(state => state.user.aboutUser.id)
 	
 	useEffect(() => {
 		let ws = null
 		
 		const closeHandler = () => {
-			// alert('Chanel is closed')
+
 			console.log('соединение разорванно я в ахуе')
+
+			toast.error('Соединение разорвано,\n пытаюсь подключится', {
+				position: "top-center",
+				autoClose: 3000,
+				hideProgressBar: true,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			})
+
+			const token = updateAccessToken(refresh)
+			localStorage.setItem('accessToken',token.access)
+			dispatch(setUserAccessToken(token.access))
 
 			setTimeout(()=>{
 				createChannel()
-				toast.error('Соединение разорвано,\n пытаюсь подключится', {
-					position: "top-center",
-					autoClose: 3000,
-					hideProgressBar: true,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: "light",
-				})
+
 			}, 3000)
 		}
 		const createChannel = () => {
-			
+
+			if(statusSocket === 'ready') return
+
 			console.log('соединение установлено')
 			ws?.removeEventListener('close', closeHandler)
 			ws?.close()
-			
-			ws = new WebSocket(`ws://${HOST}/ws/chat/?token=${userAccessToken}`)
-			
+
+			ws = new WebSocket(`ws://${HOST}/ws/chat/?token=${localStorage.getItem('accessToken')}`)
+
 			ws.addEventListener('close', closeHandler)
 			setSocket(ws)
 			

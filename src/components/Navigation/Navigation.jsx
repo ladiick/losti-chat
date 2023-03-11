@@ -9,6 +9,7 @@ import {MdOutlineLogout} from 'react-icons/md'
 import {ImEnter} from "react-icons/im";
 import React from "react";
 import logo from '../assets/logo.svg'
+import {CgProfile} from "react-icons/cg";
 const Navigation = () => {
     const isAuth = useSelector(state => state.user.isAuth)
     const classActive = ({isActive}) => isActive ? s.active : ''
@@ -43,7 +44,7 @@ const Navigation = () => {
                     {isAuth ?
                         <NavLink to='/profile' title='Профиль' className={classActive}>
                             <li className={s.list__item}>
-                                <img src={photo} alt='logo'/>
+                                <CgProfile/>
                                 <h2>
                                     Моя страница
                                 </h2>

@@ -1,6 +1,13 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import {Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom'
+import {
+    Route,
+    RouterProvider,
+    createBrowserRouter,
+    createRoutesFromElements,
+    useNavigate,
+    useNavigation
+} from 'react-router-dom'
 import './App.scss'
 import './normalize.css'
 
@@ -38,8 +45,8 @@ function App() {
 
     const userAccessToken = useSelector(state => state.user.tokens.access)
     const [socket, statusSocket, newMessage] = useWebsocket(userAccessToken)
-    useGetUserQuery()
 
+    useGetUserQuery()
 
     if(window.screen.width < 1140){
         return <h1 className='mobile__support'>На данный момент поддержки мобильных устройств нет😔<span> Идет разработка <BsPersonWorkspace/></span></h1>
@@ -63,6 +70,8 @@ function App() {
                 pauseOnHover
                 theme="light"
             />
+
+
         </>
     )
 }

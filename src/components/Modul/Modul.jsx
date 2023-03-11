@@ -76,8 +76,14 @@ const Modul = () => {
                     <Dialog.Title className={s.dialog__title}>Новое сообщение</Dialog.Title>
                     <div className={s.content}>
                         <div className={s.wrapper__info__user}>
-                            <img src={friendsCurrent?.friend?.image ? friendsCurrent?.friend?.image : photo}
-                                 alt='logo'/>
+                            {friendsCurrent?.friend?.image
+                                ?
+                                <img src={friendsCurrent?.friend?.image ? friendsCurrent?.friend?.image : photo}
+                                  alt='logo'/>
+                            :
+                                <span className={s.empty__img}
+                                >{friendsCurrent?.friend?.first_name[0]}{friendsCurrent?.friend?.last_name[0]}</span>
+                            }
                             <div className={s.info__user}>
                                 <h3>{friendsCurrent?.friend?.first_name} {friendsCurrent?.friend?.last_name}</h3>
                             </div>
@@ -85,6 +91,7 @@ const Modul = () => {
                         <form onSubmit={onSubmit}>
 							<textarea
                                 value={textArea}
+                                maxLength="4000"
                                 onChange={e => setTextArea(e.target.value)}
                                 cols="40" rows="5" ref={refTextArea}/>
                             <button>Отправить</button>

@@ -4,6 +4,7 @@
 	//background-color: #282828;
 	border-radius: 0 16px 16px 0;
 	display: flex;
+	position: relative;
 	flex-direction: column;
 }
 
@@ -18,5 +19,33 @@
 
 	.friend{
 		width: 45%;
+	}
+}
+
+.page__develop{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 75vh;
+	background-color: var(--bgBlocksColor);
+	border-radius: 16px;
+	border: 1px solid var(--borderColor);
+	a{
+		text-decoration: none;
+		margin-top: 10px;
+		font-size: 24px;
+		color: var(--secondColor);
+	}
+	span{
+		display: flex;
+		align-items: center;
+		color: #FFFFFF;
+		font-size: 32px;
+		svg{
+			margin-left: 10px;
+		}
+
 	}
 }

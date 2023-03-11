@@ -4,12 +4,9 @@ import {openModalBlock} from "../../redux/slices/navigationSlice";
 import {useDispatch} from "react-redux";
 import BtnRequestsFriend from "../BtnRequestsFriend/BtnRequestsFriend";
 import {setFriendsCurrent} from "../../redux/slices/friendsSlice";
+import {changeColor} from "../actions/changeColor";
 
 
-const changeColor = (index)=>{
-	const arrColor = ['#4bb24b','#1a73e8','#FFFFFF']
-	return arrColor[index]
-}
 
 const FriendsItem = ({obj,index, requests, handlerCancel, handlerAccept}) => {
 	

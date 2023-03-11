@@ -9,6 +9,7 @@ import {Dialog} from "@headlessui/react";
 import {motion} from 'framer-motion'
 import {useGetAllPeopleQuery} from "../features/findPeopleApiSlice";
 import {useAcceptFriendRequestsMutation} from "../features/friendsApiSlice";
+import {toast} from "react-toastify";
 
 const SearchFriends = () => {
     //*requests
@@ -23,9 +24,35 @@ const SearchFriends = () => {
 
 
     const handlerPeople = async (index, obj) => {
-        await acceptFriendRequests({
-            second_user: obj.pk
-        }).unwrap()
+        try{
+            await acceptFriendRequests({
+                second_user: obj.pk
+            }).unwrap()
+
+            toast.success('Заявка отправлена', {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+        catch(err){
+            toast.error('Ошибка, заявка не отправлена, попробуйте позже', {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+
     }
 
 
@@ -53,6 +80,7 @@ const SearchFriends = () => {
                             <AllPeopleItem
                                 key={obj.pk}
                                 obj={obj}
+                                index={index}
                                 handlerPeople={() => handlerPeople(index, obj)}
                             />
                         )}

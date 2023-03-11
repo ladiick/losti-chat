@@ -8,6 +8,7 @@ const SearchBlock = ({searchValue,setSearch}) => {
 			<input type='text'
 			       placeholder='Поиск'
 			       value={searchValue}
+				   maxLength="30"
 			       onChange={(e) => setSearch(e.target.value)}
 			/>
 			<svg version="1.1" viewBox="0 0 512 512">

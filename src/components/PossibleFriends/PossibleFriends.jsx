@@ -74,6 +74,7 @@ const PossibleFriends = () => {
                 possibleFriends?.map((obj, index) => <PossibleFriendsItem
                     key={obj.possible_friend.pk}
                     obj={obj}
+                    index={index}
                     handlerPeople={() => handlerPeople(index, obj)}
                 />)
             }
