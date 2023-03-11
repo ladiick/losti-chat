@@ -5,7 +5,8 @@ import message from "./slices/messageSlice";
 import navigation from "./slices/navigationSlice";
 import friends from "./slices/friendsSlice";
 import registration from "./slices/registrationStepsSlice";
-import {peopleApiSlice} from "../components/features/peopleApiSlice";
+import {apiSlice} from "../components/api/apiSlice";
+
 // import {dialogsAPI} from "../components/api/apiSlice";
 
 export const store = configureStore({
@@ -18,8 +19,8 @@ export const store = configureStore({
         navigation,
         friends,
         registration,
-        [peopleApiSlice.reducerPath]: peopleApiSlice.reducer,
+        [apiSlice.reducerPath]: apiSlice.reducer,
 
     },
-    middleware: (getDefaultMiddleware)=> getDefaultMiddleware().concat(peopleApiSlice.middleware)
+    middleware: (getDefaultMiddleware)=> getDefaultMiddleware().concat(apiSlice.middleware)
 })

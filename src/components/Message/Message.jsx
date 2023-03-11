@@ -21,12 +21,11 @@ const TimeFunc = (time) => {
 
 const Message = ({message, time, who, refCommunication}) => {
 
-
     const refScrollBlock = useRef(null);
 
     useEffect(() => {
         refScrollBlock.current.scrollIntoView(false)
-    },)
+    },[])
 
     // const refDate = useRef(null);
     // const scrollHandler = () => {
@@ -56,7 +55,7 @@ const Message = ({message, time, who, refCommunication}) => {
                     who === 'sender' ? s.message__left : who === 'recipient' ? s.message__right : s.enterDate
                 }>
 				
-				{who === 'Date' ? <span className={s.date__block}>{reTime(message)}</span> : message}
+                {who === 'Date' ? <span className={s.date__block}>{reTime(message)}</span> : message}
                 <div className={who === 'sender' ? s.message__info__left : s.message__info__right}>
 					<span className={s.message__day}>{who !== 'Date' && TimeFunc(time)}</span>
 				</div>

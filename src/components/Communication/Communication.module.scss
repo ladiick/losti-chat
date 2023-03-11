@@ -1,8 +1,8 @@
 .block__messages {
-	max-height: 75vh;
+	max-height: 82vh;
 	//margin-right: 4px;
-	padding: 15px 0;
-	//margin-right: 10px;
+	padding: 15px 5px 15px 15px;
+	margin-right: 10px;
 	height: 100%;
 	position: relative;
 	//background-color: rgba(0,0,0,0.1);
@@ -17,7 +17,6 @@
 	&::-webkit-scrollbar {
 		transition: all .3s;
 		width: 4px;
-
 	}
 	&::-webkit-scrollbar-thumb {
 		transition: all .3s;

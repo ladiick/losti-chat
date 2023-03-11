@@ -7,6 +7,7 @@ export const reTime = (time) => {
     if (currentTime.getDate() === messageTime.getDate()) {
         return 'Cегодня'
     }
+
     if (currentTime.getDate() - 1 === messageTime.getDate()) {
         return 'Вчера'
     }

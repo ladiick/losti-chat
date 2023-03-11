@@ -54,6 +54,7 @@ const People = ({searchValue, setSearch}) => {
                         img={obj.recip.image}
                         handlerPeople={() => handlerPeople(obj.recip, index)}
                         obj={obj.recip}
+                        index={index}
                     />
 
                     : obj.sender.pk === myId && obj.recip.pk === myId
@@ -69,6 +70,7 @@ const People = ({searchValue, setSearch}) => {
                             img={favorite}
                             handlerPeople={() => handlerPeople(obj.sender, index)}
                             obj={obj.sender}
+                            index={index}
                         />
 
                         :
@@ -82,6 +84,7 @@ const People = ({searchValue, setSearch}) => {
                             img={obj.sender.image}
                             handlerPeople={() => handlerPeople(obj.sender, index)}
                             obj={obj.sender}
+                            index={index}
                         />
                 )}
 

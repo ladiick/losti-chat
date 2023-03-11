@@ -8,6 +8,7 @@ import {setIsAuth, setUserAccessToken, setUserRefreshToken} from "../../redux/sl
 import {HOST} from "../api/HOST";
 import logo from "../assets/logo.svg";
 
+
 const AuthorizationForm = () => {
     const dispatch = useDispatch()
     const {register, handleSubmit, formState: {errors, isValid}} = useForm(
@@ -16,7 +17,7 @@ const AuthorizationForm = () => {
         }
     )
 
-    const navigation = useNavigate()
+
     const onSubmit = async (data) => {
 
 
@@ -31,7 +32,8 @@ const AuthorizationForm = () => {
                 dispatch(setUserRefreshToken(res.data.refresh))
 
                 dispatch(setIsAuth(true))
-                navigation('/')
+                window.location.href = '/'
+
             })
             .catch(err => console.log('Ошибка', err))
 

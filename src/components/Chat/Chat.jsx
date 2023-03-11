@@ -1,5 +1,4 @@
 import s from './Chat.module.scss'
-import photo from '../assets/photo.svg'
 import Communication from "../Communication/Communication";
 import {useSelector} from "react-redux";
 import message__logo from '../assets/messages.svg'
@@ -9,6 +8,7 @@ import {useContext, useEffect, useRef} from "react";
 import favorite from '../assets/favorite.svg'
 import {MyContext} from "../../App";
 import {motion} from 'framer-motion'
+
 const Chat = () => {
 
     const peopleCurrent = useSelector(state => state.people.peopleCurrent)
@@ -17,22 +17,31 @@ const Chat = () => {
     const {register, handleSubmit, reset} = useForm()
     const {socket, statusSocket} = useContext(MyContext);
 
-    const [searchParams,setSearchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
 
-    // const refInput = useRef(null);
-    //
-    // useEffect(()=>{
-    // 	console.log(refInput.current)
-    // 	if(peopleCurrent.pk) refInput.current.focus()
-    //
-    // },[peopleCurrent.pk])
-    //
+    // console.log(peopleCurrent?.first_name[0])
+
+    useEffect(() => {
+        const onKeypress = e => {
+            if (e.code === 'Escape') {
+                setSearchParams('')
+            }
+        }
+
+        document.addEventListener('keydown', onKeypress);
+
+        return () => {
+            document.removeEventListener('keydown', onKeypress);
+        };
+    }, []);
+
 
     const sendMessage = (data) => {
 
         if (!data.message) {
             return
         }
+
 
         socket?.send(
             JSON.stringify(
@@ -41,7 +50,6 @@ const Chat = () => {
                     message: data.message,
                     action: 'create_dialog_message',
                     recipient: searchParams.get('dialogs'),
-
                 }
             )
         )
@@ -70,15 +78,27 @@ const Chat = () => {
                 x: -50
             }}
             animate={{
-                opacity:1,
-                x:0
+                opacity: 1,
+                x: 0
             }}
 
             className={s.wrapper}>
             <header className={s.header}>
                 <div className={s.left__side}>
-                    <img src={searchParams.get('dialogs') === myId ? favorite : peopleCurrent.image ? peopleCurrent.image : photo}
-                         alt="logo"/>
+                    {searchParams.get('dialogs') === myId ?
+                        <img
+                            src={favorite}
+                            alt="logo"/> :
+                        peopleCurrent.image ?
+                            <img
+                                src={peopleCurrent.image}
+                                alt="logo"/>
+                            :
+                            ''
+                        // <span className={s.empty__img}
+                        // >{peopleCurrent?.first_name[0]}{peopleCurrent?.last_name[0]}</span>
+
+                    }
                     <div className={s.person__info}>
                         <h1>
                             {searchParams.get('dialogs') === myId ? 'Избранное' : `${peopleCurrent.first_name} ${peopleCurrent.last_name}`} </h1>
@@ -118,9 +138,13 @@ const Chat = () => {
                             placeholder='Напишите сообщение...'
                             {...register('message')}
                             autoComplete={'off'}
-
+                            autoFocus={true}
                         />
-                        <button className={s.button__send} disabled={statusSocket === 'pending'}>
+                        {
+                            statusSocket === 'ready'
+                            ?
+
+                            <button className={s.button__send} disabled={statusSocket === 'pending'}>
                             <svg viewBox="0 0 24 24">
                                 <path
                                     d="M22.984.638a.5.5,0,0,0-.718-.559L1.783,10.819a1.461,1.461,0,0,0-.1,2.527h0l4.56,2.882a.25.25,0,0,0,.3-.024L18.7,5.336a.249.249,0,0,1,.361.342L9.346,17.864a.25.25,0,0,0,.062.367L15.84,22.3a1.454,1.454,0,0,0,2.19-.895Z"/>
@@ -128,6 +152,11 @@ const Chat = () => {
                                     d="M7.885,19.182a.251.251,0,0,0-.385.211c0,1.056,0,3.585,0,3.585a1,1,0,0,0,1.707.707l2.018-2.017a.251.251,0,0,0-.043-.388Z"/>
                             </svg>
                         </button>
+                        :
+                                <div className={s.wrapper__load}>
+                                    <div className={s.load}></div>
+                                </div>
+                        }
                     </form>
                 </div>
             </div>

@@ -22,30 +22,35 @@
 
 
 .message__left {
-
+	white-space: pre-line;
 	display: inline-block;
 	background: rgba(255, 255, 255, 0.1);
 	padding: 9px;
-	color: #FFFFFF;
-	max-width: 45%;
-	word-break: break-all;
-
+	color: var(--descriptionColor);
+	max-width: 70%;
+	word-break: break-word;
+	word-wrap: break-word ;
+	line-height: 18px;
 	position: relative;
 	font-size: 13px;
 	border-radius: 8px 10px 10px 0;
-
+	text-align: justify;
 }
 .message__right {
-	word-break: break-all;
+	white-space: pre-line;
+	word-wrap: break-word;
+	word-break: break-word;
+	text-align: justify;
 	display: inline-block;
-	text-align: left;
-	max-width: 45%;
-	background-color: var(--secondColor);
+
+	max-width: 70%;
+	//background-color: var(--secondColor);
+	background: rgba(255, 255, 255, 0.08);
 	padding: 9px;
-	color: #FFFFFF;
+	color: var(--descriptionColor);
+	line-height: 18px;
 	position: relative;
 	font-size: 13px;
-
 
 	border-radius: 10px 8px 0 10px;
 
