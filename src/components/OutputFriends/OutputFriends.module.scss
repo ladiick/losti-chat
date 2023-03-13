@@ -1,0 +1,32 @@
+
+.block__friends{
+  margin-top: 10px;
+  max-height: 80%;
+
+  transition: all .3s;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar-track {
+    transition: all .3s;
+    border-radius: 4px;
+
+  }
+  &::-webkit-scrollbar {
+    transition: all .3s;
+    width: 4px;
+
+  }
+  &::-webkit-scrollbar-thumb {
+    transition: all .3s;
+    border-radius: 4px;
+    background: transparent;
+
+  }
+
+  &:hover{
+    overflow: auto;
+    &::-webkit-scrollbar-track {border-radius: 4px;}
+    &::-webkit-scrollbar {width: 4px;}
+    &::-webkit-scrollbar-thumb {border-radius: 4px;background: rgba(255, 255, 255, 0.5442);}
+  }
+}

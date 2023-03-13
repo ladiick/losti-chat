@@ -8,6 +8,9 @@ import {MyContext} from "../../App";
 import {useSearchParams} from "react-router-dom";
 import {useGetMessageQuery, usePaginationMutation} from "../features/messageApiSlice";
 import {addTimeMessage} from "../actions/addTimeMessage";
+import Loader from "../ui/LoaderWrapper/LoaderWrapper";
+import {Oval} from "react-loader-spinner";
+import LoaderWrapper from "../ui/LoaderWrapper/LoaderWrapper";
 
 
 const Communication = () => {
@@ -17,24 +20,28 @@ const Communication = () => {
     const people = useSelector(state => state.people.people)
     let {newMessage} = useContext(MyContext);
     const [searchParams, setSearchParams] = useSearchParams()
+
     const {data, isLoading} = useGetMessageQuery(searchParams.get('dialogs'))
+
     const [pagination, {isLoading: Load}] = usePaginationMutation()
     const [currentPage, setCurrentPage] = useState(2)
     const [fetching, setFetching] = useState(false)
     const refCommunication = useRef();
 
+
     useEffect(() => {
         setCurrentPage(2)
+        setFetching(false)
     }, [searchParams.get('dialogs')])
 
 
     useEffect(() => {
         const paginationFunc = async () => {
-            await setFetching(false)
+            setFetching(false)
             await pagination({id: searchParams.get('dialogs'), page: currentPage})
-            await setCurrentPage(pre => pre + 1)
+            setCurrentPage(pre => pre + 1)
         }
-        if (fetching) {
+        if (fetching && message?.next) {
             paginationFunc()
         }
 
@@ -43,25 +50,21 @@ const Communication = () => {
 
     function scrollHandler(e) {
 
-        console.log(e)
-
-        if (e.target.scrollTop < 200) {
+        if (e.target.scrollTop < 200 && message?.next) {
             setFetching(true)
+            refCommunication?.current?.removeEventListener('scroll', scrollHandler)
         }
-
     }
 
-
     useEffect(() => {
-        refCommunication?.current?.addEventListener('scroll', scrollHandler)
-
-
+        if (message?.next) {
+            refCommunication?.current?.addEventListener('scroll', scrollHandler)
+        }
         return () => {
             refCommunication?.current?.removeEventListener('scroll', scrollHandler)
         }
 
-
-    }, [])
+    }, [message])
 
 
     useEffect(() => {
@@ -79,6 +82,7 @@ const Communication = () => {
                 const arr2 = [people[ind].recip.pk, people[ind].sender.pk].sort()
                 const isEqual = _.isEqual(arr1, arr2)
                 if (isEqual) {
+                    console.log(newMessage)
                     dispatch(setMessage(newMessage))
 
                 }
@@ -93,10 +97,17 @@ const Communication = () => {
     return (
         <>
             <div className={s.block__messages} ref={refCommunication}>
-                {
-                    isLoading || Load && <div className={s.load}></div>
-                }
-
+                <LoaderWrapper top={Load ? 1 : 0}>
+                    <Oval
+                        height="32"
+                        width="32"
+                        color="#1A73E8"
+                        secondaryColor="#434343"
+                        strokeWidth={4}
+                        strokeWidthSecondary={4}
+                        visible={isLoading || Load}
+                    />
+                </LoaderWrapper>
                 {addTimeMessage(message?.results).map((obj, index) =>
                     (
                         obj?.type === 'Date' ?

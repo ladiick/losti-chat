@@ -1,0 +1,26 @@
+.wrapper__friends{
+  width: 100%;
+  color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid var(--borderColor);
+  padding: 30px 15px;
+  background-color: var(--bgBlocksColor);
+  h1{
+    color: var(--descriptionColor);
+    font-size: 14px;
+    margin: 0;
+
+    span{
+      color: var(--secondDescription);
+    }
+  }
+}
+.items{
+  --gap: 0px;
+  --elements: 4;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: var(--gap);
+  width: 100%;
+}

@@ -24,6 +24,7 @@ import {Layout} from "./components/Layout/Layout";
 import NotFound from "./components/NotFound/NotFound";
 import {BsPersonWorkspace} from "react-icons/bs";
 import {useGetUserQuery} from "./components/features/userApiSlice";
+import Settings from "./Pages/Settings/Settings";
 
 export const MyContext = React.createContext()
 
@@ -33,6 +34,8 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route index element={<Dialogs/>}/>
         <Route path='friends/*' element={<Friends/>}/>
         <Route path='profile' element={<Profile/>}/>
+        <Route path='edit' element={<Settings/>}/>
+
         <Route path='*' element={<NotFound/>}/>
     </Route>
     <Route path='/authorization' element={<Authorization/>}/>
