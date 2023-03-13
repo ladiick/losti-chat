@@ -3,6 +3,7 @@ import s from "./PossibleFriendsItem.module.scss";
 import photo from "../assets/my_photo.jpg";
 import BtnAddFriend from "../BtnAddFriend/BtnAddFriend";
 import {changeColor} from "../actions/changeColor";
+import {HOST} from "../api/HOST";
 
 const changeDeclination = (count) => {
     const count2 = count
@@ -24,7 +25,7 @@ const PossibleFriendsItem = ({obj, handlerPeople,index}) => {
             <div className={s.about__user}>
                 {
                     obj.possible_friend.image ?
-                        <img src={obj.possible_friend.image} alt="avatar"/>
+                        <img src={`${HOST + obj.possible_friend.image}`} alt="avatar"/>
                         :
                         <span className={s.empty__img}
                               style={{backgroundColor: changeColor(index)}}

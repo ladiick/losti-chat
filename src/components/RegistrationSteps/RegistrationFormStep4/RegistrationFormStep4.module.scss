@@ -34,6 +34,7 @@
 .wrapper__info{
 	display: flex;
 	align-items: center;
+	position: relative;
 }
 
 .field_names{
@@ -95,7 +96,6 @@
 	display: flex;
 	justify-content: center;
 	width: 30%;
-
 	.wrapper__uploadImg{
 		cursor: pointer;
 		border-radius: 50%;
@@ -116,6 +116,8 @@
 			object-fit: cover;
 			border-radius: 50%;
 			transition: all 0.3s;
+			position: relative;
+			z-index: 100;
 			&:hover{
 				border-radius: 4px;
 				transform: scale(4);
@@ -166,4 +168,22 @@
 	color: red;
 	font-size: 14px;
 	width: 100%;
+}
+
+.delete_image{
+	position: absolute;
+	top: -8px;
+	left: 0;
+	svg {
+		font-size: 20px;
+		transition: all 0.3s;
+		color: #838383;
+	}
+	&:hover{
+		svg{
+		cursor: pointer;
+		color: red;
+		}
+	}
+
 }

@@ -17,9 +17,8 @@ const PossibleFriends = () => {
 
     const handlerPeople = async (index, obj) => {
         try{
-
             await acceptFriendRequests({
-                second_user: obj.friend.pk
+                second_user: obj.possible_friend.pk
             }).unwrap()
 
             toast.success('Заявка отправлена', {
@@ -33,6 +32,7 @@ const PossibleFriends = () => {
                 theme: "dark",
             });
         }catch(err){
+            console.log(err)
             toast.error('Ошибка, заявка не отправлена, попробуйте позже', {
                 position: "top-center",
                 autoClose: 1500,

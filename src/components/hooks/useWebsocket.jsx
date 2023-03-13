@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {HOST} from "../api/HOST";
 import {toast} from "react-toastify";
 import {updateAccessToken} from "../actions/updateAccessToken";
-import {setUserAccessToken, setUserTokens} from "../../redux/slices/userSlice";
+import {setUserAccessToken} from "../../redux/slices/userSlice";
 
 const useWebsocket = (userAccessToken) => {
 	const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const useWebsocket = (userAccessToken) => {
 		
 		const closeHandler = () => {
 
-			console.log('соединение разорванно я в ахуе')
+			console.log('соединение разорванно')
 
 			toast.error('Соединение разорвано,\n пытаюсь подключится', {
 				position: "top-center",
@@ -50,17 +50,17 @@ const useWebsocket = (userAccessToken) => {
 			ws?.removeEventListener('close', closeHandler)
 			ws?.close()
 
-			ws = new WebSocket(`ws://${HOST}/ws/chat/?token=${localStorage.getItem('accessToken')}`)
+			ws = new WebSocket(`ws://3.77.55.244:8001/ws/chat/?token=${localStorage.getItem('accessToken')}`)
 
-			ws.addEventListener('close', closeHandler)
+			ws?.addEventListener('close', closeHandler)
 			setSocket(ws)
 			
 		}
 		if (isAuth) {
 			createChannel()
 			return () => {
-				ws.removeEventListener('close', closeHandler)
-				ws.close()
+				ws?.removeEventListener('close', closeHandler)
+				ws?.close()
 			}
 		}
 		

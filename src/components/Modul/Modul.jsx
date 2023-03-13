@@ -8,6 +8,7 @@ import {setFriendsCurrent} from "../../redux/slices/friendsSlice";
 import {toast} from "react-toastify";
 import {Dialog} from "@headlessui/react";
 import {AnimatePresence, motion} from 'framer-motion'
+import {HOST} from "../api/HOST";
 
 const Modul = () => {
 
@@ -68,7 +69,7 @@ const Modul = () => {
                     scale: 1
                 }}
                 transition={{
-                    type:'tween',
+                    type: 'tween',
                     duration: 0.25
                 }}
                 className={s.dialog__overlay}>
@@ -78,9 +79,10 @@ const Modul = () => {
                         <div className={s.wrapper__info__user}>
                             {friendsCurrent?.friend?.image
                                 ?
-                                <img src={friendsCurrent?.friend?.image ? friendsCurrent?.friend?.image : photo}
-                                  alt='logo'/>
-                            :
+                                <img
+                                    src={`${HOST + friendsCurrent?.friend?.image}`}
+                                    alt='logo'/>
+                                :
                                 <span className={s.empty__img}
                                 >{friendsCurrent?.friend?.first_name[0]}{friendsCurrent?.friend?.last_name[0]}</span>
                             }

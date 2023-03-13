@@ -18,28 +18,7 @@ const AllPeople = () => {
 	
 	const dispatch = useDispatch()
 	
-	
-	
-	// const handlerPeople = (index, obj) => {
-	// 	axios.post(`http://${HOST}/api/v1/friends/`, {
-	// 			second_user: obj.pk
-	// 		},
-	// 		{
-	// 			headers: {Authorization: `JWT ${userAccessToken}`},
-	// 		}).then(res => {
-	// 		dispatch(setAddFriend(index))
-	// 		notification()
-	// 	})
-	// }
-	
-	// const notification = ()=>{
-	// 	setAlert(true)
-	//
-	// 	setTimeout(()=>{
-	// 		setAlert(false)
-	// 	},3000)
-	// }
-	//
+
 	
 	return (
 		<div className={s.wrapper}>

@@ -36,10 +36,10 @@ const RegistrationFormStep1 = () => {
         dispatch(setRegistrationSteps(data))
 
         const res = await axios
-            .get(`http://${HOST}/api/v1/auth/users/check_mail/?email=${data.email}`)
+            .get(`${HOST}/api/v1/auth/users/check_mail/?email=${data.email}`)
 
         if (res.data === false) {
-            const res2 = await axios.post(`http://${HOST}/api/v1/auth/code/`, {
+            const res2 = await axios.post(`${HOST}/api/v1/auth/code/`, {
                 email: data.email
             })
 

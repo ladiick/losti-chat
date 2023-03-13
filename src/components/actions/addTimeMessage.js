@@ -1,7 +1,7 @@
-import {logOut} from "../../redux/slices/userSlice";
 
-export const addTimeMessage = (data=[])=>{
+export const addTimeMessage = (data2=[])=>{
 
+	let data = structuredClone(data2)
 	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Субботу', 'Воскресенье']
 	let time = null
 	let timeObj = null
@@ -35,7 +35,7 @@ export const addTimeMessage = (data=[])=>{
 	let obj_2 = {
 		message: timeObj,
 		type: 'Date',
-		time: data[data.length-1].time
+		time: data[data.length-1]?.time
 	}
 
 	data.push(obj_2)

@@ -9,6 +9,7 @@ import {redirect, useNavigate} from "react-router-dom";
 import {setRegistrationSteps} from "../../../redux/slices/registrationStepsSlice";
 import axios from "axios";
 import {HOST} from "../../api/HOST";
+import {IoCloseOutline} from "react-icons/io5";
 
 const RegistrationFormStep4 = () => {
     const navigate = useNavigate()
@@ -18,7 +19,7 @@ const RegistrationFormStep4 = () => {
 
     useEffect(() => {
         if (stepsInfo.password === "") {
-            // navigate('/registration')
+            navigate('/registration')
         }
     }, [])
 
@@ -43,7 +44,6 @@ const RegistrationFormStep4 = () => {
 
 
     const onSubmit = async data => {
-        const formData = new FormData()
         const newDate = new Date(data.birth_date)
         let generalData = {}
 
@@ -54,13 +54,12 @@ const RegistrationFormStep4 = () => {
 
 
         if (image.file) {
-
-            formData.append('image', image.file)
             generalData = {
                 ...data,
                 ...stepsInfo,
-                image: formData
+                image: image.file
             }
+
         } else {
             generalData = {
                 ...data,
@@ -69,7 +68,11 @@ const RegistrationFormStep4 = () => {
         }
 
 
-        await axios.post(`http://${HOST}/api/v1/auth/users/`, generalData)
+        await axios.post(`${HOST}/api/v1/auth/users/`, generalData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        })
 
         navigate('/authorization')
     }
@@ -87,17 +90,24 @@ const RegistrationFormStep4 = () => {
                                     image ?
                                         <img className={s.image__upload}
                                              src={image.imagePreview} alt="check"/>
+
                                         :
                                         <img src={camera} alt="camera"/>
 
                                 }
+
                             </div>
+
                             <input
                                 type='file'
                                 accept='image/*,.png,.jpg,'
                                 onChange={onImageChange}
                             />
                         </label>
+
+                        {image ? <span className={s.delete_image}
+                                       onClick={()=>setImage('')}
+                        ><IoCloseOutline/></span> : ''}
 
                         <div className={s.field_names}>
                             <label className={s.label__inputs}>

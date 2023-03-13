@@ -34,12 +34,13 @@ const RegistrationFormStep2 = () => {
 		}
 		try {
 			const res = await axios
-				.get(`http://${HOST}/api/v1/auth/users/check_code/?code=${code}&email=${stepsInfo.email}`)
+				.get(`${HOST}/api/v1/auth/users/check_code/?code=${code}&email=${stepsInfo.email}`)
 			dispatch(setRegistrationSteps({code}))
 			navigate('/registration/password')
 			
 		} catch (err) {
-			if (err.response.data[0] === 'code is wrong') {
+			if (err.response.data.type === 3) {
+				setValues(['', '', '', '', '', ''])
 				setCodeError('Код введен неверно')
 			}
 		}
@@ -54,8 +55,10 @@ const RegistrationFormStep2 = () => {
 				<form noValidate>
 					
 					<div className={s.wrapper__inputs}>
-							<h3 className={s.description__title}>
-								На вашу электронную почту отправлен код активации
+							<h3 className={codeError ? s.error__send : s.description__title} >
+								{codeError ?
+									codeError :
+									'На вашу электронную почту отправлен код активации'}
 							</h3>
 							{errors}
 							<PinInput
@@ -63,17 +66,19 @@ const RegistrationFormStep2 = () => {
 								autoFocus={true}
 								values={values}
 								autoTab={true}
-								borderColor='#434343'
+								borderColor={'#434343'}
 								errorBorderColor='red'
 								focusBorderColor='#1a73e8'
 								inputStyle={{color: 'white'}}
 								placeholder='●'
-								validBorderColor='#4bb24b'
+								validBorderColor={'#4bb24b'}
+								aria-label={codeError}
 								required={true}
+								onBlur={()=>{setCodeError('')}}
 								onChange={(value, index, values) => setValues(values)}
+
 							
 							/>
-							<div className={s.error__send}>{codeError}</div>
 					</div>
 					
 					<button className={s.btn_submit} disabled={!btnDisable}>Send</button>

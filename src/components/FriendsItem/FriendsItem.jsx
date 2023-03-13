@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import BtnRequestsFriend from "../BtnRequestsFriend/BtnRequestsFriend";
 import {setFriendsCurrent} from "../../redux/slices/friendsSlice";
 import {changeColor} from "../actions/changeColor";
+import {HOST} from "../api/HOST";
 
 
 
@@ -15,7 +16,7 @@ const FriendsItem = ({obj,index, requests, handlerCancel, handlerAccept}) => {
 	const dispatch = useDispatch()
 	return (
 		<div className={s.wrapper__item}>
-			{!!obj.friend.image ? <img src={obj.friend.image} alt="avatar"/>
+			{!!obj.friend.image ? <img src={`${HOST+obj.friend.image}`} alt="avatar"/>
 				:
 				<span className={s.empty__img} style={{backgroundColor: changeColor(index)}}
 				>{obj.friend?.first_name[0]}{obj.friend?.last_name[0]}</span>
