@@ -14,9 +14,8 @@ const People = ({searchValue, setSearch}) => {
     const dialogsQuery = searchParams.get('diaglogs') || ''
 
     //*request
-    const {data,isLoading} = useGetPeopleQuery()
+    const {data, isLoading, isError} = useGetPeopleQuery()
     //*request
-
 
 
     const handlerPeople = (current__obj, index) => {
@@ -26,10 +25,12 @@ const People = ({searchValue, setSearch}) => {
     }
 
 
-
     return (
         <div className={s.block__people}>
             <div className={s.wrapper__items}>
+                {isError
+                    && <div className={s.wrapper__load}>Ошибка, не удалось загрузить диалоги</div>
+                }
                 {isLoading && <div className={s.wrapper__load}>
                     <div className={s.load}></div>
                 </div>}

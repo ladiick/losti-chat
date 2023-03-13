@@ -8,6 +8,7 @@ import {useContext, useEffect, useRef} from "react";
 import favorite from '../assets/favorite.svg'
 import {MyContext} from "../../App";
 import {motion} from 'framer-motion'
+import {HOST} from "../api/HOST";
 
 const Chat = () => {
 
@@ -16,10 +17,10 @@ const Chat = () => {
     const myId = useSelector(state => state.user.aboutUser.id)
     const {register, handleSubmit, reset} = useForm()
     const {socket, statusSocket} = useContext(MyContext);
-
     const [searchParams, setSearchParams] = useSearchParams()
 
-    // console.log(peopleCurrent?.first_name[0])
+
+
 
     useEffect(() => {
         const onKeypress = e => {
@@ -28,20 +29,25 @@ const Chat = () => {
             }
         }
 
-        document.addEventListener('keydown', onKeypress);
+        document?.addEventListener('keydown', onKeypress);
 
         return () => {
-            document.removeEventListener('keydown', onKeypress);
+            document?.removeEventListener('keydown', onKeypress);
         };
     }, []);
 
 
     const sendMessage = (data) => {
+        // if (!data.message) {
+        //     return
+        // }
 
-        if (!data.message) {
-            return
+        if(data.length >= 4000){
+            const countMessage = Math.ceil(data.length/4000)
+
+            data.slice()
+
         }
-
 
         socket?.send(
             JSON.stringify(
@@ -53,6 +59,8 @@ const Chat = () => {
                 }
             )
         )
+
+
 
         reset()
 
@@ -91,12 +99,11 @@ const Chat = () => {
                             alt="logo"/> :
                         peopleCurrent.image ?
                             <img
-                                src={peopleCurrent.image}
+                                src={`${HOST+peopleCurrent.image}`}
                                 alt="logo"/>
                             :
-                            ''
-                        // <span className={s.empty__img}
-                        // >{peopleCurrent?.first_name[0]}{peopleCurrent?.last_name[0]}</span>
+                        <span className={s.empty__img}
+                        >{peopleCurrent?.first_name?.[0]}{peopleCurrent?.last_name?.[0]}</span>
 
                     }
                     <div className={s.person__info}>

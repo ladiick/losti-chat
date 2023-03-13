@@ -7,6 +7,7 @@ import React, {useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
 import {setCurrentPeople} from "../../redux/slices/peopleSlice";
 import {changeColor} from "../actions/changeColor";
+import {HOST} from "../api/HOST";
 
 
 const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople, obj,index}) => {
@@ -14,11 +15,13 @@ const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople,
     const dispatch = useDispatch()
 
 
+
     useEffect(() => {
         if (searchParams.get('dialogs') == id) {
             dispatch(setCurrentPeople(obj))
         }
     }, [searchParams.get('dialogs')])
+
 
     return (
         <div className={s.main__wrapper}>
@@ -28,7 +31,7 @@ const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople,
                 <div className={s.info__message}>
                     {img ?
                         <img
-                        src={img ? img : noPhoto} alt='avatar'/>
+                        src={img ? `${HOST+img}` : noPhoto} alt='avatar'/>
                     :
                         <span className={s.empty__img} style={{backgroundColor: changeColor(index)}}
                         >{firstName[0]}{lastName[0]}</span>

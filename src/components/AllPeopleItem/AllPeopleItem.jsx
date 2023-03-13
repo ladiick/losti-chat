@@ -3,6 +3,7 @@ import s from "./AllPeopleItem.module.scss"
 import photo from "../assets/my_photo.jpg";
 import BtnAddFriend from "../BtnAddFriend/BtnAddFriend";
 import {changeColor} from "../actions/changeColor";
+import {HOST} from "../api/HOST";
 
 const AllPeopleItem = ({obj, handlerPeople,index}) => {
     return (
@@ -10,7 +11,7 @@ const AllPeopleItem = ({obj, handlerPeople,index}) => {
             <div className={s.about__user}>
 
                 {obj.image ?
-                    <img src={obj.image ? obj.image : photo} alt="avatar"/>
+                    <img src={`${HOST+obj.image}`} alt="avatar"/>
                     :
                     <span className={s.empty__img}
                           style={{backgroundColor: changeColor(index)}}

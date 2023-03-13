@@ -11,7 +11,8 @@ import logo from "../assets/logo.svg";
 
 const AuthorizationForm = () => {
     const dispatch = useDispatch()
-    const {register, handleSubmit, formState: {errors, isValid}} = useForm(
+
+    const {register, setError,handleSubmit,reset, formState: {errors, isValid}} = useForm(
         {
             mode: 'onChange'
         }
@@ -20,23 +21,31 @@ const AuthorizationForm = () => {
 
     const onSubmit = async (data) => {
 
-
-        await axios.post(`http://${HOST}/api/v1/token/`, {
-            email: data.email,
-            password: data.password,
-        })
-            .then(res => {
-                localStorage.setItem('accessToken', res.data.access)
-                localStorage.setItem('refreshToken', res.data.refresh)
-                dispatch(setUserAccessToken(res.data.access))
-                dispatch(setUserRefreshToken(res.data.refresh))
-
-                dispatch(setIsAuth(true))
-                window.location.href = '/'
-
+        try {
+            const res = await axios.post(`${HOST}/api/v1/token/`, {
+                email: data.email,
+                password: data.password,
             })
-            .catch(err => console.log('Ошибка', err))
 
+            localStorage.setItem('accessToken', res.data.access)
+            localStorage.setItem('refreshToken', res.data.refresh)
+            dispatch(setUserAccessToken(res.data.access))
+            dispatch(setUserRefreshToken(res.data.refresh))
+            dispatch(setIsAuth(true))
+            window.location.href = '/'
+
+
+        } catch (err) {
+            if(err.response.status === 401){
+                reset()
+                setError('email',{
+                    message: 'Неверный пароль или почта'
+                })
+                setError('password',{
+
+                })
+            }
+        }
     }
 
     return (
@@ -52,7 +61,6 @@ const AuthorizationForm = () => {
                         <label className={s.label__inputs}>
                             {errors?.email ?
                                 <div className={s.error__send}>{errors.email.message}</div> : 'Электронная почта'}
-
                             <input
                                 className={s.input}
                                 type='text'
@@ -97,13 +105,13 @@ const AuthorizationForm = () => {
                         </label>
                     </div>
 
-                        <div>
-                            <button className={s.btn_submit} disabled={!isValid}>Войти</button>
+                    <div>
+                        <button className={s.btn_submit} disabled={!isValid}>Войти</button>
 
-                            <div className={s.orLogin}>или</div>
+                        <div className={s.orLogin}>или</div>
 
-                            <Link to='/registration' className={s.btn__desc}>Зарегистрироваться</Link>
-                        </div>
+                        <Link to='/registration' className={s.btn__desc}>Зарегистрироваться</Link>
+                    </div>
                 </form>
 
             </div>
