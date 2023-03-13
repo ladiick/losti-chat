@@ -5,6 +5,18 @@ import {setIndex} from "../../redux/slices/peopleSlice";
 import favorite from '../assets/favorite.svg'
 import {useSearchParams} from "react-router-dom";
 import {useGetPeopleQuery} from "../features/peopleApiSlice";
+import {Oval} from "react-loader-spinner";
+import LoaderWrapper from "../ui/LoaderWrapper/LoaderWrapper";
+
+const errorStyles = {
+    width: '100%',
+    fontSize: '12px',
+    textAlign: 'center',
+    color: 'red',
+    position: 'absolute',
+    top: '55%', left: '50%',
+    transform: 'translate(-50%,-50%)',
+}
 
 const People = ({searchValue, setSearch}) => {
     const dispatch = useDispatch()
@@ -27,13 +39,21 @@ const People = ({searchValue, setSearch}) => {
 
     return (
         <div className={s.block__people}>
+            <LoaderWrapper>
+                <Oval
+                    height="32"
+                    width="32"
+                    color="#1A73E8"
+                    secondaryColor="#434343"
+                    strokeWidth={4}
+                    strokeWidthSecondary={4}
+                    visible={isLoading || isError}
+                />
+            </LoaderWrapper>
+            {isError
+                && <span style={errorStyles}>Ошибка, не удалось загрузить диалоги</span>
+            }
             <div className={s.wrapper__items}>
-                {isError
-                    && <div className={s.wrapper__load}>Ошибка, не удалось загрузить диалоги</div>
-                }
-                {isLoading && <div className={s.wrapper__load}>
-                    <div className={s.load}></div>
-                </div>}
                 {people?.filter((people) => (
                     people.sender.pk === myId && people.recip.pk !== myId ?
                         people?.recip.first_name.toLowerCase().includes(searchValue.toLowerCase())

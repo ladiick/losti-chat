@@ -244,8 +244,8 @@
 .empty__img{
 	width: calc(20px + 1vw);
 	height: calc(20px + 1vw);
-	color: #FFFFFF;
-	background-color: var(--secondDescription);
+	color: var(--descriptionColor);
+	background-color: var(--navigate-color);
 	border-radius: 50%;
 	display: flex;
 	align-items: center;

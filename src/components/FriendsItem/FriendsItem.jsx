@@ -6,13 +6,14 @@ import BtnRequestsFriend from "../BtnRequestsFriend/BtnRequestsFriend";
 import {setFriendsCurrent} from "../../redux/slices/friendsSlice";
 import {changeColor} from "../actions/changeColor";
 import {HOST} from "../api/HOST";
+import {useLocation} from "react-router-dom";
 
 
 
 const FriendsItem = ({obj,index, requests, handlerCancel, handlerAccept}) => {
 	
-	
-	
+	const location = useLocation()
+	console.log(location.pathname)
 	const dispatch = useDispatch()
 	return (
 		<div className={s.wrapper__item}>

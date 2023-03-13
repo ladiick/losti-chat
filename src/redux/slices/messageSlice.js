@@ -16,6 +16,7 @@ export const messageSlice = createSlice({
     reducers: {
         addMessage(state, action) {
 
+            state.message.next = action.payload.next
 
             let indexOldMessage = action.payload.results.findIndex(obj => {
                 if (state.message.results[state.message.results.length - 1].id === obj.id) {
@@ -30,7 +31,6 @@ export const messageSlice = createSlice({
             if (indexOldMessage !== -1) {
                 state.message.results = [...state.message.results, ...action.payload.results.slice(indexOldMessage + 1, action.payload.length)]
             } else {
-                console.log('len',state.message.results.length)
                 state.message.results = [...state.message.results, ...action.payload.results]
             }
         },
@@ -40,7 +40,7 @@ export const messageSlice = createSlice({
         },
 
         setMessage: (state, action) => {
-            state.message.results.unshift(action.payload)
+            state.message.results?.unshift(action.payload)
         }
     },
 

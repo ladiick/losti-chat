@@ -24,13 +24,13 @@ const useWebsocket = (userAccessToken) => {
 
 			toast.error('Соединение разорвано,\n пытаюсь подключится', {
 				position: "top-center",
-				autoClose: 3000,
+				autoClose: 1500,
 				hideProgressBar: true,
 				closeOnClick: true,
 				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
-				theme: "light",
+				theme: "dark",
 			})
 
 			const token = updateAccessToken(refresh)
