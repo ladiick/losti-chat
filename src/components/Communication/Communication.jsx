@@ -11,6 +11,7 @@ import {addTimeMessage} from "../actions/addTimeMessage";
 import Loader from "../ui/LoaderWrapper/LoaderWrapper";
 import {Oval} from "react-loader-spinner";
 import LoaderWrapper from "../ui/LoaderWrapper/LoaderWrapper";
+import {AiOutlineArrowDown} from "react-icons/ai";
 
 
 const Communication = () => {
@@ -20,7 +21,7 @@ const Communication = () => {
     const people = useSelector(state => state.people.people)
     let {newMessage} = useContext(MyContext);
     const [searchParams, setSearchParams] = useSearchParams()
-
+    const [scrollButton, setScrollButton] = useState(false)
     const {data, isLoading} = useGetMessageQuery(searchParams.get('dialogs'))
 
     const [pagination, {isLoading: Load}] = usePaginationMutation()
@@ -48,7 +49,20 @@ const Communication = () => {
     }, [fetching])
 
 
+    const dialogDown = () => {
+        refCommunication.current.scrollTop = refCommunication.current.scrollHeight
+    }
+
+
     function scrollHandler(e) {
+
+        if (e.target.scrollTop + e.target.clientHeight < e.target.scrollHeight - 100) {
+            setScrollButton(true)
+        }
+
+        if (e.target.scrollTop + e.target.clientHeight > e.target.scrollHeight - 100) {
+            setScrollButton(false)
+        }
 
         if (e.target.scrollTop < 200 && message?.next) {
             setFetching(true)
@@ -69,7 +83,7 @@ const Communication = () => {
 
     useEffect(() => {
 
-        if (newMessage && message[0]?.id !== newMessage.id) {
+        if (newMessage && message?.results?.[0]?.id !== newMessage.id) {
 
             const arr1 = [newMessage.recip.pk, newMessage.sender.pk].sort()
             const chat = [myId, Number(searchParams.get('dialogs'))].sort()
@@ -82,7 +96,6 @@ const Communication = () => {
                 const arr2 = [people[ind].recip.pk, people[ind].sender.pk].sort()
                 const isEqual = _.isEqual(arr1, arr2)
                 if (isEqual) {
-                    console.log(newMessage)
                     dispatch(setMessage(newMessage))
 
                 }
@@ -108,6 +121,8 @@ const Communication = () => {
                         visible={isLoading || Load}
                     />
                 </LoaderWrapper>
+
+
                 {addTimeMessage(message?.results).map((obj, index) =>
                     (
                         obj?.type === 'Date' ?
@@ -115,7 +130,6 @@ const Communication = () => {
                                 key={`${obj.time}_time`}
                                 message={obj.message}
                                 who={'Date'}
-                                refCommunication={refCommunication.current}
                             /> :
                             obj?.sender?.pk === myId ?
                                 <Message
@@ -123,7 +137,6 @@ const Communication = () => {
                                     message={obj.message}
                                     time={obj.time}
                                     who={'recipient'}
-                                    refCommunication={refCommunication.current}
                                 />
                                 :
                                 obj?.recip?.pk === myId ?
@@ -132,7 +145,6 @@ const Communication = () => {
                                         message={obj.message}
                                         time={obj.time}
                                         who={'sender'}
-                                        refCommunication={refCommunication.current}
                                     />
                                     : ''
 
@@ -140,6 +152,15 @@ const Communication = () => {
                 ).reverse()
                 }
 
+                {
+                    scrollButton &&
+                    <div className={s.button__down}
+                         onClick={dialogDown}>
+                        <span>
+                            <AiOutlineArrowDown/>
+                            </span>
+                    </div>
+                }
             </div>
 
         </>

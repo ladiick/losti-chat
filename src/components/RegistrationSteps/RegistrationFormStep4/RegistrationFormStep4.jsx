@@ -57,7 +57,7 @@ const RegistrationFormStep4 = () => {
             generalData = {
                 ...data,
                 ...stepsInfo,
-                image: image.file
+                img: image.file
             }
 
         } else {

@@ -40,7 +40,7 @@ export const messageSlice = createSlice({
         },
 
         setMessage: (state, action) => {
-            state.message.results?.unshift(action.payload)
+            state.message.results.unshift(action.payload)
         }
     },
 

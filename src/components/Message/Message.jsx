@@ -19,7 +19,7 @@ const TimeFunc = (time) => {
     return `${messageTime.getHours()}:${messageTime.getMinutes()}`
 }
 
-const Message = ({message, time, who, refCommunication}) => {
+const Message = ({message, time, who}) => {
 
     const refScrollBlock = useRef(null);
 
@@ -27,20 +27,6 @@ const Message = ({message, time, who, refCommunication}) => {
         refScrollBlock.current.scrollIntoView(false)
     },[])
 
-    // const refDate = useRef(null);
-    // const scrollHandler = () => {
-    // 	if(!refDate.current) return
-    // 	console.log(refDate.current.getBoundingClientRect())
-    // 	const {top} = refDate.current.getBoundingClientRect()
-    // 	if(top < 91){
-    // 		refDate.current.style.top = 200 + 'px'
-    // 	}
-    // }
-    //
-    // useEffect(() => {
-    // 	refCommunication.addEventListener("scroll", scrollHandler, false)
-    // 	return () => refCommunication.removeEventListener("scroll", scrollHandler, false)
-    // }, [])
 
     return (
         <>
@@ -57,7 +43,7 @@ const Message = ({message, time, who, refCommunication}) => {
 				
                 {who === 'Date' ? <span className={s.date__block}>{reTime(message)}</span> : message}
                 <div className={who === 'sender' ? s.message__info__left : s.message__info__right}>
-					<span className={s.message__day}>{who !== 'Date' && TimeFunc(time)}</span>
+					<span ref={refScrollBlock} className={s.message__day}>{who !== 'Date' && TimeFunc(time)}</span>
 				</div>
 			</span>
 

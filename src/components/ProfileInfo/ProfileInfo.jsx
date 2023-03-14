@@ -1,23 +1,28 @@
-import {useSelector} from 'react-redux'
-import BurgerMenu from '../../components/BurgerMenu/BurgerMenu'
+
 import photo from '../assets/my_photo.jpg'
 import s from './ProfileInfo.module.scss'
-import {Link, useLocation} from "react-router-dom";
-import {toast} from "react-toastify";
+import {Link} from "react-router-dom";
+import {useGetUserQuery} from "../features/userApiSlice";
+import {HOST} from "../api/HOST";
 
 const ProfileInfo = () => {
-    const user = useSelector(state => state.user.aboutUser)
-
+    const {data} = useGetUserQuery()
     return (
         <div className={s.wrapper}>
             <div className={s.wrapper__block__info}>
                 <div className={s.block__info}>
-                    <img src={photo} alt='logo'/>
+
+                    {data?.image ?
+                        <img src={`${HOST+data?.image}`} alt='logo'/>
+                    :
+                        <span className={s.empty__img}
+                        >Загрузить фото</span>
+                    }
                     <div className={s.about__user}>
 
                         <div className={s.wrapper__settings}>
                             <h1 className={s.user__name}>
-                                {user.first_name} {user.last_name}
+                                {data?.first_name} {data?.last_name}
                             </h1>
 
                             <Link className={s.edit__profile}>

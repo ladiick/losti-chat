@@ -82,3 +82,25 @@
 		background-color: var(--navigate-color);
 	}
 }
+
+.empty__img{
+	width: 150px;
+	height: 150px;
+	position: relative;
+	z-index: 10;
+	border: 3px solid var(--bgBlocksColor);
+	color: var(--descriptionColor);
+	background-color: var(--navigate-color);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(14px + 0.1vw);
+	margin-right: 10px;
+	transition: all 0.3s;
+	cursor: pointer;
+	&:hover{
+		background-color: var(--bgColor);
+	}
+
+}
