@@ -10,10 +10,8 @@ import {useLocation} from "react-router-dom";
 
 
 
-const FriendsItem = ({obj,index, requests, handlerCancel, handlerAccept}) => {
+const FriendsItem = ({obj, requests, handlerCancel, handlerAccept,index}) => {
 	
-	const location = useLocation()
-	console.log(location.pathname)
 	const dispatch = useDispatch()
 	return (
 		<div className={s.wrapper__item}>

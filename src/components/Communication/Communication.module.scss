@@ -1,14 +1,52 @@
 .block__messages {
 	max-height: 82vh;
-	//margin-right: 4px;
 	padding: 15px 5px 15px 15px;
 	margin-right: 10px;
 	height: 100%;
 	position: relative;
-	//background-color: rgba(0,0,0,0.1);
 	background-color: var(--bgBlocksColor);
 	overflow-y:auto;
+	overflow-x: hidden;
 	transition: all .3s;
+	//width: 100%;
+
+	.button__down{
+		width: 100%;
+		display: flex;
+		position: sticky;
+		bottom: 0;
+		justify-content: flex-end;
+
+		span{
+			display: flex;
+			font-size: 24px;
+			padding: 8px;
+			border-radius: 50%;
+			background-color: var(--navigate-color);
+			border: 1px solid var(--borderColor);
+			color: var(--decription-color);
+			transition: all 0.3s;
+			cursor: pointer;
+
+			svg{
+				transition: all 0.3s;
+			}
+
+			&:hover{
+				background-color: var(--borderColor);
+				svg{
+					transform: translateY(3px);
+				}
+			}
+		}
+
+
+
+
+
+
+	}
+
 	&::-webkit-scrollbar-track {
 		transition: all .3s;
 		border-radius: 4px;
@@ -33,34 +71,6 @@
 	}
 }
 
-//.load {
-//	position: absolute;
-//	top: 50%;
-//	left: 50%;
-//	transform: translate(-50%, -50%);
-//
-//	border: 3px solid #4f4e4e;
-//	border-top: 3px solid var(--secondColor);
-//	border-radius: 50%;
-//	width: 30px;
-//	height: 30px;
-//	animation: spin 1s linear infinite;
-//
-//
-//	@keyframes spin {
-//		0% {
-//			transform: rotate(0deg);
-//		}
-//		100% {
-//			transform: rotate(360deg);
-//		}
-//	}
-//}
 
-//.date{
-//	width: 100%;
-//	position: sticky;
-//	left: 50%;
-//	text-align: center;
-//	top: 0;
-//}
+
+

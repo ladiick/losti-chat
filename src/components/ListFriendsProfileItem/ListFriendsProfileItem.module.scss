@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: calc((100% - (var(--elements) - 1) * var(--gap)) / (var(--elements)));
-  padding: 5px 40px;
+  padding: 5px 0;
 
   img{
     object-fit: cover;
