@@ -22,7 +22,7 @@ const Communication = () => {
     let {newMessage} = useContext(MyContext);
     const [searchParams, setSearchParams] = useSearchParams()
     const [scrollButton, setScrollButton] = useState(false)
-    const {data, isLoading} = useGetMessageQuery(searchParams.get('dialogs'))
+    const {data, isLoading} = useGetMessageQuery(searchParams.get('dialogs'), {refetchOnMountOrArgChange: true})
 
     const [pagination, {isLoading: Load}] = usePaginationMutation()
     const [currentPage, setCurrentPage] = useState(2)
@@ -53,14 +53,16 @@ const Communication = () => {
         refCommunication.current.scrollTop = refCommunication.current.scrollHeight
     }
 
+    console.log(message)
 
     function scrollHandler(e) {
-
-        if (e.target.scrollTop + e.target.clientHeight < e.target.scrollHeight - 100) {
+        console.log(e.target.scrollTop, e.target.clientHeight, e.target.scrollHeight)
+        if (e.target.scrollTop + e.target.clientHeight < e.target.scrollHeight) {
+            console.log('fdfd')
             setScrollButton(true)
         }
 
-        if (e.target.scrollTop + e.target.clientHeight > e.target.scrollHeight - 100) {
+        if (e.target.scrollTop + e.target.clientHeight > e.target.scrollHeight - 200) {
             setScrollButton(false)
         }
 
@@ -71,9 +73,9 @@ const Communication = () => {
     }
 
     useEffect(() => {
-        if (message?.next) {
-            refCommunication?.current?.addEventListener('scroll', scrollHandler)
-        }
+
+        refCommunication?.current?.addEventListener('scroll', scrollHandler)
+
         return () => {
             refCommunication?.current?.removeEventListener('scroll', scrollHandler)
         }
@@ -106,10 +108,10 @@ const Communication = () => {
 
     }, [newMessage]);
 
+    if (isLoading) {
+        return (
 
-    return (
-        <>
-            <div className={s.block__messages} ref={refCommunication}>
+            <div className={s.block__messages}>
                 <LoaderWrapper top={Load ? 1 : 0}>
                     <Oval
                         height="32"
@@ -121,8 +123,15 @@ const Communication = () => {
                         visible={isLoading || Load}
                     />
                 </LoaderWrapper>
+            </div>
+
+        )
+    }
 
 
+    return (
+        <>
+            <div className={s.block__messages} ref={refCommunication}>
                 {addTimeMessage(message?.results).map((obj, index) =>
                     (
                         obj?.type === 'Date' ?

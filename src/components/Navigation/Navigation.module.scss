@@ -15,7 +15,6 @@
 	flex-direction: column;
 	transition: all .3s;
 	padding: 30px 15px;
-	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
 
 
 }
@@ -38,10 +37,7 @@
 	position: relative;
 	border-radius: 10px;
 	margin-bottom: 10px;
-
-
-
-
+	user-select: none;
 	svg {
 		width: 20px;
 		height: 20px;
