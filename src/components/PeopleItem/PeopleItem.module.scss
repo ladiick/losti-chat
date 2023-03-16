@@ -3,6 +3,9 @@
 	justify-content: space-between;
 	align-items: center;
 	text-decoration: none;
+	&:not(:last-child){
+		margin-bottom: 10px;
+	}
 }
 
 .block__people__item {
@@ -14,10 +17,10 @@
 	border-radius: 8px;
 	cursor: pointer;
 	padding: 6px;
-
-	&:not(:last-child){
-		margin-bottom: 5px;
-	}
+	border: 1px solid transparent;
+	//&:not(:last-child){
+	//	margin-bottom: 5px;
+	//}
 
 
 	position: relative;
@@ -25,7 +28,7 @@
 		content: "";
 		position: absolute;
 		width: 30%;
-		border-bottom: 3px solid transparent;
+		border-bottom: 2px solid transparent;
 		z-index: 10;
 		bottom: -1.5px;
 		border-radius: 4px;
@@ -37,7 +40,7 @@
 		&:before{
 			width: 50%;
 			transform: translateX(50%);
-			border-bottom: 3px solid var(--secondColor);
+			border-bottom: 2px solid var(--secondColor);
 		}
 
 	}
@@ -49,32 +52,31 @@
 	display: flex;
 	align-items: center;
 	transition: all .3s;
-	//border: 1px solid rgba(0,0,0,1);
-	padding: 6px;
 
+	padding: 6px;
 	border-radius: 8px;
 	cursor: pointer;
-	//box-shadow: 0 0 10px -4px rgba(0, 0, 0, 0.4) inset;
-	//background: rgba(255, 255, 255, 0.0605);
+
 	background: #303030;
 	&:not(:last-child){
 		margin-bottom: 5px;
 	}
 
+	border: 1px solid var(--secondColor);
 
 	position: relative;
-	&:before {
-		content: "";
-		position: absolute;
-		width: 50%;
-		border-bottom: 3px solid var(--secondColor);
-		z-index: 10;
-		bottom: -1.5px;
-		border-radius: 4px;
-		left: 0;
-		transform: translateX(50%);
-		transition: all .3s;
-	}
+	//&:before {
+	//	content: "";
+	//	position: absolute;
+	//	width: 50%;
+	//	border: 3px solid var(--secondColor);
+	//	z-index: 10;
+	//	bottom: -1.5px;
+	//	border-radius: 4px;
+	//	left: 0;
+	//	transform: translateX(50%);
+	//	transition: all .3s;
+	//}
 
 }
 

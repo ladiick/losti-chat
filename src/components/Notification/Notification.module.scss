@@ -1,0 +1,28 @@
+.popover__wrapper{
+  position: relative;
+  button{
+    width: 100%;
+  }
+}
+
+.popover__panel{
+  position: absolute;
+  left: 60px;
+  top: 32px;
+  z-index: 10;
+  width: 300px;
+  max-height: 600px;
+  border-radius: 8px;
+  border: 1px solid var(--borderColor);
+  //box-shadow: 0 0 10px 0px var(--bgColor);
+  background-color: var(--bgBlocksColor);
+}
+
+.list__notification{
+
+}
+
+
+.item__notification{
+
+}

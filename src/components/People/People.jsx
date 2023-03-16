@@ -54,7 +54,8 @@ const People = ({searchValue, setSearch}) => {
                 && <span style={errorStyles}>Ошибка, не удалось загрузить диалоги</span>
             }
             <div className={s.wrapper__items}>
-                {people?.filter((people) => (
+                {people?.
+                filter((people) => (
                     people.sender.pk === myId && people.recip.pk !== myId ?
                         people?.recip.first_name.toLowerCase().includes(searchValue.toLowerCase())
                         ||
@@ -64,7 +65,8 @@ const People = ({searchValue, setSearch}) => {
                         ||
                         people?.sender.last_name.toLowerCase().includes(searchValue.toLowerCase())
 
-                )).map((obj, index) => obj.sender.pk === myId && obj.recip.pk !== myId ?
+                )).
+                map((obj, index) => obj.sender.pk === myId && obj.recip.pk !== myId ?
                     <PeopleItem
                         key={obj.recip.pk}
                         id={obj.recip.pk}

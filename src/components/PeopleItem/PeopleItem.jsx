@@ -12,15 +12,6 @@ import {HOST} from "../api/HOST";
 
 const PeopleItem = ({firstName, lastName, message, time, img, id, handlerPeople, obj,index}) => {
     const [searchParams, setSearchParams] = useSearchParams()
-    const dispatch = useDispatch()
-
-
-
-    useEffect(() => {
-        if (searchParams.get('dialogs') == id) {
-            dispatch(setCurrentPeople(obj))
-        }
-    }, [searchParams.get('dialogs')])
 
 
     return (

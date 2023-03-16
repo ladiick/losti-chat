@@ -6,11 +6,7 @@ import _ from "underscore";
 
 const initialState = {
 	people: [],
-	peopleAll: [],
-	peopleCurrent: {},
-	peopleCurrentAll: {},
 	index: null,
-	status: 'loading',
 }
 
 
