@@ -1,8 +1,6 @@
 import ProfileInfo from '../../components/ProfileInfo/ProfileInfo'
-import MyFriends from './../../components/MyFriends/MyFriends'
 import s from './Profile.module.scss'
 import {Outlet, useLocation, useNavigation} from "react-router-dom";
-import {BsPersonWorkspace} from "react-icons/bs";
 import React from "react";
 import ListFriendsProfile from "../../components/ListFriendsProfile/ListFriendsProfile";
 import Gallery from "../../components/Gallery/Gallery";

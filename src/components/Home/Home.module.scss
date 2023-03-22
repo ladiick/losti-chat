@@ -2,22 +2,21 @@
 
 .container {
 	margin: 20px auto;
-	width: 1176px;
+	width: 1076px;
 	position: relative;
 	display: flex;
-	height: 92vh;
+	height: 95vh;
 	@media (max-width: 768px) {
-		width: 420px;
+		width: 100%;
+		margin: 0;
+		height: 100vh;
 	}
 }
 
 .content {
-
 	width: 100%;
 	display: flex;
-
 	position: relative;
-
 	@media (max-width: 768px) {
 		width: 100%;
 		border: none;

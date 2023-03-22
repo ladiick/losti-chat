@@ -1,9 +1,9 @@
 
-import photo from '../assets/my_photo.jpg'
 import s from './ProfileInfo.module.scss'
 import {Link} from "react-router-dom";
 import {useGetUserQuery} from "../features/userApiSlice";
 import {HOST} from "../api/HOST";
+import {FaUserEdit} from "react-icons/fa";
 
 const ProfileInfo = () => {
     const {data} = useGetUserQuery()
@@ -26,6 +26,7 @@ const ProfileInfo = () => {
                             </h1>
 
                             <Link className={s.edit__profile}>
+                                <FaUserEdit/>
                                 Редактировать профиль
                             </Link>
                         </div>

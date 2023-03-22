@@ -104,13 +104,13 @@
 	h2 {
 		margin: 0;
 		font-weight: 400;
-		font-size: calc(11px + 0.1vw);
+		font-size: 13px;
 		color: #FFFFFF;
-
+		max-width: 160px;
 	}
 
 	p {
-		font-size: calc(10px + 0.1vw);
+		font-size: 12px;
 		margin: 0;
 		max-width: 120px;
 		text-overflow: ellipsis;
@@ -127,7 +127,7 @@
 	justify-content: space-around;
 	flex-grow: 0;
 	p {
-		font-size: calc(10px + 0.1vw);
+		font-size: 12px;
 		font-weight: 400;
 		margin: 0;
 		color: #888888;

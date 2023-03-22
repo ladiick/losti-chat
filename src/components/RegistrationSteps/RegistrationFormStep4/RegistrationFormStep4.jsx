@@ -10,6 +10,7 @@ import {setRegistrationSteps} from "../../../redux/slices/registrationStepsSlice
 import axios from "axios";
 import {HOST} from "../../api/HOST";
 import {IoCloseOutline} from "react-icons/io5";
+import {setIsAuth, setUserAccessToken, setUserRefreshToken} from "../../../redux/slices/userSlice";
 
 const RegistrationFormStep4 = () => {
     const navigate = useNavigate()
@@ -18,7 +19,7 @@ const RegistrationFormStep4 = () => {
     const [image, setImage] = useState("");
 
     useEffect(() => {
-        if (stepsInfo.password === "") {
+        if (localStorage.getItem('password') === "") {
             navigate('/registration')
         }
     }, [])
@@ -28,7 +29,6 @@ const RegistrationFormStep4 = () => {
     } = useForm({
         mode: 'onChange',
     })
-
     const onImageChange = event => {
         if (event.target.files && event.target.files[0]) {
             let reader = new FileReader();
@@ -42,7 +42,7 @@ const RegistrationFormStep4 = () => {
         }
     };
 
-
+    console.log(localStorage.getItem('email'))
     const onSubmit = async data => {
         const newDate = new Date(data.birth_date)
         let generalData = {}
@@ -52,29 +52,54 @@ const RegistrationFormStep4 = () => {
             .reverse()
             .join('-')
 
-
+        console.log(data)
         if (image.file) {
             generalData = {
                 ...data,
-                ...stepsInfo,
+                email: localStorage.getItem('email'),
+                password: localStorage.getItem('password'),
                 img: image.file
             }
 
         } else {
             generalData = {
                 ...data,
-                ...stepsInfo
+                email: localStorage.getItem('email'),
+                password: localStorage.getItem('password'),
             }
         }
 
+        console.log()
 
-        await axios.post(`${HOST}/api/v1/auth/users/`, generalData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            }
-        })
+        try {
+            await axios.post(`${HOST}/api/v1/auth/users/`, generalData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
 
-        navigate('/authorization')
+            const res = await axios.post(`${HOST}/api/v1/token/`, {
+                email: localStorage.getItem('email'),
+                password: localStorage.getItem('password'),
+            })
+
+            localStorage.clear()
+
+            dispatch(setUserAccessToken(res.data.access))
+            dispatch(setUserRefreshToken(res.data.refresh))
+            dispatch(setIsAuth(true))
+
+            localStorage.setItem('accessToken', res.data.access)
+            localStorage.setItem('refreshToken', res.data.refresh)
+            window.location.href = '/'
+
+            // navigate('/authorization')
+
+        }
+        catch (err){
+
+        }
+
     }
     return (<>
         <div className={s.form}>
@@ -152,7 +177,7 @@ const RegistrationFormStep4 = () => {
 
                     </div>
 
-                    <RegistrationFormStepInfoUser errors={errors} register={register}/>
+                    <RegistrationFormStepInfoUser watch={watch} errors={errors} register={register}/>
                 </div>
                 <button className={s.btn_submit} disabled={!isValid}>
                     Зарегистрироваться

@@ -2,7 +2,8 @@ import React from 'react';
 import s from "./RegistrationFormStepInfoUser.module.scss";
 
 const RegistrationFormStepInfoUser = ({errors,register}) => {
-	
+
+
 	return (
 		
 				<div className={s.date__gender}>

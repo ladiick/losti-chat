@@ -7,6 +7,8 @@ import {useSearchParams} from "react-router-dom";
 import {useGetPeopleQuery} from "../features/peopleApiSlice";
 import {Oval} from "react-loader-spinner";
 import LoaderWrapper from "../ui/LoaderWrapper/LoaderWrapper";
+import {openChatBlock} from "../../redux/slices/navigationSlice";
+import useMatchMedia from "../hooks/useMatchMedia";
 
 const errorStyles = {
     width: '100%',
@@ -29,11 +31,18 @@ const People = ({searchValue, setSearch}) => {
     const {data, isLoading, isError} = useGetPeopleQuery()
     //*request
 
+    const {isMobile} = useMatchMedia()
 
     const handlerPeople = (current__obj, index) => {
         dispatch(setIndex(index))
+
+        if(isMobile) {
+            dispatch(openChatBlock(true))
+        }
+
         setSearchParams({dialogs: current__obj.pk})
         setSearch('')
+
     }
 
 

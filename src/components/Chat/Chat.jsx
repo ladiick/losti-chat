@@ -1,8 +1,8 @@
 import s from './Chat.module.scss'
 import Communication from "../Communication/Communication";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import message__logo from '../assets/messages.svg'
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {useCallback, useContext, useEffect, useRef, useState} from "react";
 import favorite from '../assets/favorite.svg'
 import {MyContext} from "../../App";
@@ -15,6 +15,10 @@ import {useGetCurrentPersonQuery} from "../features/currentPeopleApiSlice";
 import {AiOutlinePaperClip} from "react-icons/ai";
 import {BsSend, BsSendSlash} from "react-icons/bs";
 import SceletonHeader from "./SceletonHeader";
+import {FiArrowLeft} from "react-icons/fi";
+import {openChatBlock} from "../../redux/slices/navigationSlice";
+import useMatchMedia from "../hooks/useMatchMedia";
+import HeaderChat from "./HeaderChat/HeaderChat";
 
 const Chat = () => {
 
@@ -23,6 +27,7 @@ const Chat = () => {
     const [searchParams, setSearchParams] = useSearchParams()
 
     const {data: peopleCurrent = {}, isLoading} = useGetCurrentPersonQuery(searchParams.get('dialogs'))
+
     //**custom-input
     const [content, setContent] = useState("")
     const refSend = useRef()
@@ -85,8 +90,9 @@ const Chat = () => {
         }
     }
 
+    const {isMobile} = useMatchMedia()
 
-    if (!searchParams.get('dialogs')) {
+    if (!searchParams.get('dialogs') && !isMobile) {
         return (
             <div className={s.emptity__chat}>
                 <div className={s.emptity__content}>
@@ -97,57 +103,10 @@ const Chat = () => {
         )
     }
 
-    const HeaderChat = () => {
-        if (isLoading) {
-            return (
-                <SceletonHeader/>
-            )
-        }
-
-
-        return (
-            <>
-                {searchParams.get('dialogs') === myId ?
-                    <img
-                        src={favorite}
-                        alt="logo"/> :
-                    peopleCurrent.image ?
-                        <img
-                            src={`${HOST + peopleCurrent.image}`}
-                            alt="logo"/>
-                        :
-                        <span className={s.empty__img}
-                        >{peopleCurrent?.first_name?.[0]}{peopleCurrent?.last_name?.[0]}</span>
-
-                }
-                <div className={s.person__info}>
-                    <h1>
-                        {searchParams.get('dialogs') === myId ? 'Избранное' : `${peopleCurrent.first_name} ${peopleCurrent.last_name}`} </h1>
-                    {/*<p>Online</p>*/}
-                </div>
-            </>
-        )
-    }
-
     return (
-        <motion.div
-            initial={{
-                opacity: 0,
-                x: -50
-            }}
-            animate={{
-                opacity: 1,
-                x: 0
-            }}
+        <div className={s.wrapper}>
 
-            className={s.wrapper}>
-            <header className={s.header}>
-                <div className={s.left__side}>
-                    <HeaderChat/>
-                </div>
-                <div className={s.right_side}>
-                </div>
-            </header>
+            <HeaderChat myId={myId} isLoading={isLoading} peopleCurrent={peopleCurrent}/>
 
             <Communication/>
 
@@ -199,7 +158,7 @@ const Chat = () => {
                     </div>
                 </div>
             </div>
-        </motion.div>
+        </div>
     )
 }
 

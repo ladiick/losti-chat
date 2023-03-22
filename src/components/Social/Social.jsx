@@ -13,8 +13,7 @@ const Social = () => {
 	return (
 		
 		<div className={s.wrapper}>
-			<span className={s.text}>Сообщения</span>
-			{/*<BurgerMenu/>*/}
+			<span className={s.text}>Чаты</span>
 			<SearchBlock searchValue={searchValue} setSearch={setSearch}/>
 			<People searchValue={searchValue} setSearch={setSearch}/>
 		</div>

@@ -1,10 +1,7 @@
 .wrapper{
-	//background-color: #202020;
 	background-color: var(--bgBlocksColor);
-	//border-radius: 9px;
 	width: 100%;
-	color: #ffffff;
-	//padding: 30px 15px 30px 15px;
+	color: var(--descriptionColor);
 	border-radius: 16px;
 	border: 1px solid var(--borderColor);
 	padding: 30px 15px;
@@ -69,5 +66,14 @@
 	transition: all 0.3s;
 	&:hover{
 		background-color: lighten(#202020,50%);
+	}
+}
+
+
+@media (max-width: 768px){
+	.wrapper{
+		border-radius: 0;
+		border: none;
+		height: calc(100vh - 48px);
 	}
 }

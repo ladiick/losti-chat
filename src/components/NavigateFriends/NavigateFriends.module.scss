@@ -62,3 +62,12 @@
 .active{
 	background-color: #303030;
 }
+
+
+@media (max-width: 768px){
+	.wrapper__nav{
+		margin-bottom: 10px;
+		border: none;
+		border-radius: 0;
+	}
+}

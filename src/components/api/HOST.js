@@ -1,4 +1,4 @@
-export const HOST = 'http://3.77.55.244:8001'
+export const HOST = 'http://127.0.0.1:8000'
 
 //192.168.0.106
 //127.0.0.1:8000

@@ -11,7 +11,7 @@ const RegistrationFormStep3 = () => {
 	const stepsInfo = useSelector(state => state.registration.stepsInfo)
 
 	useEffect(() => {
-		if (stepsInfo.email === "") {
+		if (localStorage.getItem('email') === "") {
 			navigate('/registration')
 		}
 	}, [])
@@ -23,14 +23,15 @@ const RegistrationFormStep3 = () => {
 		formState: {errors, isValid},
 	} = useForm({
 		mode: 'onChange',
-		defaultValues: {password: stepsInfo.password}
+		defaultValues: {password: localStorage.getItem('password')}
 	})
 	
 	
 	const onSubmit = data => {
 		console.log(data)
 		delete data.password_repeat
-		
+		console.log(data)
+		localStorage.setItem('password',data.password)
 		dispatch(setRegistrationSteps(data))
 		
 		navigate('/registration/about-user')

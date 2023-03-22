@@ -25,18 +25,21 @@ const authItems = [
         title: 'Сообщения',
         href: '/',
         icon: <BiMessageRounded/>,
+        count: 1
     },
     {
         id: 146,
         title: 'Друзья',
         href: '/friends',
         icon: <BsPeople/>,
+        count: 1
     },
     {
         id: 147,
         title: 'Уведомления',
         href: '',
         icon: <IoNotificationsOutline/>,
+        count: 1
     },
     {
         id: 148,
@@ -72,18 +75,7 @@ const Navigation = () => {
 
     if (!isAuth) {
         return (
-            <motion.div
-                initial={{
-                    x: -200,
-                    opacity: 0
-                }}
-                animate={{
-                    x: 0,
-                    opacity: 1
-                }}
-                transition={{
-                    type: 'tween',
-                }}
+            <div
                 className={s.wrapper__navigation}>
                 <nav className={s.nav__content}>
                     <div className={s.name__company}>
@@ -107,26 +99,17 @@ const Navigation = () => {
                             </NavLink>
                         ))}
                     </ul>
+                    <div className='project__development'>
+                        <span>Проект в разработке <BsPersonWorkspace/></span></div>
                 </nav>
-            </motion.div>
+            </div>
 
         )
     }
 
     return (
 
-        <motion.div
-            initial={{
-                x: -200,
-                opacity: 0
-            }}
-            animate={{
-                x: 0,
-                opacity: 1
-            }}
-            transition={{
-                type: 'tween',
-            }}
+        <div
             className={s.wrapper__navigation}>
             <nav className={s.nav__content}>
                 <div className={s.name__company}>
@@ -148,20 +131,27 @@ const Navigation = () => {
                                     <h2>
                                         {obj.title}
                                     </h2>
+                                    {obj.count && <span className={s.quantity}>{obj.count}</span>}
                                 </li>
                             </NavLink>
                             :
-
-                            <Notification key={obj.id} title={obj.title} className={s.list__item}/>
+                            <Notification
+                                key={obj.id}
+                                title={obj.title}
+                                classItem={s.list__item}
+                                classQuantity={s.quantity}
+                                count={obj.count}
+                            />
 
                     ))}
                 </ul>
-                <div className='project__development'>
-                    <span>Проект в разработке <BsPersonWorkspace/></span></div>
+                {/*<div className='project__development'>*/}
+                {/*    <span>Проект в разработке <BsPersonWorkspace/></span>*/}
+                {/*</div>*/}
             </nav>
 
 
-        </motion.div>
+        </div>
 
     )
 

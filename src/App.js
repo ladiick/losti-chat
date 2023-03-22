@@ -35,7 +35,6 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route path='friends/*' element={<Friends/>}/>
         <Route path='profile' element={<Profile/>}/>
         <Route path='edit' element={<Settings/>}/>
-
         <Route path='*' element={<NotFound/>}/>
     </Route>
     <Route path='/authorization' element={<Authorization/>}/>
@@ -51,9 +50,9 @@ function App() {
 
     useGetUserQuery()
 
-    if(window.screen.width < 1140){
-        return <h1 className='mobile__support'>На данный момент поддержки мобильных устройств нет😔<span> Идет разработка <BsPersonWorkspace/></span></h1>
-    }
+    // if(window.screen.width < 1140){
+    //     return <h1 className='mobile__support'>На данный момент поддержки мобильных устройств нет😔<span> Идет разработка <BsPersonWorkspace/></span></h1>
+    // }
 
     return (
         <>
