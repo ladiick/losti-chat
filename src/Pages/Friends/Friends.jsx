@@ -14,7 +14,7 @@ const Friends = () => {
     const location = useLocation()
 
     return (
-        <>
+        <div className={s.friend__page}>
             <div className={s.wrapper__friends}>
                 {location.pathname !== '/friends/requests' && <FriendRequests/>}
                 <Routes>
@@ -28,7 +28,7 @@ const Friends = () => {
             </div>
             <SearchFriends/>
 
-        </>
+        </div>
     )
 }
 

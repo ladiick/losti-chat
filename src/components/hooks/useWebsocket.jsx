@@ -50,7 +50,7 @@ const useWebsocket = (userAccessToken) => {
 			ws?.removeEventListener('close', closeHandler)
 			ws?.close()
 
-			ws = new WebSocket(`ws://3.77.55.244:8001/ws/chat/?token=${localStorage.getItem('accessToken')}`)
+			ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/?token=${localStorage.getItem('accessToken')}`)
 
 			ws?.addEventListener('close', closeHandler)
 			setSocket(ws)

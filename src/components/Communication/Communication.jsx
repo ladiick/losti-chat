@@ -11,7 +11,7 @@ import {addTimeMessage} from "../actions/addTimeMessage";
 import Loader from "../ui/LoaderWrapper/LoaderWrapper";
 import {Oval} from "react-loader-spinner";
 import LoaderWrapper from "../ui/LoaderWrapper/LoaderWrapper";
-import {AiOutlineArrowDown} from "react-icons/ai";
+import {FiArrowDown} from "react-icons/fi";
 
 
 const Communication = () => {
@@ -53,12 +53,9 @@ const Communication = () => {
         refCommunication.current.scrollTop = refCommunication.current.scrollHeight
     }
 
-    console.log(message)
 
     function scrollHandler(e) {
-        console.log(e.target.scrollTop, e.target.clientHeight, e.target.scrollHeight)
         if (e.target.scrollTop + e.target.clientHeight < e.target.scrollHeight) {
-            console.log('fdfd')
             setScrollButton(true)
         }
 
@@ -166,7 +163,7 @@ const Communication = () => {
                     <div className={s.button__down}
                          onClick={dialogDown}>
                         <span>
-                            <AiOutlineArrowDown/>
+                            <FiArrowDown/>
                             </span>
                     </div>
                 }

@@ -9,3 +9,22 @@
 	margin-left: 20px;
 
 }
+
+.friend__page{
+	width: 100%;
+	display: flex;
+}
+
+@media (max-width: 768px){
+	.nav__block{
+		width: 100%;
+		margin: 0;
+	}
+	.wrapper__friends{
+		width: 100%;
+	}
+	.friend__page{
+		flex-direction: column-reverse;
+		justify-content: flex-end;
+	}
+}

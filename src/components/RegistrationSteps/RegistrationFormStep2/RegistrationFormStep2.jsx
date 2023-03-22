@@ -28,13 +28,14 @@ const RegistrationFormStep2 = () => {
 	const onSubmit = async (e) => {
 		e.preventDefault()
 		const code = values.join('')
+		localStorage.setItem('code',code)
 		if (!code.length) {
 			setErrors('Пин-код пуст')
 			return
 		}
 		try {
 			const res = await axios
-				.get(`${HOST}/api/v1/auth/users/check_code/?code=${code}&email=${stepsInfo.email}`)
+				.get(`${HOST}/api/v1/auth/users/check_code/?code=${code}&email=${localStorage.getItem('email')}`)
 			dispatch(setRegistrationSteps({code}))
 			navigate('/registration/password')
 			
@@ -58,7 +59,7 @@ const RegistrationFormStep2 = () => {
 							<h3 className={codeError ? s.error__send : s.description__title} >
 								{codeError ?
 									codeError :
-									'На вашу электронную почту отправлен код активации'}
+									`На ${localStorage.getItem('email')} отправлен код активации`}
 							</h3>
 							{errors}
 							<PinInput

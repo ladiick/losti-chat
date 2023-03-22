@@ -10,11 +10,13 @@ import {motion} from 'framer-motion'
 import {useGetAllPeopleQuery} from "../features/findPeopleApiSlice";
 import {useAcceptFriendRequestsMutation} from "../features/friendsApiSlice";
 import {toast} from "react-toastify";
+import {FiArrowLeft} from "react-icons/fi";
+import useMatchMedia from "../hooks/useMatchMedia";
 
 const SearchFriends = () => {
     //*requests
     const {data: allPeople = []} = useGetAllPeopleQuery()
-    const [acceptFriendRequests,{isError}] = useAcceptFriendRequestsMutation()
+    const [acceptFriendRequests, {isError}] = useAcceptFriendRequestsMutation()
     //*requests
     const [searchValue, setSearch] = useState('');
 
@@ -22,9 +24,8 @@ const SearchFriends = () => {
     const isVisible = useSelector(state => state.navigation.searchFriend)
 
 
-
     const handlerPeople = async (index, obj) => {
-        try{
+        try {
             await acceptFriendRequests({
                 second_user: obj.pk
             }).unwrap()
@@ -39,8 +40,7 @@ const SearchFriends = () => {
                 progress: undefined,
                 theme: "dark",
             });
-        }
-        catch(err){
+        } catch (err) {
             toast.error('Ошибка, заявка не отправлена, попробуйте позже', {
                 position: "top-center",
                 autoClose: 1500,
@@ -55,6 +55,7 @@ const SearchFriends = () => {
 
     }
 
+    const {isMobile} = useMatchMedia()
 
     return (
         <Dialog open={isVisible} onClose={() => dispatch(searchFriend(false))}>
@@ -71,7 +72,8 @@ const SearchFriends = () => {
                 }}
                 className={s.dialog__overlay}>
                 <Dialog.Panel className={s.wrapper__search__block}>
-                    <Dialog.Title className={s.wrapper__title}>Поиск друзей</Dialog.Title>
+                    <Dialog.Title className={s.wrapper__title}>
+                        {isMobile && <FiArrowLeft onClick={() => dispatch(searchFriend(false))}/>} Поиск друзей</Dialog.Title>
 
                     <SearchBlock searchValue={searchValue} setSearch={setSearch}/>
                     <div className={s.list__allpeople}>

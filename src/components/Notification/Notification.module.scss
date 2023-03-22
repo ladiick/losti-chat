@@ -1,5 +1,6 @@
 .popover__wrapper{
   position: relative;
+  color: var(--descriptionColor);
   button{
     width: 100%;
   }
@@ -7,12 +8,12 @@
 
 .popover__panel{
   position: absolute;
-  left: 60px;
+  left: 100px;
   top: 32px;
   z-index: 10;
-  width: 300px;
-  max-height: 600px;
-  border-radius: 8px;
+  width: 350px;
+  height: 450px;
+  border-radius: 16px;
   border: 1px solid var(--borderColor);
   //box-shadow: 0 0 10px 0px var(--bgColor);
   background-color: var(--bgBlocksColor);
@@ -24,5 +25,21 @@
 
 
 .item__notification{
+
+}
+
+
+@media (max-width: 768px) {
+  .popover__wrapper{
+    width: 100%;
+  }
+
+.popover__panel{
+  bottom: 48px;
+  left: -230px;
+  top: auto;
+  width: 380px;
+
+}
 
 }

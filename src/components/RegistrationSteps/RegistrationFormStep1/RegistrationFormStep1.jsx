@@ -22,7 +22,7 @@ const RegistrationFormStep1 = () => {
         formState: {errors, isValid},
     } = useForm({
         mode: 'onChange',
-        defaultValues: {email: stepsInfo.email}
+        defaultValues: {email: localStorage.getItem('email')}
     })
 
     useEffect(() => {
@@ -33,6 +33,7 @@ const RegistrationFormStep1 = () => {
 
 
     const onSubmit = async (data) => {
+        localStorage.setItem('email',data.email)
         dispatch(setRegistrationSteps(data))
 
         const res = await axios

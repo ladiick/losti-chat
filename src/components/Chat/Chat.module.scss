@@ -1,20 +1,21 @@
 .wrapper {
   width: 65%;
-  //background-color: #202020;
   background-color: var(--bgBlocksColor);
   border-radius: 0 16px 16px 0;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 100;
 
-  //box-shadow: -5px 0 10px -6px rgba(0, 0, 0, 0.4);
   border: 1px solid var(--borderColor);
 
   border-left: none;
 
   @media(max-width: 768px) {
     width: 100%;
+    border-radius: 0;
+    border: none;
   }
 
 }
@@ -25,6 +26,9 @@
   width: 100%;
   background: var(--bgColor);
   border-radius: 0 0 15px 0;
+  @media(max-width: 768px) {
+    border-radius: 0;
+  }
 }
 
 .input {
@@ -40,21 +44,6 @@
     align-items: center;
   }
 
-  input {
-    padding: 10px;
-    color: var(--primaryColor);
-    font-size: 13px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    width: 85%;
-    //padding: 8px;
-    transition: all .3s;
-    //box-shadow: 1px 3px 8px 0 rgba(34, 60, 80, 0.4);
-    //box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.4);
-
-  }
 
   svg {
     width: 24px;
@@ -67,6 +56,9 @@
 
 
     }
+  }
+  @media(max-width: 768px) {
+    padding: 10px 5px;
   }
 }
 
@@ -91,72 +83,9 @@
   }
 }
 
-.header {
-  padding: 10px 15px;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  border-bottom: 1px solid var(--borderColor);
-  //background-color: var(--bgColor);
-}
-
-.left__side {
-  display: flex;
-  align-items: center;
-
-  img {
-    border-radius: 50%;
-    object-fit: cover;
-    width: 32px;
-    height: 32px;
-    transition: all .3s;
-    //border: 1px solid rgba(0,0,0,1);
-    margin-right: 10px;
-
-  }
-}
-
-.person__info {
-  h1 {
-    margin: 0;
-    padding: 0;
-    font-size: calc(14px + 0.1vw);
-    color: #FFFFFF;
-    font-weight: 500;
-  }
-
-  p {
-    font-size: calc(10px + 0.1vw);
-    margin: 0;
-    color: green;
-
-    &:after {
-      content: '•';
-      margin-left: 5px;
-    }
-  }
-}
 
 
-.right_side {
-  display: flex;
-  align-items: center;
 
-  svg {
-
-    transition: all .3s;
-    width: 24px;
-    height: 24px;
-    fill: black;
-    border-radius: 50%;
-    border: 1px solid transparent;
-
-    &:hover {
-      border: 1px solid rgba(0, 0, 0, 0.2);
-
-    }
-  }
-}
 
 
 .emptity__chat {
@@ -230,6 +159,8 @@
       background: rgba(255, 255, 255, 0.5442);
     }
 
+
+
   }
 
 
@@ -243,6 +174,12 @@
     cursor: text;
     pointer-events: none;
     color: var(--decription-color);
+  }
+
+
+
+  @media(max-width: 768px) {
+    width: 75%;
   }
 }
 
@@ -281,18 +218,6 @@
   height: 100%;
 }
 
-.empty__img {
-  width: calc(20px + 1vw);
-  height: calc(20px + 1vw);
-  color: var(--descriptionColor);
-  background-color: var(--navigate-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(14px + 0.1vw);
-  margin-right: 10px;
 
-}
 
 

@@ -1,7 +1,5 @@
 .wrapper__friends{
 	width: 100%;
-	//padding: 30px 15px 30px 15px;
-	//background-color: #282828;
 	border-radius: 0 16px 16px 0;
 	display: flex;
 	position: relative;
@@ -11,7 +9,6 @@
 .my_friends__photo_block{
 	display: flex;
 	width: 100%;
-	//justify-content: space-between;
 	color: white;
 	.photo{
 		width: 60%;
@@ -49,4 +46,19 @@
 		}
 
 	}
+}
+@media (max-width: 768px){
+	.my_friends__photo_block{
+		flex-direction: column;
+
+		.photo{
+			width: 100%;
+			margin: 0;
+			margin-bottom: 10px;
+		}
+		.friend{
+			width: 100%;
+		}
+	}
+
 }

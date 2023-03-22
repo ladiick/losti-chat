@@ -10,10 +10,20 @@
 
   .text {
     display: block;
-    color: #FFFFFF;
+    color: var(--descriptionColor);
     margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
   }
 
 
 }
 
+
+@media (max-width: 768px) {
+  .wrapper{
+    width: 100%;
+    border-radius: 0;
+    border: none;
+  }
+}

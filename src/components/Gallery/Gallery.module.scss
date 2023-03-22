@@ -44,3 +44,12 @@
     }
   }
 }
+
+@media (max-width: 768px){
+  .block__photos{
+    img{
+      width: 100px;
+      height: 100px;
+    }
+  }
+}

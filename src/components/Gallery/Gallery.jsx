@@ -8,11 +8,9 @@ const Gallery = () => {
         <div className={s.wrapper__gallery}>
             <span><HiOutlinePhotograph/> Фото</span>
             <div className={s.block__photos}>
-
                 <img src={photo} alt=""/>
                 <img src={photo} alt=""/>
                 <img src={photo} alt=""/>
-
             </div>
         </div>
     );

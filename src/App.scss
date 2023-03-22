@@ -18,15 +18,20 @@
 
 .project__development {
   color: var(--decription-color);
-  font-size: calc(12px + 0.1vw);
+  font-size: 13px;
   user-select: none;
-
+  padding: 6px;
+  position: fixed;
+  width: 100%;
+  top: -4px;
+  left: 0;
   span {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     svg{
-      margin-left: 6px;
+      margin-left: 5px;
     }
   }
 
