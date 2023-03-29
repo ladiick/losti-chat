@@ -5,6 +5,9 @@ import {HOST} from "../api/HOST";
 import {toast} from "react-toastify";
 import {updateAccessToken} from "../actions/updateAccessToken";
 import {setUserAccessToken} from "../../redux/slices/userSlice";
+import {useUpdateFriendRequestsMutation} from "../features/friendsRequestsApiSlice";
+import {useUpdateFriendsMutation} from "../features/friendsApiSlice";
+import {optionsNotification} from "../actions/optionsNotification";
 
 const useWebsocket = (userAccessToken) => {
 	const dispatch = useDispatch()
@@ -14,7 +17,11 @@ const useWebsocket = (userAccessToken) => {
 	const isAuth = useSelector(state => state.user.isAuth)
 	const refresh = useSelector(state => state.user.tokens.refresh)
 	const myId = useSelector(state => state.user.aboutUser.id)
-	
+
+
+	const [updateFriendRequests] = useUpdateFriendRequestsMutation()
+	const [updateFriends] = useUpdateFriendsMutation()
+
 	useEffect(() => {
 		let ws = null
 		
@@ -22,16 +29,7 @@ const useWebsocket = (userAccessToken) => {
 
 			console.log('соединение разорванно')
 
-			toast.error('Соединение разорвано,\n пытаюсь подключится', {
-				position: "top-center",
-				autoClose: 1500,
-				hideProgressBar: true,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: "dark",
-			})
+			toast.error('Соединение разорвано,\n пытаюсь подключится', optionsNotification)
 
 			const token = updateAccessToken(refresh)
 			localStorage.setItem('accessToken',token.access)
@@ -80,10 +78,33 @@ const useWebsocket = (userAccessToken) => {
 	
 	
 	useEffect(() => {
-		const messageHandler = (e) => {
-			const newMessage2 = JSON.parse(e.data).data
-			dispatch(updatePeople({data: newMessage2, myId: myId}))
-			setNewMessage(newMessage2)
+		const messageHandler = async (e) => {
+			const eventData = JSON.parse(e.data)
+
+			if(eventData.action === 'friend'){
+				if(eventData.data.type === 'friend_request'){
+					await updateFriendRequests()
+					toast.success(`Заявка в друзья от ${eventData.data.user.first_name+" "+eventData.data.user.last_name}`, optionsNotification)
+				}
+				if(eventData.data.type === 'friend_accepted'){
+					await updateFriends()
+					toast.success(`Заявка в друзья принята ${eventData.data.user.first_name+" "+eventData.data.user.last_name}`, optionsNotification)
+				}
+				if(eventData.data.type === 'friend_denied'){
+					toast.error(`Ваша заявка в друзья отклонена ${eventData.data.user.first_name+" "+eventData.data.user.last_name} `, optionsNotification);
+				}
+				if(eventData.data.type === 'friend_canceled'){
+					// в будущем
+				}
+				if(eventData.data.type === 'friend_delete'){
+					// в будущем
+				}
+			}
+			else {
+				const newMessage2 = eventData.data
+				dispatch(updatePeople({data: newMessage2, myId: myId}))
+				setNewMessage(newMessage2)
+			}
 			
 		}
 		

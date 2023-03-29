@@ -24,3 +24,24 @@
   gap: var(--gap);
   width: 100%;
 }
+
+
+@media (max-width: 768px){
+  .wrapper__friends{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 6px 12px;
+    background-color: #19191a;
+    border: none;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .items{
+    display: inline-flex;
+    margin: 0;
+    flex-wrap: nowrap;
+    width: auto;
+  }
+}

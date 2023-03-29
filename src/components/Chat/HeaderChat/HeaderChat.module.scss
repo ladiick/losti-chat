@@ -19,7 +19,7 @@
   position: relative;
   border-bottom: 1px solid var(--borderColor);
   //background-color: var(--bgColor);
-
+  height: 48px;
   @media(max-width: 768px) {
     padding: 10px 5px;
   }
@@ -33,8 +33,8 @@
   img {
     border-radius: 50%;
     object-fit: cover;
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     transition: all .3s;
     margin-right: 10px;
 
@@ -63,7 +63,7 @@
   h1 {
     margin: 0;
     padding: 0;
-    font-size: 17px;
+    font-size: 14px;
     color: var(--descriptionColor);
     font-weight: 500;
   }

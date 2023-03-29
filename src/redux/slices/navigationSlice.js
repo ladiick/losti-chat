@@ -2,10 +2,11 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 const initialState = {
-	
 	modal: false,
 	chat: false,
-	searchFriend: false
+	searchFriend: false,
+	deleteFriend: false,
+	deleteFriendObj: {},
 }
 
 
@@ -23,12 +24,16 @@ export const navigationSlice = createSlice({
 		searchFriend(state,action){
 			 state.searchFriend = action.payload
 		},
+		deleteFriend(state,action){
+			state.deleteFriend = action.payload.flag
+			state.deleteFriendObj = action.payload.obj
+		},
 		
 	}
 	
 	
 })
 
-export const {openNavBar,openModalBlock,openChatBlock,searchFriend} = navigationSlice.actions
+export const {openNavBar,openModalBlock,openChatBlock,searchFriend,deleteFriend,skipChat} = navigationSlice.actions
 
 export default navigationSlice.reducer

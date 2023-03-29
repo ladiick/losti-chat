@@ -1,14 +1,13 @@
 import s from "./Communication.module.scss";
 import Message from "../Message/Message";
 import {useDispatch, useSelector} from "react-redux";
-import {useContext, useEffect, useRef, useState} from "react";
-import {setMessage} from "../../redux/slices/messageSlice";
+import React,{useContext, useEffect, useRef, useState} from "react";
+import {changeActiveMessage, clearMessage, currentMessage, setMessage} from "../../redux/slices/messageSlice";
 import _ from "underscore";
 import {MyContext} from "../../App";
 import {useSearchParams} from "react-router-dom";
 import {useGetMessageQuery, usePaginationMutation} from "../features/messageApiSlice";
 import {addTimeMessage} from "../actions/addTimeMessage";
-import Loader from "../ui/LoaderWrapper/LoaderWrapper";
 import {Oval} from "react-loader-spinner";
 import LoaderWrapper from "../ui/LoaderWrapper/LoaderWrapper";
 import {FiArrowDown} from "react-icons/fi";
@@ -18,6 +17,8 @@ const Communication = () => {
     const dispatch = useDispatch()
     const message = useSelector(state => state.message.message)
     const myId = useSelector(state => state.user.aboutUser.id)
+    const currentMessages = useSelector(state => state.message.currentMessage)
+
     const people = useSelector(state => state.people.people)
     let {newMessage} = useContext(MyContext);
     const [searchParams, setSearchParams] = useSearchParams()
@@ -33,6 +34,9 @@ const Communication = () => {
     useEffect(() => {
         setCurrentPage(2)
         setFetching(false)
+        return ()=>{
+            dispatch(clearMessage())
+        }
     }, [searchParams.get('dialogs')])
 
 
@@ -79,7 +83,6 @@ const Communication = () => {
 
     }, [message])
 
-
     useEffect(() => {
 
         if (newMessage && message?.results?.[0]?.id !== newMessage.id) {
@@ -104,6 +107,11 @@ const Communication = () => {
 
 
     }, [newMessage]);
+
+
+    const handlerCurrentMessage = (obj) => {
+        dispatch(currentMessage(obj))
+    }
 
     if (isLoading) {
         return (
@@ -136,6 +144,8 @@ const Communication = () => {
                                 key={`${obj.time}_time`}
                                 message={obj.message}
                                 who={'Date'}
+                                obj={obj}
+                                handlerCurrentMessage={() => handlerCurrentMessage(obj)}
                             /> :
                             obj?.sender?.pk === myId ?
                                 <Message
@@ -143,6 +153,10 @@ const Communication = () => {
                                     message={obj.message}
                                     time={obj.time}
                                     who={'recipient'}
+                                    obj={obj}
+
+                                    handlerCurrentMessage={() => handlerCurrentMessage(obj)}
+
                                 />
                                 :
                                 obj?.recip?.pk === myId ?
@@ -151,6 +165,9 @@ const Communication = () => {
                                         message={obj.message}
                                         time={obj.time}
                                         who={'sender'}
+                                        obj={obj}
+                                        handlerCurrentMessage={() => handlerCurrentMessage(obj)}
+
                                     />
                                     : ''
 

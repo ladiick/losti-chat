@@ -1,22 +1,20 @@
 .block__messages {
-	max-height: 82vh;
-	padding: 15px 5px 15px 15px;
-	margin-right: 10px;
+
+	margin-right: 5px;
 	height: 100%;
 	position: relative;
 	background-color: var(--bgBlocksColor);
 	overflow-y:auto;
 	overflow-x: hidden;
 	transition: all .3s;
-	//width: 100%;
+
 
 	.button__down{
 		width: 100%;
 		display: flex;
 		position: sticky;
-		bottom: 0;
 		justify-content: flex-end;
-
+		bottom: 5px;
 		span{
 			display: flex;
 			font-size: 24px;
@@ -71,6 +69,12 @@
 	}
 }
 
+
+@media (max-width: 768px){
+	.block__messages{
+		margin: 0;
+	}
+}
 
 
 

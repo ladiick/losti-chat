@@ -1,8 +1,6 @@
 import s from './Navigation.module.scss'
-import photo from '../assets/my_photo.jpg'
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {motion} from 'framer-motion'
 import {BiMessageRounded} from "react-icons/bi";
 import {BsPeople, BsPersonCircle, BsPersonWorkspace} from "react-icons/bs";
 import {MdOutlineLogout} from 'react-icons/md'
@@ -12,44 +10,10 @@ import logo from '../assets/logo.svg'
 import {CgProfile} from "react-icons/cg";
 import {IoNotificationsOutline} from "react-icons/io5";
 import Notification from "../Notification/Notification";
+import useMatchMedia from "../hooks/useMatchMedia";
+import {useGetFriendsRequestsQuery} from "../features/friendsRequestsApiSlice";
+import {RxHamburgerMenu} from "react-icons/rx";
 
-const authItems = [
-    {
-        id: 144,
-        title: 'Моя страница',
-        href: '/profile',
-        icon: <CgProfile/>,
-    },
-    {
-        id: 145,
-        title: 'Сообщения',
-        href: '/',
-        icon: <BiMessageRounded/>,
-        count: 1
-    },
-    {
-        id: 146,
-        title: 'Друзья',
-        href: '/friends',
-        icon: <BsPeople/>,
-        count: 1
-    },
-    {
-        id: 147,
-        title: 'Уведомления',
-        href: '',
-        icon: <IoNotificationsOutline/>,
-        count: 1
-    },
-    {
-        id: 148,
-        title: 'Выход',
-        href: '/logout',
-        icon: <MdOutlineLogout/>,
-    },
-
-
-]
 
 const noAuthItems = [
     {
@@ -71,7 +35,48 @@ const noAuthItems = [
 const Navigation = () => {
     const isAuth = useSelector(state => state.user.isAuth)
     const classActive = ({isActive}) => isActive ? s.active : ''
+    const {isMobile} = useMatchMedia()
+    const {data: countRequests = []} = useGetFriendsRequestsQuery()
 
+    const myId = useSelector(state => state.user.aboutUser.id)
+
+    const authItems = [
+        {
+            id: 144,
+            title: 'Моя страница',
+            href: `/profile/${myId}`,
+            icon: <CgProfile/>,
+        },
+        {
+            id: 145,
+            title: 'Сообщения',
+            href: '/',
+            icon: <BiMessageRounded/>,
+            count: 1
+        },
+        {
+            id: 146,
+            title: 'Друзья',
+            href: '/friends',
+            icon: <BsPeople/>,
+            count: countRequests.length
+        },
+        {
+            id: 147,
+            title: 'Уведомления',
+            href: '',
+            icon: <IoNotificationsOutline/>,
+            count: 1
+        },
+        {
+            id: 148,
+            title: isMobile ? 'Меню' :'Выход',
+            href: isMobile ? '/menu' : '/logout',
+            icon: isMobile ? <RxHamburgerMenu/> : <MdOutlineLogout/>,
+        },
+
+
+    ]
 
     if (!isAuth) {
         return (
@@ -119,29 +124,61 @@ const Navigation = () => {
 					</span>
                 </div>
                 <ul className={s.list__items}>
-                    {authItems.map(obj => (
-                        obj.href ?
+                    {authItems.map((obj, index) => (
+                        isMobile ?
                             <NavLink
                                 key={obj.id}
-                                to={obj.href}
+                                to={obj.title === 'Уведомления' ? '/notification' : obj.href}
                                 title={obj.title}
                                 className={classActive}>
                                 <li className={s.list__item}>
                                     {obj.icon}
                                     <h2>
-                                        {obj.title}
+                                        {isMobile && index === 0 ?
+                                            'Профиль' : obj.title}
                                     </h2>
-                                    {obj.count && <span className={s.quantity}>{obj.count}</span>}
+                                    {
+                                        obj?.count ?
+                                            <span className={s.quantity}>
+                                            {obj.count}
+                                                {console.log(obj.count)}
+                                        </span>
+                                            :
+                                            ""
+                                    }
                                 </li>
                             </NavLink>
-                            :
-                            <Notification
-                                key={obj.id}
-                                title={obj.title}
-                                classItem={s.list__item}
-                                classQuantity={s.quantity}
-                                count={obj.count}
-                            />
+                            : obj.href ?
+                                <NavLink
+                                    key={obj.id}
+                                    to={obj.href}
+                                    title={obj.title}
+                                    className={classActive}>
+                                    <li className={s.list__item}>
+                                        {obj.icon}
+                                        <h2>
+                                            {obj.title}
+                                        </h2>
+                                        {
+
+                                            obj?.count ?
+                                                <span className={s.quantity}>
+                                                    {obj.count}
+                                                    {console.log(obj.count)}
+                                                </span>
+                                                :
+                                                ""
+                                        }
+                                    </li>
+                                </NavLink>
+                                :
+                                <Notification
+                                    key={obj.id}
+                                    title={obj.title}
+                                    classItem={s.list__item}
+                                    classQuantity={s.quantity}
+                                    count={obj.count}
+                                />
 
                     ))}
                 </ul>

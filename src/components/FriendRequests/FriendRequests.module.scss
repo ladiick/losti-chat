@@ -3,33 +3,9 @@
 	padding: 30px 15px 20px 15px;
 	border-radius: 16px;
 	border: 1px solid #434343;
-	box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
 	margin-bottom: 20px;
 	overflow: hidden;
-	//&::-webkit-scrollbar-track {
-	//	transition: all .3s;
-	//	border-radius: 4px;
-	//
-	//}
-	//&::-webkit-scrollbar {
-	//	transition: all .3s;
-	//	width: 4px;
-	//
-	//}
-	//&::-webkit-scrollbar-thumb {
-	//	transition: all .3s;
-	//	border-radius: 4px;
-	//	background: transparent;
-	//
-	//}
-	//
-	//&:hover{
-	//	overflow: auto;
-	//	&::-webkit-scrollbar-track {border-radius: 4px;}
-	//	&::-webkit-scrollbar {width: 4px;}
-	//	&::-webkit-scrollbar-thumb {border-radius: 4px;background: rgba(255, 255, 255, 0.5442);}
-	//}
-
+	background-color: var(--bgBlocksColor);
 
 
 	.wrapper__header{
@@ -38,11 +14,14 @@
 		justify-content: space-between;
 		align-items: center;
 		span{
+			font-weight: 500;
 			border: 1px solid #434343;
 			border-radius: 8px;
 			background-color: #333333;
 			padding: 5px;
 			font-size: 13px;
+			color: var(--descriptionColor);
+
 		}
 
 		a{
@@ -77,7 +56,6 @@
 	padding: 30px 15px;
 	border-radius: 12px;
 	border: 1px solid #434343;
-	box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
 	overflow-y: auto;
 	background-color: var(--bgBlocksColor);
 
@@ -88,11 +66,14 @@
 		justify-content: space-between;
 		align-items: center;
 		span{
+			font-weight: 500;
 			border: 1px solid #434343;
 			border-radius: 8px;
 			background-color: #333333;
 			padding: 5px;
 			font-size: 13px;
+			color: var(--descriptionColor);
+
 		}
 
 		a{
@@ -119,27 +100,40 @@
 		}
 	}
 
-	//&::-webkit-scrollbar-track {
-	//	transition: all .3s;
-	//	border-radius: 4px;
-	//
-	//}
-	//&::-webkit-scrollbar {
-	//	transition: all .3s;
-	//	width: 4px;
-	//
-	//}
-	//&::-webkit-scrollbar-thumb {
-	//	transition: all .3s;
-	//	border-radius: 4px;
-	//	background: transparent;
-	//
-	//}
-	//
-	//&:hover{
-	//	overflow: auto;
-	//	&::-webkit-scrollbar-track {border-radius: 4px;}
-	//	&::-webkit-scrollbar {width: 4px;}
-	//	&::-webkit-scrollbar-thumb {border-radius: 4px;background: rgba(255, 255, 255, 0.5442);}
-	//}
+}
+
+@media (max-width: 768px) {
+	.wrapper{
+		margin: 0;
+		padding-bottom: 0;
+		border-radius: 0;
+		border: none;
+		.wrapper__header{
+			span{
+				padding: 0;
+				text-transform: uppercase;
+				border-radius: 0;
+				border: none;
+				background-color: transparent;
+			}
+		}
+	}
+	.wrapper__requests{
+		padding: 0;
+		margin: 0;
+		border-radius: 0;
+		border: none;
+		.wrapper__header{
+			span{
+				padding: 0;
+
+				text-transform: uppercase;
+				border-radius: 0;
+				border: none;
+				background-color: transparent;
+			}
+		}
+	}
+
+
 }

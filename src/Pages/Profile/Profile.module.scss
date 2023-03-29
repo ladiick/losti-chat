@@ -49,7 +49,7 @@
 }
 @media (max-width: 768px){
 	.my_friends__photo_block{
-		flex-direction: column;
+		flex-direction: column-reverse;
 
 		.photo{
 			width: 100%;

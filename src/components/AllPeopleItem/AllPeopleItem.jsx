@@ -1,24 +1,27 @@
 import React from 'react';
 import s from "./AllPeopleItem.module.scss"
-import photo from "../assets/my_photo.jpg";
 import BtnAddFriend from "../BtnAddFriend/BtnAddFriend";
 import {changeColor} from "../actions/changeColor";
 import {HOST} from "../api/HOST";
+import EmptyImage from "../ui/EmptyImage/EmptyImage";
 
 const AllPeopleItem = ({obj, handlerPeople,index}) => {
     return (
         <div className={s.wrapper__people}>
             <div className={s.about__user}>
 
-                {obj.image ?
-                    <img src={`${HOST+obj.image}`} alt="avatar"/>
-                    :
-                    <span className={s.empty__img}
-                          style={{backgroundColor: changeColor(index)}}
-                    >{obj.first_name[0]}{obj.last_name[0]}</span>
-                }
+                <EmptyImage
+                    image={obj?.image}
+                    firstName={obj?.first_name}
+                    lastName={obj?.last_name}
+                    index={index}
+                    width={48}
+                    height={48}
+                    fontSize={20}
+                    marginRight={15}
+                />
 
-                <h3>{obj.first_name} {obj.last_name}</h3>
+                <h3>{obj?.first_name} {obj?.last_name}</h3>
             </div>
             <BtnAddFriend handlerPeople={handlerPeople}/>
         </div>

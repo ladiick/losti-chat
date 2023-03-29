@@ -2,7 +2,7 @@ import React from 'react';
 import {Popover} from "@headlessui/react";
 import s from './Notification.module.scss'
 import {IoNotificationsOutline} from "react-icons/io5";
-import {motion} from 'framer-motion'
+import {Link} from "react-router-dom";
 
 const Notification = ({title, classItem, count, classQuantity}) => {
 
@@ -27,6 +27,7 @@ const Notification = ({title, classItem, count, classQuantity}) => {
                                 <h4>Здесь будут уведомления</h4>
                             </li>
                         </ul>
+                        <Link to='notification'>Показать все</Link>
                     </Popover.Panel>
 
                 </>

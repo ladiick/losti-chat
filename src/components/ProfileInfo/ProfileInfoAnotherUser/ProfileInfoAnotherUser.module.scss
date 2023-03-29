@@ -1,0 +1,40 @@
+
+.block__communicate {
+  color: var(--descriptionColor);
+  display: flex;
+  align-items: center;
+
+  .write__message {
+    font-size: 13px;
+    background-color: var(--descriptionColor);
+    padding: 6px 16px;
+    border-radius: 6px;
+    color: #000000;
+    transition: all 0.3s;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  .add__friend {
+
+  }
+
+  .exist__friend {
+    max-height: inherit;
+    padding: 3.5px;
+    background-color: var(--borderColor);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover{
+      background-color: var(--navigate-color);
+    }
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

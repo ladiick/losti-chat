@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 import {motion} from 'framer-motion'
 import {useGetPossibleFriendsQuery} from "../features/friendsPossibleFriendsApiSlice";
 import {useAcceptFriendRequestsMutation} from "../features/friendsApiSlice";
+import {optionsNotification} from "../actions/optionsNotification";
 
 const PossibleFriends = () => {
 
@@ -17,28 +18,10 @@ const PossibleFriends = () => {
                 second_user: obj.possible_friend.pk
             }).unwrap()
 
-            toast.success('Заявка отправлена', {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.success('Заявка отправлена', optionsNotification);
         } catch (err) {
             console.log(err)
-            toast.error('Ошибка, заявка не отправлена, попробуйте позже', {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.error('Ошибка, заявка не отправлена, попробуйте позже', optionsNotification);
         }
 
 

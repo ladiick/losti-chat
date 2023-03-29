@@ -5,18 +5,20 @@ import FriendsItem from "../FriendsItem/FriendsItem";
 import SearchBlock from "../SearchBlock/SearchBlock";
 import {Link} from "react-router-dom";
 import {searchFriend} from "../../redux/slices/navigationSlice";
-import Modul from "../Modul/Modul";
+import Modul from "../DialogBoxes/Modul/Modul";
 import {motion} from 'framer-motion'
 import {useGetFriendsQuery} from "../features/friendsApiSlice";
 import OutputFriends from "../OutputFriends/OutputFriends";
+import DeleteFriendModal from "../DialogBoxes/DeleteFriendModal/DeleteFriendModul";
+import ActionButton from "../ui/ActionButton/ActionButton";
 
 function MyFriends() {
 
     const dispatch = useDispatch()
     const [searchValue, setSearch] = useState('');
-    const {data=[]} = useGetFriendsQuery()
-
-
+    const {data = []} = useGetFriendsQuery()
+    const deleteFriend = useSelector(state => state.navigation.deleteFriend)
+    const modal = useSelector(state => state.navigation.modal)
     if (data.length === 0) {
         return (
             <motion.div
@@ -35,7 +37,7 @@ function MyFriends() {
                 }}
                 className={s.wrapper}>
                 <div className={s.friends__empty}>
-                    У вас нет друзей! <Link to=''>Cкорее добавьте их</Link>
+                    У вас нет друзей! <span onClick={() => dispatch(searchFriend(true))}>Cкорее добавьте их</span>
                 </div>
             </motion.div>
         )
@@ -57,15 +59,16 @@ function MyFriends() {
 
             }}
             className={s.wrapper}>
-            <Modul/>
+            {modal && <Modul/>}
+            {deleteFriend && <DeleteFriendModal/>}
             <header>
-                <div className={s.quantity__friends}>
-                    <p>Все друзья</p>
-                    <span>{data?.length}</span>
-                </div>
-                <div className={s.search__friends} onClick={() => dispatch(searchFriend(true))}>
-                    <span>Найти друзей</span>
-                </div>
+
+                <ActionButton
+                    style={{cursor:'default'}}
+                    second={true}>Все друзья {data?.length}</ActionButton>
+
+                <ActionButton
+                    onClick={() => dispatch(searchFriend(true))}>Найти друзей</ActionButton>
             </header>
             <SearchBlock searchValue={searchValue} setSearch={setSearch}/>
             <OutputFriends data={data} searchValue={searchValue}/>
