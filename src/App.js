@@ -25,6 +25,7 @@ import NotFound from "./components/NotFound/NotFound";
 import {BsPersonWorkspace} from "react-icons/bs";
 import {useGetUserQuery} from "./components/features/userApiSlice";
 import Settings from "./Pages/Settings/Settings";
+import NotificationPage from "./Pages/NotificationPage/NotificationPage";
 
 export const MyContext = React.createContext()
 
@@ -33,7 +34,8 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
         <Route index element={<Dialogs/>}/>
         <Route path='friends/*' element={<Friends/>}/>
-        <Route path='profile' element={<Profile/>}/>
+        <Route path='profile/:id' element={<Profile/>}/>
+        <Route path='notification' element={<NotificationPage/>}/>
         <Route path='edit' element={<Settings/>}/>
         <Route path='*' element={<NotFound/>}/>
     </Route>
@@ -50,9 +52,8 @@ function App() {
 
     useGetUserQuery()
 
-    // if(window.screen.width < 1140){
-    //     return <h1 className='mobile__support'>На данный момент поддержки мобильных устройств нет😔<span> Идет разработка <BsPersonWorkspace/></span></h1>
-    // }
+
+
 
     return (
         <>

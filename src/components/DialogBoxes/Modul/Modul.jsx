@@ -1,14 +1,15 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './Modul.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {openModalBlock} from "../../redux/slices/navigationSlice";
-import photo from '../assets/my_photo.jpg'
-import {MyContext} from "../../App";
-import {setFriendsCurrent} from "../../redux/slices/friendsSlice";
+import {openModalBlock} from "../../../redux/slices/navigationSlice";
+import photo from '../../assets/my_photo.jpg'
+import {MyContext} from "../../../App";
+import {setFriendsCurrent} from "../../../redux/slices/friendsSlice";
 import {toast} from "react-toastify";
 import {Dialog} from "@headlessui/react";
 import {AnimatePresence, motion} from 'framer-motion'
-import {HOST} from "../api/HOST";
+import {HOST} from "../../api/HOST";
+import {optionsNotification} from "../../actions/optionsNotification";
 
 const Modul = () => {
 
@@ -40,16 +41,7 @@ const Modul = () => {
                 }
             )
         )
-        toast.success('Сообщение отправлено', {
-            position: "top-right",
-            autoClose: 1500,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        toast.success('Сообщение отправлено', optionsNotification);
         setTextArea('')
         dispatch(openModalBlock(false))
         dispatch(setFriendsCurrent({}))

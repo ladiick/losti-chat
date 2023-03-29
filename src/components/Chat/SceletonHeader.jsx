@@ -10,8 +10,8 @@ const SceletonHeader = () => (
         backgroundColor="#828282"
         foregroundColor="#303030"
     >
-        <rect x="40" y="10" rx="3" ry="3" width="160" height="13" />
-        <circle cx="16" cy="16" r="16" />
+        <rect x="40" y="8" rx="3" ry="3" width="160" height="13" />
+        <circle cx="14" cy="14" r="14" />
     </ContentLoader>
 )
 

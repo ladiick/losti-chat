@@ -10,5 +10,5 @@ export const currentPeopleApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetCurrentPersonQuery
+    useGetCurrentPersonQuery,
 } = currentPeopleApiSlice

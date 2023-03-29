@@ -12,6 +12,7 @@ import {useAcceptFriendRequestsMutation} from "../features/friendsApiSlice";
 import {toast} from "react-toastify";
 import {FiArrowLeft} from "react-icons/fi";
 import useMatchMedia from "../hooks/useMatchMedia";
+import {optionsNotification} from "../actions/optionsNotification";
 
 const SearchFriends = () => {
     //*requests
@@ -30,27 +31,9 @@ const SearchFriends = () => {
                 second_user: obj.pk
             }).unwrap()
 
-            toast.success('Заявка отправлена', {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.success('Заявка отправлена', optionsNotification);
         } catch (err) {
-            toast.error('Ошибка, заявка не отправлена, попробуйте позже', {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.error('Ошибка, заявка не отправлена, попробуйте позже', optionsNotification);
         }
 
     }

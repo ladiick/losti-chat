@@ -6,13 +6,11 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: #0f0f0f;
+  background-color: #0a0a0a;
 }
 
 code {
@@ -20,8 +18,13 @@ code {
     monospace;
 }
 
+
 :root {
-  --bgBlocksColor: #131313;
+  --bgBlocksColor: #19191a;
+  --fontWeight: 500;
+  --paddingBlock: 30px 15px;
+  --borderRadiusBlock: 16px;
+  --marginBlock: 20px;
   --primaryColor: #ffffff;
   --descriptionColor: #e1e3e6;
   --secondDescription: #828282;
@@ -29,6 +32,7 @@ code {
   --borderColor: #434343;
   --bgColor: #202020;
   --decription-color: #888888;
-  --navigate-color: #303030
+  --navigate-color: #303030;
+  --borderRadiusButton: 6px
 }
 

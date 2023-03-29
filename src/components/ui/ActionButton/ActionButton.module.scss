@@ -1,0 +1,49 @@
+.button__primary {
+  font-size: 13px;
+  font-weight: 500;
+  background-color: var(--descriptionColor);
+  padding: 8px 12px;
+  border-radius: var(--borderRadiusButton);
+  transition: all 0.3s;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  &:hover {
+    background-color: lighten(#202020, 70%);
+  }
+
+  &:focus {
+    outline: var(--secondColor);
+  }
+
+  &:active {
+    background-color: lighten(#202020, 60%);
+
+  }
+
+}
+
+.button__second {
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-block;
+  background-color: var(--navigate-color);
+  padding: 8px 12px;
+
+  border-radius: var(--borderRadiusButton);
+  transition: all 0.3s;
+  color: var(--descriptionColor);
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten(#303030, 5%);
+  }
+  &:active {
+    background-color: lighten(#303030, 0%);
+  }
+
+  &:focus {
+    outline: var(--secondColor);
+  }
+
+}

@@ -1,11 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addTimeMessage} from "../../components/actions/addTimeMessage";
-import {HOST} from "../../components/api/HOST";
-import _ from "underscore";
 
 
 const initialState = {
     message: {},
+    currentMessage: [],
 }
 
 
@@ -41,12 +39,31 @@ export const messageSlice = createSlice({
 
         setMessage: (state, action) => {
             state.message.results.unshift(action.payload)
+        },
+        currentMessage(state, action) {
+
+            const indexMessage = state.currentMessage.findIndex((message, index) => {
+                if (message.id === action.payload.id) {
+                    return true
+                }
+            })
+
+            if (indexMessage === -1) {
+                state.currentMessage.push(action.payload)
+            } else {
+                state.currentMessage.splice(indexMessage, 1)
+            }
+
+        },
+        clearMessage(state){
+            state.currentMessage = []
         }
+
     },
 
 
 })
 
-export const {setMessage, addMessage, newMessages} = messageSlice.actions
+export const {setMessage, addMessage, newMessages, currentMessage, clearMessage} = messageSlice.actions
 
 export default messageSlice.reducer

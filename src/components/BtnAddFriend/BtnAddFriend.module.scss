@@ -1,15 +1,15 @@
 .btn__wrapper{
 	display: flex;
 	cursor: pointer;
-	border-radius: 50%;
 	transition: all 0.3s;
 	padding: 8px;
-	img{
+	border-radius: 50%;
+	svg{
 		width: 24px;
 		height: 24px;
+		color: var(--secondColor);
 	}
 	&:hover{
-		background-color: var(--borderColor);
+		background-color: var(--bgColor);
 	}
-
 }

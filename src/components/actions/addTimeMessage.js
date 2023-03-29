@@ -9,7 +9,11 @@ export const addTimeMessage = (data2=[])=>{
 	for(let i = 0; i < data.length; i++){
 
 
-		timeObj = `${new Date(data[i].time).getFullYear()}-${new Date(data[i].time).getMonth()+1}-${new Date(data[i].time).getDate()}`
+		// timeObj = `${new Date(data[i].time).getFullYear()}-${new Date(data[i].time).getMonth()+1}-${new Date(data[i].time).getDate()}`
+		timeObj = new Date(data[i].time).toLocaleDateString('ru')
+			.split('.')
+			.reverse()
+			.join('-')
 
 		if(time===null) {
 			time = timeObj
@@ -37,7 +41,6 @@ export const addTimeMessage = (data2=[])=>{
 		type: 'Date',
 		time: data[data.length-1]?.time
 	}
-
 	data.push(obj_2)
 	return data
 

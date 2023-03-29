@@ -1,22 +1,25 @@
 import React from 'react';
 import s from './FriendRequests.module.scss'
-import {useDispatch, useSelector} from "react-redux";
 import FriendsItem from "../FriendsItem/FriendsItem";
 import {Link, useLocation} from "react-router-dom";
 import {motion} from 'framer-motion'
 import {useGetFriendsRequestsQuery} from "../features/friendsRequestsApiSlice";
 import {useAcceptFriendRequestsMutation, useCancelFriendRequestsMutation} from "../features/friendsApiSlice";
 import {toast} from "react-toastify";
+import {optionsNotification} from "../actions/optionsNotification";
+import useMatchMedia from "../hooks/useMatchMedia";
 
 const FriendRequests = ({allRequests}) => {
 
     const location = useLocation()
-
+    const {isMobile} = useMatchMedia()
     //*requests*
         const {data: friendRequests = []} = useGetFriendsRequestsQuery()
         const [acceptFriendRequests,{isError}] = useAcceptFriendRequestsMutation()
         const [cancelFriendRequests] = useCancelFriendRequestsMutation()
     //*requests*
+
+
 
     const handlerAccept = async (obj, index) => {
         try {
@@ -24,55 +27,19 @@ const FriendRequests = ({allRequests}) => {
                 second_user: obj.friend.pk
             }).unwrap()
 
-            toast.success('Заявка принята', {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.success('Заявка принята', optionsNotification);
         }
         catch(err){
-            toast.error('Не удалось принять заявку', {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.error('Не удалось принять заявку', optionsNotification)
         }
     }
     const handlerCancel = async (obj, index) => {
         try {
             await cancelFriendRequests(obj.friend.pk).unwrap()
-            toast.success('Заявка отклонена', {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.success('Заявка отклонена', optionsNotification);
         }
         catch(err){
-            toast.success('Не удалось отклонить', {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.success('Не удалось отклонить', optionsNotification);
         }
     }
 
@@ -119,9 +86,9 @@ const FriendRequests = ({allRequests}) => {
             className={location.pathname !== '/friends/requests' ? s.wrapper : s.wrapper__requests}>
             <header className={s.wrapper__header}>
 				<span>
-					Заявки в друзья {friendRequests?.length}
+					Заявки в друзья {friendRequests?.length !== 1 && friendRequests?.length !== 0 ? friendRequests?.length !== 1 : ''}
 				</span>
-                {location.pathname !== '/friends/requests' && <Link to={'/friends/requests'}>
+                {location.pathname !== '/friends/requests' && friendRequests?.length !== 1 && friendRequests?.length !== 0 && <Link to={'/friends/requests'}>
                     Показать всех
                     <svg height="24px" version="1.1" viewBox="0 0 512 512" width="24px">
                         <polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/>

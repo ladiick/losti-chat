@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './NavigateFriends.module.scss'
 import {NavLink, useLocation} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {searchFriend} from "../../redux/slices/navigationSlice";
 import {motion} from 'framer-motion'
 import {useGetFriendsRequestsQuery} from "../features/friendsRequestsApiSlice";
@@ -43,7 +43,7 @@ const NavigateFriends = () => {
 					</NavLink>
 				</li>
 				<li className={s.nav__items} onClick={()=> dispatch(searchFriend(true))}>
-					<div className={s.search__friends}>Поиск Друзей</div>
+					<div className={s.search__friends} title='Поиск друзей'>Поиск друзей</div>
 				</li>
 			</ul>
 		</motion.nav>

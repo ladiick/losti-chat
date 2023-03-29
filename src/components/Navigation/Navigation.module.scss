@@ -177,10 +177,12 @@
 
 @media (max-width: 768px) {
   .list__item {
-    padding: 10px;
+    padding: 4px;
 
     h2 {
-      display: none;
+      //display: none;
+      font-size: 10px;
+      //margin-top: 5px;
     }
   }
 }

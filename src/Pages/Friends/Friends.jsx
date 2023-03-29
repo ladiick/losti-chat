@@ -8,11 +8,12 @@ import FriendsRequestsPage from "../FriendsRequestsPage/FriendsRequestsPage";
 import NavigateFriends from "../../components/NavigateFriends/NavigateFriends";
 import SearchFriends from "../../components/SearchFriends/SearchFriends";
 import PossibleFriends from "../../components/PossibleFriends/PossibleFriends";
+import useMatchMedia from "../../components/hooks/useMatchMedia";
 
 const Friends = () => {
 
     const location = useLocation()
-
+    const {isMobile} = useMatchMedia()
     return (
         <div className={s.friend__page}>
             <div className={s.wrapper__friends}>
@@ -23,7 +24,7 @@ const Friends = () => {
                 {location.pathname !== '/friends/requests' && <MyFriends/>}
             </div>
             <div className={s.nav__block}>
-                <NavigateFriends/>
+                {!isMobile && <NavigateFriends/>}
                 <PossibleFriends/>
             </div>
             <SearchFriends/>

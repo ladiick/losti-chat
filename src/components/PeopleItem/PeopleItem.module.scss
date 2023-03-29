@@ -36,7 +36,7 @@
 		transition: all .3s;
 	}
 	&:hover {
-		background-color: #202020;
+		background-color: var(--navigate-color);
 		&:before{
 			width: 50%;
 			transform: translateX(50%);
@@ -57,7 +57,7 @@
 	border-radius: 8px;
 	cursor: pointer;
 
-	background: #303030;
+	background: var(--navigate-color);
 	&:not(:last-child){
 		margin-bottom: 5px;
 	}

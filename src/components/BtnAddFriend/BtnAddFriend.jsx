@@ -1,12 +1,12 @@
 import React from 'react';
-import btn from '../assets/btnAddFriend.svg'
 import s from './BtnAddFriend.module.scss'
+import {AiOutlineUserAdd} from "react-icons/ai";
 
 const BtnAddFriend = ({handlerPeople}) => {
 	
 	return (
 		<div className={s.btn__wrapper} onClick={handlerPeople}>
-			<img src={btn} alt="addFriend"/>
+			<AiOutlineUserAdd/>
 		</div>
 	);
 };
