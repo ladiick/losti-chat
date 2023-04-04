@@ -6,6 +6,7 @@ import {motion} from 'framer-motion'
 import {useGetPossibleFriendsQuery} from "../features/friendsPossibleFriendsApiSlice";
 import {useAcceptFriendRequestsMutation} from "../features/friendsApiSlice";
 import {optionsNotification} from "../actions/optionsNotification";
+import Title from "../ui/Title/Title";
 
 const PossibleFriends = () => {
 
@@ -45,7 +46,7 @@ const PossibleFriends = () => {
                 duration: 0.5
             }}
             className={s.wrapper}>
-            <h1 className={s.title__block}>Возможные друзья</h1>
+            <Title style={{marginBottom:20}}>Возможные друзья</Title>
             <div className={s.block__scroll}>
                 {
                     possibleFriends?.map((obj, index) => <PossibleFriendsItem

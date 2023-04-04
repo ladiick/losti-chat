@@ -7,28 +7,41 @@ import {BsTrash3} from "react-icons/bs";
 import ActionButton from "../../ui/ActionButton/ActionButton";
 import {clearMessage} from "../../../redux/slices/messageSlice";
 import useMatchMedia from "../../hooks/useMatchMedia";
+import {forwardMessageFlag} from "../../../redux/slices/navigationSlice";
+import {useSearchParams} from "react-router-dom";
 
 const HeaderForwardMessage = () => {
     const currentMessage = useSelector(state => state.message.currentMessage)
     const dispatch = useDispatch()
     const {isMobile} = useMatchMedia()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const param = searchParams.get('dialogs')
 
-    const sendMessage = () => {
+    const answerMessage = () => {
         console.log(currentMessage)
+    }
+    const forwardMessage = ()=>{
+        dispatch(forwardMessageFlag(true))
+    }
+
+    const clearSelectMessage = ()=>{
+        dispatch(clearMessage({param:searchParams.get('dialogs')}))
     }
 
     return (
         <header className={s.header}>
             <span className={s.left__side}>
-                 {isMobile && 'Выбрано'} {changeDeclination(currentMessage.length, 'message')} <IoClose className={s.close}
-                onClick={() => dispatch(clearMessage())}/>
+                 {isMobile && 'Выбрано'} {changeDeclination(currentMessage?.[param]?.length, 'message')}
+                <IoClose
+                className={s.close}
+                onClick={() => clearSelectMessage()}/>
             </span>
             <div className={s.right__side}>
                 <BsTrash3 style={!isMobile ? {marginRight: 10} : {marginLeft: 10}}/>
-                <div>
-                    <ActionButton style={isMobile ? {marginRight: 10} : {marginLeft: 10}}
-                                  onClick={sendMessage}>Ответить</ActionButton>
-                    <ActionButton>Переслать</ActionButton>
+                <div style={{display: 'flex'}}>
+                    <ActionButton style={{marginRight: 10}}
+                                  onClick={answerMessage}>Ответить</ActionButton>
+                    <ActionButton onClick={forwardMessage}>Переслать</ActionButton>
                 </div>
             </div>
         </header>

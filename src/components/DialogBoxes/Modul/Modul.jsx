@@ -10,6 +10,11 @@ import {Dialog} from "@headlessui/react";
 import {AnimatePresence, motion} from 'framer-motion'
 import {HOST} from "../../api/HOST";
 import {optionsNotification} from "../../actions/optionsNotification";
+import EmptyImage from "../../ui/EmptyImage/EmptyImage";
+import Text from '../../ui/Text/Text'
+import ActionButton from "../../ui/ActionButton/ActionButton";
+import {IoClose} from "react-icons/io5";
+import CloseButton from "../../ui/CloseButton/CloseButton";
 
 const Modul = () => {
 
@@ -23,7 +28,7 @@ const Modul = () => {
     useEffect(() => {
 
         if (modalActive) {
-            refTextArea.current.focus()
+            refTextArea?.current?.focus()
         }
 
     }, [modalActive])
@@ -66,29 +71,34 @@ const Modul = () => {
                 }}
                 className={s.dialog__overlay}>
                 <Dialog.Panel className={s.wrapper__content}>
-                    <Dialog.Title className={s.dialog__title}>Новое сообщение</Dialog.Title>
+                    <header className={s.header}>
+                        <Dialog.Title className={s.dialog__title}>Новое сообщение</Dialog.Title>
+                        <CloseButton onClick={() => dispatch(openModalBlock(false))}/>
+                    </header>
                     <div className={s.content}>
                         <div className={s.wrapper__info__user}>
-                            {friendsCurrent?.friend?.image
-                                ?
-                                <img
-                                    src={`${HOST + friendsCurrent?.friend?.image}`}
-                                    alt='logo'/>
-                                :
-                                <span className={s.empty__img}
-                                >{friendsCurrent?.friend?.first_name[0]}{friendsCurrent?.friend?.last_name[0]}</span>
-                            }
+                            <EmptyImage
+                                image={friendsCurrent?.friend?.image}
+                                name={{
+                                    firstName: friendsCurrent?.friend?.first_name,
+                                    lastName: friendsCurrent?.friend?.last_name
+                                }}
+                                style={{width: 50, height: 50, marginRight: 10}}
+                            />
+
                             <div className={s.info__user}>
-                                <h3>{friendsCurrent?.friend?.first_name} {friendsCurrent?.friend?.last_name}</h3>
+                                <Text
+                                    weight='strong'>{friendsCurrent?.friend?.first_name} {friendsCurrent?.friend?.last_name}</Text>
                             </div>
                         </div>
-                        <form onSubmit={onSubmit}>
+                        <form>
 							<textarea
                                 value={textArea}
                                 maxLength="4000"
                                 onChange={e => setTextArea(e.target.value)}
-                                cols="40" rows="5" ref={refTextArea}/>
-                            <button>Отправить</button>
+                                cols="40" rows="8" ref={refTextArea}/>
+                            <ActionButton onClick={onSubmit}
+                                          style={{marginTop: 20, alignSelf: 'flex-end'}}>Отправить</ActionButton>
                         </form>
                     </div>
 

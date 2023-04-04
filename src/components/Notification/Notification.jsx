@@ -3,8 +3,13 @@ import {Popover} from "@headlessui/react";
 import s from './Notification.module.scss'
 import {IoNotificationsOutline} from "react-icons/io5";
 import {Link} from "react-router-dom";
+import Text from '../ui/Text/Text'
+import useMatchMedia from "../hooks/useMatchMedia";
+import {styleText} from "../../utils/utils";
 
 const Notification = ({title, classItem, count, classQuantity}) => {
+
+    const {isMobile} = useMatchMedia()
 
     return (
 
@@ -14,9 +19,9 @@ const Notification = ({title, classItem, count, classQuantity}) => {
                     <Popover.Button>
                         <li className={classItem}>
                             <IoNotificationsOutline/>
-                            <h2>
+                            <Text style={styleText(isMobile)}>
                                 {title}
-                            </h2>
+                            </Text>
                             <span className={classQuantity}>{count}</span>
                         </li>
                     </Popover.Button>

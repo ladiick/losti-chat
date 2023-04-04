@@ -1,0 +1,29 @@
+.wrapper__find{
+  background-color: var(--bgBlocksColor);
+  width: 100%;
+  color: var(--descriptionColor);
+  border-radius: 16px;
+  border: 1px solid var(--borderColor);
+  padding: 30px 15px;
+
+  .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: var(--fontWeight);
+    color: var(--descriptionColor);
+  }
+
+}
+
+.list__allpeople{
+  margin-top: 20px;
+  --gap: 10px;
+  --elements: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  width: 100%;
+}

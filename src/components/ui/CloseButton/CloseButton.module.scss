@@ -1,0 +1,14 @@
+.close{
+  cursor: pointer;
+  color: var(--secondDescription);
+  transition: all 0.3s;
+  width: 20px;
+  height: 20px;
+  &:hover {
+    color: var(--descriptionColor);
+  }
+  &:focus{
+    outline: var(--secondColor);
+  }
+
+}

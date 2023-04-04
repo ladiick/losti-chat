@@ -1,11 +1,11 @@
 import s from "./Communication.module.scss";
 import Message from "../Message/Message";
 import {useDispatch, useSelector} from "react-redux";
-import React,{useContext, useEffect, useRef, useState} from "react";
-import {changeActiveMessage, clearMessage, currentMessage, setMessage} from "../../redux/slices/messageSlice";
+import React, {useContext, useEffect, useRef, useState} from "react";
+import {clearMessage, currentMessage, setMessage} from "../../redux/slices/messageSlice";
 import _ from "underscore";
 import {MyContext} from "../../App";
-import {useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
 import {useGetMessageQuery, usePaginationMutation} from "../features/messageApiSlice";
 import {addTimeMessage} from "../actions/addTimeMessage";
 import {Oval} from "react-loader-spinner";
@@ -17,7 +17,6 @@ const Communication = () => {
     const dispatch = useDispatch()
     const message = useSelector(state => state.message.message)
     const myId = useSelector(state => state.user.aboutUser.id)
-    const currentMessages = useSelector(state => state.message.currentMessage)
 
     const people = useSelector(state => state.people.people)
     let {newMessage} = useContext(MyContext);
@@ -30,13 +29,14 @@ const Communication = () => {
     const [fetching, setFetching] = useState(false)
     const refCommunication = useRef();
 
+    const param = searchParams.get('dialogs')
 
     useEffect(() => {
         setCurrentPage(2)
         setFetching(false)
-        return ()=>{
-            dispatch(clearMessage())
-        }
+        // return () => {
+        //     dispatch(clearMessage({param}))
+        // }
     }, [searchParams.get('dialogs')])
 
 
@@ -110,8 +110,11 @@ const Communication = () => {
 
 
     const handlerCurrentMessage = (obj) => {
-        dispatch(currentMessage(obj))
+
+        dispatch(currentMessage({param,obj}))
+
     }
+
 
     if (isLoading) {
         return (
@@ -154,7 +157,6 @@ const Communication = () => {
                                     time={obj.time}
                                     who={'recipient'}
                                     obj={obj}
-
                                     handlerCurrentMessage={() => handlerCurrentMessage(obj)}
 
                                 />
@@ -193,4 +195,4 @@ const Communication = () => {
 
 }
 
-export default Communication
+export default React.memo(Communication)
