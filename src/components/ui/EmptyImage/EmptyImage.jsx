@@ -3,18 +3,15 @@ import {HOST} from "../../api/HOST";
 import s from "./EmptyImage.module.scss";
 import {changeColor} from "../../actions/changeColor";
 
-const EmptyImage = ({image, firstName, lastName, index, width, height, fontSize, marginRight}) => {
+const EmptyImage = ({image,name={}, index,style={}}) => {
 
     return (
         <>
-            {!!image ? <img src={`${HOST + image}`} alt="avatar" style={{width, height,marginRight}}/>
+            {!!image ? <img src={`${HOST + image}`} alt="avatar" style={style}/>
                 :
                 <span className={s.empty__img}
-                      style={{
-                          backgroundColor: changeColor(index),
-                          width, height, fontSize, marginRight
-                      }}
-                >{firstName?.[0]}{lastName?.[0]}</span>
+                      style={{...style, backgroundColor: changeColor(index)}}
+                >{name?.firstName?.[0]}{name?.lastName?.[0]}</span>
             }
         </>
     );

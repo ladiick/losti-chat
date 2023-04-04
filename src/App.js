@@ -26,6 +26,9 @@ import {BsPersonWorkspace} from "react-icons/bs";
 import {useGetUserQuery} from "./components/features/userApiSlice";
 import Settings from "./Pages/Settings/Settings";
 import NotificationPage from "./Pages/NotificationPage/NotificationPage";
+import FriendsRequestsPage from "./Pages/FriendsRequestsPage/FriendsRequestsPage";
+import FriendsFind from "./components/FriendsFind/FriendsFind";
+import Grade from "./Pages/Grade/Grade";
 
 export const MyContext = React.createContext()
 
@@ -33,7 +36,10 @@ const router = createBrowserRouter(createRoutesFromElements(
     <>
     <Route path='/' element={<Layout/>}>
         <Route index element={<Dialogs/>}/>
-        <Route path='friends/*' element={<Friends/>}/>
+        <Route path='friends/*' element={<Friends/>}>
+            <Route path='requests' element={<FriendsRequestsPage/>}/>
+            <Route path='find' element={<FriendsFind/>}/>
+        </Route>
         <Route path='profile/:id' element={<Profile/>}/>
         <Route path='notification' element={<NotificationPage/>}/>
         <Route path='edit' element={<Settings/>}/>
@@ -42,6 +48,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/authorization' element={<Authorization/>}/>
     <Route path='/logout' element={<Logout/>}/>
     <Route path='/registration/*' element={<Registration/>}/>
+    <Route path='/grade' element={<Grade/>}/>
     </>
 ))
 

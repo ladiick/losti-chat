@@ -11,17 +11,18 @@ const ListFriendsProfileItem = ({obj, index}) => {
 
         <Link to={`/profile/${obj.friend.pk}`} className={s.wrapper__item}>
 
-                <EmptyImage
-                    image={obj?.friend?.image}
-                    firstName={obj?.friend?.first_name}
-                    lastName={''}
-                    index={index}
-                    width={isMobile ? 24 : 60}
-                    height={isMobile ? 24 : 60}
-                    fontSize={isMobile ? 12 : 24}
-                    marginRight={0}
-                />
-                {!isMobile && <span className={s.friend__name}>{obj.friend?.first_name}</span>}
+            <EmptyImage
+                style={{
+                    width: isMobile ? 24 : 60,
+                    height: isMobile ? 24 : 60,
+                    fontSize: isMobile ? 12 : 24,
+                    marginRight: 0
+                }}
+                image={obj?.friend?.image}
+                name={{firstName: obj?.friend?.first_name, lastName: ''}}
+                index={index}
+            />
+            {!isMobile && <span className={s.friend__name}>{obj.friend?.first_name}</span>}
 
         </Link>
 

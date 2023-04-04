@@ -7,6 +7,8 @@ const initialState = {
 	searchFriend: false,
 	deleteFriend: false,
 	deleteFriendObj: {},
+	forwardMessageFlag: false,
+	forwardMessageSendFlag: false
 }
 
 
@@ -28,12 +30,19 @@ export const navigationSlice = createSlice({
 			state.deleteFriend = action.payload.flag
 			state.deleteFriendObj = action.payload.obj
 		},
-		
+		forwardMessageFlag(state,action){
+			state.forwardMessageFlag = action.payload
+		},
+		forwardMessageSendFlag(state,action){
+			state.forwardMessageSendFlag = action.payload
+		},
+
 	}
 	
 	
 })
 
-export const {openNavBar,openModalBlock,openChatBlock,searchFriend,deleteFriend,skipChat} = navigationSlice.actions
+export const {openModalBlock,openChatBlock,searchFriend,deleteFriend,
+	forwardMessageFlag,forwardMessageSendFlag} = navigationSlice.actions
 
 export default navigationSlice.reducer

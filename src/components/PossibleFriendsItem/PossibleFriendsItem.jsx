@@ -4,29 +4,27 @@ import BtnAddFriend from "../BtnAddFriend/BtnAddFriend";
 import EmptyImage from "../ui/EmptyImage/EmptyImage";
 import {Link} from "react-router-dom";
 import {changeDeclination} from "../actions/changeDeclination";
+import Text from '../ui/Text/Text'
 
-
-const PossibleFriendsItem = ({obj, handlerPeople,index}) => {
+const PossibleFriendsItem = ({obj, handlerPeople, index}) => {
 
     return (
         <div className={s.wrapper__people}>
             <Link to={`/profile/${obj.possible_friend.pk}`} className={s.about__user}>
                 <EmptyImage
+                    style={{width: 48, height: 48, fontSize: 20, marginRight: 15}}
                     image={obj?.possible_friend?.image}
-                    firstName={obj.possible_friend?.first_name}
-                    lastName={obj.possible_friend?.last_name}
+                    name={{firstName: obj.possible_friend?.first_name, lastName: obj.possible_friend?.last_name}}
                     index={index}
-                    width={48}
-                    height={48}
-                    fontSize={20}
-                    marginRight={15}
                 />
 
                 <div className={s.user__info}>
-                    <h3>
+                    <Text>
                         {obj.possible_friend.first_name} {obj.possible_friend.last_name}
-                    </h3>
-                    <span>{changeDeclination(obj.count,'posFriend')}</span>
+                    </Text>
+                    <span className={s.NumFriend}>
+                        {changeDeclination(obj.count, 'posFriend')}
+                    </span>
                 </div>
             </Link>
             <BtnAddFriend handlerPeople={handlerPeople}/>

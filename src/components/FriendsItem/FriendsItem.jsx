@@ -24,17 +24,18 @@ const FriendsItem = ({obj, requests, handlerCancel, handlerAccept, index}) => {
 
     return (
         <div className={s.wrapper__item}>
-            <div style={{display: 'flex', alignItems: 'center',width:'100%'}}>
+            <div style={{display: 'flex', alignItems: 'center', width: '100%'}}>
                 <Link to={`/profile/${obj.friend.pk}`}>
                     <EmptyImage
                         image={obj?.friend?.image}
-                        firstName={obj.friend.first_name}
-                        lastName={obj.friend.last_name}
+                        name={{firstName: obj.friend.first_name, lastName: obj.friend.last_name}}
                         index={index}
-                        width={isMobile ? 44 : 80}
-                        height={isMobile ? 44 : 80}
-                        marginRight={15}
-                        fontSize={isMobile ? 16 : 24}
+                        style={{
+                            width: isMobile ? 44 : 80,
+                            height: isMobile ? 44 : 80,
+                            fontSize: isMobile ? 16 : 24,
+                            marginRight: 15,
+                        }}
                     />
                 </Link>
                 <div className={s.info__user}>

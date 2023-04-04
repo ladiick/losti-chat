@@ -11,6 +11,7 @@ import {useGetFriendsQuery} from "../features/friendsApiSlice";
 import OutputFriends from "../OutputFriends/OutputFriends";
 import DeleteFriendModal from "../DialogBoxes/DeleteFriendModal/DeleteFriendModul";
 import ActionButton from "../ui/ActionButton/ActionButton";
+import Title from "../ui/Title/Title";
 
 function MyFriends() {
 
@@ -61,14 +62,13 @@ function MyFriends() {
             className={s.wrapper}>
             {modal && <Modul/>}
             {deleteFriend && <DeleteFriendModal/>}
-            <header>
-
-                <ActionButton
-                    style={{cursor:'default'}}
-                    second={true}>Все друзья {data?.length}</ActionButton>
-
-                <ActionButton
-                    onClick={() => dispatch(searchFriend(true))}>Найти друзей</ActionButton>
+            <header className={s.header}>
+                <ActionButton style={{cursor: 'default', pointerEvents: 'none'}}
+                              second={true}>Все друзья {data?.length}
+                </ActionButton>
+                <Link to='/friends/find'>
+                    <ActionButton>Найти друзей</ActionButton>
+                </Link>
             </header>
             <SearchBlock searchValue={searchValue} setSearch={setSearch}/>
             <OutputFriends data={data} searchValue={searchValue}/>

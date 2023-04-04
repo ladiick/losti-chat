@@ -19,18 +19,17 @@ const HeaderChat = ({isLoading, myId, peopleCurrent}) => {
     const currentMessage = useSelector(state => state.message.currentMessage)
     const {isMobile} = useMatchMedia()
     const [searchParams, setSearchParams] = useSearchParams()
+    const forwardMessageSendFlag = useSelector(state => state.navigation.forwardMessageSendFlag)
 
-
-    if (isLoading) {
+    if (isLoading || Object.keys(peopleCurrent).length === 0) {
         return (
             <header className={s.header}>
-
                 <SceletonHeader/>
             </header>
         )
     }
 
-    if (currentMessage.length && !isMobile) {
+    if (currentMessage?.[searchParams.get('dialogs')]?.length && !isMobile && !forwardMessageSendFlag) {
         return (
             <HeaderForwardMessage/>
         )
@@ -51,13 +50,9 @@ const HeaderChat = ({isLoading, myId, peopleCurrent}) => {
                             src={favorite}
                             alt="logo"/> :
                         <EmptyImage
-                            width={30}
-                            height={30}
-                            fontSize={13}
-                            marginRight={10}
-                            lastName={peopleCurrent?.last_name}
-                            image={peopleCurrent.image}
-                            firstName={peopleCurrent?.first_name}/>
+                            style={{width: 30, height: 30, fontSize: 13, marginRight: 10}}
+                            name={{firstName: peopleCurrent?.first_name, lastName: peopleCurrent?.last_name}}
+                            image={peopleCurrent.image}/>
                     }
 
 

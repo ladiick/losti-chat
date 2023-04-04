@@ -2,7 +2,7 @@
   font-size: 13px;
   font-weight: 500;
   background-color: var(--descriptionColor);
-  padding: 8px 12px;
+  padding: 7px 10px;
   border-radius: var(--borderRadiusButton);
   transition: all 0.3s;
   color: #000000;
@@ -18,7 +18,7 @@
 
   &:active {
     background-color: lighten(#202020, 60%);
-
+    transform: translateY(1px);
   }
 
 }
@@ -39,6 +39,7 @@
     background-color: lighten(#303030, 5%);
   }
   &:active {
+    transform: translateY(1px);
     background-color: lighten(#303030, 0%);
   }
 

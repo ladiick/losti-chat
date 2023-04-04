@@ -22,14 +22,7 @@
     flex-direction: column;
     justify-content: center;
 
-    h3 {
-      margin: 0;
-      color: var(--primaryColor);
-      font-weight: var(--fontWeight);
-      font-size: 13px;
-    }
-
-    span {
+    .NumFriend {
       margin-top: 5px;
       font-size: 13px;
       color: var(--secondDescription);

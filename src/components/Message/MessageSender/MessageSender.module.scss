@@ -1,0 +1,76 @@
+.wrapper__sender{
+  text-align: left;
+
+  .current__message__right {
+    color: var(--secondColor);
+    opacity: 0.5;
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 0;
+
+  }
+
+  &:hover {
+    .current__message__right {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+
+
+
+}
+.wrapper__sender__active{
+  background-color: var(--navigate-color);
+
+  .current__message__right {
+    opacity: 1;
+    color: var(--secondColor);
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    top: 20px;
+    right: 0;
+
+  }
+}
+
+
+
+.message{
+  white-space: pre-line;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px;
+  color: var(--descriptionColor);
+  max-width: 70%;
+  word-break: break-word;
+  word-wrap: break-word;
+  line-height: 18px;
+  position: relative;
+  font-size: 13px;
+  border-radius: 8px 10px 10px 0;
+  text-align: justify;
+}
+
+.message__info{
+  word-break: normal;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--decription-color);
+  display: flex;
+  transform: translateY(-50%);
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 25px;
+
+}
+
+.scroll__block{
+  &:last-child{
+    display: block;
+    height: 40px;
+  }
+}

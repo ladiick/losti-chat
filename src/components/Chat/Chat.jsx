@@ -15,6 +15,7 @@ import useMatchMedia from "../hooks/useMatchMedia";
 import HeaderChat from "./HeaderChat/HeaderChat";
 import BlockInputs from "./BlockInputs/BlockInputs";
 import HeaderForwardMessage from "./HeaderForwardMessage/HeaderForwardMessage";
+import BlockForwardMessages from "./BlockForwardMessages/BlockForwardMessages";
 
 const Chat = () => {
 
@@ -28,17 +29,9 @@ const Chat = () => {
 
 
     const {data: peopleCurrent = {}, isLoading} = useGetCurrentPersonQuery(searchParams.get('dialogs'), {
-        skip
+        skip: searchParams?.get('dialogs') && myId ? searchParams?.get('dialogs') == String(myId) ? true : false : true
     })
 
-    useEffect(() => {
-        if (searchParams.get('dialogs') != myId) {
-            setSkip(pre => !pre)
-        } else {
-            setSkip(true)
-        }
-
-    }, [searchParams.get('dialogs')])
 
 
     useEffect(() => {
@@ -53,7 +46,7 @@ const Chat = () => {
         return () => {
             document?.removeEventListener('keydown', onKeypress);
         };
-    }, []);
+    }, [searchParams?.get('dialogs')]);
 
 
 
@@ -68,7 +61,6 @@ const Chat = () => {
             </div>
         )
     }
-
     return (
         <div className={s.wrapper}>
 
@@ -76,7 +68,8 @@ const Chat = () => {
 
             <Communication/>
 
-            {currentMessage.length && isMobile ? <HeaderForwardMessage/> : <BlockInputs/>}
+            {currentMessage?.[searchParams.get('dialogs')]?.length && isMobile ? <HeaderForwardMessage/> : <BlockInputs/>}
+
         </div>
     )
 }

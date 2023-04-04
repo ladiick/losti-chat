@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useRef, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import s from "./BlockInputs.module.scss";
 import {AiOutlinePaperClip} from "react-icons/ai";
 import ContentEditable from "react-contenteditable";
@@ -7,33 +7,47 @@ import {BsSend, BsSendSlash} from "react-icons/bs";
 import sanitizeHtml from "sanitize-html";
 import useMatchMedia from "../../hooks/useMatchMedia";
 import {MyContext} from "../../../App";
-import {useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
+import BlockForwardMessages from "../BlockForwardMessages/BlockForwardMessages";
+import {useDispatch, useSelector} from "react-redux";
+import {forwardMessageSendFlag} from "../../../redux/slices/navigationSlice";
 
 const BlockInputs = () => {
     const {isMobile} = useMatchMedia()
     const {socket, statusSocket} = useContext(MyContext);
-
+    const dispatch = useDispatch()
     const [searchParams, setSearchParams] = useSearchParams()
+    const currentMessage = useSelector(state => state.message.currentMessage)
+    const forwardFlag = useSelector(state => state.navigation.forwardMessageSendFlag)
+
+    const preValueSearch = useSelector(state => state.message.preValueSearch)
 
     const [content, setContent] = useState("")
     const refSend = useRef()
+
     const onContentChange = useCallback(evt => {
         const sanitizeConf = {
             allowedTags: ["b", "i", "a", "p"],
             allowedAttributes: {a: ["href"]}
         };
         if (evt.currentTarget.innerHTML.length > 20000) {
-            setContent()
+            setContent('')
         }
         setContent(sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf))
     }, [])
+
+
+    useEffect(() => {
+       setContent("")
+        // dispatch(forwardMessageSendFlag(false))
+    }, [searchParams?.get('dialogs')]);
+
 
     const sendMessage = () => {
 
         if (content === '') {
             return
         }
-
 
         const countMessage = Math.ceil(content.length / 4000)
         for (let i = 0; i < countMessage; i++) {
@@ -53,11 +67,16 @@ const BlockInputs = () => {
 
     }
     const handlerKeyDown = (e) => {
-        if (!e.shiftKey && e.key === 'Enter' && !isMobile) {
+        // if(isMobile){
+        //     console.log(e)
+        //
+        // }
+        if(!e.shiftKey && e.key === 'Enter') {
             e.preventDefault()
             refSend?.current?.click()
         }
     }
+
     return (
         <div className={s.wrapper__input}>
             <div className={s.input}>
@@ -97,10 +116,19 @@ const BlockInputs = () => {
                         className={s.button__send}>
                         {statusSocket === 'ready' ? <BsSend/> : <BsSendSlash/>}
                     </div>
-
-
                 </div>
             </div>
+
+            {forwardFlag && currentMessage?.[preValueSearch].length === 1 ?
+                <BlockForwardMessages
+                message={currentMessage?.[preValueSearch][0]}
+            />
+            : forwardFlag &&
+                <BlockForwardMessages
+                    message={currentMessage?.[preValueSearch]?.length}
+                    many
+                />
+            }
         </div>
     );
 };

@@ -33,12 +33,11 @@ export const peopleSlice = createSlice({
 			state.index = action.payload
 		},
 		updatePeople(state, action) {
-			// state.people[action.payload.index] = action.payload.data
+
 			let arr1 = [action.payload.data.sender.pk, action.payload.data.recip.pk].sort()
 			let peopleIndex = state.people.findIndex(obj => {
 				let arr2 = [obj.sender.pk, obj.recip.pk].sort()
 				return _.isEqual(arr1, arr2)
-				//_.isEqual(arr1,arr2)
 			})
 			
 			if (peopleIndex === -1) {

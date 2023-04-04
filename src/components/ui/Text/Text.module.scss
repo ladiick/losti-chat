@@ -1,0 +1,9 @@
+.text{
+  color: var(--descriptionColor);
+  font-size: 13px;
+
+  &__medium{
+    font-weight: var(--fontWeight);
+  }
+}
+
