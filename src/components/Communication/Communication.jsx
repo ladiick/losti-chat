@@ -2,7 +2,7 @@ import s from "./Communication.module.scss";
 import Message from "../Message/Message";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useContext, useEffect, useRef, useState} from "react";
-import {clearMessage, currentMessage, setMessage} from "../../redux/slices/messageSlice";
+import {clearMessage, currentMessage, sendMessagesOnChat, setMessage} from "../../redux/slices/messageSlice";
 import _ from "underscore";
 import {MyContext} from "../../App";
 import {useLocation, useSearchParams} from "react-router-dom";
@@ -34,9 +34,9 @@ const Communication = () => {
     useEffect(() => {
         setCurrentPage(2)
         setFetching(false)
-        // return () => {
-        //     dispatch(clearMessage({param}))
-        // }
+        return () => {
+            dispatch(clearMessage({param}))
+        }
     }, [searchParams.get('dialogs')])
 
 
@@ -112,7 +112,9 @@ const Communication = () => {
     const handlerCurrentMessage = (obj) => {
 
         dispatch(currentMessage({param,obj}))
-
+        // dispatch(sendMessagesOnChat(
+        //   {param: searchParams.get('dialogs'),forwardMessage: obj}
+        // ))
     }
 
 

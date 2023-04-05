@@ -2,7 +2,7 @@ export const convertTime = (time)=>{
 
     const messageTime = new Date(time)
 
-    if (messageTime.getHours() === 0) {
+    if (messageTime.getHours() < 10) {
         if (messageTime.getMinutes() < 10) {
             return `0${messageTime.getHours()}:0${messageTime.getMinutes()}`
         }

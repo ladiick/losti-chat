@@ -16,6 +16,7 @@ import HeaderChat from "./HeaderChat/HeaderChat";
 import BlockInputs from "./BlockInputs/BlockInputs";
 import HeaderForwardMessage from "./HeaderForwardMessage/HeaderForwardMessage";
 import BlockForwardMessages from "./BlockForwardMessages/BlockForwardMessages";
+import ViewForwardedMessage from "../DialogBoxes/ViewForwardedMessage/ViewForwardedMessage";
 
 const Chat = () => {
 
@@ -49,6 +50,7 @@ const Chat = () => {
     }, [searchParams?.get('dialogs')]);
 
 
+    const isVisible = useSelector(state => state.navigation.modal.viewForwardMessage)
 
 
     if (!searchParams.get('dialogs') && !isMobile) {
@@ -69,6 +71,9 @@ const Chat = () => {
             <Communication/>
 
             {currentMessage?.[searchParams.get('dialogs')]?.length && isMobile ? <HeaderForwardMessage/> : <BlockInputs/>}
+
+
+            {isVisible && <ViewForwardedMessage/>}
 
         </div>
     )

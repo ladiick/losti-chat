@@ -59,9 +59,6 @@ function App() {
 
     useGetUserQuery()
 
-
-
-
     return (
         <>
             <MyContext.Provider value={{socket, statusSocket, newMessage}}>

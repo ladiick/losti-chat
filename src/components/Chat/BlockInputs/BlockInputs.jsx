@@ -11,126 +11,130 @@ import {useLocation, useSearchParams} from "react-router-dom";
 import BlockForwardMessages from "../BlockForwardMessages/BlockForwardMessages";
 import {useDispatch, useSelector} from "react-redux";
 import {forwardMessageSendFlag} from "../../../redux/slices/navigationSlice";
+import {sendMessagesOnChat} from "../../../redux/slices/messageSlice";
 
 const BlockInputs = () => {
-    const {isMobile} = useMatchMedia()
-    const {socket, statusSocket} = useContext(MyContext);
-    const dispatch = useDispatch()
-    const [searchParams, setSearchParams] = useSearchParams()
-    const currentMessage = useSelector(state => state.message.currentMessage)
-    const forwardFlag = useSelector(state => state.navigation.forwardMessageSendFlag)
+	const {isMobile} = useMatchMedia()
+	const {socket, statusSocket} = useContext(MyContext);
+	const dispatch = useDispatch()
+	const [searchParams, setSearchParams] = useSearchParams()
 
-    const preValueSearch = useSelector(state => state.message.preValueSearch)
-
-    const [content, setContent] = useState("")
-    const refSend = useRef()
-
-    const onContentChange = useCallback(evt => {
-        const sanitizeConf = {
-            allowedTags: ["b", "i", "a", "p"],
-            allowedAttributes: {a: ["href"]}
-        };
-        if (evt.currentTarget.innerHTML.length > 20000) {
-            setContent('')
-        }
-        setContent(sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf))
-    }, [])
+	const forwardMessages = useSelector(state => state.message.sendMessageOnChat?.[searchParams.get('dialogs')]?.forwardMessage)
 
 
-    useEffect(() => {
-       setContent("")
-        // dispatch(forwardMessageSendFlag(false))
-    }, [searchParams?.get('dialogs')]);
+	const content = useSelector(state => state.message.sendMessageOnChat?.[searchParams.get('dialogs')]?.sendMessage || '')
+
+	const preValueSearch = useSelector(state => state.message.preValueSearch)
+
+	const refSend = useRef()
+
+	const onContentChange = useCallback(evt => {
+		const sanitizeConf = {
+			allowedTags: ["b", "i", "a", "p"],
+			allowedAttributes: {a: ["href"]}
+		};
+		if (evt.currentTarget.innerHTML.length > 20000) {
+
+			dispatch(sendMessagesOnChat({
+				param: searchParams.get('dialogs'),
+				message: ''
+			}))
+		}
+		dispatch(sendMessagesOnChat({
+			param: searchParams.get('dialogs'),
+			message: sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf)
+		}))
+	}, [searchParams.get('dialogs')])
 
 
-    const sendMessage = () => {
+	const sendMessage = () => {
 
-        if (content === '') {
-            return
-        }
+		if (content === '') {
+			return
+		}
 
-        const countMessage = Math.ceil(content.length / 4000)
-        for (let i = 0; i < countMessage; i++) {
+		const countMessage = Math.ceil(content.length / 4000)
+		for (let i = 0; i < countMessage; i++) {
 
-            socket?.send(
-                JSON.stringify(
-                    {
-                        request_id: new Date().getTime(),
-                        message: content.slice(i * 4000, i * 4000 + 4000),
-                        action: 'create_dialog_message',
-                        recipient: searchParams.get('dialogs'),
-                    }
-                )
-            )
-        }
-        setContent('')
+			socket?.send(
+				JSON.stringify(
+					{
+						request_id: new Date().getTime(),
+						message: content.slice(i * 4000, i * 4000 + 4000),
+						action: 'create_dialog_message',
+						recipient: searchParams.get('dialogs'),
+					}
+				)
+			)
+		}
+		dispatch(sendMessagesOnChat({
+			param: searchParams.get('dialogs'),
+			message: ''
+		}))
 
-    }
-    const handlerKeyDown = (e) => {
-        // if(isMobile){
-        //     console.log(e)
-        //
-        // }
-        if(!e.shiftKey && e.key === 'Enter') {
-            e.preventDefault()
-            refSend?.current?.click()
-        }
-    }
+	}
+	const handlerKeyDown = (e) => {
+		// if(isMobile){
+		//     console.log(e)
+		//
+		// }
+		if (!e.shiftKey && e.key === 'Enter') {
+			e.preventDefault()
+			refSend?.current?.click()
+		}
+	}
 
-    return (
-        <div className={s.wrapper__input}>
-            <div className={s.input}>
-                <div className={s.form__wrapper}>
-                    <label className={s.download__file}>
-                        <AiOutlinePaperClip/>
-                        <input type='file' className={s.input__file}/>
-                    </label>
+	return (
+		<div className={s.wrapper__input}>
+			<div className={s.input}>
+				<div className={s.form__wrapper}>
+					<label className={s.download__file}>
+						<AiOutlinePaperClip/>
+						<input type='file' className={s.input__file}/>
+					</label>
 
-                    <div className={s.block__input__message}>
-                        <ContentEditable
-                            html={content}
-                            onKeyDown={handlerKeyDown}
-                            contentEditable={true}
-                            className={s.input__message}
-                            role='textbox'
-                            onChange={onContentChange}
-                        />
-                        {
-                            content === '' && <motion.span
-                                initial={{
-                                    x: 20,
-                                    opacity: 0
-                                }}
-                                animate={{
-                                    x: 0,
-                                    opacity: 1
-                                }}
-                                className={s.placeholder}>Напишите сообщение...</motion.span>
-                        }
-                    </div>
+					<div className={s.block__input__message}>
+						<ContentEditable
+							html={content}
+							onKeyDown={handlerKeyDown}
+							contentEditable={true}
+							className={s.input__message}
+							role='textbox'
+							onChange={onContentChange}
+						/>
+						{
+							content === '' && <motion.span
+								initial={{
+									x: 20,
+									opacity: 0
+								}}
+								animate={{
+									x: 0,
+									opacity: 1
+								}}
+								className={s.placeholder}>Напишите сообщение...</motion.span>
+						}
+					</div>
 
 
-                    <div
-                        ref={refSend}
-                        onClick={sendMessage}
-                        className={s.button__send}>
-                        {statusSocket === 'ready' ? <BsSend/> : <BsSendSlash/>}
-                    </div>
-                </div>
-            </div>
+					<div
+						ref={refSend}
+						onClick={sendMessage}
+						className={s.button__send}>
+						{statusSocket === 'ready' ? <BsSend/> : <BsSendSlash/>}
+					</div>
+				</div>
+			</div>
 
-            {forwardFlag && currentMessage?.[preValueSearch].length === 1 ?
-                <BlockForwardMessages
-                message={currentMessage?.[preValueSearch][0]}
-            />
-            : forwardFlag &&
-                <BlockForwardMessages
-                    message={currentMessage?.[preValueSearch]?.length}
-                    many
-                />
-            }
-        </div>
-    );
+			{forwardMessages && forwardMessages.length !== 0
+				&&
+				<BlockForwardMessages
+					message={forwardMessages}
+				/>
+
+			}
+		</div>
+	);
 };
 
 export default BlockInputs;

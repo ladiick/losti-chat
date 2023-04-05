@@ -35,7 +35,10 @@
   vertical-align: top;
   display: block;
   margin-top: 6px;
-
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 
 .message__time {

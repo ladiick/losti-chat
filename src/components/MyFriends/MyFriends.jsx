@@ -5,7 +5,7 @@ import FriendsItem from "../FriendsItem/FriendsItem";
 import SearchBlock from "../SearchBlock/SearchBlock";
 import {Link} from "react-router-dom";
 import {searchFriend} from "../../redux/slices/navigationSlice";
-import Modul from "../DialogBoxes/Modul/Modul";
+import WriteFriend from "../DialogBoxes/WriteFriend/WriteFriend";
 import {motion} from 'framer-motion'
 import {useGetFriendsQuery} from "../features/friendsApiSlice";
 import OutputFriends from "../OutputFriends/OutputFriends";
@@ -19,7 +19,8 @@ function MyFriends() {
     const [searchValue, setSearch] = useState('');
     const {data = []} = useGetFriendsQuery()
     const deleteFriend = useSelector(state => state.navigation.deleteFriend)
-    const modal = useSelector(state => state.navigation.modal)
+    const modal = useSelector(state => state.navigation.modal.writeFriend)
+
     if (data.length === 0) {
         return (
             <motion.div
@@ -60,7 +61,7 @@ function MyFriends() {
 
             }}
             className={s.wrapper}>
-            {modal && <Modul/>}
+            {modal && <WriteFriend/>}
             {deleteFriend && <DeleteFriendModal/>}
             <header className={s.header}>
                 <ActionButton style={{cursor: 'default', pointerEvents: 'none'}}

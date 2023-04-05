@@ -4,7 +4,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
 	message: {},
 	currentMessage: {},
-	preValueSearch: ''
+	sendMessageOnChat: {}
 }
 
 
@@ -69,12 +69,47 @@ export const messageSlice = createSlice({
 
 		},
 
-		clearMessage(state,action) {
+		clearMessage(state, action) {
 			state.currentMessage[action.payload.param] = []
 		},
-		setPreValueSearch(state,action){
-			state.preValueSearch = action.payload
-		}
+
+		sendMessagesOnChat(state, action) {
+
+			if (!(action.payload.param in state.sendMessageOnChat)) {
+				state.sendMessageOnChat[action.payload.param] = {
+					sendMessage: '',
+					forwardMessage: [],
+					answerMessage: []
+				}
+
+			}
+
+			if (action.payload.message) {
+				state.sendMessageOnChat[action.payload.param].sendMessage = action.payload.message
+			} else {
+				state.sendMessageOnChat[action.payload.param].sendMessage = ''
+			}
+
+			if (action.payload.forwardMessage) {
+
+				state.sendMessageOnChat[action.payload.param].forwardMessage = action.payload.forwardMessage
+
+			}
+
+			if (action.payload.answerMessage) {
+
+				state.sendMessageOnChat[action.payload.param].answerMessage = action.payload.answerMessage
+
+			}
+
+		},
+		clearForwardMessage(state, action) {
+			state.sendMessageOnChat[action.payload.param].forwardMessage = []
+		},
+		clearAnswerMessage(state, action) {
+			state.sendMessageOnChat[action.payload.param].answerMessage = []
+		},
+
 
 	},
 
@@ -87,7 +122,9 @@ export const {
 	newMessages,
 	currentMessage,
 	clearMessage,
-	setPreValueSearch
+	sendMessagesOnChat,
+	clearForwardMessage,
+	clearAnswerMessage
 } = messageSlice.actions
 
 export default messageSlice.reducer

@@ -3,6 +3,7 @@ import s from './MessageSender.module.scss'
 import {BsCheckCircleFill} from "react-icons/bs";
 import {MdEdit} from "react-icons/md";
 import {convertTime} from "../../actions/convertTime";
+import {FaShare} from "react-icons/fa";
 
 const MessageSender = ({activeMessage, time, wrapper, message, handlerCurrentMessage}) => {
     const refScrollBlock = useRef(null);
@@ -22,8 +23,8 @@ const MessageSender = ({activeMessage, time, wrapper, message, handlerCurrentMes
             <div className={classNameWrapper} onClick={()=>handlerCurrentMessage()}>
                 <div className={s.current__message__right}>
                     <BsCheckCircleFill style={{margin: '0 10px'}}/>
-                    <MdEdit
-                        title='Редактировать'
+                    <FaShare
+                        title='Ответить'
                         style={{color: 'var(--decription-color)'}}/>
                 </div>
                 <span className={s.message}>

@@ -4,42 +4,62 @@ import Text from '../../ui/Text/Text'
 import {convertTime} from "../../actions/convertTime";
 import CloseButton from "../../ui/CloseButton/CloseButton";
 import {changeDeclination} from "../../actions/changeDeclination";
+import {useDispatch} from "react-redux";
+import {useSearchParams} from "react-router-dom";
+import {clearForwardMessage} from "../../../redux/slices/messageSlice";
+import {openModalBlock} from "../../../redux/slices/navigationSlice";
 
-const BlockForwardMessages = ({message,many}) => {
+const BlockForwardMessages = ({message}) => {
+	const [searchParams, setSearchParams] = useSearchParams()
 
-    if(many){
-        return (
-            <div className={s.wrapper__forward__msg}>
-                <div className={s.forward__content}>
-                    <Text className={s.name__time} weight='strong'>
-                        Пересланные сообщения
-                    </Text>
-                    <Text className={s.message__forward}>
-                        {changeDeclination(message,'message')}
-                    </Text>
-                </div>
-                <CloseButton className={s.close__btn} onClick={() => console.log(4343)}/>
+	const dispatch = useDispatch()
+	const closeForward = () => {
+		dispatch(clearForwardMessage({param: searchParams.get('dialogs')}))
+	}
 
-            </div>
-        )
-    }
+	const viewForwardedMessage = () => {
+		dispatch(openModalBlock({viewForwardMessage:true}))
+	}
 
 
-    return (
-        <div className={s.wrapper__forward__msg}>
-            <div className={s.forward__content}>
+	if (message?.length > 1) {
+		return (
+			<>
+				<div className={s.wrapper__forward__msg}>
+					<div className={s.forward__content}>
+						<Text className={s.name__time} weight='strong'>
+							Пересланные сообщения
+						</Text>
+						<Text className={s.message__forward} onClick={viewForwardedMessage}>
+							{changeDeclination(message?.length, 'message')}
+						</Text>
+					</div>
+					<CloseButton className={s.close__btn} onClick={() => closeForward()}/>
 
-                <Text className={s.name__time} weight='strong'>
-                    {message?.sender?.first_name + ' ' + message?.sender?.last_name}
-                    <Text className={s.message__time}>{convertTime(message.time)}</Text>
-                </Text>
+				</div>
+			</>
+		)
+	}
 
-                <Text className={s.message__forward}>{message.message}</Text>
-            </div>
-            <CloseButton className={s.close__btn} onClick={() => console.log(4343)}/>
 
-        </div>
-    );
+	return (
+		<div className={s.wrapper__forward__msg}>
+			<div className={s.forward__content}>
+
+				<Text className={s.name__time} weight='strong'>
+					{message?.[0]?.sender?.first_name + ' ' + message?.[0]?.sender?.last_name}
+					<Text className={s.message__time}
+					>{convertTime(message?.[0]?.time)}</Text>
+				</Text>
+
+				<Text
+					className={s.message__forward}
+					onClick={viewForwardedMessage}>{message?.[0]?.message}</Text>
+			</div>
+			<CloseButton className={s.close__btn} onClick={() => closeForward()}/>
+
+		</div>
+	);
 };
 
 export default BlockForwardMessages;
