@@ -6,7 +6,7 @@
     opacity: 0.5;
     color: var(--secondColor);
     position: absolute;
-    top: 20px;
+    top: 10px;
 
   }
 
@@ -29,7 +29,7 @@
 
     color: var(--secondColor);
     position: absolute;
-    top: 20px;
+    top: 10px;
 
   }
 
@@ -43,7 +43,7 @@
   word-break: break-word;
   text-align: justify;
   display: inline-block;
-  max-width: 70%;
+  max-width: 80%;
   background: rgba(255, 255, 255, 0.08);
   padding: 8px;
   color: var(--descriptionColor);
@@ -55,16 +55,18 @@
 
 .message__info{
   word-break: normal;
-  position: absolute;
-  top: -8px;
-  right: 6px;
+  position: relative;
   width: 25px;
-  text-align: right;
-  font-size: 12px;
+  font-size: 10px;
+  white-space: nowrap;
   font-weight: 300;
   color: var(--decription-color);
   display: flex;
-  transform: translateY(-50%);
+
+  top: 7px;
+  bottom: auto !important;
+  float: right;
+  margin-left: 0.4375rem;
 }
 
 .scroll__block{

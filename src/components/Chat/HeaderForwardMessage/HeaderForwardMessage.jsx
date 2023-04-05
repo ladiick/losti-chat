@@ -5,7 +5,7 @@ import {changeDeclination} from "../../actions/changeDeclination";
 import {IoClose} from "react-icons/io5";
 import {BsTrash3} from "react-icons/bs";
 import ActionButton from "../../ui/ActionButton/ActionButton";
-import {clearMessage} from "../../../redux/slices/messageSlice";
+import {clearForwardMessage, clearMessage} from "../../../redux/slices/messageSlice";
 import useMatchMedia from "../../hooks/useMatchMedia";
 import {forwardMessageFlag} from "../../../redux/slices/navigationSlice";
 import {useSearchParams} from "react-router-dom";
@@ -26,6 +26,7 @@ const HeaderForwardMessage = () => {
 
     const clearSelectMessage = ()=>{
         dispatch(clearMessage({param:searchParams.get('dialogs')}))
+        dispatch(clearForwardMessage({param:searchParams.get('dialogs')}))
     }
 
     return (

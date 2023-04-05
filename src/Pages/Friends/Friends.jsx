@@ -30,11 +30,6 @@ const Friends = () => {
     return (
         <div className={s.friend__page}>
             <div className={s.wrapper__friends}>
-                {/*{location.pathname !== '/friends/requests' && <FriendRequests/>}*/}
-                {/*<Routes>*/}
-                {/*    <Route path='requests' element={<FriendsRequestsPage/>}/>*/}
-                {/*</Routes>*/}
-                {/*{location.pathname !== '/friends/requests' && <MyFriends/>}*/}
                 {ifOutlet()}
             </div>
             <div className={s.nav__block}>

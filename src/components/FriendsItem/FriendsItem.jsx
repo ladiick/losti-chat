@@ -22,6 +22,12 @@ const FriendsItem = ({obj, requests, handlerCancel, handlerAccept, index}) => {
         dispatch(deleteFriend({flag: true, obj: obj.friend}))
     }
 
+    const openWriteBox = ()=>{
+      dispatch(openModalBlock({writeFriend:true}))
+      dispatch(setFriendsCurrent(obj))
+    }
+
+
     return (
         <div className={s.wrapper__item}>
             <div style={{display: 'flex', alignItems: 'center', width: '100%'}}>
@@ -44,10 +50,7 @@ const FriendsItem = ({obj, requests, handlerCancel, handlerAccept, index}) => {
 
                     {requests !== 'requests' ? <span
                             className={s.writeAMessage}
-                            onClick={() => {
-                                dispatch(openModalBlock(true))
-                                dispatch(setFriendsCurrent(obj))
-                            }}>{isMobile ? <BiMessageRounded/> : 'Написать сообщение'} </span>
+                            onClick={openWriteBox}>{isMobile ? <BiMessageRounded/> : 'Написать сообщение'} </span>
 
                         :
                         <BtnRequestsFriend handlerCancel={handlerCancel} handlerAccept={handlerAccept}/>

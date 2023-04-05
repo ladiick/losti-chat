@@ -21,7 +21,7 @@ const HeaderChat = ({isLoading, myId, peopleCurrent}) => {
     const [searchParams, setSearchParams] = useSearchParams()
     const forwardMessageSendFlag = useSelector(state => state.navigation.forwardMessageSendFlag)
 
-    if (isLoading || Object.keys(peopleCurrent).length === 0) {
+    if (isLoading) {
         return (
             <header className={s.header}>
                 <SceletonHeader/>
@@ -29,7 +29,7 @@ const HeaderChat = ({isLoading, myId, peopleCurrent}) => {
         )
     }
 
-    if (currentMessage?.[searchParams.get('dialogs')]?.length && !isMobile && !forwardMessageSendFlag) {
+    if (currentMessage?.[searchParams.get('dialogs')]?.length && !isMobile) {
         return (
             <HeaderForwardMessage/>
         )
