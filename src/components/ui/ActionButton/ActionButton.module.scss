@@ -5,7 +5,7 @@
   padding: 7px 10px;
   border-radius: var(--borderRadiusButton);
   transition: all 0.3s;
-  color: #000000;
+  color: var(--bgBlocksColor);
   cursor: pointer;
   display: inline-block;
   &:hover {
@@ -18,7 +18,8 @@
 
   &:active {
     background-color: lighten(#202020, 60%);
-    transform: translateY(1px);
+    //transform: translateY(1px);
+
   }
 
 }

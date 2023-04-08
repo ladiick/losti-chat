@@ -21,10 +21,7 @@ const BlockInputs = () => {
 
 	const forwardMessages = useSelector(state => state.message.sendMessageOnChat?.[searchParams.get('dialogs')]?.forwardMessage)
 
-
 	const content = useSelector(state => state.message.sendMessageOnChat?.[searchParams.get('dialogs')]?.sendMessage || '')
-
-	const preValueSearch = useSelector(state => state.message.preValueSearch)
 
 	const refSend = useRef()
 
@@ -46,7 +43,7 @@ const BlockInputs = () => {
 		}))
 	}, [searchParams.get('dialogs')])
 
-
+	console.log(forwardMessages)
 	const sendMessage = () => {
 
 		if (content === '') {
@@ -62,14 +59,17 @@ const BlockInputs = () => {
 						request_id: new Date().getTime(),
 						message: content.slice(i * 4000, i * 4000 + 4000),
 						action: 'create_dialog_message',
+						forward: forwardMessages,
 						recipient: searchParams.get('dialogs'),
 					}
 				)
 			)
 		}
+
 		dispatch(sendMessagesOnChat({
 			param: searchParams.get('dialogs'),
-			message: ''
+			message: '',
+			forwardMessage: []
 		}))
 
 	}

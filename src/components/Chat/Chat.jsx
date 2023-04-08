@@ -1,9 +1,9 @@
 import s from './Chat.module.scss'
 import Communication from "../Communication/Communication";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import message__logo from '../assets/messages.svg'
 import {useSearchParams} from "react-router-dom";
-import {useCallback, useContext, useEffect, useRef, useState} from "react";
+import React,{useCallback, useContext, useEffect, useRef, useState} from "react";
 import {MyContext} from "../../App";
 import {motion} from 'framer-motion'
 import sanitizeHtml from "sanitize-html";
@@ -17,13 +17,15 @@ import BlockInputs from "./BlockInputs/BlockInputs";
 import HeaderForwardMessage from "./HeaderForwardMessage/HeaderForwardMessage";
 import BlockForwardMessages from "./BlockForwardMessages/BlockForwardMessages";
 import ViewForwardedMessage from "../DialogBoxes/ViewForwardedMessage/ViewForwardedMessage";
+import {openModalBlock} from "../../redux/slices/navigationSlice";
 
 const Chat = () => {
-
+    const dispatch = useDispatch()
     const myId = useSelector(state => state.user.aboutUser.id)
     const [searchParams, setSearchParams] = useSearchParams()
     const [skip, setSkip] = useState(true)
     const currentMessage = useSelector(state => state.message.currentMessage)
+    const isVisible = useSelector(state => state.navigation.modal.viewForwardMessage)
 
     const {isMobile} = useMatchMedia()
 
@@ -36,6 +38,7 @@ const Chat = () => {
 
 
     useEffect(() => {
+        dispatch(openModalBlock({viewForwardMessage:false}))
         const onKeypress = e => {
             if (e.code === 'Escape') {
                 setSearchParams('')
@@ -50,7 +53,6 @@ const Chat = () => {
     }, [searchParams?.get('dialogs')]);
 
 
-    const isVisible = useSelector(state => state.navigation.modal.viewForwardMessage)
 
 
     if (!searchParams.get('dialogs') && !isMobile) {
@@ -79,4 +81,4 @@ const Chat = () => {
     )
 }
 
-export default Chat
+export default React.memo(Chat)

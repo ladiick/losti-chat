@@ -6,12 +6,15 @@ import MessageDate from "./MessageDate/MessageDate";
 import MessageRecipient from "./MessageRecipient/MessageRecipient";
 import {useSelector} from "react-redux";
 import {useSearchParams} from "react-router-dom";
+import MessageForward from "./MessageForward/MessageForward";
 
-const Message = ({message, obj, time, who, handlerCurrentMessage}) => {
+const Message = ({obj, handlerCurrentMessage}) => {
 	const refScrollBlock = useRef(null);
 	const currentMessage = useSelector(state => state.message.currentMessage)
 	const [searchParams, setSearchParams] = useSearchParams()
+	const myId = useSelector(state => state.user.aboutUser.id)
 	const param = searchParams.get('dialogs')
+
 
 	useEffect(() => {
 		refScrollBlock?.current?.scrollIntoView(false)
@@ -32,36 +35,56 @@ const Message = ({message, obj, time, who, handlerCurrentMessage}) => {
 	}, [currentMessage])
 
 
-	if (who === 'sender') {
-		return <MessageSender
-			wrapper={s.wrapper__message}
-			message={message}
-			handlerCurrentMessage={handlerCurrentMessage}
-			activeMessage={activeMessage}
-			time={time}/>
+
+
+	if (obj?.forward?.length) {
+		if (obj?.recip?.pk === myId) {
+			return <MessageForward
+				wrapper={s.wrapper__message}
+				who={'sender'}
+				forward={obj}
+				handlerCurrentMessage={handlerCurrentMessage}
+				activeMessage={activeMessage}
+			/>
+		}
+		if (obj?.sender?.pk === myId) {
+			return <MessageForward
+				wrapper={s.wrapper__message}
+				forward={obj}
+				handlerCurrentMessage={handlerCurrentMessage}
+				activeMessage={activeMessage}
+			/>
+		}
 	}
 
-	if (who === 'recipient') {
-		return <MessageRecipient
+	if (obj?.recip?.pk === myId) {
+		return <MessageSender
 			wrapper={s.wrapper__message}
-			message={message}
+			obj={obj}
 			handlerCurrentMessage={handlerCurrentMessage}
 			activeMessage={activeMessage}
-			time={time}
-
 		/>
 	}
 
-	if (who === 'Date') {
+	if (obj?.sender?.pk === myId) {
+		return <MessageRecipient
+			wrapper={s.wrapper__message}
+			obj={obj}
+			handlerCurrentMessage={handlerCurrentMessage}
+			activeMessage={activeMessage}
+		/>
+	}
+
+	if (obj?.type === 'Date') {
 		return <MessageDate
 			wrapper={s.wrapper__message}
-			message={message}
+			message={obj.message}
 		/>
 	}
 
 }
 
-export default Message
+export default React.memo(Message)
 
 
 

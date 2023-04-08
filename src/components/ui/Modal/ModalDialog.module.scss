@@ -17,6 +17,8 @@
 	border-radius: 12px;
 	min-width: 500px;
 	max-width: 638px;
+	max-height: 735px;
+	overflow-y: auto;
 }
 
 .header {
@@ -36,4 +38,12 @@
 
 .content {
 	padding: 20px;
+}
+
+.footer {
+	padding: 15px 20px;
+	border-top: 1px solid var(--borderColor);
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 }

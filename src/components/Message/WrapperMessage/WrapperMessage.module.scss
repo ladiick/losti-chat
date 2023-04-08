@@ -1,0 +1,31 @@
+.wrapper__message {
+
+	white-space: pre-line;
+	display: inline-block;
+	background: rgba(255, 255, 255, 0.08);
+	padding: 6px 10px;
+	color: var(--descriptionColor);
+	max-width: 80%;
+	word-break: break-word;
+	word-wrap: break-word;
+	line-height: 18px;
+	position: relative;
+	font-size: 13px;
+	border-radius: 8px 10px 10px 0;
+	text-align: justify;
+
+}
+
+.message__time{
+	word-break: normal;
+	font-size: 10px;
+	font-weight: 300;
+	color: var(--decription-color);
+	display: flex;
+	position: relative;
+	width: 25px;
+	top: 7px;
+	bottom: auto !important;
+	float: right;
+	margin-left: 0.4375rem;
+}
