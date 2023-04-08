@@ -18,8 +18,6 @@
     }
   }
 
-
-
 }
 .wrapper__sender__active{
   background-color: var(--navigate-color);
@@ -42,7 +40,7 @@
   white-space: pre-line;
   display: inline-block;
   background: rgba(255, 255, 255, 0.1);
-  padding: 8px;
+  padding: 6px 10px;
   color: var(--descriptionColor);
   max-width: 80%;
   word-break: break-word;
@@ -62,7 +60,6 @@
   display: flex;
   position: relative;
   width: 25px;
-
   top: 7px;
   bottom: auto !important;
   float: right;
