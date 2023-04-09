@@ -56,4 +56,4 @@ const BlockMessage = ({children, activeMessage, time, pos, ...props}) => {
 	);
 };
 
-export default BlockMessage;
+export default React.memo(BlockMessage);

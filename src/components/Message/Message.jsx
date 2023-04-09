@@ -9,16 +9,10 @@ import {useSearchParams} from "react-router-dom";
 import MessageForward from "./MessageForward/MessageForward";
 
 const Message = ({obj, handlerCurrentMessage}) => {
-	const refScrollBlock = useRef(null);
 	const currentMessage = useSelector(state => state.message.currentMessage)
 	const [searchParams, setSearchParams] = useSearchParams()
 	const myId = useSelector(state => state.user.aboutUser.id)
 	const param = searchParams.get('dialogs')
-
-
-	useEffect(() => {
-		refScrollBlock?.current?.scrollIntoView(false)
-	}, [])
 
 
 	const activeMessage = useMemo(() => {
@@ -34,28 +28,6 @@ const Message = ({obj, handlerCurrentMessage}) => {
 
 	}, [currentMessage])
 
-
-
-
-	if (obj?.forward?.length) {
-		if (obj?.recip?.pk === myId) {
-			return <MessageForward
-				wrapper={s.wrapper__message}
-				who={'sender'}
-				forward={obj}
-				handlerCurrentMessage={handlerCurrentMessage}
-				activeMessage={activeMessage}
-			/>
-		}
-		if (obj?.sender?.pk === myId) {
-			return <MessageForward
-				wrapper={s.wrapper__message}
-				forward={obj}
-				handlerCurrentMessage={handlerCurrentMessage}
-				activeMessage={activeMessage}
-			/>
-		}
-	}
 
 	if (obj?.recip?.pk === myId) {
 		return <MessageSender

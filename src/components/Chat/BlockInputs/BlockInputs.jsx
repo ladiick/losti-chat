@@ -43,7 +43,7 @@ const BlockInputs = () => {
 		}))
 	}, [searchParams.get('dialogs')])
 
-	console.log(forwardMessages)
+	console.log(forwardMessages?.map(a=>a.id))
 	const sendMessage = () => {
 
 		if (content === '') {
@@ -59,7 +59,7 @@ const BlockInputs = () => {
 						request_id: new Date().getTime(),
 						message: content.slice(i * 4000, i * 4000 + 4000),
 						action: 'create_dialog_message',
-						forward: forwardMessages,
+						forward: forwardMessages?.map(a=>a.id),
 						recipient: searchParams.get('dialogs'),
 					}
 				)
