@@ -59,6 +59,7 @@ const Communication = () => {
 
 
 	function scrollHandler(e) {
+
 		if (e.target.scrollTop + e.target.clientHeight < e.target.scrollHeight) {
 			setScrollButton(true)
 		}
@@ -82,6 +83,8 @@ const Communication = () => {
 		}
 
 	}, [message])
+
+
 
 	useEffect(() => {
 
@@ -110,10 +113,9 @@ const Communication = () => {
 
 
 	const handlerCurrentMessage = useCallback((obj) => {
-		console.log(obj)
 		dispatch(currentMessage({param, obj}))
 
-	}, [param])
+	}, [dispatch,param])
 
 
 	if (isLoading) {

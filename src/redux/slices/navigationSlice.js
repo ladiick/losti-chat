@@ -4,7 +4,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
 	modal: {
 		writeFriend:false,
-		viewForwardMessage: false
+		viewForwardMessage: false,
 	},
 
 	chat: false,
@@ -12,6 +12,7 @@ const initialState = {
 	deleteFriend: false,
 	deleteFriendObj: {},
 	forwardMessageFlag: false,
+	answerMessageFlag: false,
 
 }
 
@@ -38,13 +39,15 @@ export const navigationSlice = createSlice({
 		forwardMessageFlag(state,action){
 			state.forwardMessageFlag = action.payload
 		},
-
+		answerMessageFlag(state,action){
+			state.answerMessageFlag = action.payload
+		}
 	}
 	
 	
 })
 
 export const {openModalBlock,openChatBlock,searchFriend,deleteFriend,
-	forwardMessageFlag} = navigationSlice.actions
+	forwardMessageFlag,answerMessageFlag} = navigationSlice.actions
 
 export default navigationSlice.reducer

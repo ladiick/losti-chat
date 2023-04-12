@@ -12,6 +12,8 @@ import BlockForwardMessages from "../BlockForwardMessages/BlockForwardMessages";
 import {useDispatch, useSelector} from "react-redux";
 import {forwardMessageSendFlag} from "../../../redux/slices/navigationSlice";
 import {sendMessagesOnChat} from "../../../redux/slices/messageSlice";
+import BlockAnswerMessage from "../BlockAnswerMessage/BlockAnswerMessage";
+import _ from "underscore";
 
 const BlockInputs = () => {
 	const {isMobile} = useMatchMedia()
@@ -20,6 +22,7 @@ const BlockInputs = () => {
 	const [searchParams, setSearchParams] = useSearchParams()
 
 	const forwardMessages = useSelector(state => state.message.sendMessageOnChat?.[searchParams.get('dialogs')]?.forwardMessage)
+	const answerMessages = useSelector(state => state.message.sendMessageOnChat?.[searchParams.get('dialogs')]?.answerMessage || {})
 
 	const content = useSelector(state => state.message.sendMessageOnChat?.[searchParams.get('dialogs')]?.sendMessage || '')
 
@@ -42,24 +45,25 @@ const BlockInputs = () => {
 			message: sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf)
 		}))
 	}, [searchParams.get('dialogs')])
-
-	console.log(forwardMessages?.map(a=>a.id))
+	console.log(_.isEmpty(answerMessages))
 	const sendMessage = () => {
 
-		if (content === '') {
+		if (content === ''
+			&& forwardMessages?.length === 0
+			&& !_.isEmpty(answerMessages)) {
 			return
 		}
 
-		const countMessage = Math.ceil(content.length / 4000)
+		const countMessage = Math.ceil(content.length / 4000) || 1
 		for (let i = 0; i < countMessage; i++) {
-
 			socket?.send(
 				JSON.stringify(
 					{
 						request_id: new Date().getTime(),
 						message: content.slice(i * 4000, i * 4000 + 4000),
 						action: 'create_dialog_message',
-						forward: forwardMessages?.map(a=>a.id),
+						forward: i === countMessage - 1 ? forwardMessages?.map(a => a.id) : [],
+						answer: i === countMessage - 1 ? answerMessages?.id : {},
 						recipient: searchParams.get('dialogs'),
 					}
 				)
@@ -69,7 +73,8 @@ const BlockInputs = () => {
 		dispatch(sendMessagesOnChat({
 			param: searchParams.get('dialogs'),
 			message: '',
-			forwardMessage: []
+			forwardMessage: [],
+			answerMessage: {}
 		}))
 
 	}
@@ -86,6 +91,12 @@ const BlockInputs = () => {
 
 	return (
 		<div className={s.wrapper__input}>
+			{answerMessages && Object.keys(answerMessages)?.length !== 0
+				&&
+				<BlockAnswerMessage
+					message={answerMessages}
+				/>
+			}
 			<div className={s.input}>
 				<div className={s.form__wrapper}>
 					<label className={s.download__file}>
@@ -119,9 +130,11 @@ const BlockInputs = () => {
 
 					<div
 						ref={refSend}
-						onClick={sendMessage}
+						onClick={() => sendMessage()}
 						className={s.button__send}>
-						{statusSocket === 'ready' ? <BsSend/> : <BsSendSlash/>}
+						{statusSocket === 'ready' && Object.keys(answerMessages)?.length === 0 ? <BsSend/>
+							: <BsSendSlash/>
+						}
 					</div>
 				</div>
 			</div>
@@ -131,7 +144,6 @@ const BlockInputs = () => {
 				<BlockForwardMessages
 					message={forwardMessages}
 				/>
-
 			}
 		</div>
 	);

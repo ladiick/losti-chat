@@ -90,6 +90,8 @@
 
 .content__message {
 	border-left: 2px solid var(--secondColor);
+
+
 }
 
 .name__time {
@@ -130,14 +132,43 @@
 }
 
 .message__wrapper {
-	margin-left: 6px;
-	&:not(first-child){
+	margin-left: 8px;
+	&:not(:first-child){
 		margin-top: 5px;
+	}
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 550px;
+
+	&::-webkit-scrollbar-track {
+		border-radius: 4px;
+	}
+
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 4px;
+		background: rgba(255, 255, 255, 0.5442);
 	}
 }
 
 .message {
-	margin-left: 6px;
-	margin-top: 5px;
+	margin-top: 4px;
+	white-space: pre-line;
+	display: inline-block;
+	color: var(--descriptionColor);
+	max-width: 95%;
+	word-break: break-word;
+	word-wrap: break-word;
+	line-height: 18px;
+	position: relative;
+	font-size: 13px;
+	border-radius: 8px 10px 10px 0;
+	text-align: justify;
 }
+
+
+
 

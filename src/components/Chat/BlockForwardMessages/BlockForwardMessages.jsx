@@ -18,7 +18,7 @@ const BlockForwardMessages = ({message}) => {
 	}
 
 	const viewForwardedMessage = () => {
-		dispatch(openModalBlock({viewForwardMessage:true}))
+		dispatch(openModalBlock({viewForwardMessage: true}))
 	}
 
 
@@ -48,13 +48,22 @@ const BlockForwardMessages = ({message}) => {
 
 				<Text className={s.name__time} weight='strong'>
 					{message?.[0]?.sender?.first_name + ' ' + message?.[0]?.sender?.last_name}
-					<Text className={s.message__time}
-					>{convertTime(message?.[0]?.time)}</Text>
+					<Text className={s.message__time}>
+						{convertTime(message?.[0]?.time)}
+					</Text>
 				</Text>
 
-				<Text
-					className={s.message__forward}
-					onClick={viewForwardedMessage}>{message?.[0]?.message}</Text>
+				{
+					message?.[0]?.message ?
+						<Text
+							className={s.message__forward}
+							onClick={viewForwardedMessage}>{message?.[0]?.message}
+						</Text>
+						:
+						<Text className={s.message__forward} onClick={viewForwardedMessage}>
+							{changeDeclination(message?.length, 'message')}
+						</Text>
+				}
 			</div>
 			<CloseButton className={s.close__btn} onClick={() => closeForward()}/>
 

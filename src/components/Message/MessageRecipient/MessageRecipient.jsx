@@ -13,9 +13,9 @@ const MessageRecipient = ({activeMessage, obj, handlerCurrentMessage}) => {
 				time={obj.time}
 				activeMessage={activeMessage}
 				onClick={handlerCurrentMessage}>
-				<Text>{obj.message}</Text>
+				{obj.message && <Text>{obj.message}</Text>}
 
-				{obj?.forward?.length !== 0 && <MessageForward forward={obj} myKey={`${obj?.id}`}/>}
+				{obj?.forward?.length !== 0 && <MessageForward forward={obj}/>}
 
 
 			</BlockMessage>

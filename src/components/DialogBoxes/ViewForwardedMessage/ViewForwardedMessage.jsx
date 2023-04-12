@@ -7,6 +7,7 @@ import s from './ViewForwardedMessage.module.scss'
 import Text from "../../ui/Text/Text";
 import EmptyImage from "../../ui/EmptyImage/EmptyImage";
 import {convertTime} from "../../actions/convertTime";
+import MessageForward from "../../Message/MessageForward/MessageForward";
 
 const ViewForwardedMessage = () => {
 	const isVisible = useSelector(state => state.navigation.modal.viewForwardMessage)
@@ -14,7 +15,7 @@ const ViewForwardedMessage = () => {
 	const [searchParams, setSearchParams] = useSearchParams()
 
 	const messages = useSelector(state => state.message.sendMessageOnChat?.[searchParams.get('dialogs')]?.forwardMessage)
-
+	const manyForwardMessage = useSelector(state => state.message.forwardManyMessage)
 	const closeFunc = () => {
 		dispatch(openModalBlock({viewForwardMessage: false}))
 	}
@@ -24,40 +25,10 @@ const ViewForwardedMessage = () => {
 		             open={isVisible}
 		             closeFunc={closeFunc}>
 			<div className={s.wrapper__info}>
-				{messages?.map(message => (
-					<ForwardMessageItem key={message?.id} obj={message}/>
-				))}
+				<MessageForward forward={messages}/>
 			</div>
 		</ModalDialog>
 	);
 };
-
-
-const ForwardMessageItem = ({obj}) => {
-
-	return (
-		<div className={s.forwardItem}>
-			<div>
-				<Link to={`/profile/${obj.sender.pk}`}>
-					<EmptyImage
-						image={obj.sender.image}
-						name={{firstName: obj.sender.first_name, lastName: obj.sender.last_name}}
-						style={{width: 36, height: 36, fontSize: 12}}
-					/>
-				</Link>
-			</div>
-			<div className={s.info__user__message}>
-				<div className={s.info}>
-					<Link to={`/profile/${obj.sender.pk}`} className={s.user__name}>
-						{obj.sender.first_name}
-					</Link>
-					<Text className={s.time}>{convertTime(obj.time)}</Text>
-
-				</div>
-				<Text className={s.message}>{obj.message}</Text>
-			</div>
-		</div>
-	)
-}
 
 export default ViewForwardedMessage;

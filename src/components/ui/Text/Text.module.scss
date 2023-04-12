@@ -5,5 +5,17 @@
   &__medium{
     font-weight: var(--fontWeight);
   }
+
+  &__button{
+    cursor: pointer;
+    color: var(--secondColor);
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+
 }
+
+
+
 
