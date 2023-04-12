@@ -8,8 +8,12 @@
   color: var(--bgBlocksColor);
   cursor: pointer;
   display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+
   &:hover {
-    background-color: lighten(#202020, 70%);
+    background-color: lighten(#202020, 65%);
   }
 
   &:focus {
@@ -29,19 +33,21 @@
   font-weight: 500;
   display: inline-block;
   background-color: var(--navigate-color);
-  padding: 8px 12px;
+  padding: 7px 10px;
 
   border-radius: var(--borderRadiusButton);
   transition: all 0.3s;
   color: var(--descriptionColor);
   cursor: pointer;
 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   &:hover {
-    background-color: lighten(#303030, 5%);
+    background-color: lighten(#303030, 1%);
   }
   &:active {
-    transform: translateY(1px);
-    background-color: lighten(#303030, 0%);
+    background-color: lighten(#303030, 1%);
   }
 
   &:focus {

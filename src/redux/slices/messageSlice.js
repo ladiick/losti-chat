@@ -4,7 +4,8 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
 	message: {},
 	currentMessage: {},
-	sendMessageOnChat: {}
+	sendMessageOnChat: {},
+	forwardManyMessage: {}
 }
 
 
@@ -79,7 +80,7 @@ export const messageSlice = createSlice({
 				state.sendMessageOnChat[action.payload.param] = {
 					sendMessage: '',
 					forwardMessage: [],
-					answerMessage: []
+					answerMessage: {}
 				}
 
 			}
@@ -97,19 +98,21 @@ export const messageSlice = createSlice({
 			}
 
 			if (action.payload.answerMessage) {
-
 				state.sendMessageOnChat[action.payload.param].answerMessage = action.payload.answerMessage
-
 			}
 
 		},
 		clearForwardMessage(state, action) {
 			state.sendMessageOnChat[action.payload.param].forwardMessage = []
 		},
+
 		clearAnswerMessage(state, action) {
-			state.sendMessageOnChat[action.payload.param].answerMessage = []
+			state.sendMessageOnChat[action.payload.param].answerMessage = {}
 		},
 
+		setForwardMessageIfMany(state, action){
+			state.forwardManyMessage = action.payload
+		}
 
 	},
 
@@ -124,7 +127,8 @@ export const {
 	clearMessage,
 	sendMessagesOnChat,
 	clearForwardMessage,
-	clearAnswerMessage
+	clearAnswerMessage,
+	setForwardMessageIfMany
 } = messageSlice.actions
 
 export default messageSlice.reducer

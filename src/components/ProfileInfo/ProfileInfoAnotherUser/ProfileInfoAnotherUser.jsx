@@ -16,10 +16,9 @@ const ProfileInfoAnotherUser = () => {
             <div className={s.block__communicate}>
                 <ActionButton style={{marginRight: 5}}>Сообщение</ActionButton>
                 {
-                    true ? <span
-                            className={s.exist__friend}><BsPersonCheck/></span>
+                    true ? <ActionButton second style={{padding: '1px 3px'}}><BsPersonCheck style={{width:24,height:24}}/></ActionButton>
                         :
-                        <span className={s.add__friend}>Добавить в друзья</span>
+                        <ActionButton>Добавить в друзья</ActionButton>
                 }
             </div>
 

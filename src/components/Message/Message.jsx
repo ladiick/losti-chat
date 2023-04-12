@@ -6,7 +6,6 @@ import MessageDate from "./MessageDate/MessageDate";
 import MessageRecipient from "./MessageRecipient/MessageRecipient";
 import {useSelector} from "react-redux";
 import {useSearchParams} from "react-router-dom";
-import MessageForward from "./MessageForward/MessageForward";
 
 const Message = ({obj, handlerCurrentMessage}) => {
 	const currentMessage = useSelector(state => state.message.currentMessage)
