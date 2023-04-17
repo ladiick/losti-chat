@@ -1,152 +1,152 @@
 .wrapper__input {
 
-  width: 100%;
-  background: var(--bgColor);
-  border-radius: 0 0 15px 0;
-  border-top: 1px solid var(--borderColor) ;
-  @media(max-width: 768px) {
-    border-radius: 0;
-  }
+	width: 100%;
+	background: var(--background--content);
+	border-radius: 0 0 15px 0;
+	border-top: 1px solid var(--border--block);
+	@media(max-width: 768px) {
+		border-radius: 0;
+	}
 }
 
 .input {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 10px;
 
-  .form__wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-
-  svg {
-    width: 24px;
-    height: 24px;
-    fill: var(--secondColor);
-    transition: all .3s;
-
-    &:hover {
-      transform: rotate(15deg) scale(1.1);
+	.form__wrapper {
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
 
 
-    }
-  }
+	svg {
+		width: 24px;
+		height: 24px;
+		fill: var(--secondColor);
+		transition: all .3s;
 
-  @media(max-width: 768px) {
-    padding: 10px 5px;
-  }
+		&:hover {
+			transform: rotate(15deg) scale(1.1);
+
+
+		}
+	}
+
+	@media(max-width: 768px) {
+		padding: 10px 5px;
+	}
 }
 
 .download__file {
-  transform: rotate(45deg);
-  cursor: pointer;
+	transform: rotate(45deg);
+	cursor: pointer;
 
-  svg {
-    transition: all .3s;
-    width: 30px;
-    height: 30px;
-    fill: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: rotate(-45deg);
+	svg {
+		transition: all .3s;
+		width: 30px;
+		height: 30px;
+		fill: var(--background--content--svg);
+		border-radius: 50%;
+		transform: rotate(-45deg);
 
-    &:hover {
-      transform: rotate(-90deg) scale(1.1);
+		&:hover {
+			transform: rotate(-90deg) scale(1.1);
 
-      fill: rgba(255, 255, 255, 0.5);
+			fill: var(--background--accent--hover);
 
-    }
+		}
 
-  }
+	}
 }
 
 .input__file {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	white-space: nowrap;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
 }
 
 
 .block__input__message {
-  width: 85%;
-  position: relative;
+	width: 85%;
+	position: relative;
 
-  .input__message {
-    padding: 10px 10px 10px 10px;
-    color: var(--descriptionColor);
-    font-size: 13px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    width: 100%;
-    resize: none;
-    word-break: break-word;
-    word-wrap: break-word;
-    max-height: 200px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    line-height: 17px;
-    transition: all 0.3s;
-    white-space: pre-wrap;
+	.input__message {
+		padding: 10px 10px 10px 10px;
+		color: var(--color--text--main);
+		font-size: 13px;
+		background: var(--background--content--second);
+		border-radius: 8px;
+		border: none;
+		outline: none;
+		width: 100%;
+		resize: none;
+		word-break: break-word;
+		word-wrap: break-word;
+		max-height: 200px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		line-height: 17px;
+		transition: all 0.3s;
+		white-space: pre-wrap;
 
-    &::-webkit-scrollbar-track {
-      border-radius: 4px;
-    }
+		&::-webkit-scrollbar-track {
+			border-radius: 4px;
+		}
 
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
+		&::-webkit-scrollbar {
+			width: 4px;
+		}
 
-    &::-webkit-scrollbar-thumb {
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.5442);
-    }
-
-
-  }
+		&::-webkit-scrollbar-thumb {
+			border-radius: 4px;
+			background: rgba(255, 255, 255, 0.5442);
+		}
 
 
-  .placeholder {
-    font-size: 13px;
-    position: absolute;
-    top: 12px;
-    left: 10px;
-    user-select: none;
-    z-index: 3;
-    cursor: text;
-    pointer-events: none;
-    color: var(--decription-color);
-  }
+	}
 
 
-  @media(max-width: 768px) {
-    width: 75%;
-  }
+	.placeholder {
+		font-size: 13px;
+		position: absolute;
+		top: 12px;
+		left: 10px;
+		user-select: none;
+		z-index: 3;
+		cursor: text;
+		pointer-events: none;
+		color: var(--decription-color);
+	}
+
+
+	@media(max-width: 768px) {
+		width: 75%;
+	}
 }
 
 
 .button__send {
-  cursor: pointer;
+	cursor: pointer;
 
-  svg {
-    transition: all 0.3s;
-    fill: rgba(255, 255, 255, 0.3);
+	svg {
+		transition: all 0.3s;
+		fill: var(--background--content--svg);
 
-    &:hover {
-      fill: rgba(255, 255, 255, 0.5);
-    }
-  }
+		&:hover {
+			fill: var(--background--accent--hover);
+		}
+	}
 
 }
 

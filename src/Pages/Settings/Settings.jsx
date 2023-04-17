@@ -4,11 +4,11 @@ import {toast} from "react-toastify";
 
 const Settings = () => {
 
-    const navigate = useNavigate()
-
-    useEffect(()=>{
-        navigate(-1)
-    },[])
+    // const navigate = useNavigate()
+    //
+    // useEffect(()=>{
+    //     navigate(-1)
+    // },[])
 
     return (
         <div>

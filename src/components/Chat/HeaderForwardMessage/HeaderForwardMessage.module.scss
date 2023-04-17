@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  border-bottom: 1px solid var(--borderColor);
+  border-bottom: 1px solid var(--border--block);
   //background-color: var(--bgColor);
 
 
@@ -18,7 +18,7 @@
   align-items: center;
   font-size: 13px;
   font-weight: var(--fontWeight);
-  color: var(--descriptionColor);
+  color: var(--color--text--main);
 
   svg {
     cursor: pointer;
@@ -28,7 +28,7 @@
     width: 20px;
     height: 20px;
     &:hover {
-      color: var(--descriptionColor);
+      color: var(--color--text--main);
     }
   }
 }
@@ -44,7 +44,7 @@
     width: 20px;
     height: 20px;
     &:hover {
-      color: var(--descriptionColor);
+      color: var(--color--text--main);
     }
   }
 }
@@ -55,7 +55,7 @@
     flex-direction: column;
     align-items: flex-start;
     height: auto;
-    background-color: var(--navigate-color);
+    background-color: var(--background--hover);
 
   }
 

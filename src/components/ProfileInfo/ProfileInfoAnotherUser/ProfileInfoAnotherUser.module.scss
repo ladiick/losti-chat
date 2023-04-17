@@ -1,12 +1,12 @@
 
 .block__communicate {
-  color: var(--descriptionColor);
+  color: var(--color--text--main);
   display: flex;
   align-items: center;
 
   .write__message {
     font-size: 13px;
-    background-color: var(--descriptionColor);
+    background-color: var(--color--text--main);
     padding: 6px 16px;
     border-radius: 6px;
     color: #000000;
@@ -22,7 +22,7 @@
   .exist__friend {
     max-height: inherit;
     padding: 3.5px;
-    background-color: var(--borderColor);
+    background-color: var(--border--block);
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -30,7 +30,7 @@
     cursor: pointer;
     transition: all 0.3s;
     &:hover{
-      background-color: var(--navigate-color);
+      background-color: var(--background--hover);
     }
     svg {
       width: 20px;

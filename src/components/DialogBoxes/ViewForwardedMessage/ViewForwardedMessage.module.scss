@@ -1,6 +1,6 @@
 .wrapper__info {
 	padding: 0 20px;
-	color: var(--descriptionColor);
+	color: var(--color--text--main);
 }
 
 .info__user__message {
@@ -43,7 +43,7 @@
 	margin-top: 8px;
 	white-space: pre-line;
 	display: inline-block;
-	color: var(--descriptionColor);
+	color: var(--color--text--main);
 	word-break: break-word;
 	word-wrap: break-word;
 	line-height: 18px;

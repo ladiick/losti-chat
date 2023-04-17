@@ -1,57 +1,62 @@
 .button__primary {
-  font-size: 13px;
-  font-weight: 500;
-  background-color: var(--descriptionColor);
-  padding: 7px 10px;
-  border-radius: var(--borderRadiusButton);
-  transition: all 0.3s;
-  color: var(--bgBlocksColor);
-  cursor: pointer;
-  display: inline-block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+	font-size: 13px;
+	font-weight: 500;
+	background-color: var(--background--accent);
+	padding: 7px 10px;
+	border-radius: var(--borderRadiusButton);
+	transition: all 0.3s;
+	color: var(--background--content);
+	cursor: pointer;
+	display: inline-block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 
+	&:hover {
+		background-color: var(--background--accent--hover);
+	}
 
-  &:hover {
-    background-color: lighten(#202020, 65%);
-  }
+	&:focus {
+		outline: var(--secondColor);
+	}
 
-  &:focus {
-    outline: var(--secondColor);
-  }
+	&:active {
+		background-color: var(--background--content--active);
+		//transform: translateY(1px);
 
-  &:active {
-    background-color: lighten(#202020, 60%);
-    //transform: translateY(1px);
+	}
 
-  }
+	&:disabled {
+		color: #aaaaaa;
+		cursor: auto;
+		background: #202020;
+		box-shadow: none;
+	}
 
 }
 
 .button__second {
-  font-size: 13px;
-  font-weight: 500;
-  display: inline-block;
-  background-color: var(--navigate-color);
-  padding: 7px 10px;
+	font-size: 13px;
+	font-weight: 500;
+	display: inline-block;
+	background-color: var(--background--content--second);
+	padding: 7px 10px;
+	border-radius: var(--borderRadiusButton);
+	transition: all 0.3s;
+	color: var(--color--text--main);
+	cursor: pointer;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 
-  border-radius: var(--borderRadiusButton);
-  transition: all 0.3s;
-  color: var(--descriptionColor);
-  cursor: pointer;
+	&:hover {
+		background-color: var(--background--hover);
+	}
 
-  white-space: nowrap;
-  text-overflow: ellipsis;
+	&:active {
+		background-color: var(--background--content--secondary--active);
+	}
 
-  &:hover {
-    background-color: lighten(#303030, 1%);
-  }
-  &:active {
-    background-color: lighten(#303030, 1%);
-  }
-
-  &:focus {
-    outline: var(--secondColor);
-  }
+	&:focus {
+		outline: var(--secondColor);
+	}
 
 }

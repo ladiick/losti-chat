@@ -1,10 +1,10 @@
 .header {
   height: 100px;
-  background-color: var(--bgBlocksColor);
+  background-color: var(--background--content);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  color: var(--descriptionColor);
+  color: var(--color--text--main);
 }
 .header__content{
   display: flex;
@@ -26,9 +26,9 @@
 }
 
 .main {
-  background-color: var(--navigate-color);
+  background-color: var(--background--hover);
   height: 100vh;
-  color: var(--descriptionColor);
+  color: var(--color--text--main);
 }
 
 .main__top {
@@ -49,9 +49,9 @@
     margin-top: 20px;
     width: 100%;
     text-align: center;
-    border: 3px solid var(--borderColor);
+    border: 3px solid var(--border--block);
     tr,td,th,{
-      border: 2px solid var(--borderColor);
+      border: 2px solid var(--border--block);
     }
   }
 

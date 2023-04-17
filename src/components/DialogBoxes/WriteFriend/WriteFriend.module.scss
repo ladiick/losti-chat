@@ -6,13 +6,14 @@
   textarea {
     margin-top: 20px;
     background: var(--bgColor);
-    color: var(--descriptionColor);
+    color: var(--color--text--main);
+    background-color: var(--background--content--second);
     resize: none;
     outline: none;
     border-radius: 8px;
     padding: 5px;
     font-size: 13px;
-    border: 1px solid var(--borderColor);
+    border: 1px solid var(--border--block);
   }
 }
 

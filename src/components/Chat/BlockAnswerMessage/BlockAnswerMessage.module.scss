@@ -1,6 +1,6 @@
 .wrapper__forward__msg {
 	margin: 10px 58px 0 58px;
-	border-left: 2px solid var(--borderColor);
+	border-left: 2px solid var(--border--block);
 	position: relative;
 
 	.close__btn {
@@ -26,10 +26,6 @@
 	vertical-align: top;
 	display: block;
 	margin-top: 6px;
-	cursor: pointer;
-	&:hover{
-		text-decoration: underline;
-	}
 }
 
 .name__time {

@@ -7,6 +7,7 @@ import {useGetPossibleFriendsQuery} from "../features/friendsPossibleFriendsApiS
 import {useAcceptFriendRequestsMutation} from "../features/friendsApiSlice";
 import {optionsNotification} from "../actions/optionsNotification";
 import Title from "../ui/Title/Title";
+import WrapperBlocks from "../ui/WrapperBlocks/WrapperBlocks";
 
 const PossibleFriends = () => {
 
@@ -32,21 +33,8 @@ const PossibleFriends = () => {
     }
 
     return (
-        <motion.div
-            initial={{
-                y: 200,
-                opacity: 0
-            }}
-            animate={{
-                y: 0,
-                opacity: 1
-            }}
-            transition={{
-                type: 'tween',
-                duration: 0.5
-            }}
-            className={s.wrapper}>
-            <Title style={{marginBottom:20}}>Возможные друзья</Title>
+        <WrapperBlocks>
+            <Title level={4} style={{marginBottom:20}}>Возможные друзья</Title>
             <div className={s.block__scroll}>
                 {
                     possibleFriends?.map((obj, index) => <PossibleFriendsItem
@@ -58,7 +46,7 @@ const PossibleFriends = () => {
                 }
 
             </div>
-        </motion.div>
+        </WrapperBlocks>
     );
 };
 

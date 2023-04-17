@@ -4,7 +4,7 @@ import {convertTime} from "../../actions/convertTime";
 
 const WrapperMessage = ({time, children, pos}) => {
 	const position = {
-		borderRadius: pos === 'left' ? '8px 10px 10px 0' : '10px 8px 0 10px'
+		borderRadius: pos === 'left' ? '14px 14px 14px 4px' : '14px 14px 4px 14px'
 	}
 
 	return (

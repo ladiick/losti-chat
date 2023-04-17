@@ -5,13 +5,14 @@ import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {BsFillCameraFill} from "react-icons/bs";
 import ProfileInfoAboutUser from "./ProfileInfoAboutUser/ProfileInfoAboutUser";
+import WrapperBlocks from "../../ui/WrapperBlocks/WrapperBlocks";
 
 const ProfileInfo = ({children,image,firstName,lastName}) => {
     const {id} = useParams()
     const myId = useSelector(state => state.user.aboutUser.id)
 
     return (
-        <div className={s.wrapper}>
+        <WrapperBlocks className={s.wrapper}>
             <div className={s.wrapper__block__info}>
                 <div className={s.block__info}>
                 {id == myId ?
@@ -32,7 +33,7 @@ const ProfileInfo = ({children,image,firstName,lastName}) => {
                     </ProfileInfoAboutUser>
                 </div>
             </div>
-        </div>
+        </WrapperBlocks>
 
     );
 };

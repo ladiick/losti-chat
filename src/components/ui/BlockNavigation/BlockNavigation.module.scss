@@ -1,0 +1,31 @@
+
+.item {
+
+	&:not(:last-child) {
+		margin-bottom: 4px;
+	}
+
+	a {
+		color: inherit;
+		width: 100%;
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		padding: 7px 10px;
+		border-radius: 8px;
+		transition: all 0.3s;
+		svg{
+			color: var(--text--accent);
+			margin-right: 10px;
+			font-size: 20px;
+		}
+		&:hover {
+			background-color: var(--background--content--secondary--hover);
+		}
+
+	}
+}
+
+.active{
+	background-color: var(--background--content--secondary--hover);
+}

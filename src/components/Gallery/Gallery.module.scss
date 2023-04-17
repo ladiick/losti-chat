@@ -1,22 +1,17 @@
 .wrapper__gallery{
   width: 100%;
-  color: #ffffff;
-  border-radius: 16px;
-  border: 1px solid var(--borderColor);
-  padding: 30px 15px;
-  background-color: var(--bgBlocksColor);
 }
 
 .wrapper__gallery{
   //span{
   //  background-color: #303030;
   //  font-size: 14px;
-  //  color: var(--descriptionColor);
+  //  color: var(--color--text--main);
   //  display: inline-flex;
   //  padding: 5px;
   //  border-radius: 8px;
   //  align-items: center;
-  //  border: 1px solid var(--borderColor);
+  //  border: 1px solid var(--border--block);
   //  transition: all 0.3s;
   //  user-select: none;
   //  svg{
@@ -52,7 +47,7 @@
   justify-content: space-around;
   align-items: center;
   button{
-    color: var(--descriptionColor);
+    color: var(--color--text--main);
     font-size: 14px;
     font-weight: 500;
     display: flex;

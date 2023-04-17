@@ -16,6 +16,7 @@ const ProfileInfoMe = () => {
     }
 
 
+
     return (
         <ProfileInfo
             image={aboutUserMe?.image}

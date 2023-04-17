@@ -4,11 +4,11 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--bgBlocksColor);
+  background-color: var(--background--content);
   height: 50%;
   padding: 16px;
 
-  border-radius: 12px 12px 15px 15px;
+  border-radius: 11px;
 
 }
 
@@ -24,7 +24,7 @@
 
 .user__name {
   margin: 0;
-  color: var(--descriptionColor);
+  color: var(--color--text--main);
   font-size: 21px;
   font-weight: 600;
 }

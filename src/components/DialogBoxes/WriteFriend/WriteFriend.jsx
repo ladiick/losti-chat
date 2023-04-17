@@ -2,19 +2,13 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import s from './WriteFriend.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {openModalBlock} from "../../../redux/slices/navigationSlice";
-import photo from '../../assets/my_photo.jpg'
-import {MyContext} from "../../../App";
+import {MyContext} from "../../Layout/Layout";
 import {setFriendsCurrent} from "../../../redux/slices/friendsSlice";
 import {toast} from "react-toastify";
-import {Dialog} from "@headlessui/react";
-import {AnimatePresence, motion} from 'framer-motion'
-import {HOST} from "../../api/HOST";
 import {optionsNotification} from "../../actions/optionsNotification";
 import EmptyImage from "../../ui/EmptyImage/EmptyImage";
 import Text from '../../ui/Text/Text'
 import ActionButton from "../../ui/ActionButton/ActionButton";
-import {IoClose} from "react-icons/io5";
-import CloseButton from "../../ui/CloseButton/CloseButton";
 import ModalDialog from "../../ui/Modal/ModalDialog";
 
 const WriteFriend = () => {
@@ -61,6 +55,7 @@ const WriteFriend = () => {
 
 	return (
 		<ModalDialog
+			noFooter
 			open={modalActive}
 			closeFunc={closeFunc}
 			title='Написать сообщение'>

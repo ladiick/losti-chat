@@ -16,7 +16,7 @@ const Notification = ({title, classItem, count, classQuantity}) => {
         <Popover className={s.popover__wrapper}>
             {({open}) => (
                 <>
-                    <Popover.Button>
+                    <Popover.Button style={{marginBottom:10}}>
                         <li className={classItem}>
                             <IoNotificationsOutline/>
                             <Text style={styleText(isMobile)}>

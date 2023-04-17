@@ -8,6 +8,8 @@ import {useAcceptFriendRequestsMutation, useCancelFriendRequestsMutation} from "
 import {toast} from "react-toastify";
 import {optionsNotification} from "../actions/optionsNotification";
 import useMatchMedia from "../hooks/useMatchMedia";
+import WrapperBlocks from "../ui/WrapperBlocks/WrapperBlocks";
+import Text from "../ui/Text/Text";
 
 const FriendRequests = ({allRequests}) => {
 
@@ -46,22 +48,9 @@ const FriendRequests = ({allRequests}) => {
 
     if (friendRequests?.length === 0 && location.pathname === '/friends/requests') {
         return (
-            <motion.div
-                initial={{
-                    y: -200,
-                    opacity: 0
-                }}
-                animate={{
-                    y: 0,
-                    opacity: 1
-                }}
-                transition={{
-                    type: 'tween',
-                    duration: 0.5
-                }}
-                className={s.wrapper__requests}>
-                <div style={{textAlign: 'center', fontSize: 14}}>У вас нет заявок в друзья</div>
-            </motion.div>
+            <WrapperBlocks style={{textAlign: 'center'}}>
+                <Text>У вас нет заявок в друзья</Text>
+            </WrapperBlocks>
         )
     } else if (friendRequests?.length === 0) {
         return

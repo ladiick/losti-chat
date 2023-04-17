@@ -13,7 +13,7 @@
   .about__user {
     display: flex;
     align-items: center;
-    color: var(--descriptionColor);
+    color: var(--color--text--main);
 
   }
 
@@ -32,7 +32,7 @@
 
 
   &:hover {
-    background-color: var(--navigate-color);
+    background-color: var(--background--hover);
   }
 
 

@@ -6,7 +6,7 @@ import navigation from "./slices/navigationSlice";
 import friends from "./slices/friendsSlice";
 import registration from "./slices/registrationStepsSlice";
 import {apiSlice} from "../components/api/apiSlice";
-
+import theme from '../redux/slices/themeSlice'
 // import {dialogsAPI} from "../components/api/apiSlice";
 
 export const store = configureStore({
@@ -19,6 +19,7 @@ export const store = configureStore({
         navigation,
         friends,
         registration,
+        theme,
         [apiSlice.reducerPath]: apiSlice.reducer,
 
     },

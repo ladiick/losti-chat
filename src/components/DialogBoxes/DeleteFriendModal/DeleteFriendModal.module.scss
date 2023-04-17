@@ -11,8 +11,8 @@
   transform: translateX(-50%);
   background-color: var(--bgColor);
   border-radius: 8px;
-  border: 1px solid var(--borderColor);
-  color: var(--descriptionColor);
+  border: 1px solid var(--border--block);
+  color: var(--color--text--main);
   padding: 30px 15px;
   box-shadow: 0 5px 20px 0 black;
 
@@ -46,10 +46,10 @@
     }
     border-radius: 4px;
     padding: 6px 16px;
-    color: var(--descriptionColor);
+    color: var(--color--text--main);
 
     &:hover{
-      background-color: var(--navigate-color);
+      background-color: var(--background--hover);
     }
     &:active{
       transform: translateY(1px);

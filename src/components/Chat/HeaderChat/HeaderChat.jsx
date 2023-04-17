@@ -58,7 +58,7 @@ const HeaderChat = ({isLoading, myId, peopleCurrent}) => {
 					</ActionLink>
 
 					<div className={s.person__info}>
-						<ActionLink to={`/profile/${searchParams.get('dialogs')}`}>
+						<ActionLink to={`/profile/${searchParams.get('dialogs')}`} style={{fontWeight:600}}>
 							{searchParams.get('dialogs') == myId ? 'Избранное'
 								:
 								`${peopleCurrent.first_name} ${peopleCurrent.last_name}`}

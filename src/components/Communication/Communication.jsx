@@ -4,13 +4,14 @@ import {useDispatch, useSelector} from "react-redux";
 import React, {useCallback, useContext, useEffect, useRef, useState} from "react";
 import {clearMessage, currentMessage, sendMessagesOnChat, setMessage} from "../../redux/slices/messageSlice";
 import _ from "underscore";
-import {MyContext} from "../../App";
+import {MyContext} from "../Layout/Layout";
 import {useLocation, useSearchParams} from "react-router-dom";
 import {useGetMessageQuery, usePaginationMutation} from "../features/messageApiSlice";
 import {addTimeMessage} from "../actions/addTimeMessage";
 import {Oval} from "react-loader-spinner";
 import LoaderWrapper from "../ui/LoaderWrapper/LoaderWrapper";
 import {FiArrowDown} from "react-icons/fi";
+import {helperMessage} from "../../utils/utils";
 
 
 const Communication = () => {
@@ -85,7 +86,6 @@ const Communication = () => {
 	}, [message])
 
 
-
 	useEffect(() => {
 
 		if (newMessage && message?.results?.[0]?.id !== newMessage.id) {
@@ -115,7 +115,7 @@ const Communication = () => {
 	const handlerCurrentMessage = useCallback((obj) => {
 		dispatch(currentMessage({param, obj}))
 
-	}, [dispatch,param])
+	}, [dispatch, param])
 
 
 	if (isLoading) {
@@ -140,32 +140,37 @@ const Communication = () => {
 
 
 	return (
-		<>
-			<div className={s.block__messages} ref={refCommunication}>
-				{addTimeMessage(message?.results).map((obj, index) =>
-					(
+		<div className={s.block__messages} ref={refCommunication}>
+			{addTimeMessage(message?.results).map((obj, index, arr) =>
+				(
+					helperMessage(arr?.[index], arr?.[index - 1]) ?
 						<Message
 							key={obj?.type === 'Date' ? `${obj.time}_time` : obj.id}
 							obj={obj}
+							margin={true}
 							handlerCurrentMessage={() => handlerCurrentMessage(obj)}
 						/>
-					)
-				).reverse()
-				}
+						:
+						<Message
+							key={obj?.type === 'Date' ? `${obj.time}_time` : obj.id}
+							obj={obj}
+							margin={false}
+							handlerCurrentMessage={() => handlerCurrentMessage(obj)}
+						/>
+				)
+			).reverse()
+			}
 
-				{
-					scrollButton &&
-					<div className={s.button__down}
-					     onClick={dialogDown}>
-                        <span>
-                            <FiArrowDown/>
-                            </span>
-					</div>
-				}
-			</div>
-
-		</>
-
+			{
+				scrollButton &&
+				<div className={s.button__down}
+				     onClick={dialogDown}>
+                <span>
+                    <FiArrowDown/>
+								</span>
+				</div>
+			}
+		</div>
 
 	)
 

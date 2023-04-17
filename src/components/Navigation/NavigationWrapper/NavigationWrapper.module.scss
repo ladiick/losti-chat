@@ -25,25 +25,17 @@
 
 .name__company {
 
-  margin-bottom: 5px;
-  padding: 6px;
+  margin-bottom: 20px;
+  padding: 4px;
 
   span {
     display: flex;
     align-items: center;
     position: relative;
 
-
-    h1 {
-      font-size: 13px;
-      color: var(--descriptionColor);
-      padding-left: 6.5px;
-      margin: 0;
-    }
-
     img {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       border-radius: 8px;
       background-color: var(--secondColor);
     }

@@ -42,7 +42,7 @@ const useWebsocket = (userAccessToken) => {
 		}
 		const createChannel = () => {
 
-			if(statusSocket === 'ready') return
+			if(statusSocket === 'ready' && socket?.readyState === 1) return
 
 			console.log('соединение установлено')
 			ws?.removeEventListener('close', closeHandler)
@@ -52,7 +52,6 @@ const useWebsocket = (userAccessToken) => {
 
 			ws?.addEventListener('close', closeHandler)
 			setSocket(ws)
-			
 		}
 		if (isAuth) {
 			createChannel()
@@ -114,8 +113,8 @@ const useWebsocket = (userAccessToken) => {
 			socket?.removeEventListener('message', messageHandler)
 		}
 	}, [socket]);
-	
-	
+
+
 	return [socket, statusSocket, newMessage]
 	
 };

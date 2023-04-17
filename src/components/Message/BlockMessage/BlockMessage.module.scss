@@ -1,12 +1,9 @@
 
 .wrapper__message{
 	margin: 0 10px 0 20px;
-	padding: 4px;
 	border-radius: 6px;
 	cursor: pointer;
 	position: relative;
-
-
 
 	&:not(:last-child) {
 		margin-bottom: 2px;
@@ -19,6 +16,7 @@
 
 .wrapper__sender{
 	text-align: left;
+	padding: 1px 10px 1px 4px;
 
 	.current__message__right {
 		color: var(--secondColor);
@@ -40,8 +38,8 @@
 }
 
 .wrapper__sender__active{
-	background-color: var(--navigate-color);
-
+	background-color: var(--background--content--secondary--hover);
+	padding: 1px 10px 1px 4px;
 	.current__message__right {
 		opacity: 1;
 		color: var(--secondColor);
@@ -57,6 +55,7 @@
 
 .wrapper__recipient{
 	text-align: right;
+	padding: 1px 4px 1px 10px;
 
 	.current__message__left {
 		display: none;
@@ -77,7 +76,8 @@
 }
 
 .wrapper__recipient__active{
-	background-color: var(--navigate-color);
+	background-color: var(--background--content--secondary--hover);
+	padding: 1px 4px 1px 10px;
 
 	.current__message__left {
 		display: flex;

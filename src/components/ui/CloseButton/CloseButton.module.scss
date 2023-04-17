@@ -5,7 +5,7 @@
   width: 20px;
   height: 20px;
   &:hover {
-    color: var(--descriptionColor);
+    color: var(--color--text--main);
   }
   &:focus{
     outline: var(--secondColor);

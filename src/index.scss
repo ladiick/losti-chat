@@ -1,38 +1,103 @@
 
-*,html,body{
-  font-family: 'Inter', sans-serif;
-  box-sizing: border-box;
+*, html, body {
+	box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  background-color: #0a0a0a;
-}
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+	monospace;
 }
 
 
 :root {
-  --bgBlocksColor: #19191a;
-  --fontWeight: 500;
-  --paddingBlock: 30px 15px;
-  --borderRadiusBlock: 16px;
-  --marginBlock: 20px;
-  --primaryColor: #ffffff;
-  --descriptionColor: #e1e3e6;
-  --secondDescription: #828282;
-  --secondColor: #1a73e8;
-  --borderColor: #434343;
-  --bgColor: #202020;
-  --decription-color: #888888;
-  --navigate-color: #303030;
-  --borderRadiusButton: 8px
+	--body--bg: #0a0a0a;
+
+	--fontWeight: 500;
+	--paddingBlock: 30px 15px;
+	--borderRadiusBlock: 16px;
+	--marginBlock: 15px;
+	--primaryColor: #ffffff;
+	--color--text--main: #e1e3e6;
+	--secondDescription: #828282;
+	--secondColor: #1a73e8;
+	--border--block: #434343;
+	--bgColor: #202020;
+	--decription-color: #888888;
+	--background--hover: #303030;
+	--borderRadiusButton: 8px;
+	--family: 'Inter', sans-serif;
+
+
+	//new variables
+	--text--secondary: #888888;
+	--text--accent: #1a73e8;
+	--margin--blocks: 15px;
+	--padding--block: 30px 15px;
+	--background--active: #303030;
+
 }
+
+@media (max-width: 768px) {
+	:root {
+		--marginBlock: 10px;
+	}
+}
+
+body[data-theme='dark'] {
+	--background--body: #0a0a0a;
+	--color--text--main: #e1e3e6;
+	--background--content: #19191a;
+	--border--block: #434343;
+	--background--hover: #303030;
+	--background--accent: #e1e3e6;
+	--background--accent--hover: #AFB1B6;
+	--color--text--inverse: #000000;
+	--background--content--second: #232324;
+	--background--content--active: #AFB1B6;
+	--background--content--secondary--active: #3a3737;
+	--background--content--svg: rgba(255, 255, 255, 0.3);
+	--background--content--secondary--hover: rgba(255, 255, 255, 0.1);
+	--background--block--message: rgba(255, 255, 255, 0.08);
+	--background--content--secondary: #3f3e3e;
+
+}
+
+body[data-theme='light'] {
+	--background--body: #e9ebee;
+	--color--text--main: #000000;
+	--background--content: #ffffff;
+	--border--block: #ece8e8;
+	--background--hover: #e1e1e1;
+	--background--accent: #1a73e8;
+	--background--accent--hover: #4986CC;
+	--color--text--inverse: #ffffff;
+	--background--content--second: #f0f1f3;
+	--background--content--active: #237EDD;
+	--background--content--secondary--active: #eeeeee;
+	--background--content--svg: #1a73e8;
+	--background--content--secondary--hover: #f0f1f3;
+	--background--block--message: #e9f0fc;
+	--background--content--secondary: #4986CC;
+
+}
+
+//body {
+//  margin: 0;
+//  font-family: var(--family);
+//  color: var(--colors-text);
+//  font-weight: var(--fw-light);
+//  background-color: var(--colors-bg);
+//}
+body {
+	margin: 0;
+	font-family: var(--family);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--background--body);
+}
+
+
+
+
 

@@ -5,7 +5,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import s from './ModalDialog.module.scss';
 import ActionButton from "../ActionButton/ActionButton";
 
-const ModalDialog = ({title, open, closeFunc, children}) => {
+const ModalDialog = ({title, open, closeFunc, children,noFooter}) => {
 
 	return (
 		<AnimatePresence>
@@ -24,9 +24,9 @@ const ModalDialog = ({title, open, closeFunc, children}) => {
 						<main className={s.content}>
 							{children}
 						</main>
-						<footer className={s.footer}>
+						{!noFooter && <footer className={s.footer}>
 							<ActionButton onClick={() => closeFunc()}>Закрыть</ActionButton>
-						</footer>
+						</footer>}
 					</Dialog.Panel>
 				</motion.div>
 			</Dialog>}

@@ -5,10 +5,10 @@
   width: calc((100% - (var(--elements) - 1) * var(--gap)) / (var(--elements)));
   padding: 5px 0;
   cursor: pointer;
-  color: var(--descriptionColor);
+  color: var(--color--text--main);
   text-decoration: none;
   .friend__name {
-    color: var(--descriptionColor);
+    color: var(--color--text--main);
     font-size: 13px;
     margin-top: 8px;
   }
@@ -17,7 +17,7 @@
   border-radius: 8px;
 
   &:hover {
-    background-color: var(--navigate-color);
+    background-color: var(--background--hover);
   }
 
 }

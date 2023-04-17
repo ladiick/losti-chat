@@ -21,7 +21,7 @@
 }
 
 .wrapper__recipient__active{
-  background-color: var(--navigate-color);
+  background-color: var(--background--hover);
 
   .current__message__left {
     display: flex;
@@ -44,9 +44,9 @@
   text-align: justify;
   display: inline-block;
   max-width: 80%;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--background--block--message);
   padding: 6px 10px;
-  color: var(--descriptionColor);
+  color: var(--color--text--main);
   line-height: 18px;
   position: relative;
   font-size: 13px;

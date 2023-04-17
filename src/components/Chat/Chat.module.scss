@@ -1,14 +1,15 @@
 .wrapper {
   width: 65%;
-  background-color: var(--bgBlocksColor);
-  border-radius: 0 16px 16px 0;
+  padding: 0;
+  //background-color: var(--background--content);
+  border-radius: 0 12px 12px 0;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   z-index: 100;
 
-  border: 1px solid var(--borderColor);
+  //border: 1px solid var(--border--block);
 
   border-left: none;
 
@@ -27,12 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border-radius: 0 16px 16px 0;
-
-  background-color: var(--bgBlocksColor);
-
-  border: 1px solid #434343;
+  border-radius: 0 12px 12px 0;
   border-left: none;
 
 }
@@ -48,15 +44,6 @@
     height: 56px;
   }
 
-  span {
-    font-size: 14px;
-    padding: 5px 10px;
-    background-color: rgba(255, 255, 255, 0.08);
-    color: #FFFFFF;
-    border-radius: 17px;
-    margin-top: 5px;
-
-  }
 }
 
 

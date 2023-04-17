@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import Text from '../Text/Text'
 import s from './ActionLink.module.scss'
 
-const ActionLink = ({to, children, className, hover, style}) => {
+const ActionLink = ({button, to, children, className, hover, style}) => {
 
 	const classGeneral = className && hover
 		? `${className} ${s.hover}`
@@ -13,7 +13,11 @@ const ActionLink = ({to, children, className, hover, style}) => {
 
 	return (
 		<Link to={to}>
-			<Text className={classGeneral} style={style}>{children}</Text>
+			<Text
+				className={classGeneral}
+				style={style}>
+				{children}
+			</Text>
 		</Link>
 	);
 };

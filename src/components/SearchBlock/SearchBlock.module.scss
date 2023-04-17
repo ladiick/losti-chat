@@ -3,7 +3,7 @@
 	position: relative;
 
 	svg {
-		fill: #828282;
+		fill: var(--text--secondary);
 		position: absolute;
 		width: 20px;
 		height: 20px;
@@ -16,15 +16,15 @@
 	}
 
 	input {
-		border: 1px solid #434343;
-		background: #202020;
-		border-radius: 6px;
+		border: 1px solid transparent;
+		background: var(--background--content--second);
+		border-radius: 8px;
 		outline: none;
 		transition: all .3s;
 		width: 100%;
 		//opacity: 0;
 		padding: 8px 35px 8px 12px;
-		color: #FFFFFF;
+		color: var(--color--text--main);
 		font-size: 14px;
 
 		&:focus {

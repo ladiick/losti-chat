@@ -1,15 +1,19 @@
 import React from 'react';
 import s from './Title.module.scss'
 
-const Title = ({children, style, level = 1}) => {
+const Title = ({children, className, level = 1, ...props}) => {
+
+	const Tag = `h${level}`
+	const classGeneral = className ? `${className} ${s.title}` : s.title
 
 
-    return (
-        <h1 style={style} className={s.title}>
-            {children}
-        </h1>
+	return (
+		<Tag {...props} className={classGeneral}>
+			{children}
+		</Tag>
 
-    );
+	);
 };
+
 
 export default Title;
