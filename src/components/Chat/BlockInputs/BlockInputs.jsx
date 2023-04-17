@@ -6,7 +6,7 @@ import {motion} from "framer-motion";
 import {BsSend, BsSendSlash} from "react-icons/bs";
 import sanitizeHtml from "sanitize-html";
 import useMatchMedia from "../../hooks/useMatchMedia";
-import {MyContext} from "../../../App";
+import {MyContext} from "../../Layout/Layout";
 import {useLocation, useSearchParams} from "react-router-dom";
 import BlockForwardMessages from "../BlockForwardMessages/BlockForwardMessages";
 import {useDispatch, useSelector} from "react-redux";
@@ -45,7 +45,7 @@ const BlockInputs = () => {
 			message: sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf)
 		}))
 	}, [searchParams.get('dialogs')])
-	console.log(_.isEmpty(answerMessages))
+
 	const sendMessage = () => {
 
 		if (content === ''
@@ -132,8 +132,10 @@ const BlockInputs = () => {
 						ref={refSend}
 						onClick={() => sendMessage()}
 						className={s.button__send}>
-						{statusSocket === 'ready' && Object.keys(answerMessages)?.length === 0 ? <BsSend/>
-							: <BsSendSlash/>
+						{
+							statusSocket === 'ready'
+								? <BsSend/>
+								: <BsSendSlash/>
 						}
 					</div>
 				</div>

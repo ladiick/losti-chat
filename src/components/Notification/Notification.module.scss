@@ -1,8 +1,9 @@
 .popover__wrapper{
   position: relative;
-  color: var(--descriptionColor);
+  color: var(--color--text--main);
   button{
     width: 100%;
+    cursor: pointer;
   }
 }
 
@@ -13,9 +14,9 @@
   z-index: 13;
   width: 350px;
   height: 450px;
-  border-radius: 16px;
-  border: 1px solid var(--borderColor);
-  background-color: var(--bgBlocksColor);
+  border-radius: 12px;
+  border: 1px solid var(--border--block);
+  background-color: var(--background--content);
 }
 
 .list__notification{

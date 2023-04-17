@@ -5,10 +5,11 @@ import photo from '../assets/my_photo.jpg'
 import {BsPlus} from "react-icons/bs";
 import {MdKeyboardArrowRight} from "react-icons/md";
 import ActionButton from "../ui/ActionButton/ActionButton";
+import WrapperBlocks from "../ui/WrapperBlocks/WrapperBlocks";
 
 const Gallery = () => {
     return (
-        <div className={s.wrapper__gallery}>
+        <WrapperBlocks className={s.wrapper__gallery}>
             <ActionButton
                 second
                 style={{display:'inline-flex',alignItems: 'center',padding: 6}}>
@@ -27,7 +28,7 @@ const Gallery = () => {
                     Показать всё <MdKeyboardArrowRight/>
                     </button>
             </div>
-        </div>
+        </WrapperBlocks>
     );
 };
 

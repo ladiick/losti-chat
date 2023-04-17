@@ -15,7 +15,7 @@ const Navigation = () => {
     if (localStorage.getItem('accessToken') === 'undefined') {
         return (
             <NavigationWrapper>
-                {noAuthItems.map((obj) => (
+                {noAuthItems?.map((obj) => (
                     <NavigationItem key={obj.id} obj={obj}/>
                 ))}
             </NavigationWrapper>
@@ -25,7 +25,7 @@ const Navigation = () => {
 
     return (
         <NavigationWrapper>
-            {authItems(myId, countRequests.length, isMobile).map((obj, index) => (
+            {authItems(myId, countRequests.length, isMobile)?.map((obj, index) => (
                 <NavigationItem key={obj.id} obj={obj} index={index}/>
             ))}
         </NavigationWrapper>

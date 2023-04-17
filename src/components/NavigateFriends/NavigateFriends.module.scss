@@ -1,9 +1,9 @@
 .wrapper__nav{
-	border: 1px solid var(--borderColor);
+	border: 1px solid var(--border--block);
 	padding: var(--paddingBlock);
 	border-radius: var(--borderRadiusBlock);
 	margin-bottom: var(--marginBlock);
-	background-color: var(--bgBlocksColor);
+	background-color: var(--background--content);
 }
 
 .nav__items{
@@ -23,7 +23,7 @@
 		border-radius: 8px;
 		transition: all 0.3s;
 		&:hover{
-			background-color: var(--navigate-color);
+			background-color: var(--background--content--secondary--hover);
 		}
 
 	}
@@ -36,7 +36,7 @@
 	}
 
 	.quantity__requests{
-		color: var(--descriptionColor);
+		color: var(--color--text--main);
 		background-color: var(--secondColor);
 		border-radius: 50%;
 		padding: 1px 5px 0 5px;
@@ -52,7 +52,7 @@
 		transition: all 0.3s;
 
 		&:hover{
-			background-color: var(--navigate-color);
+			background-color: var(--background--content--secondary--hover);
 
 		}
 
@@ -60,7 +60,7 @@
 }
 
 .active{
-	background-color: var(--navigate-color);
+	background-color: var(--background--content--secondary--hover);
 }
 
 

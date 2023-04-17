@@ -7,7 +7,7 @@ import MessageRecipient from "./MessageRecipient/MessageRecipient";
 import {useSelector} from "react-redux";
 import {useSearchParams} from "react-router-dom";
 
-const Message = ({obj, handlerCurrentMessage}) => {
+const Message = ({obj, handlerCurrentMessage,margin}) => {
 	const currentMessage = useSelector(state => state.message.currentMessage)
 	const [searchParams, setSearchParams] = useSearchParams()
 	const myId = useSelector(state => state.user.aboutUser.id)
@@ -28,9 +28,11 @@ const Message = ({obj, handlerCurrentMessage}) => {
 	}, [currentMessage])
 
 
+
+
 	if (obj?.recip?.pk === myId) {
 		return <MessageSender
-			wrapper={s.wrapper__message}
+			margin={margin}
 			obj={obj}
 			handlerCurrentMessage={handlerCurrentMessage}
 			activeMessage={activeMessage}
@@ -39,7 +41,7 @@ const Message = ({obj, handlerCurrentMessage}) => {
 
 	if (obj?.sender?.pk === myId) {
 		return <MessageRecipient
-			wrapper={s.wrapper__message}
+			margin={margin}
 			obj={obj}
 			handlerCurrentMessage={handlerCurrentMessage}
 			activeMessage={activeMessage}

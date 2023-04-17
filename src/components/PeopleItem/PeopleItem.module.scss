@@ -15,6 +15,7 @@
 	transition: all .3s;
 	//border: 1px solid rgba(0,0,0,0.2);
 	border-radius: 8px;
+	background-color: var(--background--content--second);
 	cursor: pointer;
 	padding: 6px;
 	border: 1px solid transparent;
@@ -36,7 +37,7 @@
 		transition: all .3s;
 	}
 	&:hover {
-		background-color: var(--navigate-color);
+		background-color: var(--background--content--second);
 		&:before{
 			width: 50%;
 			transform: translateX(50%);
@@ -57,7 +58,7 @@
 	border-radius: 8px;
 	cursor: pointer;
 
-	background: var(--navigate-color);
+	background: var(--background--content--second);
 	&:not(:last-child){
 		margin-bottom: 5px;
 	}

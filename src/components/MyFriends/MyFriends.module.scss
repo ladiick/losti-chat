@@ -1,18 +1,16 @@
 .wrapper{
-	background-color: var(--bgBlocksColor);
+	background-color: var(--background--content);
 	width: 100%;
-	color: var(--descriptionColor);
+	color: var(--color--text--main);
 	border-radius: 16px;
-	border: 1px solid var(--borderColor);
+	border: 1px solid var(--border--block);
 	padding: 30px 15px;
-
-	.header{
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-bottom: 20px;
-	}
-
+}
+.header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
 }
 
 .friends__empty{
@@ -35,11 +33,11 @@
 
 .quantity__friends{
 	display: inline-block;
-	background-color: var(--navigate-color);
+	background-color: var(--background--hover);
 	padding: 6px 16px;
 	border-radius: 10px;
 	font-size: 13px;
-	border: 1px solid var(--borderColor);
+	border: 1px solid var(--border--block);
 	transition: all 0.3s;
 
 	p{
@@ -71,7 +69,7 @@
 		background-color: transparent;
 		padding: 5px;
 		font-size: 13px;
-		color: var(--descriptionColor);
+		color: var(--color--text--main);
 		text-transform: uppercase;
 		&:hover{
 			background-color: transparent;

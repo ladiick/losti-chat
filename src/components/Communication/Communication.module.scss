@@ -3,7 +3,7 @@
 	margin-right: 5px;
 	height: 100%;
 	position: relative;
-	background-color: var(--bgBlocksColor);
+	background-color: var(--background--content);
 	overflow-y:auto;
 	overflow-x: hidden;
 	transition: all .3s;
@@ -20,8 +20,8 @@
 			font-size: 24px;
 			padding: 8px;
 			border-radius: 50%;
-			background-color: var(--navigate-color);
-			border: 1px solid var(--borderColor);
+			background-color: var(--background--hover);
+			border: 1px solid var(--border--block);
 			color: var(--decription-color);
 			transition: all 0.3s;
 			cursor: pointer;
@@ -31,7 +31,7 @@
 			}
 
 			&:hover{
-				background-color: var(--borderColor);
+				background-color: var(--border--block);
 				svg{
 					transform: translateY(3px);
 				}

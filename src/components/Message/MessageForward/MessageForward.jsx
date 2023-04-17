@@ -6,32 +6,27 @@ import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {openModalBlock} from "../../../redux/slices/navigationSlice";
 import {setForwardMessageIfMany} from "../../../redux/slices/messageSlice";
+import _ from "underscore";
+import {helperMessage} from "../../../utils/utils";
 
 
-const MessageForward = ({forward}) => {
-	const [counter, setCounter] = useState(0);
+const MessageForward = ({forward,count}) => {
 	const dispatch = useDispatch()
 	const isVisible = useSelector(state => state.navigation.modal.viewForwardMessage)
+	const forwardManyMessage = useSelector(state => state.message.forwardManyMessage)
 
-	useEffect(() => {
-		if(counter < 3) {
-			setCounter(pre => pre + 1)
-		}
-	}, [forward]);
-
-
-	const outTime = (currentObj, preObj) => {
-		const currentItem = new Date(currentObj?.time)
-		const preItem = new Date(preObj?.time)
-
-		if (currentItem.getHours() === preItem.getHours() &&
-			Math.abs(currentItem.getMinutes() - preItem.getMinutes()) < 5 &&
-			currentObj?.sender?.pk === preObj?.sender?.pk
-		) {
-			return true
-		}
-		return false
-	}
+	// const outTime = (currentObj, preObj) => {
+	// 	const currentItem = new Date(currentObj?.time)
+	// 	const preItem = new Date(preObj?.time)
+	//
+	// 	if (currentItem.getHours() === preItem.getHours() &&
+	// 		Math.abs(currentItem.getMinutes() - preItem.getMinutes()) < 5 &&
+	// 		currentObj?.sender?.pk === preObj?.sender?.pk
+	// 	) {
+	// 		return true
+	// 	}
+	// 	return false
+	// }
 
 
 	const forwardOutput = (forward) => {
@@ -46,7 +41,6 @@ const MessageForward = ({forward}) => {
 
 	const openManyForward = (e, obj) => {
 		e.stopPropagation()
-		console.log(obj)
 		dispatch(setForwardMessageIfMany(obj))
 		dispatch(openModalBlock({viewForwardMessage: true}))
 
@@ -58,7 +52,7 @@ const MessageForward = ({forward}) => {
 			{forwardOutput(forward)?.map((obj, index, arr) => (
 				<div className={s.message__wrapper} key={obj?.id}>
 					<div className={s.name__time}>
-						{outTime(arr?.[index], arr?.[index - 1])
+						{helperMessage(arr?.[index], arr?.[index - 1])
 							? '' :
 							(
 								<>
@@ -75,7 +69,12 @@ const MessageForward = ({forward}) => {
 					</div>
 					{obj?.message && <Text className={s.message}>{obj?.message}</Text>}
 
-					{obj?.forward?.length !== 0 && <MessageForward forward={obj}/>}
+					{obj?.forward?.length !== 0 && count < 3 ?
+						<MessageForward forward={obj} count={count+1}/>
+					: <Text style={{display:'block'}}
+					        type={'button'}
+					        onClick={openManyForward}>Пересланное сообщение</Text>
+					}
 				</div>
 			)).reverse()}
 

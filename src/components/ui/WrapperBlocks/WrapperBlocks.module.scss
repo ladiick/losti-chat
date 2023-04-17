@@ -1,0 +1,16 @@
+.wrapper{
+	background-color: var(--background--content);
+	color: var(--color--text--main);
+	border-radius: 12px;
+	border: 1px solid var(--border--block);
+	padding: var(--paddingBlock);
+}
+
+
+@media (max-width: 768px) {
+	.wrapper{
+		width: 100%;
+		border-radius: 0;
+		border: none;
+	}
+}

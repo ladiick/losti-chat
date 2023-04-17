@@ -4,7 +4,7 @@
 
 .btn__accept{
 	cursor: pointer;
-	color: var(--descriptionColor);
+	color: var(--color--text--main);
 	background-color: var(--secondColor);
 	padding: 5px 12px;
 	border-radius: 8px;
@@ -17,7 +17,7 @@
 }
 .btn__cancel{
 	cursor: pointer;
-	color: var(--descriptionColor);
+	color: var(--color--text--main);
 	padding: 5px 12px;
 	border-radius: 8px;
 	transition: all 0.3s;
@@ -25,7 +25,7 @@
 
 
 	&:hover{
-		background-color: var(--borderColor);
+		background-color: var(--border--block);
 	}
 
 }

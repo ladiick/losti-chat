@@ -5,10 +5,10 @@
 
 .edit__profile {
   text-decoration: none;
-  color: var(--descriptionColor);
-  background-color: var(--borderColor);
+  color: var(--color--text--main);
+  background-color: var(--border--block);
   border-radius: 8px;
-  padding: 8px;
+  padding: 7px 10px;
   font-size: 13px;
   transition: all 0.3s;
   cursor: pointer;
@@ -20,7 +20,7 @@
   }
 
   &:hover {
-    background-color: var(--navigate-color);
+    background-color: var(--background--hover);
   }
 }
 

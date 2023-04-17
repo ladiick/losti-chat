@@ -8,7 +8,7 @@ import {styleText} from "../../../utils/utils";
 
 
 const NavigationItem = ({obj, index}) => {
-    const classActive = ({isActive}) => isActive ? s.active : ''
+    const classActive = ({isActive}) => isActive ? s.active : s.link
     const {isMobile} = useMatchMedia()
 
     if(!obj.href && !isMobile){

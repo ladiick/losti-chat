@@ -2,9 +2,9 @@
 
 	white-space: pre-line;
 	display: inline-block;
-	background: rgba(255, 255, 255, 0.08);
+	background: var(--background--block--message);
 	padding: 6px 10px;
-	color: var(--descriptionColor);
+	color: var(--color--text--main);
 	max-width: 80%;
 	word-break: break-word;
 	word-wrap: break-word;

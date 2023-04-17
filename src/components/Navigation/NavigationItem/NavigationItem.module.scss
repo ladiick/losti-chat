@@ -1,69 +1,81 @@
 
+.link{
+	&:not(:last-child){
+		margin-bottom: 10px;
+
+	}
+}
+
 .list__item {
-  transition: all .3s;
-  display: flex;
-  align-items: center;
-  color: var(--descriptionColor);
-  padding: 4px;
-  position: relative;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  user-select: none;
+	transition: all .3s;
+	display: flex;
+	align-items: center;
+	color: var(--color--text--main);
+	padding: 4px;
+	position: relative;
+	border-radius: 8px;
 
-  svg {
-    width: 20px;
-    height: 20px;
-    transition: all .3s;
-  }
 
-  &:hover {
-    background-color: var(--navigate-color);
+	user-select: none;
 
-  }
+	svg {
+		width: 20px;
+		height: 20px;
+		transition: all .3s;
+	}
+
+	&:hover {
+		background-color: var(--background--hover);
+
+	}
 }
 
 .quantity {
-  padding: 1.5px 6px;
-  font-size: 12px;
-  color: #FFFFFF;
-  border-radius: 50%;
-  background-color: var(--secondColor);
+	padding: 1.5px 6px;
+	font-size: 12px;
+	color: #FFFFFF;
+	border-radius: 50%;
+	background-color: var(--secondColor);
 }
 
 .active {
-  li {
-    background-color: var(--navigate-color);
-  }
+	&:not(:last-child){
+		margin-bottom: 10px;
+
+	}
+	li {
+		background-color: var(--background--hover);
+	}
 }
 
 
 @media (max-width: 768px) {
 
-  .list__item {
-    border-radius: 0;
-    flex-direction: column;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    width: 100%;
-    padding: 4px;
+	.list__item {
+		border-radius: 0;
+		flex-direction: column;
+		position: relative;
+		justify-content: center;
+		align-items: center;
+		margin: 0;
+		width: 100%;
+		padding: 4px;
 
-    h2 {
-      font-size: 10px;
-      padding: 0;
-    }
+		h2 {
+			font-size: 10px;
+			padding: 0;
+		}
 
-    svg {
-      width: 28px;
-      height: 28px;
-    }
-  }
-  .quantity {
-    position: absolute;
-    left: 50%;
-    transform: translateX(50%);
-    top: 0;
-  }
+		svg {
+			width: 28px;
+			height: 28px;
+		}
+	}
+	.quantity {
+		position: absolute;
+		left: 50%;
+		transform: translateX(50%);
+		top: 0;
+	}
 
 }

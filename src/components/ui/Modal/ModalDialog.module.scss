@@ -13,22 +13,22 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background-color: var(--bgBlocksColor);
+	background-color: var(--background--content);
 	border-radius: 12px;
 	min-width: 500px;
 	max-width: 638px;
-	min-height: 400px;
+	min-height: 345px;
 	max-height: 735px;
 	overflow-y: auto;
 }
 
 .header {
 	padding: 20px;
-	border-bottom: 1px solid var(--borderColor);
+	border-bottom: 1px solid var(--border--block);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	color: var(--descriptionColor);
+	color: var(--color--text--main);
 
 	.dialog__title {
 		margin: 0;
@@ -48,7 +48,7 @@
 	right: 0;
 	left: 0;
 	padding: 15px 20px;
-	border-top: 1px solid var(--borderColor);
+	border-top: 1px solid var(--border--block);
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;

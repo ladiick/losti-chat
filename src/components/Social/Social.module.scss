@@ -1,20 +1,18 @@
 .wrapper {
-
   width: 35%;
   border-radius: 16px 0 0 16px;
   position: relative;
-  background-color: var(--bgBlocksColor);
+  background-color: var(--background--content);
   padding: 30px 15px;
-
   border: 1px solid #434343;
 
-  .text {
-    display: block;
-    color: var(--descriptionColor);
-    margin-bottom: 20px;
-    font-size: 20px;
-    font-weight: 600;
-  }
+  //.text {
+  //  display: block;
+  //  color: var(--color--text--main);
+  //  margin-bottom: 20px;
+  //  font-size: 20px;
+  //  font-weight: 600;
+  //}
 
 
 }

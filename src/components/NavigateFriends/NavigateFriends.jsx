@@ -4,6 +4,7 @@ import {NavLink, useLocation} from "react-router-dom";
 import {motion} from 'framer-motion'
 import {useGetFriendsRequestsQuery} from "../features/friendsRequestsApiSlice";
 import Text from '../ui/Text/Text'
+import WrapperBlocks from "../ui/WrapperBlocks/WrapperBlocks";
 
 const NavigateFriends = () => {
     const location = useLocation()
@@ -11,20 +12,7 @@ const NavigateFriends = () => {
     const {data: friendRequests = []} = useGetFriendsRequestsQuery()
 
     return (
-        <motion.nav
-            initial={{
-                y: -200,
-                opacity: 0
-            }}
-            animate={{
-                y: 0,
-                opacity: 1
-            }}
-            transition={{
-                type: 'tween',
-                duration: 0.5
-            }}
-            className={s.wrapper__nav}>
+        <WrapperBlocks style={{marginBottom: 'var(--marginBlock)'}}>
             <ul className={s.list__nav__items}>
                 <li className={s.nav__items}>
                     <NavLink to='/friends'
@@ -51,7 +39,7 @@ const NavigateFriends = () => {
                     </NavLink>
                 </li>
             </ul>
-        </motion.nav>
+        </WrapperBlocks>
     );
 };
 

@@ -12,7 +12,7 @@
 	color: white;
 	.photo{
 		width: 60%;
-		margin-right: 20px;
+		margin-right: var(--marginBlock);
 	}
 
 	.friend{
@@ -27,9 +27,9 @@
 	align-items: center;
 	flex-direction: column;
 	height: 75vh;
-	background-color: var(--bgBlocksColor);
+	background-color: var(--background--content);
 	border-radius: 16px;
-	border: 1px solid var(--borderColor);
+	border: 1px solid var(--border--block);
 	a{
 		text-decoration: none;
 		margin-top: 10px;

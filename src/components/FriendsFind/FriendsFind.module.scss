@@ -1,9 +1,9 @@
 .wrapper__find{
-  background-color: var(--bgBlocksColor);
+  background-color: var(--background--content);
   width: 100%;
-  color: var(--descriptionColor);
+  color: var(--color--text--main);
   border-radius: 16px;
-  border: 1px solid var(--borderColor);
+  border: 1px solid var(--border--block);
   padding: 30px 15px;
 
   .header{
@@ -13,7 +13,7 @@
     margin-bottom: 20px;
     font-size: 14px;
     font-weight: var(--fontWeight);
-    color: var(--descriptionColor);
+    color: var(--color--text--main);
   }
 
 }
