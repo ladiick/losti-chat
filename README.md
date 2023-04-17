@@ -4,7 +4,7 @@ This is Losti-Chat
 </h1>
 
 ### Project in development
-### Current url http://losti.ru/
+### Current url https://losti.ru/
 #### The back-end is https://github.com/Love-Time/LostiChat
 
 ## Getting Started
