@@ -20,7 +20,6 @@
 .label__inputs{
 	display: flex;
 	flex-direction: column;
-	//margin-bottom: 20px;
 	font-weight: 400;
 	font-size: 14px;
 	color: #aaaaaa;
@@ -100,50 +99,23 @@
 	//width: 100%;
 }
 .orLogin {
+	display: block;
 	margin: 20px 0;
-	color: #828282;
+	color: var(--text--secondary);
 	text-align: center;
-	font-size: 13px;
 }
 
-.btn__desc {
-	display: inline-block;
+.btn__registr {
+	display: block !important;
 	width: 100%;
-	text-align: center;
-	background-color: #4bb24b;
-	padding: 7px 10px;
-	font-size: 13px;
-	border-radius: 8px;
-	text-decoration: none;
-	color: var(--color--text--main);
-	outline: none;
+	background-color: #4bb24b !important;
+	color: #FFFFFF !important;
 
+	&:hover{
+		background-color: darken(#4bb24b,8%) !important;
+	}
 }
 
-.form__title {
-
-	text-align: center;
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-
-
-	span {
-		font-weight: 500;
-		font-size: 18px;
-		color: #FFFFFF;
-	}
-
-	img {
-		border-radius: 16px;
-		background-color: var(--secondColor);
-		width: 48px;
-		height: 48px;
-		margin-bottom: 20px;
-	}
-
-}
 
 
 .wrapper__img {

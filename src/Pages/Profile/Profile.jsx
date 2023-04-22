@@ -13,18 +13,6 @@ const Profile = () => {
 
 	const myId = useSelector(state => state.user.aboutUser.id)
 	const location = useLocation()
-	// const [skip, setSkip] = useState(true)
-
-	// const {data} = useGetCurrentPersonQuery(id,{
-	// 	skip
-	// })
-	//
-	// useEffect(()=>{
-	// 	if(id) {
-	// 		setSkip(false)
-	// 	}
-	// },[id])
-
 
 	if(location.pathname === `/profile/${myId}/settings`){
 		return <Outlet/>

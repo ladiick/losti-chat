@@ -1,8 +1,9 @@
 .button__primary {
-	font-size: 13px;
 	font-weight: 500;
+	font-size: 13px;
 	background-color: var(--background--accent);
-	padding: 7px 10px;
+	min-height: 28px;
+	min-width: 28px;
 	border-radius: var(--borderRadiusButton);
 	transition: all 0.3s;
 	color: var(--background--content);
@@ -26,20 +27,21 @@
 	}
 
 	&:disabled {
-		color: #aaaaaa;
-		cursor: auto;
-		background: #202020;
+		color: var(--text--secondary);
+		cursor: no-drop;
+		background: var(--background--block--message);
 		box-shadow: none;
 	}
 
 }
 
 .button__second {
-	font-size: 13px;
 	font-weight: 500;
+	font-size: 13px;
 	display: inline-block;
-	background-color: var(--background--content--second);
-	padding: 7px 10px;
+	background-color: var(--background--color--second);
+	min-height: 28px;
+	min-width: 28px;
 	border-radius: var(--borderRadiusButton);
 	transition: all 0.3s;
 	color: var(--color--text--main);
@@ -59,4 +61,52 @@
 		outline: var(--secondColor);
 	}
 
+}
+
+
+.content__btn {
+	display: flex;
+	align-items: center;
+	min-height: inherit;
+	min-width: inherit;
+	justify-content: center;
+	text-align: center;
+}
+
+
+.leftIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-left: 8px;
+	svg{
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.single__icon{
+	padding: 0;
+	margin: 0 auto;
+	svg{
+		width: 20px;
+		height: 20px;
+	}
+}
+
+
+.children{
+	padding: 0 8px;
+}
+
+
+.rightIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-right: 8px;
+	svg{
+		width: 20px;
+		height: 20px;
+	}
 }

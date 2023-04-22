@@ -111,7 +111,6 @@ const Communication = () => {
 
 	}, [newMessage]);
 
-
 	const handlerCurrentMessage = useCallback((obj) => {
 		dispatch(currentMessage({param, obj}))
 

@@ -97,17 +97,17 @@
 	justify-content: center;
 	width: 30%;
 	.wrapper__uploadImg{
+		background-color: var(--background--content--second);
 		cursor: pointer;
 		border-radius: 50%;
 		width: 60px;
 		height: 60px;
-		border: 1px solid #434343;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		transition: all 0.3s;
 		&:hover{
-			border: 1px solid var(--secondColor);
+			border: 1px solid var(--text--accent);
 		}
 
 		.image__upload{

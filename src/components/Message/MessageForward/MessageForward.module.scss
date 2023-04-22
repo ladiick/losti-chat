@@ -89,8 +89,7 @@
 }
 
 .content__message {
-	border-left: 2px solid var(--secondColor);
-
+	border-left: 2px solid var(--text--accent--light);
 
 }
 
@@ -98,13 +97,6 @@
 	display: flex;
 	align-items: center;
 
-	a {
-		color: var(--secondColor);
-
-		&:hover {
-			text-decoration: underline;
-		}
-	}
 }
 
 .message__info {

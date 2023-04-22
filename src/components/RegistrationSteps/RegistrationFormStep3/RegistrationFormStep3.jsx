@@ -4,6 +4,11 @@ import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {setRegistrationSteps} from "../../../redux/slices/registrationStepsSlice";
 import {useDispatch, useSelector} from "react-redux";
+import Text from '../../ui/Text/Text'
+import FormWrapperLabel from "../../FormWrapper/FormWrapperLabel/FormWrapperLabel";
+import ActionInput from "../../ui/ActionInput/ActionInput";
+import ActionButton from "../../ui/ActionButton/ActionButton";
+import {BsCalendarDate} from "react-icons/bs";
 
 const RegistrationFormStep3 = () => {
 	const dispatch = useDispatch()
@@ -11,11 +16,11 @@ const RegistrationFormStep3 = () => {
 	const stepsInfo = useSelector(state => state.registration.stepsInfo)
 
 	useEffect(() => {
-		if (localStorage.getItem('email') === "") {
+		if (!localStorage.getItem('email')) {
 			navigate('/registration')
 		}
 	}, [])
-	
+
 	const {
 		register,
 		watch,
@@ -25,73 +30,71 @@ const RegistrationFormStep3 = () => {
 		mode: 'onChange',
 		defaultValues: {password: localStorage.getItem('password')}
 	})
-	
-	
+
+
 	const onSubmit = data => {
-		console.log(data)
 		delete data.password_repeat
-		console.log(data)
-		localStorage.setItem('password',data.password)
+		localStorage.setItem('password', data.password)
 		dispatch(setRegistrationSteps(data))
-		
 		navigate('/registration/about-user')
 	}
-	
+
 	return (
 		<>
-			
+
 			<div className={s.form}>
 				<form noValidate onSubmit={handleSubmit(onSubmit)}>
 					<div className={s.wrapper__form}>
-						<h3 className={s.description__title}>Ваш пароль будет использован <br/> для входа в аккаунт</h3>
+						<Text style={{textAlign: 'center'}}>
+							Ваш пароль будет использован <br/> для входа в аккаунт
+						</Text>
 						<div>
-						<label className={s.label__inputs}>
-							{errors?.password ? (
-								<div className={s.error__send}>{errors.password.message}</div>
-							) : (
-								'Пароль'
-							)}
-							<input
-								className={s.input}
-								type='password'
-								placeholder='Введите больше 5 символов'
-								style={errors?.password && {borderColor: 'red'}}
-								{...register('password', {
-									required: 'Необходимо заполнить',
-									minLength: {
-										value: 5,
-										message: 'Пароль менее 5 символов',
-									},
-								})}
-							/>
-						</label>
-						<label className={s.label__inputs}>
-							{errors?.password_repeat ? (
-								<div className={s.error__send}>{errors.password_repeat.message}</div>
-							) : (
-								'Подтвердите пароль'
-							)}
-							<input
-								className={s.input}
-								type='password'
-								placeholder='Подтвердить'
-								style={errors?.password_repeat && {borderColor: 'red'}}
-								{...register('password_repeat', {
-									required: 'Пароли не совпадают',
-									validate: (val) => {
-										if (watch('password') !== val) {
-											return "Пароли не совпадают";
-										}
-									},
-								})}
-							/>
-						</label>
+							<FormWrapperLabel
+								title='Пароль'
+								errors={errors?.password}
+							>
+								<ActionInput
+									type='password'
+									placeholder='Введите больше 5 символов'
+									style={errors?.password ? {borderColor: 'red', marginTop: 8} : {marginTop: 8}}
+									{...register('password', {
+										required: 'Необходимо заполнить',
+										minLength: {
+											value: 5,
+											message: 'Пароль менее 5 символов',
+										},
+									})}
+								/>
+							</FormWrapperLabel>
+							<FormWrapperLabel
+								errors={errors?.password_repeat}
+								title='Подтвердите пароль'
+							>
+								<ActionInput
+
+									type='password'
+									placeholder='Подтвердить'
+									style={errors?.password_repeat
+										? {borderColor: 'red', marginTop: 8}
+										: {marginTop: 8}}
+									{...register('password_repeat', {
+										required: 'Пароли не совпадают',
+										validate: (val) => {
+											if (watch('password') !== val) {
+												return "Пароли не совпадают";
+											}
+										},
+									})}
+								/>
+							</FormWrapperLabel>
 						</div>
 					</div>
 					<div>
-						<button className={s.btn_submit} disabled={!isValid}>
+						<ActionButton
+							style={{display: 'block', width: '100%'}}
+							disabled={!isValid}>
 							Продолжить
-						</button>
+						</ActionButton>
 					</div>
 				</form>
 			</div>

@@ -17,11 +17,12 @@
 	.info__user{
 		display: flex;
 		flex-direction: column;
+		margin-left: 15px;
+
 		a{
 			text-decoration: none;
 			color: var(--color--text--main);
-			font-size: 13px;
-			font-weight: 500;
+
 			margin: 0;
 			margin-bottom: 8px;
 		}
@@ -29,13 +30,8 @@
 }
 .writeAMessage{
 	color: var(--secondColor);
-	font-size: 13px;
-	transition: all 0.3s;
-	cursor: pointer;
-	&:hover{
-		text-decoration: underline;
 
-	}
+	cursor: pointer;
 
 }
 

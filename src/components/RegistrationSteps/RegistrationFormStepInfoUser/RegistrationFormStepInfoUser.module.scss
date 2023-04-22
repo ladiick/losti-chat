@@ -61,29 +61,15 @@
 
 	.label__radios {
 		display: flex;
-		//flex-direction: column;
 		border-radius: 8px;
 
 		&:not(:last-child) {
 			margin-right: 10px;
 		}
 
-		.input__radio {
-			position: absolute;
-			width: 1px;
-			height: 1px;
-			margin: -1px;
-			border: 0;
-			padding: 0;
-			white-space: nowrap;
-			clip-path: inset(100%);
-			clip: rect(0 0 0 0);
-			overflow: hidden;
-			appearance: none;
 
-		}
 
-		span {
+		.radio__btn {
 			border: 1px solid #434343;
 			padding: 8px 10px;
 			cursor: pointer;
@@ -110,6 +96,21 @@
 	}
 }
 
+.input__radio {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	white-space: nowrap;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+	appearance: none;
+
+}
+
 .wrapper__gender_title {
 	font-weight: 400;
 	font-size: 14px;
@@ -117,6 +118,23 @@
 	margin-bottom: 8px;
 	cursor: pointer;
 
+}
+
+.icon__calendar{
+	position: absolute;
+	top: 55%;
+	right: 4%;
+	pointer-events: none;
+}
+
+.wrapper__radio{
+	display: flex;
+	justify-content: space-evenly;
+	li{
+		&:not(:last-child){
+			margin-right: 16px;
+		}
+	}
 }
 
 

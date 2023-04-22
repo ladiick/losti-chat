@@ -103,10 +103,20 @@
 }
 
 .orLogin {
+	display: block;
 	margin: 20px 0;
-	color: #828282;
+	color: var(--text--secondary);
 	text-align: center;
-	font-size: 13px;
+}
+.btn__registr{
+	display: block !important;
+	width: 100%;
+	background-color: #4bb24b !important;
+	color: #FFFFFF !important;
+
+	&:hover{
+		background-color: darken(#4bb24b,8%) !important;
+	}
 }
 
 .btn__desc {

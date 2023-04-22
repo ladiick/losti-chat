@@ -7,103 +7,104 @@ import {HOST} from '../../api/HOST'
 import s from './RegistrationFormStep1.module.scss'
 import {setRegistrationSteps} from "../../../redux/slices/registrationStepsSlice";
 import logo from "../../assets/logo.svg";
+import NameCompany from "../../NameCompany/NameCompany";
+import Text from '../../ui/Text/Text'
+import FormWrapperLabel from "../../FormWrapper/FormWrapperLabel/FormWrapperLabel";
+import ActionInput from "../../ui/ActionInput/ActionInput";
+import ActionButton from "../../ui/ActionButton/ActionButton";
+import {VALID__EMAIL} from "../../../utils/validateForm";
 
 const RegistrationFormStep1 = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const stepsInfo = useSelector(state => state.registration.stepsInfo)
-    const [emailExist, setEmailExist] = useState('');
-    const [watchInput, setWatchInput] = useState('');
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const stepsInfo = useSelector(state => state.registration.stepsInfo)
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: {errors, isValid},
-    } = useForm({
-        mode: 'onChange',
-        defaultValues: {email: localStorage.getItem('email')}
-    })
+	const {
+		register,
+		handleSubmit,
+		setError,
+		formState: {errors, isValid},
+	} = useForm({
+		mode: 'onChange',
+		defaultValues: {email: localStorage.getItem('email')}
+	})
 
-    useEffect(() => {
-        if (watch('email') !== watchInput) {
-            setEmailExist('')
-        }
-    }, [watch('email')]);
+	const onSubmit = async (data) => {
 
+		const res = await axios
+			.get(`${HOST}/api/v1/auth/users/check_mail/?email=${data.email}`)
 
-    const onSubmit = async (data) => {
-        localStorage.setItem('email',data.email)
-        dispatch(setRegistrationSteps(data))
+		if (res.data === false) {
+			await axios.post(`${HOST}/api/v1/auth/code/`, {
+				email: data.email
+			})
+			localStorage.setItem('email', data.email)
+			dispatch(setRegistrationSteps(data))
+			navigate('/registration/confirmation-code')
+		}
 
-        const res = await axios
-            .get(`${HOST}/api/v1/auth/users/check_mail/?email=${data.email}`)
+		if (res.data === true) {
+			setError('email', {
+				message: 'Такая почта уже зарегистрирована'
+			})
+		}
 
-        if (res.data === false) {
-            const res2 = await axios.post(`${HOST}/api/v1/auth/code/`, {
-                email: data.email
-            })
+	}
 
-            navigate('/registration/confirmation-code')
+	return (
+		<>
+			<NameCompany
+				size={36}
+				title='Регистрация в LOSTI-CHAT'
+				direction='column'/>
 
-        }
+			<Text
+				style={
+					{
+						textAlign: 'center',
+						marginTop: 10
+					}
+				}>Ваша почта будет использована <br/> для входа в аккаунт</Text>
+			<div className={s.form}>
+				<form noValidate onSubmit={handleSubmit(onSubmit)}>
+					<div className={s.wrapper__form}>
+						<FormWrapperLabel
+							title='Электронная почта'
+							errors={errors?.email}>
 
-        if (res.data === true) {
-            setEmailExist('Такой email существует')
-            setWatchInput(watch('email'))
-        }
+							<ActionInput
+								type='email'
+								placeholder='example@gmail.com'
+								style={errors?.email ? {borderColor: 'red', marginTop: 8} : {marginTop: 8}}
+								{...register('email', {
+									required: 'Необходимо заполнить',
+									pattern: {
+										value: VALID__EMAIL,
+										message: 'Введите корректный email адрес',
+									},
+								})}
+							/>
 
-    }
+						</FormWrapperLabel>
 
-    return (
-        <>
-            <div className={s.form__title}>
-                <img src={logo} alt='logo'/>
-                <span>Регистрация в LOSTI-CHAT</span>
-            </div>
+					</div>
+					<div>
+						<ActionButton
+							style={{display: 'block', width: '100%'}}
+							disabled={!isValid}>Продолжить</ActionButton>
 
-            <h3 className={s.description__title}>Ваша почта будет использована <br/> для входа в аккаунт</h3>
-            <div className={s.form}>
-                <form noValidate onSubmit={handleSubmit(onSubmit)}>
-                    <div className={s.wrapper__form}>
-                        <label className={s.label__inputs}>
-                            {errors?.email ? (
-                                <div className={s.error__send}>{errors.email.message}</div>
-                            ) : (
-                                'Электронная почта'
-                            )}
-                            <input
-                                className={s.input}
-                                type='email'
-                                placeholder='example@gmail.com'
-                                style={errors?.email || emailExist !== '' ? {borderColor: 'red'} : {}}
-                                // style={emailExist !== '' && {borderColor: 'red'}}
+						<Text className={s.orLogin}>или</Text>
 
-                                {...register('email', {
-                                    required: 'Необходимо заполнить',
-                                    pattern: {
-                                        value:
-                                            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-                                        message: 'Введите корректный email адрес',
-                                    },
-                                })}
-                            />
-                            <div className={s.error__send} style={{marginTop: 8}}>{emailExist}</div>
-                        </label>
-                    </div>
-                    <div>
-                        <button className={s.btn_submit} disabled={!isValid}>
-                            Продолжить
-                        </button>
-
-                        <div className={s.orLogin}>или</div>
-
-                        <Link to='/authorization' className={s.btn__desc}>Войти</Link>
-                    </div>
-                </form>
-            </div>
-        </>
-    )
+						<ActionButton
+							onClick={() => navigate('/authorization')}
+							className={s.btn__registr}>
+							Войти
+						</ActionButton>
+					</div>
+				</form>
+			</div>
+		</>
+	)
 }
 
 export default RegistrationFormStep1

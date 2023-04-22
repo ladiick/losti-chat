@@ -16,6 +16,9 @@
 
 }
 
+
+
+
 .message__time{
 	word-break: normal;
 	font-size: 10px;
@@ -28,4 +31,12 @@
 	bottom: auto !important;
 	float: right;
 	margin-left: 0.4375rem;
+}
+
+
+@media(max-width: 768px){
+	.wrapper__message{
+		max-width: 98%;
+
+	}
 }

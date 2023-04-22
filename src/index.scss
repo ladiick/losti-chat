@@ -32,10 +32,11 @@ code {
 	//new variables
 	--text--secondary: #888888;
 	--text--accent: #1a73e8;
+	--text--accent--light: #4986CC;
 	--margin--blocks: 15px;
 	--padding--block: 30px 15px;
 	--background--active: #303030;
-
+	--color--green: #4bb14b;
 }
 
 @media (max-width: 768px) {
@@ -60,7 +61,8 @@ body[data-theme='dark'] {
 	--background--content--secondary--hover: rgba(255, 255, 255, 0.1);
 	--background--block--message: rgba(255, 255, 255, 0.08);
 	--background--content--secondary: #3f3e3e;
-
+	--color--text--soft: #e1e3e6;
+	--background--color--second: #393939;
 }
 
 body[data-theme='light'] {
@@ -79,16 +81,10 @@ body[data-theme='light'] {
 	--background--content--secondary--hover: #f0f1f3;
 	--background--block--message: #e9f0fc;
 	--background--content--secondary: #4986CC;
-
+	--color--text--soft: #FFFFFF;
+	--background--color--second: #f0f1f3;
 }
 
-//body {
-//  margin: 0;
-//  font-family: var(--family);
-//  color: var(--colors-text);
-//  font-weight: var(--fw-light);
-//  background-color: var(--colors-bg);
-//}
 body {
 	margin: 0;
 	font-family: var(--family);

@@ -1,7 +1,7 @@
 .text{
   color: var(--color--text--main);
   font-size: 13px;
-
+  cursor: default;
   &__medium{
     font-weight: var(--fontWeight);
   }

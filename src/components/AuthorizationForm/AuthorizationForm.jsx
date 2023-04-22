@@ -6,19 +6,21 @@ import axios from "axios";
 import {useDispatch} from "react-redux";
 import {setIsAuth, setUserAccessToken, setUserRefreshToken} from "../../redux/slices/userSlice";
 import {HOST} from "../api/HOST";
-import logo from "../assets/logo.svg";
 import ActionButton from "../ui/ActionButton/ActionButton";
-
+import NameCompany from "../NameCompany/NameCompany";
+import Text from '../ui/Text/Text'
+import {VALID__EMAIL} from "../../utils/validateForm";
+import ActionInput from "../ui/ActionInput/ActionInput";
+import FormWrapperLabel from "../FormWrapper/FormWrapperLabel/FormWrapperLabel";
 
 const AuthorizationForm = () => {
 	const dispatch = useDispatch()
-
+	const navigation = useNavigate()
 	const {register, setError, handleSubmit, reset, formState: {errors, isValid}} = useForm(
 		{
 			mode: 'onChange'
 		}
 	)
-
 
 	const onSubmit = async (data) => {
 
@@ -40,7 +42,7 @@ const AuthorizationForm = () => {
 			if (err.response.status === 401) {
 				reset()
 				setError('email', {
-					message: 'Неверный пароль или почта'
+					message: 'Неверная почта или пароль'
 				})
 				setError('password', {})
 			}
@@ -49,48 +51,41 @@ const AuthorizationForm = () => {
 
 	return (
 		<>
-			<div className={s.form__title}>
-				<img src={logo} alt='logo'/>
-				<span>Вход в LOSTI-CHAT</span>
-			</div>
+
+			<NameCompany
+				size={36}
+				title='Вход в LOSTI-CHAT'
+				direction='column'/>
 
 			<div className={s.form}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className={s.wrapper__form}>
-						<label className={s.label__inputs}>
-							{errors?.email ?
-								<div className={s.error__send}>{errors.email.message}</div> : 'Электронная почта'}
-							<input
-								className={s.input}
+						<FormWrapperLabel
+							errors={errors?.email}
+							title='Электронная почта'>
+							<ActionInput
 								type='text'
 								placeholder='Email'
-								style={errors?.email && {borderColor: 'red'}}
+								style={errors?.email ? {borderColor: 'red', marginTop: 8} : {marginTop: 8}}
 								{...(register('email', {
 									required: 'Необходимо заполнить',
 									pattern: {
-										value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+										value: VALID__EMAIL,
 										message: "Введите корректный email адрес"
 									}
-								}))}
+								}))}/>
 
-							/>
-							{/*{errors?.email && <div className={s.error__send}>{errors.email.message}</div>}*/}
-						</label>
+						</FormWrapperLabel>
 
+						<FormWrapperLabel
+							title={'Пароль'}
+							errors={errors?.password}
+							descriptionTitle={<Text type='button'>Забыли пароль?</Text>}>
 
-						<label className={s.label__inputs}>
-							<div className={s.fogot__password}>
-								{errors?.password ?
-									<span className={s.error__send}>{errors.password.message}</span> : 'Пароль'}
-								<Link to='/'>Забыли пароль?</Link>
-
-							</div>
-
-							<input
-								className={s.input}
+							<ActionInput
 								type='password'
 								placeholder='Введите больше 5 символов'
-								style={errors?.password && {borderColor: 'red'}}
+								style={errors?.password ? {borderColor: 'red', marginTop: 8} : {marginTop: 8}}
 								{...(register('password', {
 									required: 'Необходимо заполнить',
 									minLength: {
@@ -101,7 +96,8 @@ const AuthorizationForm = () => {
 
 							/>
 
-						</label>
+						</FormWrapperLabel>
+
 					</div>
 
 					<div>
@@ -109,9 +105,14 @@ const AuthorizationForm = () => {
 							style={{display: 'block', width: '100%'}}
 							disabled={!isValid}>Войти</ActionButton>
 
-						<div className={s.orLogin}>или</div>
+						<Text className={s.orLogin}>или</Text>
 
-						<Link to='/registration' className={s.btn__desc}>Зарегистрироваться</Link>
+						<ActionButton
+							onClick={() => navigation('/registration')}
+							className={s.btn__registr}>
+							Зарегистрироваться
+						</ActionButton>
+
 					</div>
 				</form>
 

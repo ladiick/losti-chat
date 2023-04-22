@@ -6,6 +6,8 @@ import {HOST} from "../../api/HOST";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {setRegistrationSteps} from "../../../redux/slices/registrationStepsSlice";
+import Text from "../../ui/Text/Text";
+import ActionButton from "../../ui/ActionButton/ActionButton";
 
 const RegistrationFormStep2 = () => {
 	const [values, setValues] = useState(['', '', '', '', '', '']);
@@ -15,6 +17,14 @@ const RegistrationFormStep2 = () => {
 	const [codeError, setCodeError] = useState('');
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+
+
+	useEffect(() => {
+		if (!localStorage.getItem('email')) {
+			navigate('/registration')
+		}
+	}, [])
+
 
 	useEffect(() => {
 		const val = values.join('')
@@ -56,11 +66,11 @@ const RegistrationFormStep2 = () => {
 				<form noValidate>
 					
 					<div className={s.wrapper__inputs}>
-							<h3 className={codeError ? s.error__send : s.description__title} >
+							<Text className={codeError ? s.error__send : s.description__title} >
 								{codeError ?
 									codeError :
 									`На ${localStorage.getItem('email')} отправлен код активации`}
-							</h3>
+							</Text>
 							{errors}
 							<PinInput
 								size='sm'
@@ -82,7 +92,7 @@ const RegistrationFormStep2 = () => {
 							/>
 					</div>
 					
-					<button className={s.btn_submit} disabled={!btnDisable}>Send</button>
+					<ActionButton disabled={!btnDisable}>Send</ActionButton>
 				</form>
 			</div>
 		</>

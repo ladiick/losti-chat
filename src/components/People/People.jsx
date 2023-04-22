@@ -43,7 +43,6 @@ const People = ({searchValue, setSearch}) => {
 
     }
 
-
     return (
         <div className={s.block__people}>
             <LoaderWrapper>
@@ -72,8 +71,7 @@ const People = ({searchValue, setSearch}) => {
                         ||
                         people?.sender.last_name.toLowerCase().includes(searchValue.toLowerCase())
 
-                )).
-                map((obj, index) => obj.sender.pk === myId && obj.recip.pk !== myId ?
+                )).map((obj, index) => obj.sender.pk === myId && obj.recip.pk !== myId ?
                     <PeopleItem
                         key={obj.recip.pk}
                         id={obj.recip.pk}
@@ -81,6 +79,7 @@ const People = ({searchValue, setSearch}) => {
                         lastName={obj.recip.last_name}
                         message={`Вы: ${obj.message}`}
                         time={obj.time}
+                        online={obj?.recip?.online}
                         img={obj.recip.image}
                         handlerPeople={() => handlerPeople(obj.recip, index)}
                         obj={obj.recip}
@@ -110,6 +109,7 @@ const People = ({searchValue, setSearch}) => {
                             lastName={obj.sender.last_name}
                             message={obj.message}
                             time={obj.time}
+                            online={obj?.sender?.online}
                             img={obj.sender.image}
                             handlerPeople={() => handlerPeople(obj.sender, index)}
                             obj={obj.sender}
