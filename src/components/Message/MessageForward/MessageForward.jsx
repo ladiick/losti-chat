@@ -8,34 +8,18 @@ import {openModalBlock} from "../../../redux/slices/navigationSlice";
 import {setForwardMessageIfMany} from "../../../redux/slices/messageSlice";
 import _ from "underscore";
 import {helperMessage} from "../../../utils/utils";
+import ActionLink from "../../ui/ActionLink/ActionLink";
 
 
-const MessageForward = ({forward,count}) => {
+const MessageForward = ({forward, count, view}) => {
 	const dispatch = useDispatch()
-	const isVisible = useSelector(state => state.navigation.modal.viewForwardMessage)
-	const forwardManyMessage = useSelector(state => state.message.forwardManyMessage)
-
-	// const outTime = (currentObj, preObj) => {
-	// 	const currentItem = new Date(currentObj?.time)
-	// 	const preItem = new Date(preObj?.time)
-	//
-	// 	if (currentItem.getHours() === preItem.getHours() &&
-	// 		Math.abs(currentItem.getMinutes() - preItem.getMinutes()) < 5 &&
-	// 		currentObj?.sender?.pk === preObj?.sender?.pk
-	// 	) {
-	// 		return true
-	// 	}
-	// 	return false
-	// }
 
 
 	const forwardOutput = (forward) => {
 		if (Array.isArray(forward)) {
 			return forward
-		}
-		else{
+		} else {
 			return forward?.forward
-
 		}
 	}
 
@@ -43,7 +27,6 @@ const MessageForward = ({forward,count}) => {
 		e.stopPropagation()
 		dispatch(setForwardMessageIfMany(obj))
 		dispatch(openModalBlock({viewForwardMessage: true}))
-
 	}
 
 
@@ -56,9 +39,9 @@ const MessageForward = ({forward,count}) => {
 							? '' :
 							(
 								<>
-									<Link to={`/profile/${obj?.sender?.pk}`}>
+									<ActionLink weight={600} to={`/profile/${obj?.sender?.pk}`}>
 										{obj?.sender?.first_name}
-									</Link>
+									</ActionLink>
 									<div className={s.message__forward__time}>
 										{convertTime(obj?.time)}
 									</div>
@@ -69,12 +52,21 @@ const MessageForward = ({forward,count}) => {
 					</div>
 					{obj?.message && <Text className={s.message}>{obj?.message}</Text>}
 
-					{obj?.forward?.length !== 0 && count < 3 ?
-						<MessageForward forward={obj} count={count+1}/>
-					: <Text style={{display:'block'}}
-					        type={'button'}
-					        onClick={openManyForward}>Пересланное сообщение</Text>
+					{view ?
+						<MessageForward forward={obj} view={true}/>
+						:
+						obj?.forward?.length !== 0 && count < 3 ?
+							<MessageForward forward={obj} count={count + 1}/>
+							: obj?.forward?.length !== 0 ?
+							<Text style={{display: 'block'}}
+							      type={'button'}
+							      onClick={(e)=>openManyForward(e,obj)}>
+								Пересланное сообщение
+							</Text>
+							:
+							''
 					}
+
 				</div>
 			)).reverse()}
 

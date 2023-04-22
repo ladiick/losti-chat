@@ -1,0 +1,18 @@
+.label{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	&:not(:last-child){
+		margin-bottom: 20px;
+	}
+}
+
+.wrapper__titles{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.error {
+	color: red;
+}

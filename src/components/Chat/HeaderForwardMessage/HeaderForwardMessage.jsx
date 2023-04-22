@@ -28,10 +28,12 @@ const HeaderForwardMessage = () => {
 			answerMessage: currentMessage[searchParams?.get('dialogs')][0]
 		}))
 		dispatch(clearMessage({param: searchParams.get('dialogs')}))
+		dispatch(clearForwardMessage({param: searchParams.get('dialogs')}))
 	}
 
 	const forwardMessage = () => {
 		dispatch(forwardMessageFlag(true))
+		dispatch(clearAnswerMessage({param: searchParams.get('dialogs')}))
 	}
 
 	const forwardItHere = ()=>{
@@ -58,7 +60,7 @@ const HeaderForwardMessage = () => {
 		            onClick={() => clearSelectMessage()}/>
             </span>
 			<div className={s.right__side}>
-				<BsTrash3 style={!isMobile ? {marginRight: 10} : {marginLeft: 10}}/>
+				<BsTrash3 size={16} style={!isMobile ? {marginRight: 15} : {marginLeft: 10}}/>
 				<div style={{display: 'flex',alignItems:'center'}}>
 
 					{currentMessage[searchParams?.get('dialogs')].length === 1 ?

@@ -3,6 +3,7 @@
 	justify-content: space-between;
 	align-items: center;
 	text-decoration: none;
+	cursor: pointer;
 	&:not(:last-child){
 		margin-bottom: 10px;
 	}
@@ -102,23 +103,14 @@
 	flex-direction: column;
 	justify-content: space-around;
 	flex-grow: 2;
-	h2 {
+	margin-left: 10px;
+	.last__message {
 		margin: 0;
-		font-weight: 400;
-		font-size: 13px;
-		color: #FFFFFF;
 		max-width: 160px;
-	}
-
-	p {
-		font-size: 12px;
-		margin: 0;
-		max-width: 120px;
 		text-overflow: ellipsis;
-
 		white-space: nowrap;
 		overflow: hidden;
-		color: #888888;
+		color: var(--text--secondary);
 	}
 }
 

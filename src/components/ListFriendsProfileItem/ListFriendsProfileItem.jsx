@@ -18,6 +18,8 @@ const ListFriendsProfileItem = ({obj, index}) => {
                     fontSize: isMobile ? 12 : 24,
                     marginRight: 0
                 }}
+                sizeIndicator={{width:12,height:12,bottom:2,right:2}}
+                noOnline={obj?.friend?.online}
                 image={obj?.friend?.image}
                 name={{firstName: obj?.friend?.first_name, lastName: ''}}
                 index={index}

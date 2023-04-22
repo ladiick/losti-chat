@@ -1,5 +1,23 @@
-.hover{
-	&:hover{
+
+.link {
+	color: var(--text--accent);
+	max-width: 240px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;;
+	&:hover {
 		text-decoration: underline;
 	}
 }
+
+.defaultColor{
+	color: var(--color--text--main);
+}
+.no__hover {
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+

@@ -5,47 +5,31 @@
 	svg {
 		fill: var(--text--secondary);
 		position: absolute;
-		width: 20px;
-		height: 20px;
+		width: 14px;
+		height: 14px;
 		top: 50%;
 		transform: translateY(-50%);
-		right: 3%;
+		right: 4%;
 		transition: all .3s;
-		//z-index: 1;
-		//margin-right: 15px;
+		pointer-events: none;
 	}
+
 
 	input {
-		border: 1px solid transparent;
-		background: var(--background--content--second);
-		border-radius: 8px;
-		outline: none;
-		transition: all .3s;
-		width: 100%;
-		//opacity: 0;
-		padding: 8px 35px 8px 12px;
-		color: var(--color--text--main);
-		font-size: 14px;
-
-		&:focus {
-			border: 1px solid var(--secondColor);
-
-		}
-		&:focus + svg{
+		&:focus + svg {
 			fill: var(--secondColor);
 		}
-
-
 	}
 
-	&:hover{
-		svg{
+	&:hover {
+		input {
+			border: 1px solid var(--secondColor);
+		}
+
+		svg {
 			fill: var(--secondColor);
 		}
-		input{
-			border: 1px solid var(--secondColor);
 
-		}
 	}
 
 

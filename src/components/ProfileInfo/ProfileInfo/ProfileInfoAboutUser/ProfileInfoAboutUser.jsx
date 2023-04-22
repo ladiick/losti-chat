@@ -1,12 +1,13 @@
 import React from 'react';
 import s from './ProfileInfoAboutUser.module.scss'
+import Title from "../../../ui/Title/Title";
 const ProfileInfoAboutUser = ({children,firstName,lastName}) => {
     return (
         <div className={s.about__user}>
             <div className={s.wrapper__settings}>
-                <h1 className={s.user__name}>
+                <Title level={2} size={20} weight={600}>
                     {firstName} {lastName}
-                </h1>
+                </Title>
                 {children}
             </div>
         </div>

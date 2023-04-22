@@ -10,10 +10,10 @@ import {BiMessageRounded} from "react-icons/bi";
 import {Link} from "react-router-dom";
 import EmptyImage from "../ui/EmptyImage/EmptyImage";
 import ActionButton from "../ui/ActionButton/ActionButton";
-
+import ActionLink from "../ui/ActionLink/ActionLink";
+import Text from '../ui/Text/Text'
 
 const FriendsItem = ({obj, requests, handlerCancel, handlerAccept, index}) => {
-
     const dispatch = useDispatch()
 
     const {isMobile} = useMatchMedia()
@@ -36,21 +36,22 @@ const FriendsItem = ({obj, requests, handlerCancel, handlerAccept, index}) => {
                         image={obj?.friend?.image}
                         name={{firstName: obj.friend.first_name, lastName: obj.friend.last_name}}
                         index={index}
+                        noOnline={obj?.friend?.online}
+                        sizeIndicator={{right: 6}}
                         style={{
                             width: isMobile ? 44 : 80,
                             height: isMobile ? 44 : 80,
                             fontSize: isMobile ? 16 : 24,
-                            marginRight: 15,
                         }}
                     />
                 </Link>
                 <div className={s.info__user}>
-                    <Link to={`/profile/${obj.friend.pk}`}>
-                        {obj.friend.first_name} {obj.friend.last_name}</Link>
+                    <ActionLink to={`/profile/${obj.friend.pk}`}>
+                        {obj.friend.first_name} {obj.friend.last_name}</ActionLink>
 
-                    {requests !== 'requests' ? <span
+                    {requests !== 'requests' ? <Text type={'button'}
                             className={s.writeAMessage}
-                            onClick={openWriteBox}>{isMobile ? <BiMessageRounded/> : 'Написать сообщение'} </span>
+                            onClick={openWriteBox}>{isMobile ? <BiMessageRounded/> : 'Написать сообщение'} </Text>
 
                         :
                         <BtnRequestsFriend handlerCancel={handlerCancel} handlerAccept={handlerAccept}/>

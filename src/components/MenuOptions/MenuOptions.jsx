@@ -13,6 +13,7 @@ import NavigationSlice from "../../redux/slices/navigationSlice";
 import NavigationItem from "../Navigation/NavigationItem/NavigationItem";
 import {CgProfile} from "react-icons/cg";
 import {menuItems} from "../../utils/utils";
+import ArrowBack from "../ui/ArrowBack/ArrowBack";
 
 // const navObj = {
 // 	id: 300,
@@ -52,12 +53,17 @@ const MenuOptions = () => {
 						</WrapperBlocks>
 
 						<BlockNavigation
+							style={{padding: 0, marginTop: 10}}
 							items={menuItems}
-							style={{width: '35%',height:'fit-content'}}/>
+						/>
 
 					</WrapperBlocks>
 
-					: <Outlet/>
+					:
+					<WrapperBlocks>
+						<ArrowBack onClick={()=>navigation(-1)}/>
+						<Outlet/>
+					</WrapperBlocks>
 				}
 			</>
 		)
@@ -79,23 +85,19 @@ const MenuOptions = () => {
 					/>
 					<div className={s.wrapper__info}>
 						<div>
-							<Text>{user?.first_name} {user?.last_name}</Text>
+							<Text style={{cursor: 'pointer'}}>{user?.first_name} {user?.last_name}</Text>
 						</div>
 						<Text style={{
 							marginTop: 6,
 							fontSize: 12,
-							color: 'var(--text--secondary)'
+							color: 'var(--text--secondary)',
+							cursor: 'pointer'
 						}}>Перейти в профиль</Text>
 						<MdKeyboardArrowRight className={s.styleArrow}/>
 					</div>
 
 				</WrapperBlocks>
 
-				{/*<div className={s.wrapper__nav}>*/}
-				{/*	<ul>*/}
-				{/*			<NavigationItem obj={navObj}/>*/}
-				{/*	</ul>*/}
-				{/*</div>*/}
 			</WrapperBlocks>
 
 			{location.pathname !== '/menu' && <WrapperBlocks>

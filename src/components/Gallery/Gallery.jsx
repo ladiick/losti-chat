@@ -8,28 +8,29 @@ import ActionButton from "../ui/ActionButton/ActionButton";
 import WrapperBlocks from "../ui/WrapperBlocks/WrapperBlocks";
 
 const Gallery = () => {
-    return (
-        <WrapperBlocks className={s.wrapper__gallery}>
-            <ActionButton
-                second
-                style={{display:'inline-flex',alignItems: 'center',padding: 6}}>
-                <HiOutlinePhotograph
-                    style={{marginRight: 5,fontSize: 20}}/> Фото</ActionButton>
-            <div className={s.block__photos}>
-                <img src={photo} alt=""/>
-                <img src={photo} alt=""/>
-                <img src={photo} alt=""/>
-            </div>
-            <div className={s.block__button}>
-                <button>
-                <BsPlus/> Загрузить фото
-                    </button>
-                <button>
-                    Показать всё <MdKeyboardArrowRight/>
-                    </button>
-            </div>
-        </WrapperBlocks>
-    );
+	return (
+		<WrapperBlocks className={s.wrapper__gallery}>
+			<ActionButton
+				leftIcon={<HiOutlinePhotograph/>}
+				second
+				style={{display: 'inline-flex', alignItems: 'center'}}>
+				Фото
+			</ActionButton>
+			<div className={s.block__photos}>
+				<img src={photo} alt=""/>
+				<img src={photo} alt=""/>
+				<img src={photo} alt=""/>
+			</div>
+			<div className={s.block__button}>
+				<button>
+					<BsPlus/> Загрузить фото
+				</button>
+				<button>
+					Показать всё <MdKeyboardArrowRight/>
+				</button>
+			</div>
+		</WrapperBlocks>
+	);
 };
 
 export default Gallery;

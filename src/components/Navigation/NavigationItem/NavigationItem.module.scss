@@ -2,7 +2,11 @@
 .link{
 	&:not(:last-child){
 		margin-bottom: 10px;
-
+	}
+	@media(max-width: 768px){
+		&:not(:last-child){
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -41,10 +45,14 @@
 .active {
 	&:not(:last-child){
 		margin-bottom: 10px;
-
 	}
 	li {
 		background-color: var(--background--hover);
+	}
+	@media(max-width: 768px){
+		&:not(:last-child){
+			margin-bottom: 0;
+		}
 	}
 }
 

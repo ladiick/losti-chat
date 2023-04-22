@@ -1,0 +1,29 @@
+.action__input{
+	border: 1px solid transparent;
+	background: var(--background--content--second);
+	border-radius: 8px;
+	outline: none;
+	transition: all .3s;
+	width: 100%;
+	padding: 8px 35px 8px 12px;
+	color: var(--color--text--main);
+	font-size: 13px;
+
+	&::-webkit-calendar-picker-indicator {
+		opacity: 0;
+	}
+
+	&:hover{
+		border: 1px solid var(--secondColor);
+	}
+
+
+	&:focus {
+		border: 1px solid var(--secondColor);
+
+	}
+	&:focus + svg{
+		fill: var(--secondColor);
+	}
+
+}

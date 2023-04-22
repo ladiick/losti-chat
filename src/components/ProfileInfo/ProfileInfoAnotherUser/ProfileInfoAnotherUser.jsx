@@ -11,15 +11,19 @@ const ProfileInfoAnotherUser = () => {
 	const {id} = useParams()
 	const {data} = useGetCurrentPersonQuery(id)
 	const {data: isFriend} = useGetIsFriendQuery(id)
-
+	console.log(data)
 	return (
-		<ProfileInfo image={data?.image} firstName={data?.first_name} lastName={data?.last_name}>
+		<ProfileInfo image={data?.image}
+		             online={data?.online}
+		             firstName={data?.first_name} lastName={data?.last_name}>
 
 			<div className={s.block__communicate}>
 				<ActionButton style={{marginRight: 5}}>Сообщение</ActionButton>
 				{
-					isFriend?.is_friend ? <ActionButton second style={{padding: '1px 3px'}}><BsPersonCheck
-							style={{width: 24, height: 24}}/></ActionButton>
+					isFriend?.is_friend ? <ActionButton
+							leftIcon={<BsPersonCheck
+								style={{width: 24, height: 24}}/>}
+							second/>
 						:
 						<ActionButton>Добавить в друзья</ActionButton>
 				}

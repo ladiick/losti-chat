@@ -1,0 +1,15 @@
+.arrow__back{
+	border-radius: 50%;
+	padding: 8px;
+	display: inline-flex;
+	margin-right: 8px;
+	cursor: pointer;
+	svg {
+		width: 24px;
+		height: 24px;
+		color: var(--color--text--main);
+	}
+	&:hover{
+		background-color: var(--bgColor);
+	}
+}

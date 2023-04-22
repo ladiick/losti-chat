@@ -31,6 +31,10 @@ import FriendsFind from "./components/FriendsFind/FriendsFind";
 import Grade from "./Pages/Grade/Grade";
 import Menu from "./Pages/Menu/Menu";
 import Appearance from "./components/Appearance/Appearance";
+import RegistrationFormStep2 from "./components/RegistrationSteps/RegistrationFormStep2/RegistrationFormStep2";
+import RegistrationFormStep3 from "./components/RegistrationSteps/RegistrationFormStep3/RegistrationFormStep3";
+import RegistrationFormStep4 from "./components/RegistrationSteps/RegistrationFormStep4/RegistrationFormStep4";
+import RegistrationFormStep1 from "./components/RegistrationSteps/RegistrationFormStep1/RegistrationFormStep1";
 
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -46,13 +50,19 @@ const router = createBrowserRouter(createRoutesFromElements(
 			<Route path='menu' element={<Menu/>}>
 				<Route path='appearance' element={<Appearance/>}/>
 				<Route path='edit' element={<Settings/>}/>
-
 			</Route>
 			<Route path='*' element={<NotFound/>}/>
 		</Route>
 		<Route path='/authorization' element={<Authorization/>}/>
 		<Route path='/logout' element={<Logout/>}/>
-		<Route path='/registration/*' element={<Registration/>}/>
+		<Route path='/registration/*' element={<Registration/>}>
+
+			<Route index element={<RegistrationFormStep1/>}/>
+			<Route path='confirmation-code' element={<RegistrationFormStep2/>}/>
+			<Route path='password' element={<RegistrationFormStep3/>}/>
+			<Route path='about-user' element={<RegistrationFormStep4/>}/>
+
+		</Route>
 		<Route path='/grade' element={<Grade/>}/>
 	</>
 ))

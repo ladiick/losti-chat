@@ -1,0 +1,11 @@
+.indicator {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
+	border: 2px solid var(--background--content);
+	background: var(--color--green);
+}

@@ -19,7 +19,8 @@
 	max-width: 638px;
 	min-height: 345px;
 	max-height: 735px;
-	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
 }
 
 .header {
@@ -38,15 +39,15 @@
 }
 
 .content {
-	padding: 20px;
-
+	flex: 1 0 auto;
+	max-height: 600px;
+	overflow-y: auto;
+	position: relative;
+	padding: 10px 40px;
 }
 
 .footer {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	left: 0;
+	flex: 0 0 auto;
 	padding: 15px 20px;
 	border-top: 1px solid var(--border--block);
 	display: flex;
