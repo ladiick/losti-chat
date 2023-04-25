@@ -11,7 +11,7 @@ const ProfileInfoAnotherUser = () => {
 	const {id} = useParams()
 	const {data} = useGetCurrentPersonQuery(id)
 	const {data: isFriend} = useGetIsFriendQuery(id)
-	console.log(data)
+
 	return (
 		<ProfileInfo image={data?.image}
 		             online={data?.online}

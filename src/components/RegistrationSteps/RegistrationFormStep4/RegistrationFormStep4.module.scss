@@ -97,6 +97,7 @@
 	justify-content: center;
 	width: 30%;
 	.wrapper__uploadImg{
+		border: 1px solid transparent;
 		background-color: var(--background--content--second);
 		cursor: pointer;
 		border-radius: 50%;

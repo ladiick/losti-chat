@@ -89,8 +89,9 @@
 }
 
 .content__message {
+	margin-top: 6px;
 	border-left: 2px solid var(--text--accent--light);
-
+	border-radius: 2px;
 }
 
 .name__time {

@@ -38,12 +38,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  img {
-    width: 56px;
-    height: 56px;
+  svg{
+    color: var(--icon--secondary);
   }
-
 }
 
 

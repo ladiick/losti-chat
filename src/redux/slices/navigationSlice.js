@@ -5,6 +5,7 @@ const initialState = {
 	modal: {
 		writeFriend:false,
 		viewForwardMessage: false,
+		viewAttachmentsInDialogs: false
 	},
 
 	chat: false,
@@ -25,6 +26,7 @@ export const navigationSlice = createSlice({
 		openModalBlock(state,action){
 			state.modal.writeFriend = action.payload.writeFriend
 			state.modal.viewForwardMessage = action.payload.viewForwardMessage
+			state.modal.viewAttachmentsInDialogs = action.payload.viewAttachmentsInDialogs
 		},
 		openChatBlock(state,action){
 			 state.chat = action.payload

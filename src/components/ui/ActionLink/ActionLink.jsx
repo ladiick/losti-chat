@@ -20,9 +20,6 @@ const ActionLink = ({weight,size, defaultColor, children, className, noHover, ..
 
 	const classGeneral = `${selectClass} ${selectWeight} ${selectColor} ${selectFontSize}`
 
-
-
-
 	return (
 		<Link className={classGeneral} {...props}>
 			{children}

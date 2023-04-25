@@ -28,6 +28,22 @@ const BlockInputs = () => {
 
 	const refSend = useRef()
 
+	const refContentEditable = useRef('');
+
+	const downRandomKey = ({key})=>{
+		if(/^[a-zа-яё0-9]$/i.test(key)){
+			refContentEditable?.current?.el?.current?.focus()
+		}
+	}
+
+	useEffect(() => {
+		refContentEditable?.current?.el?.current?.focus()
+		window.addEventListener('keydown',downRandomKey)
+		return ()=> window.removeEventListener('keydown',downRandomKey)
+
+	}, []);
+
+
 	const onContentChange = useCallback(evt => {
 		const sanitizeConf = {
 			allowedTags: ["b", "i", "a", "p"],
@@ -44,8 +60,8 @@ const BlockInputs = () => {
 			param: searchParams.get('dialogs'),
 			message: sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf)
 		}))
-	}, [searchParams.get('dialogs')])
-
+	}, [])
+//searchParams.get('dialogs')
 	const sendMessage = () => {
 
 		if (content === ''
@@ -107,6 +123,7 @@ const BlockInputs = () => {
 					<div className={s.block__input__message}>
 						<ContentEditable
 							html={content}
+							ref={refContentEditable}
 							onKeyDown={handlerKeyDown}
 							contentEditable={true}
 							className={s.input__message}
@@ -126,7 +143,6 @@ const BlockInputs = () => {
 								className={s.placeholder}>Напишите сообщение...</motion.span>
 						}
 					</div>
-
 
 					<div
 						ref={refSend}

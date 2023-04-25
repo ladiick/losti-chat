@@ -8,7 +8,7 @@ const EmptyImage = ({sizeIndicator,noOnline,image, name = {}, index, style = {}}
 
 	return (
 		<div style={{position: 'relative'}}>
-			{!!image ? <img src={`${HOST + image}`} alt="avatar" style={style}/>
+			{!!image ? <img src={`${HOST + image}`} alt="avatar" style={style} className={s.img}/>
 				:
 				<span className={s.empty__img}
 				      style={{...style, backgroundColor: changeColor(index)}}

@@ -4,13 +4,16 @@ import CloseButton from "../CloseButton/CloseButton";
 import {AnimatePresence, motion} from "framer-motion";
 import s from './ModalDialog.module.scss';
 import ActionButton from "../ActionButton/ActionButton";
+import Title from "../Title/Title";
 
-const ModalDialog = ({title, open, closeFunc, children,noFooter}) => {
+const ModalDialog = ({title, open, closeFunc, children, noFooter}) => {
 
 	return (
 		<AnimatePresence>
-
-			{open && <Dialog open={open} onClose={() => closeFunc()}>
+			{open && (<Dialog
+				as='div'
+				initialFocus={false}
+				open={open} onClose={() => closeFunc()}>
 				<motion.div
 					initial={{opacity: 0}}
 					animate={{opacity: 1}}
@@ -18,7 +21,7 @@ const ModalDialog = ({title, open, closeFunc, children,noFooter}) => {
 					className={s.dialog__overlay}>
 					<Dialog.Panel className={s.wrapper__content}>
 						<header className={s.header}>
-							<Dialog.Title className={s.dialog__title}>{title}</Dialog.Title>
+							<Dialog.Title className={s.dialog__title} as={Title}>{title}</Dialog.Title>
 							<CloseButton onClick={() => closeFunc()}/>
 						</header>
 						<main className={s.content}>
@@ -29,7 +32,8 @@ const ModalDialog = ({title, open, closeFunc, children,noFooter}) => {
 						</footer>}
 					</Dialog.Panel>
 				</motion.div>
-			</Dialog>}
+			</Dialog>)
+			}
 		</AnimatePresence>
 	);
 };
