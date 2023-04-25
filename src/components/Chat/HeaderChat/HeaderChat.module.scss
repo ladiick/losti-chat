@@ -16,9 +16,10 @@
 	padding: 10px 15px;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	position: relative;
 	border-bottom: 1px solid var(--border--block);
-	//background-color: var(--bgColor);
+
 	height: 48px;
 	@media(max-width: 768px) {
 		padding: 10px 5px;
@@ -40,6 +41,7 @@
 
 	}
 }
+
 
 .arrow__back {
 	border-radius: 50%;

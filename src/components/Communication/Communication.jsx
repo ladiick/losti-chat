@@ -55,7 +55,7 @@ const Communication = () => {
 
 
 	const dialogDown = () => {
-		refCommunication.current.scrollTop = refCommunication.current.scrollHeight
+		refCommunication.current.scrollTop = refCommunication?.current?.scrollHeight
 	}
 
 
@@ -175,4 +175,4 @@ const Communication = () => {
 
 }
 
-export default React.memo(Communication)
+export default Communication

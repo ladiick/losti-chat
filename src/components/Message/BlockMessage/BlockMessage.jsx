@@ -4,6 +4,7 @@ import WrapperMessage from "../WrapperMessage/WrapperMessage";
 import {BsCheckCircleFill} from "react-icons/bs";
 import {MdEdit} from "react-icons/md";
 import {FaShare} from "react-icons/fa";
+import {motion} from 'framer-motion'
 
 const BlockMessage = ({children, activeMessage, time, pos, ...props}) => {
 
@@ -45,14 +46,18 @@ const BlockMessage = ({children, activeMessage, time, pos, ...props}) => {
 
 
 	return (
-		<div ref={refScrollBlock} className={classNameWrapper} {...props}>
+		<motion.div
+			initial={{y: "100%", x: '-20%'}}
+			animate={{y: 0, x: 0}}
+			transition={{ duration: 0.18}}
+			ref={refScrollBlock} className={classNameWrapper} {...props}>
 			<div className={classNameIcons}>
 				{icons}
 			</div>
 			<WrapperMessage pos={pos} time={time}>
 				{children}
 			</WrapperMessage>
-		</div>
+		</motion.div>
 	);
 };
 

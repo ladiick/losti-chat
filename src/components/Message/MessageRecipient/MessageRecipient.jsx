@@ -3,10 +3,10 @@ import _ from "underscore";
 import BlockMessage from "../BlockMessage/BlockMessage";
 import MessageForward from "../MessageForward/MessageForward";
 import Text from '../../ui/Text/Text'
-import MessageAnswer from "../MessageAnswer/MessageAnswer";
 import BlockAnswerMessage from "../../Chat/BlockAnswerMessage/BlockAnswerMessage";
+import MessageImage from "../MessageImage/MessageImage";
 
-const MessageRecipient = ({activeMessage, obj, handlerCurrentMessage,margin}) => {
+const MessageRecipient = ({activeMessage, obj, handlerCurrentMessage, margin}) => {
 
 	return (
 		<>
@@ -16,7 +16,9 @@ const MessageRecipient = ({activeMessage, obj, handlerCurrentMessage,margin}) =>
 				time={obj.time}
 				activeMessage={activeMessage}
 				onClick={handlerCurrentMessage}>
-				{obj.message && <Text>{obj.message}</Text>}
+				{obj.message && <Text >{obj.message}</Text>}
+
+				{obj?.images?.length !== 0 && <MessageImage images={obj?.images}/>}
 
 				{obj?.forward?.length !== 0 && <MessageForward forward={obj} count={0}/>}
 

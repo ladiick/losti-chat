@@ -11,6 +11,7 @@ import HeaderForwardMessage from "../HeaderForwardMessage/HeaderForwardMessage";
 import EmptyImage from "../../ui/EmptyImage/EmptyImage";
 import ActionLink from "../../ui/ActionLink/ActionLink";
 import Text from '../../ui/Text/Text'
+import RightSideBlock from "./RightSideBlock/RightSideBlock";
 
 const HeaderChat = ({isLoading, myId, peopleCurrent}) => {
 
@@ -73,6 +74,9 @@ const HeaderChat = ({isLoading, myId, peopleCurrent}) => {
 						</Text>
 					</div>
 				</div>
+
+			<RightSideBlock/>
+
 			</header>
 		</>
 	)

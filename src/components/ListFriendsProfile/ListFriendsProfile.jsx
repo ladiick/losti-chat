@@ -24,7 +24,7 @@ const ListFriendsProfile = () => {
 	if (isMobile) {
 		return (
 			<WrapperBlocks className={s.wrapper__friends}>
-				<Title level={4}>Друзья <span>{friends?.length}</span> {request.length ? <span>&#183; {request.length}</span> : ''}
+				<Title>Друзья <span>{friends?.length}</span> {request.length ? <span>&#183; {request.length}</span> : ''}
 				</Title>
 				<div className={s.items}>
 

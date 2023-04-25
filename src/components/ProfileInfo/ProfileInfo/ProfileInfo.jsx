@@ -9,6 +9,7 @@ import WrapperBlocks from "../../ui/WrapperBlocks/WrapperBlocks";
 import IndicatorOnline from "../../ui/IndicatorOnline/IndicatorOnline";
 
 const ProfileInfo = ({online,children, image, firstName, lastName}) => {
+
 	const {id} = useParams()
 	const myId = useSelector(state => state.user.aboutUser.id)
 
@@ -20,9 +21,9 @@ const ProfileInfo = ({online,children, image, firstName, lastName}) => {
 						image ?
 							<img src={`${HOST + image}`} alt='logo'/>
 							:
-							<span className={s.empty__img}
-							>Загрузить фото
-								{online && <IndicatorOnline sizeIndicator={{right: 15, bottom: 10}}/>}
+							<span className={s.empty__img}>
+								Загрузить фото
+								{!!online && <IndicatorOnline sizeIndicator={{right: 15, bottom: 10}}/>}
               </span>
 						:
 						image ?

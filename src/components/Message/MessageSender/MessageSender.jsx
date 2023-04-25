@@ -6,8 +6,10 @@ import Text from '../../ui/Text/Text'
 import _ from "underscore";
 import MessageAnswer from "../MessageAnswer/MessageAnswer";
 import BlockAnswerMessage from "../../Chat/BlockAnswerMessage/BlockAnswerMessage";
+import MessageImage from "../MessageImage/MessageImage";
 
 const MessageSender = ({activeMessage, obj, handlerCurrentMessage,margin}) => {
+
 
 	return (
 		<>
@@ -19,9 +21,10 @@ const MessageSender = ({activeMessage, obj, handlerCurrentMessage,margin}) => {
 				onClick={handlerCurrentMessage}>
 				{obj.message && <Text>{obj.message}</Text>}
 
+				{obj?.images?.length !== 0 && <MessageImage images={obj?.images}/>}
+
 				{obj?.forward?.length !== 0 && <MessageForward forward={obj} count={0}/>}
 				{!_.isEmpty(obj?.answer) && <BlockAnswerMessage message={obj} answer/>}
-
 
 			</BlockMessage>
 		</>

@@ -1,0 +1,58 @@
+.dialog__overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.wrapper__content {
+	background-color: var(--background--content);
+	border-radius: 12px;
+	width: 638px;
+	margin: 40px auto 20px auto;
+
+
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	border-bottom: 1px solid var(--border--block);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: var(--color--text--main);
+	padding: 0 20px 0 10px;
+}
+.group{
+	display: flex;
+	align-items: center;
+}
+
+
+
+.tab {
+	padding: 20px 0;
+	margin: 0 10px;
+	border-bottom: 2px solid transparent;
+	transition: all .3s;
+	&:hover{
+		border-bottom: 2px solid var(--text--accent--light);
+	}
+}
+
+.tab__selected {
+	padding: 20px 0;
+	margin: 0 10px;
+	border-bottom: 2px solid var(--text--accent);
+}
+
+
+.wrapper__panel{
+	padding: 5px 20px;
+	color: var(--color--text--main);
+}

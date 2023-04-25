@@ -14,7 +14,13 @@ import FormWrapperLabel from "../../FormWrapper/FormWrapperLabel/FormWrapperLabe
 import ActionButton from "../../ui/ActionButton/ActionButton";
 import ActionInput from "../../ui/ActionInput/ActionInput";
 import {VALID__NAME} from "../../../utils/validateForm";
+import CloseButton from "../../ui/CloseButton/CloseButton";
 
+const styleCloseButton = {
+	position: 'absolute',
+	top: -8,
+	left: 0
+}
 const RegistrationFormStep4 = () => {
 	const navigate = useNavigate()
 	const stepsInfo = useSelector(state => state.registration.stepsInfo)
@@ -131,9 +137,8 @@ const RegistrationFormStep4 = () => {
 							/>
 						</label>
 
-						{image ? <span className={s.delete_image}
-						               onClick={() => setImage('')}
-						><IoCloseOutline/></span> : ''}
+						{image ? <CloseButton style={styleCloseButton} onClick={() => setImage('')}/> : ''}
+
 
 						<div className={s.field_names}>
 							<FormWrapperLabel

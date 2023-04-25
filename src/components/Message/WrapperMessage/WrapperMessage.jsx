@@ -8,7 +8,8 @@ const WrapperMessage = ({time, children, pos}) => {
 	}
 
 	return (
-		<div className={s.wrapper__message} style={pos ? position : {}}>
+		<div
+			className={s.wrapper__message} style={pos ? position : {}}>
 			{children}
 			<div className={s.message__time}>
 				{convertTime(time)}

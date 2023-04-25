@@ -80,7 +80,7 @@ const RegistrationFormStep2 = () => {
 								borderColor={'#434343'}
 								errorBorderColor='red'
 								focusBorderColor='#1a73e8'
-								inputStyle={{color: 'white'}}
+								inputStyle={{color: 'var(--color--text--main)'}}
 								placeholder='●'
 								validBorderColor={'#4bb24b'}
 								aria-label={codeError}
@@ -92,7 +92,7 @@ const RegistrationFormStep2 = () => {
 							/>
 					</div>
 					
-					<ActionButton disabled={!btnDisable}>Send</ActionButton>
+					<ActionButton disabled={!btnDisable}>Продолжить</ActionButton>
 				</form>
 			</div>
 		</>
