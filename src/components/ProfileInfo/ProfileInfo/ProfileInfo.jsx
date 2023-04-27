@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from "./ProfileInfo.module.scss";
 import {HOST} from "../../api/HOST";
 import {useParams} from "react-router-dom";
@@ -12,6 +12,10 @@ const ProfileInfo = ({online,children, image, firstName, lastName}) => {
 
 	const {id} = useParams()
 	const myId = useSelector(state => state.user.aboutUser.id)
+
+	useEffect(()=>{
+		document.title = `${firstName} ${lastName}`
+	},[firstName,lastName])
 
 	return (
 		<WrapperBlocks className={s.wrapper}>

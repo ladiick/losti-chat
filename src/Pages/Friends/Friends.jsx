@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import MyFriends from '../../components/MyFriends/MyFriends'
 import 'react-toastify/dist/ReactToastify.css';
 import s from './Friends.module.scss'
@@ -12,6 +12,10 @@ const Friends = () => {
 
     const location = useLocation()
     const {isMobile} = useMatchMedia()
+
+  useEffect(()=>{
+    document.title = 'Друзья'
+  },[])
 
     const ifOutlet = ()=>{
         if(location.pathname !== '/friends'){
