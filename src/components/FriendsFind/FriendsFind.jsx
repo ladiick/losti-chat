@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './FriendsFind.module.scss'
 import SearchBlock from "../SearchBlock/SearchBlock";
 import AllPeopleItem from "../AllPeopleItem/AllPeopleItem";
@@ -13,6 +13,10 @@ const FriendsFind = () => {
 
     const {data: allPeople = []} = useGetAllPeopleQuery()
     const [acceptFriendRequests, {isError}] = useAcceptFriendRequestsMutation()
+
+  useEffect(()=>{
+    document.title = 'Поиск друзей'
+  },[])
 
     const handlerPeople = async (index, obj) => {
         try {

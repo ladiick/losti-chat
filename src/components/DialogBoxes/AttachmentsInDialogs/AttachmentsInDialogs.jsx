@@ -10,6 +10,7 @@ import Text from "../../ui/Text/Text";
 import ActionLink from "../../ui/ActionLink/ActionLink";
 import {useGetAttachmentsImagesQuery} from "../../features/attachmentsImagesApiSlice";
 import MessageImage from "../../Message/MessageImage/MessageImage";
+import OutputImage from "./OutputImage/OutputImage";
 
 
 const AttachmentsInDialogs = () => {
@@ -40,7 +41,6 @@ const AttachmentsInDialogs = () => {
 		},
 	]);
 
-	const {data} = useGetAttachmentsImagesQuery(searchParams?.get('dialogs'))
 
 	const closeFunc = () => {
 		searchParams?.delete('history')
@@ -78,7 +78,7 @@ const AttachmentsInDialogs = () => {
 							</Tab.List>
 							<Tab.Panels className={s.wrapper__panel}>
 								<Tab.Panel>
-									<MessageImage images={data}/>
+									<OutputImage/>
 								</Tab.Panel>
 								<Tab.Panel>Content 2</Tab.Panel>
 							</Tab.Panels>

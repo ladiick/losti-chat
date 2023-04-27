@@ -11,6 +11,8 @@ const Profile = () => {
 
 	const {id} = useParams()
 
+
+
 	const myId = useSelector(state => state.user.aboutUser.id)
 	const location = useLocation()
 

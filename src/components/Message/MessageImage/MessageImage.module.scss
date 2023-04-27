@@ -6,17 +6,15 @@
 
 .wrapper__attachments__images{
 	cursor: pointer;
-	margin: 2px;
+	//margin: 2px;
 
 	img{
-		border-radius: 5px;
 		vertical-align: middle;
 		border-style: none;
 		width: 100%;
 		height: 100%;
 		display: block;
 		object-fit: cover;
-
 	}
 }
 
