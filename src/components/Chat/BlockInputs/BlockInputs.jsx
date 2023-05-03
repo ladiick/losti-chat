@@ -105,6 +105,15 @@ const BlockInputs = () => {
 		}
 	}
 
+	const handlerFilesUploader = (file)=>{
+		console.log(file.target.files)
+		dispatch(sendMessagesOnChat({
+			param: searchParams.get('dialogs'),
+			file: file.target.files
+		}))
+	}
+
+
 	return (
 		<div className={s.wrapper__input}>
 			{answerMessages && Object.keys(answerMessages)?.length !== 0
@@ -117,7 +126,7 @@ const BlockInputs = () => {
 				<div className={s.form__wrapper}>
 					<label className={s.download__file}>
 						<AiOutlinePaperClip/>
-						<input type='file' className={s.input__file}/>
+						<input type='file' className={s.input__file} multiple={true} onChange={handlerFilesUploader}/>
 					</label>
 
 					<div className={s.block__input__message}>

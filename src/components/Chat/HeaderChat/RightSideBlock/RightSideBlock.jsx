@@ -8,13 +8,14 @@ import {HiOutlinePhotograph} from "react-icons/hi";
 import Text from "../../../ui/Text/Text";
 import {useDispatch, useSelector} from "react-redux";
 import {openModalBlock} from "../../../../redux/slices/navigationSlice";
-import {useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
 
 
 const RightSideBlock = () => {
 	const dispatch = useDispatch();
 	const viewAttachmentsInDialogs = useSelector(state => state.navigation.modal.viewAttachmentsInDialogs)
 	const [searchParams, setSearchParams] = useSearchParams()
+
 	const items = [
 		{
 			title: 'Показать вложения',

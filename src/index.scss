@@ -10,6 +10,18 @@ code {
 }
 
 
+.dialog__overlay{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+
 :root {
 	--body--bg: #0a0a0a;
 

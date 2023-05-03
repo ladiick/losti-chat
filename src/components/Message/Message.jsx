@@ -7,7 +7,7 @@ import MessageRecipient from "./MessageRecipient/MessageRecipient";
 import {useSelector} from "react-redux";
 import {useSearchParams} from "react-router-dom";
 
-const Message = ({obj, handlerCurrentMessage,margin}) => {
+const Message = React.memo(({obj, handlerCurrentMessage,margin}) => {
 	const currentMessage = useSelector(state => state.message.currentMessage)
 	const [searchParams, setSearchParams] = useSearchParams()
 	const myId = useSelector(state => state.user.aboutUser.id)
@@ -25,7 +25,7 @@ const Message = ({obj, handlerCurrentMessage,margin}) => {
 			}
 		}
 
-	}, [currentMessage])
+	}, [param,obj,currentMessage])
 
 
 
@@ -55,9 +55,9 @@ const Message = ({obj, handlerCurrentMessage,margin}) => {
 		/>
 	}
 
-}
+})
 
-export default React.memo(Message)
+export default Message
 
 
 

@@ -1,34 +1,35 @@
-import React, {useRef} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useGetAttachmentsImagesQuery} from "../../../features/attachmentsImagesApiSlice";
 import {useSearchParams} from "react-router-dom";
 import {rendersImage} from "../../../../utils/outputAttachmentsPhotos";
 import PhotosRow from "./PhotosRow";
 import {Oval} from "react-loader-spinner";
+import Loader from "../../../ui/Loader/Loader";
+import {useSelector} from "react-redux";
 
-const OutputImage = ({images2}) => {
+const OutputImage = () => {
 	const [searchParams, setSearchParams] = useSearchParams()
+	const {data, isLoading} = useGetAttachmentsImagesQuery(searchParams?.get('dialogs'))
 
-	const {data,isLoading} = useGetAttachmentsImagesQuery(searchParams?.get('dialogs'))
+	const refBlock = useRef();
+	const [images, setImages] = useState([]);
 
-	const refContainer = useRef(null);
+	useEffect(() => {
+		if(data) {
+			const cloneImages = structuredClone(data)
+			setImages(rendersImage(cloneImages, refBlock?.current?.clientWidth))
+		}
+	}, [data]);
 
 
-	if(!data) {
-		return <Oval
-			height="32"
-			width="32"
-			color="#1A73E8"
-			secondaryColor="#434343"
-			strokeWidth={4}
-			strokeWidthSecondary={4}
-			visible={isLoading}
-		/>
+	if (isLoading && !data) {
+		return <Loader visible={isLoading}/>
 	}
 
 
 	return (
-		<div  ref={refContainer}>
-			{rendersImage(structuredClone(data),refContainer?.current?.offsetWidth)?.map((row,index) =>
+		<div ref={refBlock}>
+			{images?.map((row, index) =>
 				<PhotosRow key={index} images={row}/>
 			)}
 		</div>

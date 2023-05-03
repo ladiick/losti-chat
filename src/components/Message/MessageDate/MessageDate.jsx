@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MessageDate.module.scss'
 import {reTime} from "../../actions/reTime";
 import Text from '../../ui/Text/Text'
-const MessageDate = ({wrapper, message}) => {
+const MessageDate = React.memo(({wrapper, message}) => {
 
 	return (
 			<div className={`${wrapper} ${s.message__enter_date}`}>
@@ -11,6 +11,6 @@ const MessageDate = ({wrapper, message}) => {
             </Text>
 			</div>
 	);
-};
+})
 
 export default MessageDate;

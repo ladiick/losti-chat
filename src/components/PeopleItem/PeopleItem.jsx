@@ -62,8 +62,8 @@ const PeopleItem = ({online,flag, firstName, lastName, message, time, img, id, h
 						/>}
 
 					<div className={s.name__lastMessage}>
-						<Text weight='strong'>{firstName} {lastName}</Text>
-						<Text className={s.last__message}>{message}</Text>
+						<Text weight='strong' style={{cursor:'pointer'}}>{firstName} {lastName}</Text>
+						<Text className={s.last__message} style={{cursor:'pointer'}}>{message}</Text>
 					</div>
 					<div className={s.wrapper__time}>
 						<p className={s.time}>{reTime(time)}</p>
