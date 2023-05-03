@@ -11,19 +11,24 @@ import HeaderChat from "./HeaderChat/HeaderChat";
 import BlockInputs from "./BlockInputs/BlockInputs";
 import HeaderForwardMessage from "./HeaderForwardMessage/HeaderForwardMessage";
 import ViewForwardedMessage from "../DialogBoxes/ViewForwardedMessage/ViewForwardedMessage";
-import {openModalBlock} from "../../redux/slices/navigationSlice";
+import {openModalBlock, setOpenDetailedImage} from "../../redux/slices/navigationSlice";
 import WrapperBlocks from "../ui/WrapperBlocks/WrapperBlocks";
 import Text from "../ui/Text/Text";
 import AttachmentsInDialogs from "../DialogBoxes/AttachmentsInDialogs/AttachmentsInDialogs";
+import DetailedImage from "../DialogBoxes/AttachmentsInDialogs/DetailedImage/DetailedImage";
+import DragAndDropFileUpload from "./DragAndDropFileUpload/DragAndDropFileUpload";
 
 
 const Chat = () => {
 	const dispatch = useDispatch()
 	const myId = useSelector(state => state.user.aboutUser.id)
 	const [searchParams, setSearchParams] = useSearchParams()
-	const [skip, setSkip] = useState(true)
+	// const [skip, setSkip] = useState(true)
 	const currentMessage = useSelector(state => state.message.currentMessage)
-	const isVisible = useSelector(state => state.navigation.modal.viewForwardMessage)
+	const viewForwardMessage = useSelector(state => state.navigation.modal.viewForwardMessage)
+	const viewDetailedImage = useSelector(state => state.navigation.openDetailedImage)
+
+
 	const viewAttachmentsInDialogs = useSelector(state => state.navigation.modal.viewAttachmentsInDialogs)
 
 	const {isMobile} = useMatchMedia()
@@ -32,15 +37,24 @@ const Chat = () => {
 		skip: searchParams?.get('dialogs') && myId ? searchParams?.get('dialogs') == String(myId) ? true : false : true
 	})
 
-
 	useEffect(() => {
 
-		dispatch(openModalBlock(
-			searchParams?.has('history') ? {
+		if (searchParams?.has('photo') && searchParams?.has('history')) {
+			dispatch(setOpenDetailedImage(true))
+		}
+
+		if (searchParams?.has('history')) {
+			dispatch(openModalBlock({
 				viewAttachmentsInDialogs: true,
 				viewForwardMessage: false
-			} : {viewForwardMessage: false})
-		)
+			}))
+		}
+		// dispatch(openModalBlock(
+		// 	searchParams?.has('history') ? {
+		// 		viewAttachmentsInDialogs: true,
+		// 		viewForwardMessage: false
+		// 	} : {viewForwardMessage: false})
+		// )
 		const onKeypress = e => {
 			if (e.code === 'Escape') {
 				setSearchParams('')
@@ -69,12 +83,16 @@ const Chat = () => {
 		<WrapperBlocks className={s.wrapper}>
 			<HeaderChat myId={myId} isLoading={isLoading} peopleCurrent={peopleCurrent}/>
 
-			<Communication/>
+			<DragAndDropFileUpload
+				style={{display: 'contents'}}>
+				<Communication/>
 
-			{currentMessage?.[searchParams.get('dialogs')]?.length && isMobile ? <HeaderForwardMessage/> : <BlockInputs/>}
+				{currentMessage?.[searchParams.get('dialogs')]?.length && isMobile ? <HeaderForwardMessage/> : <BlockInputs/>}
+			</DragAndDropFileUpload>
 
-			{isVisible && <ViewForwardedMessage/>}
+			{viewForwardMessage && <ViewForwardedMessage/>}
 			{viewAttachmentsInDialogs && <AttachmentsInDialogs/>}
+			{viewDetailedImage && <DetailedImage/>}
 		</WrapperBlocks>
 	)
 }

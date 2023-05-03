@@ -1,17 +1,20 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import s from './BlockMessage.module.scss'
 import WrapperMessage from "../WrapperMessage/WrapperMessage";
 import {BsCheckCircleFill} from "react-icons/bs";
 import {MdEdit} from "react-icons/md";
 import {FaShare} from "react-icons/fa";
-import {motion} from 'framer-motion'
+import {AnimatePresence, motion} from 'framer-motion'
 
-const BlockMessage = ({children, activeMessage, time, pos, ...props}) => {
+const BlockMessage = React.memo(({children, activeMessage, time, pos, ...props}) => {
 
-	const refScrollBlock = useRef(null);
-	useEffect(() => {
-		refScrollBlock?.current?.scrollIntoView(false)
-	}, [])
+
+
+	const refMessage = useCallback((ref) => {
+		if (ref) {
+			ref.scrollIntoView(true)
+		}
+	}, []);
 
 
 	const icons = pos === 'right' ?
@@ -46,19 +49,20 @@ const BlockMessage = ({children, activeMessage, time, pos, ...props}) => {
 
 
 	return (
-		<motion.div
-			initial={{y: "100%", x: '-20%'}}
-			animate={{y: 0, x: 0}}
-			transition={{ duration: 0.18}}
-			ref={refScrollBlock} className={classNameWrapper} {...props}>
+
+		<div
+			ref={refMessage}
+			className={classNameWrapper}
+			{...props}>
 			<div className={classNameIcons}>
 				{icons}
 			</div>
 			<WrapperMessage pos={pos} time={time}>
 				{children}
 			</WrapperMessage>
-		</motion.div>
-	);
-};
+		</div>
 
-export default React.memo(BlockMessage);
+	);
+});
+
+export default BlockMessage;

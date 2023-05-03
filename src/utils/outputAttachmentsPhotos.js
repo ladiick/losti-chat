@@ -1,24 +1,21 @@
 export const rendersImage = (images, sizeContainer) => {
-
-
-	const container = sizeContainer
 	const maxWidth = 350
 	const maxHeight = 250
 	const minWidth = 50
 	const minHeight = 100
-	let my_arr = [[]]
+	let myArr = [[]]
 	let a
-	let temp_height
-	let now_width_row = [0]
-	let now_row = 0
+	let tempHeight
+	let nowWidthRow = [0]
+	let nowRow = 0
 
 	for (let i = 0; i < images.length; i++) {
 		if (images[i].width > maxWidth) {
 			a = images[i].width
 			images[i].width = maxWidth
-			temp_height = (images[i].width / a) * images[i].height
-			if (temp_height > minHeight) {
-				images[i].height = temp_height
+			tempHeight = (images[i].width / a) * images[i].height
+			if (tempHeight > minHeight) {
+				images[i].height = tempHeight
 			}
 		}
 
@@ -26,8 +23,8 @@ export const rendersImage = (images, sizeContainer) => {
 			a = images[i].width
 			images[i].width = minWidth
 			images[i].height = (images[i].width / a) * images[i].height
-			if (temp_height < maxHeight) {
-				images[i].height = temp_height
+			if (tempHeight < maxHeight) {
+				images[i].height = tempHeight
 			}
 		}
 
@@ -35,27 +32,95 @@ export const rendersImage = (images, sizeContainer) => {
 		images[i].height = minHeight
 		images[i].width = Math.round(images[i].height * a)
 
-		if (now_width_row[now_row] + images[i].width < container) {
-			my_arr[now_row].push(images[i])
-			now_width_row[now_row] += images[i].width
+		if (nowWidthRow[nowRow] + images[i].width < sizeContainer) {
+			myArr[nowRow].push(images[i])
+			nowWidthRow[nowRow] += images[i].width - 2
 		} else {
-			my_arr.push([images[i]])
-			now_row++
-			now_width_row.push(images[i].width)
+			myArr.push([images[i]])
+			nowWidthRow.push(images[i].width)
+			nowRow++
 		}
 	}
 
-	let temp_width
-	for (let i = 0; i < my_arr.length; i++) {
-		a = container - now_width_row[i]
-		for (let k = 0; k < my_arr[i].length; k++) {
-			temp_width = my_arr[i][k].width
-			my_arr[i][k].width += a * (my_arr[i][k].width / now_width_row[i])
-			my_arr[i][k].height = (my_arr[i][k].width / temp_width) * my_arr[i][k].height
+	let tempWidth
+	for (let i = 0; i < myArr.length; i++) {
+		a = sizeContainer - nowWidthRow[i]
+		for (let k = 0; k < myArr[i].length; k++) {
+			tempWidth = myArr[i][k].width
+			myArr[i][k].width += a * (myArr[i][k]?.width / nowWidthRow?.[i])
+			myArr[i][k].height = (myArr[i][k]?.width / tempWidth) * myArr[i][k]?.height
 
 		}
 	}
-
-	return my_arr
+	return myArr
 }
+
+
+export const outputOfImagesInMessage = (images, sizeContainer) => {
+
+	const maxWidth = structuredClone(sizeContainer)
+	const maxHeight = 300
+	const minWidth = 36
+	const minHeight = 16
+	let ratio
+
+	let arrayImages = structuredClone(images)
+
+
+	if (arrayImages[0].width > maxWidth) {
+		arrayImages[0].width = maxWidth
+		ratio = Math.min(maxWidth / arrayImages[0].width, maxHeight / arrayImages[0].height);
+		if (arrayImages[0].height > minHeight) {
+			arrayImages[0].height *= ratio / 1.3
+		}
+	}
+
+
+	for (let index = 1; index < arrayImages.length; index++) {
+
+
+		if (arrayImages[index].width > maxWidth) {
+			arrayImages[index].width = maxWidth / 2.04
+
+			ratio = Math.min(maxWidth / arrayImages[index].width, maxHeight / arrayImages[index].height);
+
+			if (arrayImages[index].height > minHeight) {
+				arrayImages[index].height *= ratio / 1.3
+			}
+		}
+
+		if (arrayImages[index].width < minWidth) {
+			arrayImages[index].width = minWidth
+
+			ratio = Math.min(maxWidth / arrayImages[index].width, maxHeight / arrayImages[index].height);
+
+			if (arrayImages[index].height > minHeight) {
+				arrayImages[index].height *= ratio / 1.3
+			}
+
+		}
+
+
+
+
+
+
+
+		// arrayImages[index].height *= ratio
+		// if (arrayImages[index].width > maxWidth) {
+		// 	tempVar = arrayImages[index].width
+		// 	arrayImages[index].width = maxWidth
+		// 	tempHeight = (arrayImages[index].width / tempVar) * arrayImages[index].height
+		// 	if (tempHeight > minHeight) {
+		// 		arrayImages[index].height = tempHeight
+		// 	}
+		// }
+
+
+	}
+
+	return arrayImages
+
+}
+
 

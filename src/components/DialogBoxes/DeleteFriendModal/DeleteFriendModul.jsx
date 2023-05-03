@@ -33,7 +33,7 @@ const DeleteFriendModal = () => {
                     exit={{
                         y: -100,
                     }}
-                    className={s.overlay}>
+                    className={'dialog__overlay'}>
                     <Dialog.Panel className={s.wrapper__content}>
                         <Dialog.Title>
                             Удалить из

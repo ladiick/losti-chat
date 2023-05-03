@@ -5,7 +5,8 @@ const initialState = {
 	message: {},
 	currentMessage: {},
 	sendMessageOnChat: {},
-	forwardManyMessage: {}
+	forwardManyMessage: {},
+	widthDialogBlock: null
 }
 
 
@@ -80,7 +81,8 @@ export const messageSlice = createSlice({
 				state.sendMessageOnChat[action.payload.param] = {
 					sendMessage: '',
 					forwardMessage: [],
-					answerMessage: {}
+					answerMessage: {},
+					file: [],
 				}
 
 			}
@@ -101,17 +103,24 @@ export const messageSlice = createSlice({
 				state.sendMessageOnChat[action.payload.param].answerMessage = action.payload.answerMessage
 			}
 
+			if(action.payload.file){
+				state.sendMessageOnChat[action.payload.param].file = [...state.sendMessageOnChat[action.payload.param].file, ...action.payload.file]
+			}
+
 		},
 		clearForwardMessage(state, action) {
 			state.sendMessageOnChat[action.payload.param].forwardMessage = []
 		},
-
 		clearAnswerMessage(state, action) {
 			state.sendMessageOnChat[action.payload.param].answerMessage = {}
 		},
 
 		setForwardMessageIfMany(state, action){
 			state.forwardManyMessage = action.payload
+		},
+
+		setWidthDialogBlock(state, action){
+			state.widthDialogBlock = action.payload
 		}
 
 	},
@@ -128,7 +137,8 @@ export const {
 	sendMessagesOnChat,
 	clearForwardMessage,
 	clearAnswerMessage,
-	setForwardMessageIfMany
+	setForwardMessageIfMany,
+	setWidthDialogBlock
 } = messageSlice.actions
 
 export default messageSlice.reducer

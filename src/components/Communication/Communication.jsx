@@ -1,17 +1,25 @@
 import s from "./Communication.module.scss";
 import Message from "../Message/Message";
 import {useDispatch, useSelector} from "react-redux";
-import React, {useCallback, useContext, useEffect, useRef, useState} from "react";
-import {clearMessage, currentMessage, sendMessagesOnChat, setMessage} from "../../redux/slices/messageSlice";
+import React, {useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
+import {
+	clearMessage,
+	currentMessage,
+	sendMessagesOnChat,
+	setMessage,
+	setWidthDialogBlock
+} from "../../redux/slices/messageSlice";
 import _ from "underscore";
 import {MyContext} from "../Layout/Layout";
-import {useLocation, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {useGetMessageQuery, usePaginationMutation} from "../features/messageApiSlice";
 import {addTimeMessage} from "../actions/addTimeMessage";
-import {Oval} from "react-loader-spinner";
 import LoaderWrapper from "../ui/LoaderWrapper/LoaderWrapper";
 import {FiArrowDown} from "react-icons/fi";
 import {helperMessage} from "../../utils/utils";
+import Loader from "../ui/Loader/Loader";
+import DragAndDropFileUpload from "../Chat/DragAndDropFileUpload/DragAndDropFileUpload";
+import {FileUploader} from "react-drag-drop-files";
 
 
 const Communication = () => {
@@ -22,19 +30,33 @@ const Communication = () => {
 	const people = useSelector(state => state.people.people)
 	let {newMessage} = useContext(MyContext);
 	const [searchParams, setSearchParams] = useSearchParams()
+
+
 	const [scrollButton, setScrollButton] = useState(false)
-	const {data, isLoading} = useGetMessageQuery(searchParams.get('dialogs'), {refetchOnMountOrArgChange: true})
+
+	const {data, isLoading} = useGetMessageQuery(searchParams.get('dialogs'))
+
 
 	const [pagination, {isLoading: Load}] = usePaginationMutation()
 	const [currentPage, setCurrentPage] = useState(2)
 	const [fetching, setFetching] = useState(false)
-	const refCommunication = useRef();
 
 	const param = searchParams.get('dialogs')
+
+	const [refBlockMessage, setRefBlockMessage] = useState(null);
+
+
+	const getBlockMessage = useCallback((ref) => {
+		if (ref) {
+			setRefBlockMessage(ref)
+		}
+	}, []);
+
 
 	useEffect(() => {
 		setCurrentPage(2)
 		setFetching(false)
+
 		return () => {
 			dispatch(clearMessage({param}))
 		}
@@ -55,11 +77,11 @@ const Communication = () => {
 
 
 	const dialogDown = () => {
-		refCommunication.current.scrollTop = refCommunication?.current?.scrollHeight
+		refBlockMessage.scrollTop = refBlockMessage.scrollHeight
 	}
 
 
-	function scrollHandler(e) {
+	const scrollHandler = useCallback((e) => {
 
 		if (e.target.scrollTop + e.target.clientHeight < e.target.scrollHeight) {
 			setScrollButton(true)
@@ -71,19 +93,23 @@ const Communication = () => {
 
 		if (e.target.scrollTop < 200 && message?.next) {
 			setFetching(true)
-			refCommunication?.current?.removeEventListener('scroll', scrollHandler)
+			refBlockMessage?.removeEventListener('scroll', scrollHandler)
 		}
-	}
+	}, [message?.next])
+
 
 	useEffect(() => {
-
-		refCommunication?.current?.addEventListener('scroll', scrollHandler)
-
+		if (refBlockMessage) {
+			refBlockMessage?.addEventListener('scroll', scrollHandler)
+			dispatch(setWidthDialogBlock(refBlockMessage.clientWidth))
+		}
 		return () => {
-			refCommunication?.current?.removeEventListener('scroll', scrollHandler)
+			if (refBlockMessage) {
+				refBlockMessage?.removeEventListener('scroll', scrollHandler)
+			}
 		}
 
-	}, [message])
+	}, [scrollHandler, message])
 
 
 	useEffect(() => {
@@ -122,15 +148,7 @@ const Communication = () => {
 
 			<div className={s.block__messages}>
 				<LoaderWrapper top={Load ? 1 : 0}>
-					<Oval
-						height="32"
-						width="32"
-						color="#1A73E8"
-						secondaryColor="#434343"
-						strokeWidth={4}
-						strokeWidthSecondary={4}
-						visible={isLoading || Load}
-					/>
+					<Loader visible={isLoading || Load}/>
 				</LoaderWrapper>
 			</div>
 
@@ -139,37 +157,42 @@ const Communication = () => {
 
 
 	return (
-		<div className={s.block__messages} ref={refCommunication}>
-			{addTimeMessage(message?.results).map((obj, index, arr) =>
-				(
-					helperMessage(arr?.[index], arr?.[index - 1]) ?
-						<Message
-							key={obj?.type === 'Date' ? `${obj.time}_time` : obj.id}
-							obj={obj}
-							margin={true}
-							handlerCurrentMessage={() => handlerCurrentMessage(obj)}
-						/>
-						:
-						<Message
-							key={obj?.type === 'Date' ? `${obj.time}_time` : obj.id}
-							obj={obj}
-							margin={false}
-							handlerCurrentMessage={() => handlerCurrentMessage(obj)}
-						/>
-				)
-			).reverse()
-			}
 
-			{
-				scrollButton &&
-				<div className={s.button__down}
-				     onClick={dialogDown}>
+			<div className={s.block__messages} ref={getBlockMessage}>
+				{
+					addTimeMessage(message?.results).map((obj, index, arr) =>
+						(
+							helperMessage(arr?.[index], arr?.[index - 1]) ?
+								<Message
+									key={obj?.type === 'Date' ? `${obj.time}_time` : obj.id}
+									obj={obj}
+									margin={true}
+									handlerCurrentMessage={() => handlerCurrentMessage(obj)}
+								/>
+								:
+								<Message
+									key={obj?.type === 'Date' ? `${obj.time}_time` : obj.id}
+									obj={obj}
+									margin={false}
+									handlerCurrentMessage={() => handlerCurrentMessage(obj)}
+								/>
+						)
+					).reverse()
+				}
+
+				{
+					scrollButton &&
+					<div className={s.button__down}
+					     onClick={dialogDown}>
                 <span>
                     <FiArrowDown/>
 								</span>
-				</div>
-			}
-		</div>
+					</div>
+				}
+
+			</div>
+
+
 
 	)
 
