@@ -1,122 +1,111 @@
-import React, {useEffect, useState} from 'react';
-import {updatePeople} from "../../redux/slices/peopleSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {HOST} from "../api/HOST";
-import {toast} from "react-toastify";
-import {updateAccessToken} from "../actions/updateAccessToken";
-import {setUserAccessToken} from "../../redux/slices/userSlice";
-import {useUpdateFriendRequestsMutation} from "../features/friendsRequestsApiSlice";
-import {useUpdateFriendsMutation} from "../features/friendsApiSlice";
-import {optionsNotification} from "../actions/optionsNotification";
+import React, { useEffect, useState } from "react";
+import { updatePeople } from "../../redux/slices/peopleSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { HOST } from "../api/HOST";
+import { toast } from "react-toastify";
+import { updateAccessToken } from "../actions/updateAccessToken";
+import { setUserAccessToken } from "../../redux/slices/userSlice";
+import { useUpdateFriendRequestsMutation } from "../../modules/Friends/api/friendsRequestsApiSlice";
+import { useUpdateFriendsMutation } from "../../modules/Friends/api/friendsApiSlice";
+import { optionsNotification } from "../actions/optionsNotification";
 
 const useWebsocket = (userAccessToken) => {
-	const dispatch = useDispatch()
-	const [socket, setSocket] = useState(null)
-	const [statusSocket, setStatusSocket] = useState('pending')
-	const [newMessage, setNewMessage] = useState(null);
-	const isAuth = useSelector(state => state.user.isAuth)
-	const refresh = useSelector(state => state.user.tokens.refresh)
-	const myId = useSelector(state => state.user.aboutUser.id)
+  const dispatch = useDispatch();
+  const [socket, setSocket] = useState(null);
+  const [statusSocket, setStatusSocket] = useState("pending");
+  const [newMessage, setNewMessage] = useState(null);
+  const isAuth = useSelector((state) => state.user.isAuth);
+  const refresh = useSelector((state) => state.user.tokens.refresh);
+  const myId = useSelector((state) => state.user.aboutUser.id);
 
+  const [updateFriendRequests] = useUpdateFriendRequestsMutation();
+  const [updateFriends] = useUpdateFriendsMutation();
 
-	const [updateFriendRequests] = useUpdateFriendRequestsMutation()
-	const [updateFriends] = useUpdateFriendsMutation()
+  useEffect(() => {
+    let ws = null;
 
-	useEffect(() => {
-		let ws = null
-		
-		const closeHandler = () => {
+    const closeHandler = () => {
+      console.log("соединение разорванно");
 
-			console.log('соединение разорванно')
+      toast.error("Соединение разорвано,\n пытаюсь подключится", optionsNotification);
 
-			toast.error('Соединение разорвано,\n пытаюсь подключится', optionsNotification)
+      const token = updateAccessToken(refresh);
+      localStorage.setItem("accessToken", token.access);
+      dispatch(setUserAccessToken(token.access));
 
-			const token = updateAccessToken(refresh)
-			localStorage.setItem('accessToken',token.access)
-			dispatch(setUserAccessToken(token.access))
+      setTimeout(() => {
+        createChannel();
+      }, 3000);
+    };
+    const createChannel = () => {
+      if (statusSocket === "ready" && socket?.readyState === 1) return;
 
-			setTimeout(()=>{
-				createChannel()
+      console.log("соединение установлено");
+      ws?.removeEventListener("close", closeHandler);
+      ws?.close();
 
-			}, 3000)
-		}
-		const createChannel = () => {
+      ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/?token=${localStorage.getItem("accessToken")}`);
 
-			if(statusSocket === 'ready' && socket?.readyState === 1) return
+      ws?.addEventListener("close", closeHandler);
+      setSocket(ws);
+    };
+    if (isAuth) {
+      createChannel();
+      return () => {
+        ws?.removeEventListener("close", closeHandler);
+        ws?.close();
+      };
+    }
+  }, [isAuth, userAccessToken]);
 
-			console.log('соединение установлено')
-			ws?.removeEventListener('close', closeHandler)
-			ws?.close()
+  useEffect(() => {
+    let openHandler = () => {
+      setStatusSocket("ready");
+    };
 
-			ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/?token=${localStorage.getItem('accessToken')}`)
+    socket?.addEventListener("open", openHandler);
+    return () => {
+      socket?.removeEventListener("open", openHandler);
+    };
+  }, [socket]);
 
-			ws?.addEventListener('close', closeHandler)
-			setSocket(ws)
-		}
-		if (isAuth) {
-			createChannel()
-			return () => {
-				ws?.removeEventListener('close', closeHandler)
-				ws?.close()
-			}
-		}
-		
-	}, [isAuth,userAccessToken]);
-	
-	useEffect(() => {
-		let openHandler = () => {
-			setStatusSocket('ready')
-		}
-		
-		socket?.addEventListener('open', openHandler)
-		return () => {
-			socket?.removeEventListener('open', openHandler)
-		}
-		
-	}, [socket]);
-	
-	
-	useEffect(() => {
-		const messageHandler = async (e) => {
-			const eventData = JSON.parse(e.data)
+  useEffect(() => {
+    const messageHandler = async (e) => {
+      const eventData = JSON.parse(e.data);
 
-			if(eventData.action === 'friend'){
-				if(eventData.data.type === 'friend_request'){
-					await updateFriendRequests()
-					toast.success(`Заявка в друзья от ${eventData.data.user.first_name+" "+eventData.data.user.last_name}`, optionsNotification)
-				}
-				if(eventData.data.type === 'friend_accepted'){
-					await updateFriends()
-					toast.success(`Заявка в друзья принята ${eventData.data.user.first_name+" "+eventData.data.user.last_name}`, optionsNotification)
-				}
-				if(eventData.data.type === 'friend_denied'){
-					toast.error(`Ваша заявка в друзья отклонена ${eventData.data.user.first_name+" "+eventData.data.user.last_name} `, optionsNotification);
-				}
-				if(eventData.data.type === 'friend_canceled'){
-					// в будущем
-				}
-				if(eventData.data.type === 'friend_delete'){
-					// в будущем
-				}
-			}
-			else {
-				const newMessage2 = eventData.data
-				dispatch(updatePeople({data: newMessage2, myId: myId}))
-				setNewMessage(newMessage2)
-			}
-			
-		}
-		
-		socket?.addEventListener('message', messageHandler)
-		
-		return () => {
-			socket?.removeEventListener('message', messageHandler)
-		}
-	}, [socket]);
+      if (eventData.action === "friend") {
+        if (eventData.data.type === "friend_request") {
+          await updateFriendRequests();
+          toast.success(`Заявка в друзья от ${eventData.data.user.first_name + " " + eventData.data.user.last_name}`, optionsNotification);
+        }
+        if (eventData.data.type === "friend_accepted") {
+          await updateFriends();
+          toast.success(`Заявка в друзья принята ${eventData.data.user.first_name + " " + eventData.data.user.last_name}`, optionsNotification);
+        }
+        if (eventData.data.type === "friend_denied") {
+          toast.error(`Ваша заявка в друзья отклонена ${eventData.data.user.first_name + " " + eventData.data.user.last_name} `, optionsNotification);
+        }
+        if (eventData.data.type === "friend_canceled") {
+          // в будущем
+        }
+        if (eventData.data.type === "friend_delete") {
+          // в будущем
+        }
+      } else {
+        const newMessage2 = eventData.data;
+        dispatch(updatePeople({ data: newMessage2, myId: myId }));
+        setNewMessage(newMessage2);
+      }
+    };
 
+    socket?.addEventListener("message", messageHandler);
 
-	return [socket, statusSocket, newMessage]
-	
+    return () => {
+      socket?.removeEventListener("message", messageHandler);
+    };
+  }, [socket]);
+
+  return [socket, statusSocket, newMessage];
 };
 
 export default useWebsocket;

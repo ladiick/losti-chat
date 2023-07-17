@@ -7,7 +7,7 @@ import ActionButton from "../ActionButton/ActionButton";
 import Title from "../Title/Title";
 import {variantsAnimationModal} from "../../../utils/variantsAnimationModal";
 
-const ModalDialog = ({title, open, closeFunc, children, noFooter}) => {
+const ModalDialog = ({noOverlay,title, open, closeFunc, children, noFooter}) => {
 
 	return (
 		<AnimatePresence>
@@ -20,7 +20,7 @@ const ModalDialog = ({title, open, closeFunc, children, noFooter}) => {
 					animate={'visible'}
 					exit={'exit'}
 					variants={variantsAnimationModal}
-					className={'dialog__overlay'}>
+					className={noOverlay ? '' : 'dialog__overlay'}>
 					<Dialog.Panel className={s.wrapper__content}>
 						<header className={s.header}>
 							<Dialog.Title className={s.dialog__title} as={Title}>{title}</Dialog.Title>

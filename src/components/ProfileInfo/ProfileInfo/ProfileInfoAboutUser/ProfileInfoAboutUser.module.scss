@@ -29,6 +29,14 @@
   font-weight: 600;
 }
 
+
+
+.loadingTitle{
+  height: 21px;
+  width: 200px;
+  background: var(--background--hover);
+}
+
 @media (max-width: 768px){
   .wrapper__settings {
     width: 100%;

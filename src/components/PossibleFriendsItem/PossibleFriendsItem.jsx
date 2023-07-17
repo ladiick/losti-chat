@@ -20,7 +20,7 @@ const PossibleFriendsItem = ({obj, handlerPeople, index}) => {
 				/>
 
 				<div className={s.user__info}>
-					<Text>
+					<Text pointer>
 						{obj.possible_friend.first_name} {obj.possible_friend.last_name}
 					</Text>
 					<span className={s.NumFriend}>
