@@ -9,23 +9,36 @@ import {useGetIsFriendQuery} from "../../features/isFriendApiSlice";
 
 const ProfileInfoAnotherUser = () => {
 	const {id} = useParams()
-	const {data} = useGetCurrentPersonQuery(id)
+	const {data, isLoading} = useGetCurrentPersonQuery(id)
 	const {data: isFriend} = useGetIsFriendQuery(id)
+
 
 	return (
 		<ProfileInfo image={data?.image}
 		             online={data?.online}
+		             isLoading={isLoading}
 		             firstName={data?.first_name} lastName={data?.last_name}>
 
 			<div className={s.block__communicate}>
-				<ActionButton style={{marginRight: 5}}>Сообщение</ActionButton>
+
 				{
-					isFriend?.is_friend ? <ActionButton
-							leftIcon={<BsPersonCheck
-								style={{width: 24, height: 24}}/>}
-							second/>
+					isLoading ?
+
+						<>
+							<span className={s.loading__btn} style={{marginRight: 5}}></span>
+							<span className={s.loading__btn}></span>
+						</>
 						:
-						<ActionButton>Добавить в друзья</ActionButton>
+						<>
+							<ActionButton style={{marginRight: 5}}>Сообщение</ActionButton>
+
+							{isFriend?.is_friend ? <ActionButton
+									leftIcon={<BsPersonCheck
+										style={{width: 24, height: 24}}/>}
+									second/>
+								:
+								<ActionButton>Добавить в друзья</ActionButton>}
+						</>
 				}
 			</div>
 

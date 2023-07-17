@@ -1,0 +1,17 @@
+.wrapper__block {
+	position: relative;
+}
+
+
+.content__menu {
+	padding: 0;
+	min-width: 200px;
+	max-width: 250px;
+	border-radius: 6px;
+	position: absolute;
+	top: 20px;
+	right: 0;
+	z-index: 10;
+	transition: all .3s;
+	//pointer-events: none;
+}

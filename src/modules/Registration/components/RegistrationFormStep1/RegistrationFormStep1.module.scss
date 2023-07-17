@@ -1,0 +1,150 @@
+.form {
+	width: 100%;
+	height: 100%;
+	form{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+	}
+}
+
+.form__title {
+
+	text-align: center;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	span {
+		font-weight: 500;
+		font-size: 18px;
+		color: #FFFFFF;
+	}
+
+	img {
+		border-radius: 16px;
+		background-color: var(--secondColor);
+		width: 48px;
+		height: 48px;
+		margin-bottom: 20px;
+	}
+
+}
+
+.description__title{
+	text-align: center;
+	font-size: 14px;
+	color: #aaaaaa;
+	margin: 0;
+	margin-top: 10px;
+	font-weight: 400;
+}
+
+
+.label__inputs{
+	cursor: pointer;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-weight: 400;
+	font-size: 14px;
+	color: #aaaaaa;
+}
+
+.wrapper__form{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+
+
+.input{
+	cursor: pointer;
+
+	margin-top: 8px;
+	outline: none;
+	padding: 8px 10px;
+	background: #202020;
+	border: 1px solid #434343;
+	color: #FFFFFF;
+	border-radius: 8px;
+	transition: all .3s;
+	&:focus{
+		border: 1px solid var(--secondColor);
+	}
+	&:hover{
+		border: 1px solid var(--secondColor);
+
+
+	}
+}
+
+
+.btn_submit{
+	background: var(--secondColor);
+	border-radius: 8px;
+	border: none;
+	width: 100%;
+	padding: 8px 10px;
+	transition: all .3s;
+	cursor: pointer;
+	color: #FFFFFF;
+	&:disabled{
+		color: #aaaaaa;
+		cursor: no-drop;
+		background: #202020;
+		box-shadow: none;
+
+
+	}
+}
+
+.orLogin {
+	display: block;
+	margin: 20px 0;
+	color: var(--text--secondary);
+	text-align: center;
+}
+.btn__registr{
+	display: block !important;
+	width: 100%;
+	background-color: #4bb24b !important;
+	color: #FFFFFF !important;
+
+	&:hover{
+		background-color: darken(#4bb24b,8%) !important;
+	}
+}
+
+.btn__desc {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	background-color: #4bb24b;
+	padding: 8px 10px;
+
+	border-radius: 8px;
+	text-decoration: none;
+	color: #FFFFFF;
+	outline: none;
+
+}
+
+
+
+.error__send {
+	color: red;
+	font-size: 14px;
+	width: 100%;
+}
+
+@media (max-width: 900px) {
+	.form {
+		backdrop-filter: blur(10px);
+
+	}
+}

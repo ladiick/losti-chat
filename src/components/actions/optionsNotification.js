@@ -6,5 +6,4 @@ export const optionsNotification = {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
 }

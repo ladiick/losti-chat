@@ -1,0 +1,15 @@
+
+.content{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.wrapper__btn{
+	display: flex;
+	align-items: center;
+	position: absolute;
+	right: 40px;
+	bottom: 10px;
+}

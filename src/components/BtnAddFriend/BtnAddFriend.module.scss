@@ -8,10 +8,10 @@
 	svg{
 		width: 24px;
 		height: 24px;
-		color: var(--secondColor);
+		color: var(--text--accent);
 	}
 	&:hover{
 		opacity: 1;
-		background-color: var(--bgColor);
+		background-color: var(--background--content--secondary--hover);
 	}
 }

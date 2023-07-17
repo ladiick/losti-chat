@@ -27,7 +27,8 @@ const initialState = {
 
 	// drag over state
 
-	dragOver: false
+	dragOver: false,
+	visibleDropZone: false,
 
 }
 
@@ -66,6 +67,9 @@ export const navigationSlice = createSlice({
 		},
 		setDragOver(state, action) {
 			state.dragOver = action.payload
+		},
+		setVisibleDropZone(state, action){
+			state.visibleDropZone = action.payload
 		}
 	},
 
@@ -74,7 +78,7 @@ export const navigationSlice = createSlice({
 
 export const {
 	openModalBlock, openChatBlock, searchFriend, deleteFriend,
-	forwardMessageFlag, setOpenDetailedImage, setOpenFromDialog, setDragOver
+	forwardMessageFlag, setOpenDetailedImage, setOpenFromDialog, setDragOver,setVisibleDropZone
 } = navigationSlice.actions
 
 export default navigationSlice.reducer

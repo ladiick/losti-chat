@@ -1,1 +1,14 @@
-import React from 'react';import s from './PeopleDialogs.module.scss'import Social from "../Social/Social";import Chat from "../Chat/Chat";const PeopleDialogs = () => {    return (        <>            <Social/>            <Chat/>        </>    );};export default PeopleDialogs;
+// import React from "react";
+// import Chat from "../Chat/Chat";
+// import Social from "../Social/Social";
+
+// const PeopleDialogs = () => {
+//   return (
+//     <>
+//       <Social />
+//       <Chat />
+//     </>
+//   );
+// };
+
+// export default PeopleDialogs;
