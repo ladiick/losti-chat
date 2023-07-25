@@ -1,5 +1,5 @@
-export const changeColor = (index) => {
-
+export const changeColor = () => {
+    const randomNumber = Math.ceil(Math.random() * 3)
     const arrColor = ['#4bb24b', '#1a73e8', 'red', 'orange']
-    return arrColor[index%4]
+    return arrColor[randomNumber];
 }

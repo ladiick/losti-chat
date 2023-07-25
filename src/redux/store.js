@@ -3,7 +3,7 @@ import user from "./slices/userSlice";
 import people from "./slices/peopleSlice";
 import message from "./slices/messageSlice";
 import navigation from "./slices/navigationSlice";
-import friends from "./slices/friendsSlice";
+import friends from "../modules/Friends/slices/friendsSlice";
 import registration from "../modules/Registration/store/registrationStepsSlice";
 import { apiSlice } from "../components/api/apiSlice";
 import theme from "../redux/slices/themeSlice";

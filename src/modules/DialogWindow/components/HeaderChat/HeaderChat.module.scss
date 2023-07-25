@@ -31,15 +31,6 @@
 	display: flex;
 	align-items: center;
 
-	img {
-		border-radius: 50%;
-		object-fit: cover;
-		width: 30px;
-		height: 30px;
-		transition: all .3s;
-		margin-right: 10px;
-
-	}
 }
 
 
@@ -49,13 +40,6 @@
 	display: flex;
 	margin-right: 8px;
 	cursor: pointer;
-
-	svg {
-		width: 24px;
-		height: 24px;
-		color: var(--color--text--main);
-
-	}
 
 	&:hover {
 		background-color: var(--bgColor);

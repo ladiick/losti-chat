@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import s from "../Grade.module.scss";
 import ActionButton from "../../../components/ui/ActionButton/ActionButton";
-import SearchBlock from "../../../components/SearchBlock/SearchBlock";
 import axios from "axios";
+import SearchBlock from '../../../components/ui/SearchBlock/SearchBlock'
 
 const HeaderGrade = ({setCurrentTeacher}) => {
     const [inputText, setInputText] = useState('');

@@ -6,14 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Text from "../../../../components/ui/Text/Text";
 import s from "./DragAndDropFileUpload.module.scss";
-import { setDragOver, setVisibleDropZone } from "../../../../redux/slices/navigationSlice";
+import { setDragOver, setVisibleDropZone } from "../../../../redux/slices/dragAndDropSlice";
 import { sendMessagesOnChat } from "../../../../redux/slices/messageSlice";
 
 const DragAndDropFileUpload = ({ children, style }) => {
-  const visibleDragAndDrop = useSelector((state) => state.navigation.visibleDropZone);
+  const visibleDragAndDrop = useSelector((state) => state.dragAndDrop.visibleDropZone);
   const typeDropZone = useSelector((state) => state.dragAndDrop.typeDropZone);
 
-  const dragOver = useSelector((state) => state.navigation.dragOver);
+  const dragOver = useSelector((state) => state.dragAndDrop.dragOver);
 
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();

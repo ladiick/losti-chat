@@ -1,17 +1,16 @@
-import s from "./MyFriends.module.scss";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SearchBlock from "../../../../components/SearchBlock/SearchBlock";
 import { useNavigate } from "react-router-dom";
-import { searchFriend } from "../../../../redux/slices/navigationSlice";
-import { motion } from "framer-motion";
-import { useGetFriendsQuery } from "../../api/friendsApiSlice";
-import OutputFriends from "../../../../components/OutputFriends/OutputFriends";
 import ActionButton from "../../../../components/ui/ActionButton/ActionButton";
+import SearchBlock from "../../../../components/ui/SearchBlock/SearchBlock";
 import WrapperBlocks from "../../../../components/ui/WrapperBlocks/WrapperBlocks";
+import { searchFriend } from "../../../../redux/slices/navigationSlice";
+import DeleteFriendModal from "../../../AllModals/DeleteFriendModal/DeleteFriendModal";
 import WriteFriend from "../../../AllModals/WriteFriend/WriteFriend";
-import DeleteFriendModal from "../../../AllModals/DeleteFriendModal/DeleteFriendModul";
-
+import { useGetFriendsQuery } from "../../api/friendsApiSlice";
+import OutputFriends from "../OutputFriends/OutputFriends";
+import s from "./MyFriends.module.scss";
 function MyFriends() {
   const dispatch = useDispatch();
   const [searchValue, setSearch] = useState("");

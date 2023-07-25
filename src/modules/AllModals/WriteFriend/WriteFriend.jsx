@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import s from "./WriteFriend.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { openModalBlock } from "../../../redux/slices/navigationSlice";
-import { setFriendsCurrent } from "../../../redux/slices/friendsSlice";
+import { openModalBlock } from "../../../redux/slices/navigationSlice.js";
+import { setFriendsCurrent } from "../../Friends/slices/friendsSlice.js";
 import { toast } from "react-toastify";
 import Text from "../../../components/ui/Text/Text";
-import { MyContext } from "../../../components/Layout/Layout";
+import { MyContext } from "../../Layout/Layout";
 import { optionsNotification } from "../../../components/actions/optionsNotification";
 import ModalDialog from "../../../components/ui/Modal/ModalDialog";
-import EmptyImage from "../../../components/ui/EmptyImage/EmptyImage";
+import Avatar from "../../../components/ui/Avatar/Avatar";
 import ActionButton from "../../../components/ui/ActionButton/ActionButton";
+
 const WriteFriend = () => {
   const dispatch = useDispatch();
   const friendsCurrent = useSelector((state) => state.friends.friendsCurrent);
@@ -49,7 +50,7 @@ const WriteFriend = () => {
   return (
     <ModalDialog noFooter open={modalActive} closeFunc={closeFunc} title="Написать сообщение">
       <div className={s.wrapper__info__user}>
-        <EmptyImage
+        <Avatar
           image={friendsCurrent?.friend?.image}
           name={{
             firstName: friendsCurrent?.friend?.first_name,

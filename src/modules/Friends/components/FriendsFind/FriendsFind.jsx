@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import s from "./FriendsFind.module.scss";
-import SearchBlock from "../../../../components/SearchBlock/SearchBlock";
-import AllPeopleItem from "../../../../components/AllPeopleItem/AllPeopleItem";
+import AllPeopleItem from "./components/AllPeopleItem/AllPeopleItem";
 import { useGetAllPeopleQuery } from "../../api/findPeopleApiSlice";
 import { useAcceptFriendRequestsMutation } from "../../api/friendsApiSlice";
 import { toast } from "react-toastify";
 import { optionsNotification } from "../../../../components/actions/optionsNotification";
 import useMatchMedia from "../../../../components/hooks/useMatchMedia";
+import WrapperBlocks from '../../../../components/ui/WrapperBlocks/WrapperBlocks'
+import SearchBlock from '../../../../components/ui/SearchBlock/SearchBlock'
 const FriendsFind = () => {
   const [searchValue, setSearch] = useState("");
   const { isMobile } = useMatchMedia();
@@ -31,8 +32,7 @@ const FriendsFind = () => {
   };
 
   return (
-    <div className={s.wrapper__find}>
-      <header className={s.header}>Поиск друзей</header>
+    <WrapperBlocks title={"Поиск друзей"}>
       <SearchBlock searchValue={searchValue} setSearch={setSearch} />
       <div className={s.list__allpeople}>
         {allPeople
@@ -41,7 +41,7 @@ const FriendsFind = () => {
             <AllPeopleItem key={obj.pk} obj={obj} index={index} handlerPeople={() => handlerPeople(index, obj)} />
           ))}
       </div>
-    </div>
+    </WrapperBlocks>
   );
 };
 

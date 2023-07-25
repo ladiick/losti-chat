@@ -1,13 +1,12 @@
-import { Oval } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import useMatchMedia from "../../../../components/hooks/useMatchMedia";
+import Loader from "../../../../components/ui/Loader/Loader";
 import LoaderWrapper from "../../../../components/ui/LoaderWrapper/LoaderWrapper";
 import { openChatBlock } from "../../../../redux/slices/navigationSlice";
 import { setIndex } from "../../../../redux/slices/peopleSlice";
 import s from "./ListPeople.module.scss";
 import { useGetPeopleQuery } from "./api/peopleApiSlice.js";
-import favorite from "./assets/favorite.svg";
 import PeopleItem from "./components/PeopleItem/PeopleItem";
 
 const errorStyles = {
@@ -45,7 +44,7 @@ const People = ({ searchValue, setSearch }) => {
   return (
     <div className={s.block__people}>
       <LoaderWrapper>
-        <Oval height="32" width="32" color="#1A73E8" secondaryColor="#434343" strokeWidth={4} strokeWidthSecondary={4} visible={isLoading || isError} />
+        <Loader visible={isLoading || isError} />
       </LoaderWrapper>
       {isError && <span style={errorStyles}>Ошибка, не удалось загрузить диалоги</span>}
       <div className={s.wrapper__items}>
@@ -61,42 +60,20 @@ const People = ({ searchValue, setSearch }) => {
             obj.sender.pk === myId && obj.recip.pk !== myId ? (
               <PeopleItem
                 key={obj.recip.pk}
-                id={obj.recip.pk}
-                firstName={obj.recip.first_name}
-                lastName={obj.recip.last_name}
-                message={`Вы: ${obj.message}`}
+                message={obj.message && `Вы: ${obj.message}`}
                 time={obj.time}
-                online={obj?.recip?.online}
-                img={obj.recip.image}
                 handlerPeople={() => handlerPeople(obj.recip, index)}
-                obj={obj.recip}
-                index={index}
-              />
-            ) : obj.sender.pk === myId && obj.recip.pk === myId ? (
-              <PeopleItem
-                key={0}
-                id={obj.sender.pk}
-                firstName={"Избранное"}
-                lastName={""}
-                message={obj.message}
-                time={obj.time}
-                img={favorite}
-                handlerPeople={() => handlerPeople(obj.sender, index)}
-                obj={obj.sender}
+                obj={obj?.recip}
+                obj2={obj}
                 index={index}
               />
             ) : (
               <PeopleItem
                 key={obj.sender.pk}
-                id={obj.sender.pk}
-                firstName={obj.sender.first_name}
-                lastName={obj.sender.last_name}
                 message={obj.message}
                 time={obj.time}
-                online={obj?.sender?.online}
-                img={obj.sender.image}
                 handlerPeople={() => handlerPeople(obj.sender, index)}
-                obj={obj.sender}
+                obj={obj?.sender}
                 index={index}
               />
             ),
@@ -107,3 +84,18 @@ const People = ({ searchValue, setSearch }) => {
 };
 
 export default People;
+
+// : obj.sender.pk === myId && obj.recip.pk === myId ? (
+//               <PeopleItem
+//                 key={0}
+//                 id={obj.sender.pk}
+//                 firstName={"Избранное"}
+//                 lastName={""}
+//                 message={obj.message}
+//                 time={obj.time}
+//                 img={favorite}
+//                 handlerPeople={() => handlerPeople(obj.sender, index)}
+//                 obj={obj.sender}
+//                 index={index}
+//               />
+//             )

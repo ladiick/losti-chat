@@ -1,19 +1,16 @@
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { HOST } from "../../../../components/api/HOST";
-import s from "./RegistrationFormStep1.module.scss";
-import { setRegistrationSteps } from "../../store/registrationStepsSlice";
-import NameCompany from "../../../../components/NameCompany/NameCompany";
-import Text from "../../../../components/ui/Text/Text";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
-import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
 import ActionButton from "../../../../components/ui/ActionButton/ActionButton";
+import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
+import NameCompany from "../../../../components/ui/NameCompany/NameCompany";
+import Text from "../../../../components/ui/Text/Text";
 import { VALID__EMAIL } from "../../../../utils/validateForm";
+import { setRegistrationSteps } from "../../store/registrationStepsSlice";
+import s from "./RegistrationFormStep1.module.scss";
 import { useExistEmailMutation } from "./api/checkEmailApiSlice";
 import { useSendCodeMutation } from "./api/sendCodeApiSlice";
-
 const RegistrationFormStep1 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,11 +50,7 @@ const RegistrationFormStep1 = () => {
 
   return (
     <>
-      <NameCompany
-        size={36}
-        title="Регистрация в LOSTI-CHAT"
-        direction="column"
-      />
+      <NameCompany size={36} title="Регистрация в LOSTI-CHAT" direction="column" />
 
       <Text
         style={{
@@ -75,11 +68,7 @@ const RegistrationFormStep1 = () => {
                 type="email"
                 autoFocus={true}
                 placeholder="example@gmail.com"
-                style={
-                  errors?.email
-                    ? { borderColor: "red", marginTop: 8 }
-                    : { marginTop: 8 }
-                }
+                style={errors?.email ? { borderColor: "red", marginTop: 8 } : { marginTop: 8 }}
                 {...register("email", {
                   required: "Необходимо заполнить",
                   pattern: {
@@ -91,19 +80,13 @@ const RegistrationFormStep1 = () => {
             </FormWrapperLabel>
           </div>
           <div>
-            <ActionButton
-              style={{ display: "block", width: "100%" }}
-              disabled={!isValid}
-            >
+            <ActionButton style={{ display: "block", width: "100%" }} disabled={!isValid}>
               Продолжить
             </ActionButton>
 
             <Text className={s.orLogin}>или</Text>
 
-            <ActionButton
-              onClick={() => navigate("/authorization")}
-              className={s.btn__registr}
-            >
+            <ActionButton onClick={() => navigate("/authorization")} className={s.btn__registr}>
               Войти
             </ActionButton>
           </div>

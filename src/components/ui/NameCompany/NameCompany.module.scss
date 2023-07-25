@@ -1,0 +1,20 @@
+.wrapper__company {
+  display: flex;
+  align-items: center;
+  img {
+    border-radius: 10px;
+    background-color: var(--text--accent);
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+
+  &__column {
+    flex-direction: column;
+    justify-content: center;
+    img {
+      margin-right:0;
+      margin-bottom: 20px;
+    }
+  }
+}
