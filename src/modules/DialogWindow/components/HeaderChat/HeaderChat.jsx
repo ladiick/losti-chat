@@ -1,24 +1,26 @@
 import React from "react";
-import SceletonHeader from "./SceletonHeader";
-import favorite from "../../../DialogsUsers/components/People/assets/favorite.svg";
-import s from "./HeaderChat.module.scss";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import HeaderForwardMessage from "../HeaderForwardMessage/HeaderForwardMessage";
-import RightSideBlock from "./RightSideBlock/RightSideBlock";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useMatchMedia from "../../../../components/hooks/useMatchMedia";
-import { openChatBlock } from "../../../../redux/slices/navigationSlice";
 import ActionLink from "../../../../components/ui/ActionLink/ActionLink";
-import EmptyImage from "../../../../components/ui/EmptyImage/EmptyImage";
+import Avatar from "../../../../components/ui/Avatar/Avatar";
 import Text from "../../../../components/ui/Text/Text";
+import { openChatBlock } from "../../../../redux/slices/navigationSlice";
+import favorite from "../../../DialogsUsers/components/People/assets/favorite.svg";
+import HeaderForwardMessage from "../HeaderForwardMessage/HeaderForwardMessage";
+import s from "./HeaderChat.module.scss";
+import RightSideBlock from "./RightSideBlock/RightSideBlock";
+import SceletonHeader from "./SceletonHeader";
+import ArrowBack from '../../../../components/ui/ArrowBack/ArrowBack'
 const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const chatActive = useSelector((state) => state.navigation.chat);
   const currentMessage = useSelector((state) => state.message.currentMessage);
   const { isMobile } = useMatchMedia();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+
   if (isLoading) {
     return (
       <header className={s.header}>
@@ -36,24 +38,18 @@ const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
       <header className={s.header}>
         <div className={s.left__side}>
           {chatActive && isMobile && (
-            <div
-              className={s.arrow__back}
-              onClick={() => {
+            <ArrowBack onClick={() => {
                 navigation("/");
                 dispatch(openChatBlock(false));
-              }}
-            >
-              <FiArrowLeft />
-            </div>
+              }}/>
           )}
           <ActionLink to={`/profile/${searchParams.get("dialogs")}`}>
             {searchParams.get("dialogs") == myId ? (
               <img src={favorite} alt="logo" />
             ) : (
-              <EmptyImage
-                noOnline={peopleCurrent?.online}
-                style={{ width: 30, height: 30, fontSize: 13 }}
-                name={{ firstName: peopleCurrent?.first_name, lastName: peopleCurrent?.last_name }}
+              <Avatar
+                online={peopleCurrent?.online}
+                size={30}
                 image={peopleCurrent.image}
               />
             )}

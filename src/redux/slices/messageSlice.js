@@ -28,7 +28,6 @@ export const messageSlice = createSlice({
 
 			})
 
-
 			if (indexOldMessage !== -1) {
 				state.message.results = [...state.message.results, ...action.payload.results.slice(indexOldMessage + 1, action.payload.length)]
 			} else {

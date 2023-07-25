@@ -67,34 +67,21 @@
 	border: 1px solid var(--secondColor);
 
 	position: relative;
-	//&:before {
-	//	content: "";
-	//	position: absolute;
-	//	width: 50%;
-	//	border: 3px solid var(--secondColor);
-	//	z-index: 10;
-	//	bottom: -1.5px;
-	//	border-radius: 4px;
-	//	left: 0;
-	//	transform: translateX(50%);
-	//	transition: all .3s;
-	//}
+	
 
 }
 
 .info__message {
 	display: flex;
-	//align-items: center;
-	//justify-content: space-between;
+	
 	width: 100%;
-	img {
-		margin-right: 10px;
-		border-radius: 50%;
-		object-fit: cover;
-		width: 45px;
-		height: 45px;
+	// img {
+	// 	border-radius: 50%;
+	// 	object-fit: cover;
+	// 	width: 45px;
+	// 	height: 45px;
 
-	}
+	// }
 }
 
 

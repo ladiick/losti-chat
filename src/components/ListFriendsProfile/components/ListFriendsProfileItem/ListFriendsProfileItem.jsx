@@ -2,14 +2,14 @@ import React from "react";
 import s from "./ListFriendsProfileItem.module.scss";
 
 import useMatchMedia from "../../../hooks/useMatchMedia";
-import EmptyImage from "../../../ui/EmptyImage/EmptyImage";
+import Avatar from "../../../ui/Avatar/Avatar";
 import { Link } from "react-router-dom";
 
 const ListFriendsProfileItem = ({ obj, index }) => {
   const { isMobile } = useMatchMedia();
   return (
     <Link to={`/profile/${obj.friend.pk}`} className={s.wrapper__item}>
-      <EmptyImage
+      <Avatar
         style={{
           width: isMobile ? 24 : 60,
           height: isMobile ? 24 : 60,

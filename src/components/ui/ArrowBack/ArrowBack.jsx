@@ -7,15 +7,14 @@ const ArrowBack = ({...props}) => {
 	const {isMobile} = useMatchMedia()
 
 	return (
-		<>
-			{
-				isMobile &&
-				<div className={s.arrow__back} {...props}>
-					<FiArrowLeft/>
-				</div>
-			}
-		</>
-	)
+    <>
+      {isMobile && (
+        <div className={s.arrow__back} {...props}>
+          <FiArrowLeft size={24} color={"var(--color--text--main)"} />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default ArrowBack;

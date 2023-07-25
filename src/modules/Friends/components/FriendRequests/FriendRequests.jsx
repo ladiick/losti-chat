@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./FriendRequests.module.scss";
-import FriendsItem from "../../../../components/FriendsItem/FriendsItem";
+import FriendsItem from "../FriendsItem/FriendsItem";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useGetFriendsRequestsQuery } from "../../api/friendsRequestsApiSlice";

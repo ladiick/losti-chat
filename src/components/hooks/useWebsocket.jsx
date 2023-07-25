@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { updatePeople } from "../../redux/slices/peopleSlice";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { HOST } from "../api/HOST";
 import { toast } from "react-toastify";
-import { updateAccessToken } from "../actions/updateAccessToken";
-import { setUserAccessToken } from "../../redux/slices/userSlice";
-import { useUpdateFriendRequestsMutation } from "../../modules/Friends/api/friendsRequestsApiSlice";
 import { useUpdateFriendsMutation } from "../../modules/Friends/api/friendsApiSlice";
+import { useUpdateFriendRequestsMutation } from "../../modules/Friends/api/friendsRequestsApiSlice";
+import { updatePeople } from "../../redux/slices/peopleSlice";
+import { setUserAccessToken } from "../../redux/slices/userSlice";
 import { optionsNotification } from "../actions/optionsNotification";
+import { updateAccessToken } from "../actions/updateAccessToken";
 
 const useWebsocket = (userAccessToken) => {
   const dispatch = useDispatch();

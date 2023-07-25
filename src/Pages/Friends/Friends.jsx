@@ -4,8 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 import s from "./Friends.module.scss";
 import FriendRequests from "../../modules/Friends/components/FriendRequests/FriendRequests";
 import { Outlet, useLocation } from "react-router-dom";
-import NavigateFriends from "../../components/NavigateFriends/NavigateFriends";
-import PossibleFriends from "../../components/PossibleFriends/PossibleFriends";
+import NavigateFriends from "../../modules/Friends/components/NavigateFriends/NavigateFriends";
+import PossibleFriends from "../../modules/Friends/components/PossibleFriends/PossibleFriends";
 import useMatchMedia from "../../components/hooks/useMatchMedia";
 
 const Friends = () => {

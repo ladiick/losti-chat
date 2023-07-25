@@ -11,7 +11,7 @@ import Registration from "./Pages/Registration/Registration";
 import { Logout } from "./components/Logout/Logout";
 
 import Dialogs from "./Pages/Dialogs/Dialogs";
-import { Layout } from "./components/Layout/Layout";
+import { Layout } from "./modules/Layout/Layout.jsx";
 import NotFound from "./components/NotFound/NotFound";
 
 import FriendsRequestsPage from "./Pages/FriendsRequestsPage/FriendsRequestsPage";

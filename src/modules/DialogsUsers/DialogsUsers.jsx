@@ -1,9 +1,8 @@
 import { useState } from "react";
-import People from "./components/People/ListPeople";
-import SearchBlock from "../../components/SearchBlock/SearchBlock";
 import useMatchMedia from "../../components/hooks/useMatchMedia";
-import Title from "../../components/ui/Title/Title";
 import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
+import People from "./components/People/ListPeople";
+import SearchBlock from '../../components/ui/SearchBlock/SearchBlock'
 
 const DialogsUsers = () => {
   const [searchValue, setSearch] = useState("");
@@ -16,10 +15,7 @@ const DialogsUsers = () => {
   };
 
   return (
-    <WrapperBlocks style={dialogsUsersStyles}>
-      <Title level={4} style={{ marginBottom: 20 }}>
-        Чаты
-      </Title>
+    <WrapperBlocks title={"Чаты"} style={dialogsUsersStyles}>
       <SearchBlock searchValue={searchValue} setSearch={setSearch} />
       <People searchValue={searchValue} setSearch={setSearch} />
     </WrapperBlocks>

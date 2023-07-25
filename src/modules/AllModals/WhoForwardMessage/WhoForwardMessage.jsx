@@ -12,7 +12,7 @@ import PeopleItem from "../../../modules/DialogsUsers/components/People/componen
 import useMatchMedia from "../../../components/hooks/useMatchMedia";
 import { useGetPeopleQuery } from "../../DialogsUsers/components/People/api/peopleApiSlice";
 import ModalDialog from "../../../components/ui/Modal/ModalDialog";
-import SearchBlock from "../../../components/SearchBlock/SearchBlock";
+import SearchBlock from '../../../components/ui/SearchBlock/SearchBlock'
 
 const WhoForwardMessage = () => {
   const dispatch = useDispatch();

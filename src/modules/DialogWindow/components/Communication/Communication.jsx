@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { clearMessage, currentMessage, setMessage, setWidthDialogBlock } from "../../../../redux/slices/messageSlice";
 import _ from "underscore";
-import { MyContext } from "../../../../components/Layout/Layout";
+import { MyContext } from "../../../Layout/Layout";
 import { useSearchParams } from "react-router-dom";
 import { useGetMessageQuery, usePaginationMutation } from "./api/messageApiSlice";
 import { addTimeMessage } from "../../helpers/addTimeMessage";

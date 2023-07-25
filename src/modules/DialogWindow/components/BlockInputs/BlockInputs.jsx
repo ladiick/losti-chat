@@ -12,7 +12,7 @@ import BlockAnswerMessage from "../BlockAnswerMessage/BlockAnswerMessage";
 import _ from "underscore";
 import BlockFilesMessage from "../BlockFilesMessage/BlockFilesMessage";
 import useMatchMedia from "../../../../components/hooks/useMatchMedia";
-import { MyContext } from "../../../../components/Layout/Layout";
+import { MyContext } from "../../../Layout/Layout";
 import { sendMessagesOnChat } from "../../../../redux/slices/messageSlice";
 
 const BlockInputs = () => {

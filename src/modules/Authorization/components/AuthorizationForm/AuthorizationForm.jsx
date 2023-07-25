@@ -2,11 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
-import NameCompany from "../../../../components/NameCompany/NameCompany";
 import ActionButton from "../../../../components/ui/ActionButton/ActionButton";
 import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
-import Loader from "../../../../components/ui/Loader/Loader";
-import LoaderWrapper from "../../../../components/ui/LoaderWrapper/LoaderWrapper";
+import NameCompany from "../../../../components/ui/NameCompany/NameCompany";
 import Text from "../../../../components/ui/Text/Text";
 import { VALID__EMAIL } from "../../../../utils/validateForm";
 import { useAuthorizationMutation } from "../../api/authorizationApiSlice";
@@ -88,15 +86,9 @@ const AuthorizationForm = () => {
           </div>
 
           <div>
-            {loadAuthorization ? (
-              <LoaderWrapper center>
-                <Loader />
-              </LoaderWrapper>
-            ) : (
-              <ActionButton style={{ display: "block", width: "100%" }} disabled={!isValid}>
-                Войти
-              </ActionButton>
-            )}
+            <ActionButton style={{ display: "block", width: "100%" }} disabled={!isValid} loading={loadAuthorization}>
+              Войти
+            </ActionButton>
 
             <Text className={s.orLogin}>или</Text>
 

@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  typeDropZone: 'image' || 'document'
+  typeDropZone: "image" || "document",
+  dragOver: false,
+  visibleDropZone: false,
 };
 
 export const dragAndDropSlice = createSlice({
@@ -11,9 +13,15 @@ export const dragAndDropSlice = createSlice({
     setTypeDropZone: (state, action) => {
       state.typeDropZone = action.payload;
     },
+    setDragOver(state, action) {
+      state.dragOver = action.payload;
+    },
+    setVisibleDropZone(state, action) {
+      state.visibleDropZone = action.payload;
+    },
   },
 });
 
-export const { setTypeDropZone } = dragAndDropSlice.actions;
+export const { setTypeDropZone, setDragOver, setVisibleDropZone } = dragAndDropSlice.actions;
 
 export default dragAndDropSlice.reducer;
