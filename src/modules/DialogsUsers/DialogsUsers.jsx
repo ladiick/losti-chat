@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { BsBookmarks } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import useMatchMedia from "../../components/hooks/useMatchMedia";
+import ActionButton from "../../components/ui/ActionButton/ActionButton";
+import SearchBlock from "../../components/ui/SearchBlock/SearchBlock";
 import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
 import People from "./components/People/ListPeople";
-import SearchBlock from '../../components/ui/SearchBlock/SearchBlock'
-
 const DialogsUsers = () => {
   const [searchValue, setSearch] = useState("");
   const { isMobile } = useMatchMedia();
-
   const dialogsUsersStyles = {
     width: isMobile ? "100%" : "35%",
     borderRadius: isMobile ? 0 : "12px 0 0 12px",
@@ -15,10 +17,23 @@ const DialogsUsers = () => {
   };
 
   return (
-    <WrapperBlocks title={"Чаты"} style={dialogsUsersStyles}>
+    <WrapperBlocks title={"Чаты"} block={<BookMark />} style={dialogsUsersStyles}>
       <SearchBlock searchValue={searchValue} setSearch={setSearch} />
       <People searchValue={searchValue} setSearch={setSearch} />
     </WrapperBlocks>
   );
 };
 export default DialogsUsers;
+
+const BookMark = () => {
+  const [, setSearchParams] = useSearchParams();
+  const myId = useSelector((state) => state.user.aboutUser.id);
+
+  return (
+    <ActionButton
+      onClick={() => setSearchParams({ dialogs: myId })}
+      second
+      leftIcon={<BsBookmarks size={16} strokeWidth={0.5} color="var(--text--accent)" />}
+    />
+  );
+};

@@ -26,16 +26,10 @@ const Image = React.memo(({ idImage, attachments, style }) => {
     });
   };
 
-  // if (isLoading) {
-  // 	return (
-  // 		<Loader visible={isLoading}/>
-  // 	)
-  // }
-
   if (attachments) {
     return (
       <div className={s.wrapper__attachments__images} style={style} onClick={(e) => detailedImage(e)}>
-        <img src={data} alt={"pictures"} />
+        <img src={data} alt={"pictures"} loading='lazy'/>
       </div>
     );
   }
@@ -44,7 +38,7 @@ const Image = React.memo(({ idImage, attachments, style }) => {
     <>
       {!isLoading ? (
         <div className={s.wrapper__image} style={style} onClick={(e) => detailedImage(e)}>
-          <img src={data} alt={"pictures"} />
+          <img src={data} alt={"pictures"} loading="lazy" />
         </div>
       ) : (
         <div className={s.wrapper__image} style={style} onClick={(e) => detailedImage(e)}>

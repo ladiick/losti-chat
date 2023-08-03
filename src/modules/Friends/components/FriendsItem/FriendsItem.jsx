@@ -33,14 +33,11 @@ const FriendsItem = ({ obj, requests, handlerCancel, handlerAccept, index }) => 
         <Link to={`/profile/${obj.friend.pk}`}>
           <Avatar
             image={obj?.friend?.image}
-            name={{ firstName: obj.friend.first_name, lastName: obj.friend.last_name }}
-            index={index}
-            noOnline={obj?.friend?.online}
+            online={obj?.friend?.online}
             sizeIndicator={{ right: 6 }}
-            style={{
+            size={{
               width: isMobile ? 44 : 80,
               height: isMobile ? 44 : 80,
-              fontSize: isMobile ? 16 : 24,
             }}
           />
         </Link>

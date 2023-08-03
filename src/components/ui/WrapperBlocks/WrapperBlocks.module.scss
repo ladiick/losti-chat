@@ -6,6 +6,13 @@
 	padding: var(--paddingBlock);
 }
 
+.block{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;
+}
+
 
 @media (max-width: 768px) {
 	.wrapper{

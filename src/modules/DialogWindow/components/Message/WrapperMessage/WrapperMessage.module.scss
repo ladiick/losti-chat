@@ -20,13 +20,14 @@
 
 
 .message__time{
+	white-space: nowrap;
 	word-break: normal;
-	font-size: 10px;
+	font-size: .75rem;
 	font-weight: 300;
 	color: var(--decription-color);
 	display: flex;
 	position: relative;
-	width: 25px;
+	// width: 25px;
 	top: 7px;
 	bottom: auto !important;
 	float: right;

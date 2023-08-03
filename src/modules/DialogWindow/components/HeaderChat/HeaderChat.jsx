@@ -1,9 +1,9 @@
 import React from "react";
-import { FiArrowLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useMatchMedia from "../../../../components/hooks/useMatchMedia";
 import ActionLink from "../../../../components/ui/ActionLink/ActionLink";
+import ArrowBack from "../../../../components/ui/ArrowBack/ArrowBack";
 import Avatar from "../../../../components/ui/Avatar/Avatar";
 import Text from "../../../../components/ui/Text/Text";
 import { openChatBlock } from "../../../../redux/slices/navigationSlice";
@@ -12,7 +12,6 @@ import HeaderForwardMessage from "../HeaderForwardMessage/HeaderForwardMessage";
 import s from "./HeaderChat.module.scss";
 import RightSideBlock from "./RightSideBlock/RightSideBlock";
 import SceletonHeader from "./SceletonHeader";
-import ArrowBack from '../../../../components/ui/ArrowBack/ArrowBack'
 const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -38,20 +37,18 @@ const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
       <header className={s.header}>
         <div className={s.left__side}>
           {chatActive && isMobile && (
-            <ArrowBack onClick={() => {
+            <ArrowBack
+              onClick={() => {
                 navigation("/");
                 dispatch(openChatBlock(false));
-              }}/>
+              }}
+            />
           )}
           <ActionLink to={`/profile/${searchParams.get("dialogs")}`}>
             {searchParams.get("dialogs") == myId ? (
               <img src={favorite} alt="logo" />
             ) : (
-              <Avatar
-                online={peopleCurrent?.online}
-                size={30}
-                image={peopleCurrent.image}
-              />
+              <Avatar online={peopleCurrent?.online} size={30} image={peopleCurrent.image} />
             )}
           </ActionLink>
 
