@@ -1,29 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
+import useMatchMedia from "../../../../../components/hooks/useMatchMedia";
+import { outputOfImagesInMessage } from "../../../../../utils/outputAttachmentsPhotos";
 import Image from "./Image";
 import s from "./MessageImage.module.scss";
-import { outputOfImagesInMessage } from "../../../../../utils/outputAttachmentsPhotos";
-
 const MessageImage = React.memo(({ images }) => {
   const containerWidth = useRef();
   const [generalImages, setGeneralImages] = useState([]);
-
+  const { isMobile } = useMatchMedia();
   useEffect(() => {
     if (images) {
-      setGeneralImages(outputOfImagesInMessage(images, containerWidth?.current?.clientWidth));
+      setGeneralImages(outputOfImagesInMessage(images, isMobile ? document.body.clientWidth : 587*0.7));
     }
-  }, [images]);
+  }, [images, isMobile]);
 
   useEffect(() => {
     containerWidth?.current?.scrollIntoView(true);
-  }, []);
-
-  // if (generalImages.length === 0) {
-  // 	return (
-  // 		<div className={s.wrapper__images} ref={containerWidth}>
-  //
-  // 		</div>
-  // 	)
-  // }
+  }, [containerWidth?.current?.clientWidth]);
 
   return (
     <div className={s.wrapper__images} ref={containerWidth}>

@@ -1,12 +1,12 @@
 import { apiSlice } from "../../../../../components/api/apiSlice";
 import { addMessage, newMessages } from "../../../../../redux/slices/messageSlice";
-import { logOut } from "../../../../../redux/slices/userSlice";
 
 export const messageApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMessage: builder.query({
       query: (id) => `/dialog/${id}/?page=1&page_size=20`,
-      keepUnusedDataFor: -1,
+      // keepUnusedDataFor: -1,
+
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -18,7 +18,8 @@ export const messageApiSlice = apiSlice.injectEndpoints({
     }),
     pagination: builder.mutation({
       query: ({ id, page }) => `/dialog/${id}/?page=${page}&page_size=20`,
-      keepUnusedDataFor: -1,
+      // keepUnusedDataFor: -1,
+
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;

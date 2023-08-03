@@ -1,13 +1,19 @@
-import React from 'react';
-import s from './WrapperBlocks.module.scss'
-import Title from '../Title/Title'
-const WrapperBlocks = ({title,children,className,...props}) => {
+import React from "react";
+import Title from "../Title/Title";
+import s from "./WrapperBlocks.module.scss";
+const WrapperBlocks = ({ title, children, block, className, ...props }) => {
+  const classGeneral = className ? `${className} ${s.wrapper}` : s.wrapper;
 
-	const classGeneral = className ? `${className} ${s.wrapper}` : s.wrapper
-
-	return (
+  return (
     <div className={classGeneral} {...props}>
-      {title && <Title size={16} style={{marginBottom: 20}}>{title}</Title>}
+      {block || title ? (
+        <div className={s.block}>
+          {title && <Title size={16}>{title}</Title>}
+          {block}
+        </div>
+      ) : (
+        ""
+      )}
       {children}
     </div>
   );

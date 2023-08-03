@@ -24,9 +24,11 @@ const Communication = () => {
 
   const [scrollButton, setScrollButton] = useState(false);
 
-  const { data, isLoading } = useGetMessageQuery(searchParams.get("dialogs"));
+  const { data, isFetching:isFetchingMessages } = useGetMessageQuery(searchParams.get("dialogs"), {
+    refetchOnMountOrArgChange: true,
+  });
 
-  const [pagination, { isLoading: Load }] = usePaginationMutation();
+  const [pagination, { isFetching: isLoadingPagination }] = usePaginationMutation();
   const [currentPage, setCurrentPage] = useState(2);
   const [fetching, setFetching] = useState(false);
 
@@ -123,12 +125,13 @@ const Communication = () => {
   const outputMessages = useMemo(() => {
     return addTimeMessage(message?.results);
   }, [message?.results]);
+  
 
-  if (isLoading) {
+  if (isFetchingMessages) {
     return (
       <div className={s.block__messages}>
-        <LoaderWrapper top={Load ? 1 : 0}>
-          <Loader visible={isLoading || Load} />
+        <LoaderWrapper top={isLoadingPagination ? 1 : 0}>
+          <Loader visible={isFetchingMessages || isLoadingPagination} />
         </LoaderWrapper>
       </div>
     );

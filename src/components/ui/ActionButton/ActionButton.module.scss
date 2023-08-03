@@ -39,7 +39,7 @@
 	font-weight: 500;
 	font-size: 13px;
 	display: inline-block;
-	background-color: var(--background--color--second);
+	background-color: var(--background--content--second);
 	min-height: 28px;
 	min-width: 28px;
 	border-radius: var(--borderRadiusButton);
@@ -88,10 +88,6 @@
 .single__icon{
 	padding: 0;
 	margin: 0 auto;
-	svg{
-		width: 20px;
-		height: 20px;
-	}
 }
 
 

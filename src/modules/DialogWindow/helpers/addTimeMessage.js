@@ -1,47 +1,34 @@
 
-export const addTimeMessage = (data2=[])=>{
+export const addTimeMessage = (messages=[])=>{
 
-	let data = structuredClone(data2)
-	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Субботу', 'Воскресенье']
-	let time = null
-	let timeObj = null
-	
-	for(let i = 0; i < data.length; i++){
+	if (messages.length === 0) {
+    return [];
+  }
 
+  // Группируем сообщения по дате
+  const groupedMessages = messages.reduce((acc, message) => {
+    const messageDate = new Date(message.time).toDateString();
+    if (!acc[messageDate]) {
+      acc[messageDate] = [];
+    }
+    acc[messageDate].push(message);
+    return acc;
+  }, {});
 
-		// timeObj = `${new Date(data[i].time).getFullYear()}-${new Date(data[i].time).getMonth()+1}-${new Date(data[i].time).getDate()}`
-		timeObj = new Date(data[i].time).toLocaleDateString('ru')
-			.split('.')
-			.reverse()
-			.join('-')
+  // Создаем новые объекты со временем для каждой группы сообщений с одинаковой датой
+  const newMessages = Object.entries(groupedMessages).reduce((acc, [date, messages]) => {
+    // Вычисляем общее время для группы сообщений
+    const totalTime = messages.reduce((sum, message) => sum + Date.parse(message.time), 0);
+    // Создаем новый объект с временем и добавляем его в начало группы сообщений
+    const newMessage = {
+      message: "Время всех сообщений за " + date,
+      type: "Date",
+      time: new Date(totalTime).toISOString(),
+    };
 
-		if(time===null) {
-			time = timeObj
-			continue
-		}
-		
-		if(time !== timeObj){
-			
-			let obj = {
-				message: time,
-				type: 'Date',
-				time: timeObj
-			}
-			data.splice(i,0,obj)
-			i++
-			
-			time = timeObj
-		}
-		
-		
-	}
-	
-	let obj_2 = {
-		message: timeObj,
-		type: 'Date',
-		time: data[data.length-1]?.time
-	}
-	data.push(obj_2)
-	return data
+    acc.push(...messages, newMessage);
+    return acc;
+  }, []);
+  return newMessages;
 
 }

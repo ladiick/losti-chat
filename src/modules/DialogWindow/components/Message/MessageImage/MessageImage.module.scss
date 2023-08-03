@@ -1,67 +1,76 @@
-
-.container {
-	display: flex;
+.wrapper__images {
+  // display: flex;
+  // flex-wrap: wrap;
+  // gap: 6px;
 }
-
 
 .wrapper__attachments__images {
-	cursor: pointer;
-	margin: 2px;
+  cursor: pointer;
+  margin: 2px;
 
-	img {
-		vertical-align: middle;
-		border-style: none;
-		width: 100%;
-		height: 100%;
-		display: block;
-		object-fit: cover;
-		border-radius: 2px;
-		max-width: 100%;
-		overflow: hidden;
-	}
+  img {
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 2px;
+    max-width: 100%;
+    overflow: hidden;
+  }
 }
-
 
 .wrapper__image {
-	cursor: pointer;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+	max-height: 300px !important;
+  img {
+    border-radius: 6px;
+    vertical-align: top;
+    border-style: none;
+    width: 100%;
+    height: 100%;
+    display: block;
+    // object-fit: cover;
+    max-width: 100%;
+    overflow: hidden;
+  }
 
-	img {
-		border-radius: 6px;
-		vertical-align: middle;
-		border-style: none;
-		width: 100%;
-		height: 100%;
-		display: block;
-		object-fit: cover;
-		max-width: 100%;
-		float: left;
-		overflow: hidden;
+	
 
+	&:not(:first-child){
+		margin: 6px 6px 0 0;
 	}
+
+	&:last-child{
+		margin: 6px 0 0 0;
+	}
+
+  // &:not(:first-child) {
+  //   max-width: calc((100% - 6px) / var(--columns--message--image, 9));
+    
+  // }
 }
+
+
 
 .loader {
-	display: inline-block;
-	background: var(--background--content--second);
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	border-radius: 6px;
-	animation: loading 2s infinite alternate;
+  display: inline-block;
+  background: var(--background--content--second);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  animation: loading 2s infinite alternate;
 
-	@keyframes loading {
-
-		from {
-			background: var(--text--accent--light);
-		}
-		to{
-			background: var(--background--content--second);
-		}
-	}
-}
-
-.wrapper__images {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 6px;
+  @keyframes loading {
+    from {
+      background: var(--text--accent--light);
+    }
+    to {
+      background: var(--background--content--second);
+    }
+  }
 }
