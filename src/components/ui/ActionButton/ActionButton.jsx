@@ -1,48 +1,83 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import LoaderWrapper from "../LoaderWrapper/LoaderWrapper";
+import Text from "../Text/Text";
 import s from "./ActionButton.module.scss";
 
-const ActionButton = ({ leftIcon, rightIcon, className, second, children, loading, ...props }) => {
-  const classGeneral =
-    className && second ? `${className} ${s.button__second}` : className ? `${className} ${s.button__primary}` : second ? s.button__second : s.button__primary;
-
-  const singleLeftIcon = rightIcon ? s.leftIcon : s.single__icon;
-
-  const singleRightsIcon = leftIcon ? s.rightIcon : s.single__icon;
-
-  if (loading) {
+export const ActionButton = ({ leftIcon, rightIcon, to, type, color, fullWidth, second, children, loading, ...props }) => {
+  const colors = {
+    success: `${s.btn__success}`,
+    danger: `${s.btn__danger}`,
+  };
+  const variants = {
+    primary: `${s.btn__default} ${s.btn__primary} ${fullWidth && s.btn__fullWidth} ${colors[color]}`,
+    outline: `${s.btn__default} ${s.btn__outline} ${fullWidth && s.btn__fullWidth} ${colors[color]}`,
+  };
+  
+  if (to) {
     return (
-      <button className={classGeneral} {...props}>
-        <span className={s.content__btn}>
-          <LoaderWrapper center>
-            <Loader height={"20"} width={"20"} />
-          </LoaderWrapper>
-        </span>
-      </button>
-    );
-  }
-
-  if (!children) {
-    return (
-      <button className={classGeneral} {...props}>
-        <span className={s.content__btn}>
-          {leftIcon && <span className={singleLeftIcon}>{leftIcon}</span>}
-          {rightIcon && <span className={singleRightsIcon}>{rightIcon}</span>}
-        </span>
-      </button>
+      <Link className={variants[type || "primary"]} {...props} to={to}>
+        <ButtonWithIcon leftIcon={leftIcon} rightIcon={rightIcon}>
+          {children}
+        </ButtonWithIcon>
+      </Link>
     );
   }
 
   return (
-    <button {...props} className={classGeneral}>
-      <span className={s.content__btn}>
-        {leftIcon && <span className={s.leftIcon}>{leftIcon}</span>}
-        {children ? <span className={s.children}>{children}</span> : ""}
-        {rightIcon && <span className={s.rightIcon}>{rightIcon}</span>}
-      </span>
+    <button className={variants[type || "primary"]} {...props}>
+      {loading ? (
+        <ButtonLoading loading={loading} />
+      ) : (
+        <ButtonWithIcon leftIcon={leftIcon} rightIcon={rightIcon}>
+            {children}
+        </ButtonWithIcon>
+      )}
     </button>
   );
 };
 
-export default ActionButton;
+const ButtonWithIcon = ({ leftIcon, rightIcon, children }) => {
+  return (
+    <>
+      {leftIcon && <span className={s.leftIcon}>{leftIcon}</span>}
+      {children}
+      {rightIcon && <span className={s.rightIcon}>{rightIcon}</span>}
+    </>
+  );
+};
+
+const ButtonLoading = ({ loading }) => {
+  return (
+    <LoaderWrapper center>
+      <Loader height={"20"} width={"20"} visible={loading} />
+    </LoaderWrapper>
+  );
+};
+
+export const IconButton = ({ children, type, to, fullWidth, color, ...props }) => {
+  const colors = {
+    success: `${s.btn__success}`,
+    danger: `${s.btn__danger}`,
+  };
+
+  const variants = {
+    primary: `${s.single__icon} ${s.btn__default} ${s.btn__primary} ${fullWidth && s.btn__fullWidth} ${colors[color]}`,
+    outline: `${s.single__icon} ${s.btn__default} ${s.btn__outline} ${fullWidth && s.btn__fullWidth} ${colors[color]}`,
+  };
+
+
+  if (to) {
+    return (
+      <Link className={variants[type || "primary"]} {...props} to={to}>
+        {children}
+      </Link>
+    );
+  }
+    return (
+      <button className={variants[type || "primary"]} {...props}>
+        {children}
+      </button>
+    );
+};

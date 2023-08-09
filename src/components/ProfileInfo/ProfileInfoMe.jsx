@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfileInfoAnotherUser from "./ProfileInfoAnotherUser/ProfileInfoAnotherUser";
 import ActionInput from "../ui/ActionInput/ActionInput";
-import ActionButton from "../ui/ActionButton/ActionButton";
+import {ActionButton} from "../ui/ActionButton/ActionButton";
 
 const ProfileInfoMe = () => {
 	const {id} = useParams()

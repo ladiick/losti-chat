@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setRegistrationSteps } from "../../store/registrationStepsSlice";
 import Text from "../../../../components/ui/Text/Text";
-import ActionButton from "../../../../components/ui/ActionButton/ActionButton";
+import {ActionButton} from "../../../../components/ui/ActionButton/ActionButton";
 import { useCheckAuthCodeMutation } from "./api/checkAuthCodeApiSlice";
 
 const RegistrationFormStep2 = () => {

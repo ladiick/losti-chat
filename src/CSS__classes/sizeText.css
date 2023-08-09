@@ -1,77 +1,27 @@
-.Font--8 {
-	font-size: 8px;
-}
-
-.Font--9 {
-	font-size: 9px;
-
-}
-
 .Font--10 {
-	font-size: 10px;
-
-}
-
-.Font--11 {
-	font-size: 11px;
-
+  font-size: var(--fontSize-xxs);
 }
 
 .Font--12 {
-	font-size: 12px;
-
-}
-
-.Font--13 {
-	font-size: 13px;
-
+  font-size: var(--fontSize-xs);
 }
 
 .Font--14 {
-	font-size: 14px;
-
+  font-size: var(--fontSize-sm);
 }
 
 .Font--16 {
-	font-size: 16px;
-
-}
-
-.Font--17 {
-	font-size: 17px;
-
+  font-size: var(--fontSize-md);
 }
 
 .Font--18 {
-	font-size: 18px;
-
-}
-
-.Font--19 {
-	font-size: 19px;
-
+  font-size: var(--fontSize-lg);
 }
 
 .Font--20 {
-	font-size: 20px;
-
-}
-
-.Font--21 {
-	font-size: 21px;
-
-}
-
-.Font--22 {
-	font-size: 22px;
-
-}
-
-.Font--23 {
-	font-size: 23px;
-
+  font-size: var(--fontSize-xl);
 }
 
 .Font--24 {
-	font-size: 24px;
+  font-size: var(--fontSize-xl2);
 }

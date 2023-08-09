@@ -1,0 +1,16 @@
+:root{
+	--family-family: "Inter", sans-serif;
+  --fontSize-xxs: 0.625rem;
+	--fontSize-xs: 0.75rem;
+  --fontSize-sm: 0.875rem;
+  --fontSize-md: 1rem;
+  --fontSize-lg: 1.125rem;
+  --fontSize-xl: 1.25rem;
+  --fontSize-xl2: 1.5rem;
+  --fontSize-xl3: 1.875rem;
+  --fontSize-xl4: 2.25rem;
+
+	--fontWeight-sm: 400;
+  --fontWeight-md: 500;
+  --fontWeight-xl: 700;
+}
