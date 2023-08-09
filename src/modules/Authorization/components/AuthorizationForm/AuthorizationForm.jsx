@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { BiUserPlus } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
-import ActionButton from "../../../../components/ui/ActionButton/ActionButton";
+import { ActionButton } from "../../../../components/ui/ActionButton/ActionButton";
 import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
 import NameCompany from "../../../../components/ui/NameCompany/NameCompany";
 import Text from "../../../../components/ui/Text/Text";
@@ -86,13 +87,13 @@ const AuthorizationForm = () => {
           </div>
 
           <div>
-            <ActionButton style={{ display: "block", width: "100%" }} disabled={!isValid} loading={loadAuthorization}>
+            <ActionButton type={"outline"} fullWidth disabled={!isValid} loading={loadAuthorization}>
               Войти
             </ActionButton>
 
             <Text className={s.orLogin}>или</Text>
 
-            <ActionButton onClick={() => navigation("/registration")} className={s.btn__registr}>
+            <ActionButton to={"/registration"} leftIcon={<BiUserPlus />} fullWidth color={"success"}>
               Зарегистрироваться
             </ActionButton>
           </div>

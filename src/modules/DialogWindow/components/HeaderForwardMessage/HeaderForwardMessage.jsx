@@ -9,7 +9,7 @@ import useMatchMedia from "../../../../components/hooks/useMatchMedia";
 import { clearAnswerMessage, clearForwardMessage, clearMessage, sendMessagesOnChat } from "../../../../redux/slices/messageSlice";
 import { forwardMessageFlag } from "../../../../redux/slices/navigationSlice";
 import { changeDeclination } from "../../../../components/actions/changeDeclination";
-import ActionButton from "../../../../components/ui/ActionButton/ActionButton";
+import {ActionButton} from "../../../../components/ui/ActionButton/ActionButton";
 
 const HeaderForwardMessage = () => {
   const currentMessage = useSelector((state) => state.message.currentMessage);

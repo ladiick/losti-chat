@@ -1,19 +1,11 @@
-.Text--300 {
-	font-weight: 300;
-}
-
 .Text--400 {
-	font-weight: 400;
+  font-weight: var(--fontWeight-sm);
 }
 
 .Text--500 {
-	font-weight: 500;
-}
-
-.Text--600 {
-	font-weight: 600;
+  font-weight: var(--fontWeight-md);
 }
 
 .Text--700 {
-	font-weight: 700;
+  font-weight: var(--fontWeight-xl);
 }

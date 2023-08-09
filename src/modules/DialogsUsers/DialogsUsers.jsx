@@ -3,7 +3,7 @@ import { BsBookmarks } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import useMatchMedia from "../../components/hooks/useMatchMedia";
-import ActionButton from "../../components/ui/ActionButton/ActionButton";
+import {ActionButton} from "../../components/ui/ActionButton/ActionButton";
 import SearchBlock from "../../components/ui/SearchBlock/SearchBlock";
 import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
 import People from "./components/People/ListPeople";

@@ -5,7 +5,7 @@ import { deleteFriend } from "../../../redux/slices/navigationSlice";
 import Text from "../../../components/ui/Text/Text";
 import { useDeleteFriendsMutation } from "../../Friends/api/friendsApiSlice";
 import ModalDialog from "../../../components/ui/Modal/ModalDialog";
-import ActionButton from "../../../components/ui/ActionButton/ActionButton";
+import {ActionButton} from "../../../components/ui/ActionButton/ActionButton";
 
 const DeleteFriendModal = () => {
   const dispatch = useDispatch();
