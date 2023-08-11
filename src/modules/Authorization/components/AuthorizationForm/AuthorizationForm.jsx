@@ -3,16 +3,17 @@ import { useForm } from "react-hook-form";
 import { BiUserPlus } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
-import { ActionButton } from "../../../../components/ui/ActionButton/ActionButton";
+import { ActionButton } from "../../../../components/ui/Button/ActionButton/ActionButton";
 import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
 import NameCompany from "../../../../components/ui/NameCompany/NameCompany";
 import Text from "../../../../components/ui/Text/Text";
 import { VALID__EMAIL } from "../../../../utils/validateForm";
 import { useAuthorizationMutation } from "../../api/authorizationApiSlice";
 import s from "./AuthorizationForm.module.scss";
+import IconButton from '../../../../components/ui/Button/IconButton/IconButton'
 
 const AuthorizationForm = () => {
-  const navigation = useNavigate();
+  
   const {
     register,
     setError,
@@ -87,13 +88,13 @@ const AuthorizationForm = () => {
           </div>
 
           <div>
-            <ActionButton type={"outline"} fullWidth disabled={!isValid} loading={loadAuthorization}>
+            <ActionButton fullWidth disabled={!isValid} loading={loadAuthorization}>
               Войти
             </ActionButton>
 
             <Text className={s.orLogin}>или</Text>
 
-            <ActionButton to={"/registration"} leftIcon={<BiUserPlus />} fullWidth color={"success"}>
+            <ActionButton to={"/registration"} leftIcon={<BiUserPlus />} fullWidth color="success">
               Зарегистрироваться
             </ActionButton>
           </div>

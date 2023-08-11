@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {ActionButton} from "../../../../components/ui/ActionButton/ActionButton";
+import { ActionButton } from "../../../../components/ui/Button/ActionButton/ActionButton";
 import SearchBlock from "../../../../components/ui/SearchBlock/SearchBlock";
 import WrapperBlocks from "../../../../components/ui/WrapperBlocks/WrapperBlocks";
 import { searchFriend } from "../../../../redux/slices/navigationSlice";

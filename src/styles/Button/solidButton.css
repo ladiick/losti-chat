@@ -1,0 +1,35 @@
+body[data-theme="dark"] {
+  /* ---font */
+  --primary--solidColor: var(--neutral-900);
+  --success-solidColor: var(--success-50);
+
+  /* ---background */
+
+  --primary--solidBg: var(--neutral-50);
+  --primary--solidBgHover: var(--neutral-300);
+  --primary--solidBgActive: var(--neutral-400);
+
+
+  --success-solidBg: var(--success-500);
+  --success-solidBgHover: var(--success-600);
+  --success--solidBgActive: var(--success-700);
+
+}
+
+body[data-theme="light"] {
+
+  /* font */
+  --primary--solidColor: var(--primary-50);
+  --success-solidColor: var(--success-50);
+
+  /* background */
+  --primary--solidBg: var(--primary-600);
+  --primary--solidBgHover: var(--primary-700);
+  --primary--solidBgActive: var(--primary-800);
+
+
+  --success-solidBg: var(--success-500);
+  --success-solidBgHover: var(--success-600);
+  --success--solidBgActive: var(--success-700);
+
+}

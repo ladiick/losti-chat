@@ -9,7 +9,7 @@ import { MyContext } from "../../Layout/Layout";
 import { optionsNotification } from "../../../components/actions/optionsNotification";
 import ModalDialog from "../../../components/ui/Modal/ModalDialog";
 import Avatar from "../../../components/ui/Avatar/Avatar";
-import {ActionButton} from "../../../components/ui/ActionButton/ActionButton";
+import { ActionButton } from "../../../components/ui/Button/ActionButton/ActionButton";
 
 const WriteFriend = () => {
   const dispatch = useDispatch();

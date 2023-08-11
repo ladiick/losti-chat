@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
 import useImageView from "../../../../components/hooks/useImageView";
-import {ActionButton} from "../../../../components/ui/ActionButton/ActionButton";
+import { ActionButton } from "../../../../components/ui/Button/ActionButton/ActionButton";
 import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
 import CloseButton from "../../../../components/ui/CloseButton/CloseButton";
 import Text from "../../../../components/ui/Text/Text";

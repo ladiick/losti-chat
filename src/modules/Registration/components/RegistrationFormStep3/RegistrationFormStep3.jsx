@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Text from "../../../../components/ui/Text/Text";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
 import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
-import {ActionButton} from "../../../../components/ui/ActionButton/ActionButton";
+import { ActionButton } from "../../../../components/ui/Button/ActionButton/ActionButton";
 
 const RegistrationFormStep3 = () => {
   const dispatch = useDispatch();

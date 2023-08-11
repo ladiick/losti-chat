@@ -3,7 +3,7 @@ import {Dialog} from "@headlessui/react";
 import CloseButton from "../CloseButton/CloseButton";
 import {AnimatePresence, motion} from "framer-motion";
 import s from './ModalDialog.module.scss';
-import {ActionButton} from "../ActionButton/ActionButton";
+import { ActionButton } from "../Button/ActionButton/ActionButton";
 import Title from "../Title/Title";
 import {variantsAnimationModal} from "../../../utils/variantsAnimationModal";
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import s from "../Grade.module.scss";
-import {ActionButton} from "../../../components/ui/ActionButton/ActionButton";
+import {ActionButton} from "../../../components/ui/Button/ActionButton/ActionButton";
 import axios from "axios";
 import SearchBlock from '../../../components/ui/SearchBlock/SearchBlock'
 
