@@ -1,0 +1,23 @@
+.btn__primarySolidColor{
+  background-color: var(--primary--solidBg);
+  color: var(--primary--solidColor);
+
+	&:hover{
+		background-color: var(--primary--solidBgHover);
+	}
+	&:active{
+		background-color: var(--primary--solidBgActive);
+	}
+}
+
+
+.btn__successSolidColor{
+	background-color: var(--success-solidBg);
+  color: var(--success-solidColor);
+  &:hover {
+    background-color: var(--success-solidBgHover);
+  }
+	&:active{
+    background-color: var(--success--solidBgActive);
+	}
+}

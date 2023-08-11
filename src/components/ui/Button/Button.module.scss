@@ -1,0 +1,71 @@
+@import './ActionButton/variants/OutlineButton.module.scss';
+@import './ActionButton/variants/SolidButton.module.scss';
+
+.btn__default {
+  min-height: 2rem;
+  min-width: 2rem;
+  border-radius: var(--borderRadiusButton);
+  transition: all 0.3s;
+  display: inline-flex ;
+  align-items: center;
+  justify-content: center;
+  
+  cursor: pointer;
+
+  font-weight: 600;
+  font-size: var(--fontSize-sm);
+
+  
+
+  outline: var(--outline-focus-transparent);
+  outline-offset: var(--outline-focus-offset);
+
+  &:focus-visible {
+    outline: var(--outline-focus);
+  }
+
+  &:disabled {
+    color: var(--text--secondary);
+    cursor: no-drop;
+    background: var(--background--block--message) !important;
+    box-shadow: none;
+  }
+}
+
+.btn__mdSize{
+  padding-block: 0.25rem;
+  padding-inline: 1rem;
+}
+.btn__lgSize{
+  padding-block: 0.375rem;
+  padding-inline: 1.5rem;
+}
+
+
+.btn__fullWidth {
+  display: flex;
+  width: 100%;
+}
+
+
+.icon{
+  display: inherit;
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.leftIcon {
+  margin-right: 0.5rem;
+}
+
+.single__icon {
+  display: inline-flex;
+  padding-block: 0;
+  padding-inline: 0;
+}
+
+.rightIcon {
+  margin-left: 0.5rem;
+}

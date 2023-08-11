@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./ProfileInfoAnotherUser.module.scss";
-import {ActionButton} from "../../ui/ActionButton/ActionButton";
+import { ActionButton } from "../../ui/Button/ActionButton/ActionButton";
 import {BsPersonCheck} from "react-icons/bs";
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import {useGetCurrentPersonQuery} from "../../features/currentPeopleApiSlice";

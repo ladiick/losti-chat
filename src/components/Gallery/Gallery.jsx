@@ -4,7 +4,7 @@ import {HiOutlinePhotograph} from "react-icons/hi";
 import photo from '../assets/my_photo.jpg'
 import {BsPlus} from "react-icons/bs";
 import {MdKeyboardArrowRight} from "react-icons/md";
-import {ActionButton} from "../ui/ActionButton/ActionButton";
+import { ActionButton } from "../ui/Button/ActionButton/ActionButton";
 import WrapperBlocks from "../ui/WrapperBlocks/WrapperBlocks";
 
 const Gallery = () => {
