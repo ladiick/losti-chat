@@ -1,5 +1,4 @@
 @import "/src/styles/variables.css";
-@import "./styles/Button/index.css";
 
 *,
 html,
@@ -44,6 +43,10 @@ code {
   --outline-focus-transparent: 2px solid transparent;
   --outline-focus: 2px solid var(--primary-700);
   --outline-focus-offset: 2px;
+  --padding-inlineLayout: 1.5rem;
+  --padding-blockLayout: 1.25rem;
+
+
 
   --text--secondary: #888888;
   --text--accent: #1a73e8;

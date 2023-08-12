@@ -1,12 +1,11 @@
 import React from "react";
 import { toast } from "react-toastify";
-import { useAcceptFriendRequestsMutation } from "../../api/friendsApiSlice";
-import { useGetPossibleFriendsQuery } from "../../api/friendsPossibleFriendsApiSlice";
-import PossibleFriendsItem from "./components/PossibleFriendsItem/PossibleFriendsItem";
 import { optionsNotification } from "../../../../components/actions/optionsNotification";
 import WrapperBlocks from "../../../../components/ui/WrapperBlocks/WrapperBlocks";
+import { useAcceptFriendRequestsMutation } from "../../api/friendsApiSlice";
+import { useGetPossibleFriendsQuery } from "../../api/friendsPossibleFriendsApiSlice";
 import s from "./PossibleFriends.module.scss";
-import Title from '../../../../components/ui/Title/Title'
+import PossibleFriendsItem from "./components/PossibleFriendsItem/PossibleFriendsItem";
 const PossibleFriends = () => {
   const { data: possibleFriends = [] } = useGetPossibleFriendsQuery();
   const [acceptFriendRequests, { isError }] = useAcceptFriendRequestsMutation();

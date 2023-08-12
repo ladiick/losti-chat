@@ -21,9 +21,9 @@ const Layout = () => {
     setDataAttribute(localStorage.getItem("theme"));
   }, []);
 
-  if (!localStorage.getItem("accessToken") || localStorage.getItem("accessToken") === "undefined") {
-    window.location.href = "/logout";
-  }
+  // if (!localStorage.getItem("accessToken") || localStorage.getItem("accessToken") === "undefined") {
+  //   window.location.href = "/logout";
+  // }
 
   return (
     <>

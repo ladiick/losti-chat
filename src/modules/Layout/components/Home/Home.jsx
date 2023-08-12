@@ -5,6 +5,7 @@ import { setTypeDropZone, setVisibleDropZone } from "../../../../redux/slices/dr
 import s from "./Home.module.scss";
 import { identifyFileExtension } from "./helpers/identifyFileExtension.js";
 import Navigation from '../Navigation/Navigation'
+import Header from '../Header/Header'
 const Home = ({ children }) => {
   const dispatch = useDispatch();
   const chatActive = useSelector((state) => state.navigation.chat);
@@ -57,6 +58,7 @@ const Home = ({ children }) => {
 
   return (
     <div className={s.wrapper}>
+      <Header/>
       <div className={s.container}>
         <Navigation />
         <div className={s.content}>{children}</div>

@@ -2,4 +2,6 @@
 @import './font.css';
 @import './radius.css';
 
-
+/* components */
+@import './components/Button/index.css';
+@import './components/Input/index.css';

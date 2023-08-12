@@ -1,0 +1,101 @@
+body[data-theme="dark"] {
+	--typography-primary: var(--primary-200);
+	--typography-neutral: var(--neutral-50);
+  --typography-success: var(--success-300);
+  --typography-danger: var(--danger-300);
+}
+body[data-theme="light"] {
+	--typography-primary: var(--primary-600);
+	--typography-neutral: var(--neutral-800);
+  --typography-success: var(--success-600);
+	--typography-danger: var(--danger-600);
+}
+
+.primary__color{
+	color: var(--typography-primary);
+}
+.neutral__color{
+	color: var(--typography-neutral);
+}
+.danger__color{
+	color: var(--typography-success);
+}
+.success__color{
+	color: var(--typography-danger);
+}
+
+.headline__h1 {
+  font-size: var(--fontSize-xl2);
+  font-weight: var(--fontWeight-xl);
+}
+.headline__h2 {
+  font-size: var(--fontSize-xl1);
+  font-weight: var(--fontWeight-xl);
+}
+.headline__h3 {
+  font-size: var(--fontSize-xl);
+  font-weight: var(--fontWeight-xl);
+}
+
+.bodyL__bold {
+  font-size: var(--fontSize-lg);
+  font-weight: var(--fontWeight-xl);
+}
+.bodyL__medium {
+  font-size: var(--fontSize-lg);
+  font-weight: var(--fontWeight-md);
+}
+.bodyL__regular {
+  font-size: var(--fontSize-lg);
+  font-weight: var(--fontWeight-sm);
+}
+.bodyM__bold {
+  font-size: var(--fontSize-md);
+  font-weight: var(--fontWeight-xl);
+}
+.bodyM__medium {
+  font-size: var(--fontSize-md);
+  font-weight: var(--fontWeight-md);
+}
+.bodyM__regular {
+  font-size: var(--fontSize-md);
+  font-weight: var(--fontWeight-sm);
+}
+
+.bodyS__bold{
+	font-size: var(--fontSize-sm);
+  font-weight: var(--fontWeight-xl);
+}
+.bodyS__medium{
+	font-size: var(--fontSize-sm);
+  font-weight: var(--fontWeight-md);
+}
+.bodyS__regular{
+	font-size: var(--fontSize-sm);
+  font-weight: var(--fontWeight-sm);
+}
+
+
+
+.bodyXs__bold {
+  font-size: var(--fontSize-xs);
+  font-weight: var(--fontWeight-xl);
+}
+
+.bodyXs__medium {
+  font-size: var(--fontSize-xs);
+  font-weight: var(--fontWeight-md);
+}
+.bodyXs__regular {
+  font-size: var(--fontSize-xs);
+  font-weight: var(--fontWeight-sm);
+}
+
+.caption__bold {
+  font-size: var(--fontSize-xxs);
+  font-weight: var(--fontWeight-xl);
+}
+.caption__regular {
+  font-size: var(--fontSize-xxs);
+  font-weight: var(--fontWeight-sm);
+}

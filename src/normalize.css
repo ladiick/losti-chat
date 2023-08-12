@@ -39,8 +39,8 @@ main {
  */
 
 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+  font-size: var(--fontSize-xl2);
+  margin: 0;
 }
 
 /* Grouping conte nt

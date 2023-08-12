@@ -2,7 +2,7 @@ import { RadioGroup } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import Text from "../Text/Text";
-import Title from "../Title/Title";
+import Typography from "../Typography/Typography";
 import s from "./RadioGroup.module.scss";
 
 const RadioButtonGroup = ({ names, title, toggle, currentIndex, descriptionTitle, classWrapperEl }) => {
@@ -10,7 +10,7 @@ const RadioButtonGroup = ({ names, title, toggle, currentIndex, descriptionTitle
 
   return (
     <RadioGroup value={name} onChange={setName}>
-      {descriptionTitle ? <Text>{descriptionTitle}</Text> : <Title level={4}>{title}</Title>}
+      {descriptionTitle ? <Text>{descriptionTitle}</Text> : <Typography level={4}>{title}</Typography>}
       <div className={classWrapperEl}>
         {names.map((name) => (
           <RadioGroup.Option key={name} value={name} as={Fragment}>

@@ -1,0 +1,10 @@
+body[data-theme="dark"] {
+	--input-borderColor: var(--primary-600);
+	--input-Bg: var(--neutral-900);
+	--input-color: var(--neutral-300);
+}
+body[data-theme="light"] {
+	--input-borderColor: var(--primary-600);
+	--input-Bg: var(--neutral-200);
+	--input-color: var(--neutral-900);
+}

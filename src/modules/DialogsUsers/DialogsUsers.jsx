@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { BsBookmarks } from "react-icons/bs";
+import { BsBookmarks, BsSearch } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import useMatchMedia from "../../components/hooks/useMatchMedia";
+import ActionInput from "../../components/ui/ActionInput/ActionInput";
 import { IconButton } from "../../components/ui/Button/Button";
-import SearchBlock from "../../components/ui/SearchBlock/SearchBlock";
 import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
 import People from "./components/People/ListPeople";
 const DialogsUsers = () => {
@@ -18,7 +18,8 @@ const DialogsUsers = () => {
 
   return (
     <WrapperBlocks title={"Чаты"} block={<BookMark />} style={dialogsUsersStyles}>
-      <SearchBlock searchValue={searchValue} setSearch={setSearch} />
+      {/* <SearchBlock searchValue={searchValue} setSearch={setSearch} /> */}
+      <ActionInput icon={<BsSearch />} type="text" placeholder="Поиск" value={searchValue} maxLength="30" onChange={(e) => setSearch(e.target.value)} />
       <People searchValue={searchValue} setSearch={setSearch} />
     </WrapperBlocks>
   );
@@ -30,8 +31,8 @@ const BookMark = () => {
   const myId = useSelector((state) => state.user.aboutUser.id);
 
   return (
-    <IconButton onClick={() => setSearchParams({ dialogs: myId })} type={"outline"} title='Избранное'>
-      <BsBookmarks strokeWidth={0.5}  />
+    <IconButton onClick={() => setSearchParams({ dialogs: myId })} type={"outline"} title="Избранное">
+      <BsBookmarks strokeWidth={0.5} />
     </IconButton>
   );
 };
