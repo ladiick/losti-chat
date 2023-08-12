@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProfileInfoAboutUser.module.scss'
-import Title from "../../../ui/Title/Title";
+import Typography from "../../../ui/Typography/Typography";
 const ProfileInfoAboutUser = ({children,isLoading,firstName,lastName}) => {
 
 
@@ -10,9 +10,9 @@ const ProfileInfoAboutUser = ({children,isLoading,firstName,lastName}) => {
             <div className={s.wrapper__settings}>
               {isLoading ?
                 <span className={s.loadingTitle}></span>
-                :<Title level={2} size={21} weight={600}>
+                :<Typography level={2} size={21} weight={600}>
                 {firstName} {lastName}
-              </Title>}
+              </Typography>}
                 {children}
             </div>
         </div>

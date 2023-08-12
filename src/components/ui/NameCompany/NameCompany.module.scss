@@ -1,18 +1,22 @@
 .wrapper__company {
   display: flex;
   align-items: center;
-  img {
-    border-radius: 10px;
-    background-color: var(--text--accent);
-    width: 24px;
-    height: 24px;
+
+  .title{
+    color:var(--color-title);
+    font-size: var(--fontSize-xl4);
+  }
+
+  .icon__title {
+    width: 30px;
+    height: 30px;
     margin-right: 10px;
   }
 
   &__column {
     flex-direction: column;
     justify-content: center;
-    img {
+    .icon__title {
       margin-right:0;
       margin-bottom: 20px;
     }

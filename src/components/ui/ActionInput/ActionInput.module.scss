@@ -1,31 +1,67 @@
-@import '../../../styles/Input/Input.css';
-
-.action__input{
-	border: 1px solid transparent;
-	background: var(--background--content--second);
-	border-radius: 8px;
-	outline: none;
-	transition: all .3s;
-	width: 100%;
-	padding: 8px 35px 8px 12px;
-	color: var(--color--text--main);
-	font-size: 13px;
-
-	&::-webkit-calendar-picker-indicator {
-		opacity: 0;
-	}
-
-	&:hover{
-		border: 1px solid var(--secondColor);
-	}
 
 
-	&:focus {
-		border: 1px solid var(--secondColor);
+.action__input {
+  
+  border: none;
+  min-width: 0;
+	// height: 100%;
+  outline: 0;
+  padding: 0;
+  flex: 1;
+  color: inherit;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-overflow: ellipsis;
 
-	}
-	&:focus + svg{
-		fill: var(--secondColor);
-	}
+  &::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  }
 
+  
+}
+
+.input__control {
+	cursor: text;
+  color: var(--input-color);
+  font-size: var(--fontSize-md);
+  font-weight: 400;
+  transition: all 0.3s;
+  min-height: 2rem;
+  position: relative;
+  display: flex;
+	// align-items: center;
+  border: 2px solid transparent;
+  background: var(--input-Bg);
+  border-radius: var(--radius-md);
+  padding-inline: 0.75rem;
+
+
+	&:hover {
+    border-color: var(--input-borderColor);
+  }
+  &:focus{
+    border-color: var(--input-borderColor);
+  }
+
+}
+
+.input__controlFocused{
+	 border-color: var(--input-borderColor);
+}
+
+.input__icon {
+  display: inherit;
+  align-items: center;
+	margin-inline-start: 0.5rem;
+	
+  svg {
+    width: 1rem;
+    height: 1rem;
+    stroke-width: 0.5px;
+		
+  }
 }

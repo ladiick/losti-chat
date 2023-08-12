@@ -10,16 +10,16 @@
   --primary-800: #1d61d5;
   --primary-900: #1f41b6;
 
-  --neutral-50: #f5f7fa;
-  --neutral-100: #eaeef6;
-  --neutral-200: #dde7ee;
-  --neutral-300: #cdd7e1;
-  --neutral-400: #9fa6ad;
-  --neutral-500: #636b74;
-  --neutral-600: #555e68;
-  --neutral-700: #32383e;
-  --neutral-800: #23272b;
-  --neutral-900: #121416;
+  --neutral-50: #fafafc;
+  --neutral-100: #f5f5f7;
+  --neutral-200: #f0f0f1;
+  --neutral-300: #e2e2e4;
+  --neutral-400: #bfbfc1;
+  --neutral-500: #a1a1a2;
+  --neutral-600: #787879;
+  --neutral-700: #636365;
+  --neutral-800: #444445;
+  --neutral-900: #232324;
 
   --danger-50: #fef6f6;
   --danger-100: #fce4e4;
