@@ -1,0 +1,23 @@
+body[data-theme="dark"] {
+  --header-Bg: var(--neutral-900);
+  --header-bottomDivider: var(--neutral-800);
+  --header-colorBurger: var(--neutral-50);
+
+  --header-dropDownMenuBg: #2323247f;
+  --header-dropDownMenuShadow: rgb(16, 16, 16, 0.612);
+}
+body[data-theme="light"] {
+  --header-Bg: var(--neutral-50);
+  --header-bottomDivider: var(--neutral-400);
+  --header-colorBurger: var(--neutral-800);
+  --header-dropDownMenuBg: var(--neutral-500);
+}
+
+.dialog__search {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 2px 2px var(--header-dropDownMenuShadow);
+  height: 3.5rem;
+}

@@ -91,7 +91,7 @@ body[data-theme="dark"] {
 }
 
 body[data-theme="light"] {
-  
+
 
   --background--body: #e9ebee;
   --color--text--main: #000000;
@@ -119,4 +119,5 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background--body);
+  height: 100%;
 }

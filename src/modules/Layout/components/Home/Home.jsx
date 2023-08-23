@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import useMatchMedia from "../../../../components/hooks/useMatchMedia";
-import { setTypeDropZone, setVisibleDropZone } from "../../../../redux/slices/dragAndDropSlice";
-import s from "./Home.module.scss";
-import { identifyFileExtension } from "./helpers/identifyFileExtension.js";
-import Navigation from '../Navigation/Navigation'
-import Header from '../Header/Header'
+import React, { useCallback, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import useMatchMedia from "../../../../components/hooks/useMatchMedia"
+import { setTypeDropZone, setVisibleDropZone } from "../../../../redux/slices/dragAndDropSlice"
+import Navigation from "../Navigation/Navigation"
+import s from "./Home.module.scss"
+import { identifyFileExtension } from "./helpers/identifyFileExtension.js"
 const Home = ({ children }) => {
   const dispatch = useDispatch();
   const chatActive = useSelector((state) => state.navigation.chat);
@@ -57,12 +56,8 @@ const Home = ({ children }) => {
   }
 
   return (
-    <div className={s.wrapper}>
-      <Header/>
-      <div className={s.container}>
-        <Navigation />
-        <div className={s.content}>{children}</div>
-      </div>
+    <div className={s.container}>
+      <div className={s.content}>{children}</div>
     </div>
   );
 };
