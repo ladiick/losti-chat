@@ -1,26 +1,16 @@
-
-
 .container {
-	margin: 20px auto;
-	width: 1076px;
-	position: relative;
-	display: flex;
-	height: 95vh;
-	@media (max-width: 768px) {
-		width: 100%;
-		margin: 0;
-		height: 100vh;
-	}
+  position: relative;
+  display: flex;
+  height: 100vh;
 }
 
 .content {
-	width: 100%;
-	display: flex;
-	position: relative;
-	@media (max-width: 768px) {
-		width: 100%;
-		border: none;
-		border-radius: 0;
-		box-shadow: none;
-	}
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 100%;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 }

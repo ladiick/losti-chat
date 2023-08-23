@@ -43,9 +43,13 @@ const People = ({ searchValue, setSearch }) => {
 
   return (
     <div className={s.block__people}>
-      <LoaderWrapper>
+
+      {isLoading || isError ? <LoaderWrapper>
         <Loader visible={isLoading || isError} />
       </LoaderWrapper>
+      : null
+      }
+
       {isError && <span style={errorStyles}>Ошибка, не удалось загрузить диалоги</span>}
       <div className={s.wrapper__items}>
         {people

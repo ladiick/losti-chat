@@ -1,67 +1,49 @@
-
-
 .action__input {
-  
-  border: none;
-  min-width: 0;
-	// height: 100%;
-  outline: 0;
-  padding: 0;
-  flex: 1;
-  color: inherit;
-  background-color: transparent;
-  font-family: inherit;
-  font-size: inherit;
-  font-style: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  text-overflow: ellipsis;
-
-  &::-webkit-calendar-picker-indicator {
-    opacity: 0;
-  }
-
-  
-}
-
-.input__control {
-	cursor: text;
   color: var(--input-color);
   font-size: var(--fontSize-md);
   font-weight: 400;
   transition: all 0.3s;
-  min-height: 2rem;
-  position: relative;
-  display: flex;
-	// align-items: center;
+  min-height: 2.5rem;
+  outline: none;
+  width: 100%;
   border: 2px solid transparent;
   background: var(--input-Bg);
   border-radius: var(--radius-md);
   padding-inline: 0.75rem;
+  line-height: normal;
+  &:hover {
+    border-color: var(--input-borderColor);
+    ~ .input__icon svg {
+      fill: var(--input-borderColor);
+    }
+  }
 
-
-	&:hover {
+  &:focus {
     border-color: var(--input-borderColor);
   }
-  &:focus{
-    border-color: var(--input-borderColor);
-  }
 
+  &:focus + .input__icon svg {
+    fill: var(--input-borderColor);
+  }
 }
 
-.input__controlFocused{
-	 border-color: var(--input-borderColor);
+.control__block {
+  position: relative;
+  width: 100%;
 }
 
 .input__icon {
-  display: inherit;
-  align-items: center;
-	margin-inline-start: 0.5rem;
-	
+  display: flex;
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  transform: translateY(-50%);
+  cursor: text;
+  user-select: none;
+  pointer-events: none;
   svg {
-    width: 1rem;
-    height: 1rem;
-    stroke-width: 0.5px;
-		
+
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }

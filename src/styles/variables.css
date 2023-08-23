@@ -1,7 +1,7 @@
 @import './colors.css';
 @import './font.css';
 @import './radius.css';
-
+@import './hoverColors.css';
 /* components */
 @import './components/Button/index.css';
 @import './components/Input/index.css';

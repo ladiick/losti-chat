@@ -5,11 +5,12 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import Avatar from "../../../../../../components/ui/Avatar/Avatar";
 import Text from "../../../../../../components/ui/Text/Text";
+import Typography from "../../../../../../components/ui/Typography/Typography.jsx";
 
 const PeopleItem = ({ flag, message, time, handlerPeople, obj, index }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  const classPeopleItem = searchParams.get("dialogs") == obj?.pk ? s.block__people__item__active : s.block__people__item;
+  const activeItem = searchParams.get("dialogs") === String(obj?.pk);
 
   if (flag === "forward") {
     return (
@@ -37,28 +38,22 @@ const PeopleItem = ({ flag, message, time, handlerPeople, obj, index }) => {
 
   return (
     <div className={s.main__wrapper} title={obj.first_name + " " + obj.last_name}>
-      <div onClick={handlerPeople} className={classPeopleItem}>
+      <div onClick={handlerPeople} className={`${s.item} ${activeItem ? s.item__active : ""}`}>
         <div className={s.info__message}>
-          <Avatar
-            noOnline={obj.online}
-            style={{ width: 45, height: 45 }}
-            index={index}
-            image={obj.image}
-            name={{ firstName: obj.first_name, lastName: obj.last_name }}
-          />
+          <Avatar online={obj.online} size={54} image={obj.image} />
 
           <div className={s.name__lastMessage}>
-            <Text weight="strong" pointer>
+            <Typography as={"h3"} level={"bodyM"} weight="bold">
               {obj.first_name} {obj.last_name}
-            </Text>
-            <Text className={s.last__message} pointer>
+            </Typography>
+            <Typography as={"p"} level={"bodyM"} color={"neutral"}>
               {message}
-            </Text>
+            </Typography>
           </div>
           <div className={s.wrapper__time}>
-            <p className={s.time}>{reTime(time)}</p>
-            {/*<span className={s.quantity__message}>2</span>*/}
-            <span>1</span>
+            <span className={s.time}>{reTime(time)}</span>
+            <span className={s.quantity__message}>2</span>
+            {/* <span>1</span> */}
           </div>
         </div>
       </div>

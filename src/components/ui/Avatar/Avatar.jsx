@@ -10,7 +10,7 @@ const Avatar = ({ sizeIndicator, online, size, image }) => {
     width: size,
     height: size,
   };
-console.log(image);
+
   return (
     <Logo.Root className={s.AvatarRoot} style={sizeImage}>
       <Logo.Image className={s.AvatarImage} src={`${HOST + image}`} alt={"avatar"} />

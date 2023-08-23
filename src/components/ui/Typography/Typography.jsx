@@ -34,7 +34,7 @@ const Typography = React.memo(({ as, level = "h1", weight = "regular", color, ch
   const Tag = `${as ? as : tag[level]}`;
 
   return (
-    <Tag className={`${fontStyle[level]} ${colors[color || "neutral"]}`} {...props}>
+    <Tag className={`${s.general} ${fontStyle[level]} ${colors[color || "neutral"]}`} {...props}>
       {children}
     </Tag>
   );

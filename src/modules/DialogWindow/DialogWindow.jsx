@@ -83,7 +83,7 @@ const Chat = () => {
   return (
     <WrapperBlocks className={s.wrapper}>
       <HeaderChat myId={myId} isLoading={isLoading} peopleCurrent={peopleCurrent} />
-
+      
       <DragAndDropFileUpload style={{ display: "contents" }}>
         <Communication />
 
