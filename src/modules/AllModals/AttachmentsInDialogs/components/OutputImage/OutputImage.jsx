@@ -1,32 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useGetAttachmentsImagesQuery } from "../../api/attachmentsImagesApiSlice";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
-import { rendersImage } from "../../../../../utils/outputAttachmentsPhotos";
-import PhotosRow from "./PhotosRow";
 import Loader from "../../../../../components/ui/Loader/Loader";
-
+import Image from "../../../../DialogWindow/components/Message/MessageImage/Image";
+import { useGetAttachmentsImagesQuery } from "../../api/attachmentsImagesApiSlice";
+import s from "./OutputImage.module.scss";
 const OutputImage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isLoading } = useGetAttachmentsImagesQuery(searchParams?.get("dialogs"));
+  const { data: images, isLoading, isFetching } = useGetAttachmentsImagesQuery(searchParams?.get("dialogs"));
 
-  const refBlock = useRef();
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    if (data) {
-      const cloneImages = structuredClone(data);
-      setImages(rendersImage(cloneImages, refBlock?.current?.clientWidth));
-    }
-  }, [data]);
-
-  if (isLoading && !data) {
-    return <Loader visible={isLoading} />;
+  if (isFetching || isLoading) {
+    return <Loader visible={isFetching || isLoading} />;
   }
 
   return (
-    <div ref={refBlock}>
-      {images?.map((row, index) => (
-        <PhotosRow key={index} images={row} />
+    <div className={s.output__images}>
+      {images?.map((image, index) => (
+        <Image attachments={true} key={image?.id} idImage={image?.id} />
       ))}
     </div>
   );

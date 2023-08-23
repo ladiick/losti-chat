@@ -1,85 +1,123 @@
-export const rendersImage = (images, sizeContainer) => {
-  const maxWidth = 350;
-  const maxHeight = 250;
-  const minWidth = 50;
-  const minHeight = 100;
-  let myArr = [[]];
-  let a;
-  let tempHeight;
-  let nowWidthRow = [0];
-  let nowRow = 0;
+export const rendersImage = (images, containerWidth) => {
+  // const maxWidth = 300;
+  // const maxHeight = 200;
+  // const minWidth = 50;
+  // const minHeight = 100;
 
-  for (let i = 0; i < images.length; i++) {
-    if (images[i].width > maxWidth) {
-      a = images[i].width;
-      images[i].width = maxWidth;
-      tempHeight = (images[i].width / a) * images[i].height;
-      if (tempHeight > minHeight) {
-        images[i].height = tempHeight;
-      }
-    }
+  // let myArr = [[]];
+  // let a;
+  // let tempHeight;
+  // let nowWidthRow = [0];
+  // let nowRow = 0;
 
-    if (images[i].width < minWidth) {
-      a = images[i].width;
-      images[i].width = minWidth;
-      images[i].height = (images[i].width / a) * images[i].height;
-      if (tempHeight < maxHeight) {
-        images[i].height = tempHeight;
-      }
-    }
+  // for (let i = 0; i < images.length; i++) {
+  //   if (images[i].width > maxWidth) {
+  //     a = images[i].width;
+  //     images[i].width = maxWidth;
+  //     tempHeight = (images[i].width / a) * images[i].height;
+  //     if (tempHeight > minHeight) {
+  //       images[i].height = tempHeight;
+  //     }
+  //   }
 
-    a = images[i].height / minHeight;
-    images[i].height = minHeight;
-    images[i].width = Math.round(images[i].height * a);
+  //   if (images[i].width < minWidth) {
+  //     a = images[i].width;
+  //     images[i].width = minWidth;
+  //     images[i].height = (images[i].width / a) * images[i].height;
+  //     if (tempHeight < maxHeight) {
+  //       images[i].height = tempHeight;
+  //     }
+  //   }
 
-    if (nowWidthRow[nowRow] + images[i].width < sizeContainer) {
-      myArr[nowRow].push(images[i]);
-      nowWidthRow[nowRow] += images[i].width - 2;
-    } else {
-      myArr.push([images[i]]);
-      nowWidthRow.push(images[i].width);
-      nowRow++;
-    }
-  }
+  //   a = images[i].height / minHeight;
+  //   images[i].height = minHeight;
+  //   images[i].width = Math.round(images[i].height * a);
 
-  let tempWidth;
-  for (let i = 0; i < myArr.length; i++) {
-    a = sizeContainer - nowWidthRow[i];
-    for (let k = 0; k < myArr[i].length; k++) {
-      tempWidth = myArr[i][k].width;
-      myArr[i][k].width += a * (myArr[i][k]?.width / nowWidthRow?.[i]);
-      myArr[i][k].height = (myArr[i][k]?.width / tempWidth) * myArr[i][k]?.height;
-    }
-  }
-  return myArr;
-};
-
-export const outputOfImagesInMessage = (imagesArray, containerWidth) => {
-  // const firstRowImages = [];
-  // const secondRowImages = [];
-
-  // let firstRowWidth = 0;
-
-  // for (let i = 0; i < imagesArray.length; i++) {
-  //   const image = imagesArray[i];
-  //   const newWidth = Math.min(image.width, containerWidth);
-
-  //   if (i === 0) {
-  //     firstRowWidth = newWidth;
+  //   if (nowWidthRow[nowRow] + images[i].width < containerWidth) {
+  //     myArr[nowRow].push(images[i]);
+  //     nowWidthRow[nowRow] += images[i].width - 2;
   //   } else {
-  //     secondRowImages.push(image);
+  //     myArr.push([images[i]]);
+  //     nowWidthRow.push(images[i].width);
+  //     nowRow++;
   //   }
   // }
 
-  // const firstImageHeight = (firstRowWidth / imagesArray[0].width) * imagesArray[0].height;
-  // firstRowImages.push({ ...imagesArray[0], width: firstRowWidth, height: firstImageHeight });
+  // let tempWidth;
+  // for (let i = 0; i < myArr.length; i++) {
+  //   a = containerWidth - nowWidthRow[i];
+  //   for (let k = 0; k < myArr[i].length; k++) {
+  //     tempWidth = myArr[i][k].width;
+  //     myArr[i][k].width += a * (myArr[i][k]?.width / nowWidthRow?.[i]);
+  //     myArr[i][k].height = (myArr[i][k]?.width / tempWidth) * myArr[i][k]?.height;
+  //   }
+  // }
+  // return myArr;
+  const maxWidth = 250;
+  const maxHeight = 200;
+  const minWidth = 50;
+  const minHeight = 100;
+  const margin = 2; // отступ между фотографиями
 
-  // const secondRowColumns = secondRowImages.length;
+  function resizeImage(image) {
+    const widthRatio = image.width / maxWidth;
+    const heightRatio = image.height / maxHeight;
+    const maxRatio = Math.max(widthRatio, heightRatio);
 
-  // document.documentElement.style.setProperty("--columns--message--image", secondRowColumns);
-  // console.log([...firstRowImages, ...secondRowImages]);
-  // return [...firstRowImages, ...secondRowImages];
+    if (maxRatio > 1) {
+      image.width /= maxRatio;
+      image.height /= maxRatio;
+    }
 
+    const minRatio = Math.min(image.width / minWidth, image.height / minHeight);
+
+    if (minRatio < 1) {
+      image.width *= minRatio;
+      image.height *= minRatio;
+    }
+  }
+
+  function splitImagesIntoRows(images, containerWidth) {
+    const rows = [[]];
+    let currentRowWidth = 0;
+    let currentRowIndex = 0;
+
+    for (let i = 0; i < images.length; i++) {
+      resizeImage(images[i]);
+      const imageWidth = images[i].width + margin;
+
+      if (currentRowWidth + imageWidth <= containerWidth) {
+        rows[currentRowIndex].push(images[i]);
+        currentRowWidth += imageWidth;
+      } else {
+        rows.push([images[i]]);
+        currentRowIndex++;
+        currentRowWidth = imageWidth;
+      }
+    }
+
+    return rows;
+  }
+
+  const rows = splitImagesIntoRows(images, containerWidth);
+
+  // Correct the widths of images within rows to fit the containerWidth
+  for (let i = 0; i < rows.length; i++) {
+    let totalWidth = rows[i].reduce((acc, image) => acc + image.width, 0);
+    let widthDifference = containerWidth - totalWidth - margin * (rows[i].length - 1);
+    let widthFactor = widthDifference / totalWidth;
+
+    for (let k = 0; k < rows[i].length; k++) {
+      rows[i][k].width += Math.round(rows[i][k].width * widthFactor);
+    }
+  }
+
+  return rows;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+export const outputOfImagesInMessage = (imagesArray, containerWidth) => {
   const arrangedImages = [];
 
   if (imagesArray.length === 0) {
@@ -105,8 +143,7 @@ export const outputOfImagesInMessage = (imagesArray, containerWidth) => {
       }
     }
   } else {
-    
-		firstImageWidth = isFirstImageWide ? containerWidth : containerWidth / 2.1;
+    firstImageWidth = isFirstImageWide ? containerWidth : containerWidth / 2.1;
     firstImageHeight = isFirstImageWide ? 220 : 300;
   }
 
@@ -121,7 +158,7 @@ export const outputOfImagesInMessage = (imagesArray, containerWidth) => {
       const image = imagesArray[i];
       // (containerWidth - 6) минус шесть потому что gap будет 6px
       const countImages = imagesArray.length < 3 ? imagesArray.length : imagesArray.length - 1;
-      const imageWidth = (containerWidth - 6) / countImages;
+      const imageWidth = (containerWidth - 7) / countImages;
       const imageHeight = 120;
       arrangedImages.push({
         ...image,
@@ -141,6 +178,6 @@ export const outputOfImagesInMessage = (imagesArray, containerWidth) => {
       });
     }
   }
-  
+
   return arrangedImages;
 };

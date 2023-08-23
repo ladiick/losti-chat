@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom";
 import Text from "../../../Text/Text";
 import s from "./NavigationItem.module.scss";
 
-const NavigationItem = ({ obj, classContent, style }) => {
+const NavigationItem = ({ obj, classContent, style, styleItem }) => {
   const contentClass = classContent ? `${s.item__content} ${classContent}` : s.item__content;
 
   return (
-    <li className={s.list__item}>
+    <li className={s.list__item} style={styleItem}>
       <NavLink to={obj.href} title={obj.title} end>
         {({ isActive }) => (
           <div className={isActive ? `${s.item__content__active} ${contentClass}` : contentClass} style={style}>

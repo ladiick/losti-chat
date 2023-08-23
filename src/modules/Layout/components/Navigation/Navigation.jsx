@@ -16,11 +16,11 @@ const Navigation = () => {
   }, [countRequests, myId]);
 
   return (
-    <NavigationWrapper style={{width: "180px",marginRight: 10}}>
+    <NavigationWrapper style={{ width: "190px", marginRight: 15 }}>
       <NameCompany title={"LOSTI-CHAT"} style={{ marginBottom: 20 }} />
       <ListItems>
         {navItemsMemo?.map((obj) => (
-          <NavigationItem key={obj.id} obj={obj} />
+          <NavigationItem key={obj.id} obj={obj} styleItem={{marginBottom:10}} />
         ))}
       </ListItems>
     </NavigationWrapper>

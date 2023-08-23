@@ -9,7 +9,7 @@ const MessageImage = React.memo(({ images }) => {
   const { isMobile } = useMatchMedia();
   useEffect(() => {
     if (images) {
-      setGeneralImages(outputOfImagesInMessage(images, isMobile ? document.body.clientWidth : 587*0.7));
+      setGeneralImages(outputOfImagesInMessage(images, isMobile ? document.body.clientWidth : 580*0.7));
     }
   }, [images, isMobile]);
 
