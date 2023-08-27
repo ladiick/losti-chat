@@ -1,19 +1,13 @@
-import React from "react";
+import { Add, Login, Mail, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Box, Button, Checkbox, IconButton, Input, Link as LinkMui, Typography } from "@mui/joy";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { BiUserPlus } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
-import { ActionButton } from "../../../../components/ui/Button/ActionButton/ActionButton";
-import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
-import NameCompany from "../../../../components/ui/NameCompany/NameCompany";
-import Text from "../../../../components/ui/Text/Text";
 import { VALID__EMAIL } from "../../../../utils/validateForm";
 import { useAuthorizationMutation } from "../../api/authorizationApiSlice";
-import s from "./AuthorizationForm.module.scss";
-import IconButton from '../../../../components/ui/Button/IconButton/IconButton'
 
 const AuthorizationForm = () => {
-  
   const {
     register,
     setError,
@@ -23,10 +17,12 @@ const AuthorizationForm = () => {
   } = useForm({
     mode: "onChange",
   });
+  const [visibilityPass, setVisibilityPass] = useState(false);
 
   const [authorization, { isLoading: loadAuthorization }] = useAuthorizationMutation();
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
       const res = await authorization({
         email: data.email,
@@ -50,56 +46,73 @@ const AuthorizationForm = () => {
 
   return (
     <>
-      <NameCompany size={36} title="Вход в LOSTI-CHAT" direction="column" />
-
-      <div className={s.form}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={s.wrapper__form}>
-            <FormWrapperLabel errors={errors?.email} title="Электронная почта">
-              <ActionInput
-                type="text"
-                autoFocus={true}
-                placeholder="Email"
-                style={errors?.email ? { borderColor: "red", marginTop: 8 } : { marginTop: 8 }}
-                {...register("email", {
-                  required: "Необходимо заполнить",
-                  pattern: {
-                    value: VALID__EMAIL,
-                    message: "Введите корректный email адрес",
-                  },
-                })}
-              />
-            </FormWrapperLabel>
-
-            <FormWrapperLabel title={"Пароль"} errors={errors?.password} descriptionTitle={<Text type="button">Забыли пароль?</Text>}>
-              <ActionInput
-                type="password"
-                placeholder="Введите больше 5 символов"
-                style={errors?.password ? { borderColor: "red", marginTop: 8 } : { marginTop: 8 }}
-                {...register("password", {
-                  required: "Необходимо заполнить",
-                  minLength: {
-                    value: 5,
-                    message: "Пароль менее 5 символов",
-                  },
-                })}
-              />
-            </FormWrapperLabel>
-          </div>
-
-          <div>
-            <ActionButton fullWidth disabled={!isValid} loading={loadAuthorization}>
-              Войти
-            </ActionButton>
-
-            <Text className={s.orLogin}>или</Text>
-
-            <ActionButton to={"/registration"} leftIcon={<BiUserPlus />} fullWidth color="success">
-              Зарегистрироваться
-            </ActionButton>
-          </div>
-        </form>
+      <div>
+        <Typography component="h1" fontSize="xl2" fontWeight="lg">
+          Войдите в свой аккаунт
+        </Typography>
+        <Typography level="body-sm" sx={{ my: 1, mb: 3 }}>
+          С возвращением!
+        </Typography>
       </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormWrapperLabel errors={errors?.email} title="Электронная почта">
+          <Input
+            endDecorator={<Mail />}
+            type="text"
+            autoFocus={true}
+            placeholder="example@gmail.com"
+            {...register("email", {
+              required: "Необходимо заполнить",
+              pattern: {
+                value: VALID__EMAIL,
+                message: "Введите корректный email адрес",
+              },
+            })}
+          />
+        </FormWrapperLabel>
+
+        <FormWrapperLabel title={"Пароль"} errors={errors?.password}>
+          <Input
+            endDecorator={<IconButton onClick={() => setVisibilityPass((pre) => !pre)}>{visibilityPass ? <Visibility /> : <VisibilityOff />}</IconButton>}
+            type={visibilityPass ? "text" : "password"}
+            placeholder={visibilityPass ? "Password" : "••••••••"}
+            {...register("password", {
+              required: "Необходимо заполнить",
+              minLength: {
+                value: 5,
+                message: "Пароль менее 5 символов",
+              },
+            })}
+          />
+        </FormWrapperLabel>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Checkbox size="sm" label="Запомнить вход" name="persistent" />
+          <LinkMui component={Link} fontSize="sm" to="#forgot-pass" fontWeight="lg">
+            Забыли пароль?
+          </LinkMui>
+        </Box>
+
+        <div>
+          <Button endDecorator={<Login />} type={"submit"} fullWidth disabled={!isValid} loading={loadAuthorization}>
+            Войти
+          </Button>
+
+          <Typography component={"span"} level={"body-sm"} textAlign={"center"} sx={{ my: "0.75rem" }}>
+            или
+          </Typography>
+
+          <Button endDecorator={<Add />} component={Link} to={"/registration"} fullWidth variant="outlined">
+            Зарегистрироваться
+          </Button>
+        </div>
+      </form>
     </>
   );
 };

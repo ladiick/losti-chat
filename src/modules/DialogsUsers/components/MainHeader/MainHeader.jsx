@@ -1,6 +1,18 @@
-import s from './MainHeader.module.scss'
+import { Stack } from "@mui/joy";
+import Menu from "../Menu/Menu";
 const MainHeader = ({ children }) => {
-  return <header className={s.dialog__search}>{children}</header>;
+  return (
+    <Stack
+      component={"header"}
+      direction="row"
+      alignItems="center"
+      spacing={2}
+      sx={{ borderBottom: "1px solid", borderColor: "divider", pb: "0.75rem", height: "3.5rem" }}
+    >
+      <Menu />
+      {children}
+    </Stack>
+  );
 };
 
 export default MainHeader;

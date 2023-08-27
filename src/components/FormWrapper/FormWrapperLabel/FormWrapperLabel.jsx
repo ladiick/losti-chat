@@ -1,23 +1,19 @@
-import React from 'react';
-import s from "./FormWrapperLabel.module.scss";
-import Text from "../../ui/Text/Text";
+import { InfoOutlined } from "@mui/icons-material";
+import { FormControl, FormHelperText, FormLabel } from "@mui/joy";
+import React from "react";
 
-const FormWrapperLabel = ({errors, title, children, descriptionTitle,...props}) => {
-	return (
-    <label className={s.label} {...props}>
-    	<div className={s.wrapper__titles}>
-    		{errors ?
-    			<Text className={s.error}>
-    				{errors?.message}</Text>
-    			: <Text>{title}</Text>}
-    		{
-    			descriptionTitle &&
-    			descriptionTitle
-    		}
-    	</div>
-    	{children}
-    </label>
-
+const FormWrapperLabel = ({ errors, title, children, descriptionTitle, ...props }) => {
+  return (
+    <FormControl error={!!errors} {...props}>
+      <FormLabel>{title}</FormLabel>
+      {children}
+      {errors && (
+        <FormHelperText>
+          <InfoOutlined />
+          {errors?.message}
+        </FormHelperText>
+      )}
+    </FormControl>
   );
 };
 

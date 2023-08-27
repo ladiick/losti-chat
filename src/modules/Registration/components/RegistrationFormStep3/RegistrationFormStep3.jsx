@@ -1,23 +1,22 @@
-import React, { useEffect } from "react";
-import s from "./RegistrationFormStep3.module.scss";
-import { useNavigate } from "react-router-dom";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Button, IconButton, Input, Typography } from "@mui/joy";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { setRegistrationSteps } from "../../store/registrationStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Text from "../../../../components/ui/Text/Text";
+import { useNavigate } from "react-router-dom";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
-import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
-import { ActionButton } from "../../../../components/ui/Button/ActionButton/ActionButton";
+import { setRegistrationSteps } from "../../store/registrationStepsSlice";
 
 const RegistrationFormStep3 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const stepsInfo = useSelector((state) => state.registration.stepsInfo);
+  const [visibilityPass, setVisibilityPass] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem("email")) {
-      navigate("/registration");
-    }
+    // if (!localStorage.getItem("email")) {
+    //   navigate("/registration");
+    // }
   }, []);
 
   const {
@@ -27,7 +26,7 @@ const RegistrationFormStep3 = () => {
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
-    defaultValues: {password: stepsInfo.password}
+    defaultValues: { password: stepsInfo.password },
   });
 
   const onSubmit = (data) => {
@@ -39,66 +38,48 @@ const RegistrationFormStep3 = () => {
 
   return (
     <>
-      <div className={s.form}>
-        <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <div className={s.wrapper__form}>
-            <Text style={{ textAlign: "center" }}>
-              Ваш пароль будет использован <br /> для входа в аккаунт
-            </Text>
-            <div>
-              <FormWrapperLabel title="Пароль" errors={errors?.password}>
-                <ActionInput
-                  type="password"
-                  autoFocus={true}
-                  placeholder="Введите больше 5 символов"
-                  style={
-                    errors?.password
-                      ? { borderColor: "red", marginTop: 8 }
-                      : { marginTop: 8 }
-                  }
-                  {...register("password", {
-                    required: "Необходимо заполнить",
-                    minLength: {
-                      value: 5,
-                      message: "Пароль менее 5 символов",
-                    },
-                  })}
-                />
-              </FormWrapperLabel>
-              <FormWrapperLabel
-                errors={errors?.password_repeat}
-                title="Подтвердите пароль"
-              >
-                <ActionInput
-                  type="password"
-                  placeholder="Подтвердить"
-                  style={
-                    errors?.password_repeat
-                      ? { borderColor: "red", marginTop: 8 }
-                      : { marginTop: 8 }
-                  }
-                  {...register("password_repeat", {
-                    required: "Пароли не совпадают",
-                    validate: (val) => {
-                      if (watch("password") !== val) {
-                        return "Пароли не совпадают";
-                      }
-                    },
-                  })}
-                />
-              </FormWrapperLabel>
-            </div>
-          </div>
-          <div>
-            <ActionButton
-              style={{ display: "block", width: "100%" }}
-              disabled={!isValid}
-            >
-              Продолжить
-            </ActionButton>
-          </div>
-        </form>
+      <div>
+        <Typography component="h1" fontSize="xl2" fontWeight="lg">
+          Укажите пароль
+        </Typography>
+        <Typography level="body-sm" sx={{ my: 1, mb: 3 }}>
+          Он будет использоваться для входа в аккаунт
+        </Typography>
       </div>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <FormWrapperLabel title="Пароль" errors={errors?.password}>
+          <Input
+            endDecorator={<IconButton onClick={() => setVisibilityPass((pre) => !pre)}>{visibilityPass ? <Visibility /> : <VisibilityOff />}</IconButton>}
+            type={visibilityPass ? "text" : "password"}
+            autoFocus={true}
+            placeholder="••••••••"
+            {...register("password", {
+              required: "Необходимо заполнить",
+              minLength: {
+                value: 5,
+                message: "Пароль менее 5 символов",
+              },
+            })}
+          />
+        </FormWrapperLabel>
+        <FormWrapperLabel errors={errors?.password_repeat} title="Подтвердите пароль">
+          <Input
+            type={visibilityPass ? "text" : "password"}
+            placeholder="••••••••"
+            {...register("password_repeat", {
+              required: "Пароли не совпадают",
+              validate: (val) => {
+                if (watch("password") !== val) {
+                  return "Пароли не совпадают";
+                }
+              },
+            })}
+          />
+        </FormWrapperLabel>
+        <Button fullWidth disabled={!isValid}>
+          Продолжить
+        </Button>
+      </form>
     </>
   );
 };

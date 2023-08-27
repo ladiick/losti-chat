@@ -1,29 +1,26 @@
+import { CalendarMonth } from "@mui/icons-material";
+import { Input, Radio, RadioGroup } from "@mui/joy";
 import React from "react";
-import { BiCalendar } from "react-icons/bi";
 import FormWrapperLabel from "../../../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
-import ActionInput from "../../../../../../components/ui/ActionInput/ActionInput";
-import RadioButtonGroup from "../../../../../../components/ui/RadioGroup/RadioGroup";
-import s from "./AboutUser.module.scss";
 
 const AboutUser = ({ errors, register, setValue }) => {
-  const toggleRadio = (name) => {
-    const gender = name === "Мужчина" ? "m" : "f";
-    setValue("gender", gender);
+  const toggleRadio = ({ target: { value } }) => {
+    setValue("gender", value);
   };
 
   return (
-    <div className={s.date__gender}>
+    <>
       <FormWrapperLabel errors={errors?.birth_date} title="Дата рождения">
-        <ActionInput
+        <Input
+          endDecorator={<CalendarMonth />}
+          sx={{
+            "input[type='date']::-webkit-inner-spin-button, input[type='date']::-webkit-calendar-picker-indicator": {
+              display: "none",
+              "-webkit-appearance": "none",
+              background: "transparent",
+            },
+          }}
           type="date"
-          style={
-            errors?.birth_date
-              ? {
-                  borderColor: "red",
-                  marginTop: 8,
-                }
-              : { marginTop: 8 }
-          }
           {...register("birth_date", {
             required: "Необходимо заполнить",
             min: {
@@ -37,32 +34,30 @@ const AboutUser = ({ errors, register, setValue }) => {
             valueAsDate: true,
           })}
         />
-        <BiCalendar className={s.icon__calendar} />
       </FormWrapperLabel>
-      <div className={s.wrapper__gender}>
-        <RadioButtonGroup toggle={toggleRadio} classWrapperEl={s.wrapper__radio} descriptionTitle="Пол" names={["Мужчина", "Женщина"]} />
 
-        <input
-          id="male"
-          className={s.input__radio}
-          type="radio"
-          value="m"
-          {...register("gender", {
-            required: "Необходимо заполнить",
-          })}
-        />
+      <FormWrapperLabel defaultValue="male" errors={errors?.gender} title="Пол">
+        <RadioGroup onChange={toggleRadio} orientation="horizontal" sx={{ justifyContent: "center" }}>
+          <Radio
+            type="radio"
+            value="m"
+            label="Мужчина"
+            {...register("gender", {
+              required: "Необходимо заполнить",
+            })}
+          />
 
-        <input
-          id="female"
-          className={s.input__radio}
-          type="radio"
-          value="f"
-          {...register("gender", {
-            required: "Необходимо заполнить",
-          })}
-        />
-      </div>
-    </div>
+          <Radio
+            type="radio"
+            value="f"
+            label="Женщина"
+            {...register("gender", {
+              required: "Необходимо заполнить",
+            })}
+          />
+        </RadioGroup>
+      </FormWrapperLabel>
+    </>
   );
 };
 

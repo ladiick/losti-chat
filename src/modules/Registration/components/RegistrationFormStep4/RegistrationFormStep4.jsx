@@ -1,30 +1,16 @@
+import { AddAPhoto, Close, Create, Draw } from "@mui/icons-material";
+import { Avatar, Button, FormControl, FormLabel, IconButton, Input, Typography } from "@mui/joy";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { BsCamera } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
 import useImageView from "../../../../components/hooks/useImageView";
-import { ActionButton } from "../../../../components/ui/Button/ActionButton/ActionButton";
-import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
-import CloseButton from "../../../../components/ui/CloseButton/CloseButton";
-import Text from "../../../../components/ui/Text/Text";
 import { VALID__NAME } from "../../../../utils/validateForm";
 import { useAuthorizationMutation } from "../../../Authorization/api/authorizationApiSlice";
-import Loader from "./../../../../components/ui/Loader/Loader";
-import LoaderWrapper from "./../../../../components/ui/LoaderWrapper/LoaderWrapper";
-import s from "./RegistrationFormStep4.module.scss";
 import { useRegistrationMutation } from "./api/registrationApiSlice";
 import AboutUser from "./components/AboutUser/AboutUser";
 
-const styleCloseButton = {
-  position: "absolute",
-  top: -8,
-  left: 0,
-};
-
 const RegistrationFormStep4 = () => {
-  const navigate = useNavigate();
   const stepsInfo = useSelector((state) => state.registration.stepsInfo);
 
   const [image, onImageChange, setImage] = useImageView();
@@ -33,9 +19,9 @@ const RegistrationFormStep4 = () => {
   const [authorization, { isLoading: loadAuthorization }] = useAuthorizationMutation();
 
   useEffect(() => {
-    if (!stepsInfo.password) {
-      navigate("/registration/password");
-    }
+    // if (!stepsInfo.password) {
+    //   navigate("/registration/password");
+    // }
   }, []);
 
   const {
@@ -97,66 +83,91 @@ const RegistrationFormStep4 = () => {
   };
   return (
     <>
-      <div className={s.form}>
-        <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <div className={s.wrapper__form}>
-            <Text style={{ textAlign: "center" }}>Информация о вас</Text>
-            <div className={s.wrapper__info}>
-              <label className={s.label__img}>
-                <div className={s.wrapper__uploadImg} style={image ? { borderColor: "#1a73e8" } : {}}>
-                  {image ? <img className={s.image__upload} src={image.imagePreview} alt="check" /> : <BsCamera color="#1a73e8" size={24} />}
-                </div>
-
-                <input type="file" accept="image/*,.png,.jpg," onChange={(e) => onImageChange(e)} />
-              </label>
-
-              {image ? <CloseButton style={styleCloseButton} onClick={() => setImage("")} /> : ""}
-
-              <div className={s.field_names}>
-                <FormWrapperLabel style={{ marginBottom: 5 }}>
-                  <ActionInput
-                    type="text"
-                    autoFocus={true}
-                    placeholder={errors?.first_name?.message ? errors?.first_name?.message : "Имя"}
-                    style={errors?.first_name && { borderColor: "red" }}
-                    {...register("first_name", {
-                      required: "Необходимо заполнить",
-                      pattern: {
-                        value: VALID__NAME,
-                        message: "Имя содержит цифры",
-                      },
-                    })}
-                  />
-                </FormWrapperLabel>
-
-                <FormWrapperLabel>
-                  <ActionInput
-                    type="text"
-                    placeholder={errors?.last_name?.message ? errors?.last_name?.message : "Фамилия"}
-                    style={errors?.last_name && { borderColor: "red" }}
-                    {...register("last_name", {
-                      required: "Необходимо заполнить",
-                      pattern: {
-                        value: VALID__NAME,
-                        message: "Фамилия содержит цифры",
-                      },
-                    })}
-                  />
-                </FormWrapperLabel>
-              </div>
-            </div>
-
-            <AboutUser setValue={setValue} errors={errors} register={register} />
-          </div>
-          {loadRegistration || loadAuthorization ? (
-            <LoaderWrapper>
-              <Loader />
-            </LoaderWrapper>
-          ) : (
-            <ActionButton disabled={!isValid}>Зарегистрироваться</ActionButton>
-          )}
-        </form>
+      <div>
+        <Typography component="h1" fontSize="xl2" fontWeight="lg">
+          Заполните информацию о Вас
+        </Typography>
+        <Typography level="body-sm" sx={{ my: 1, mb: 3 }}>
+          Будет видна другим пользователям
+        </Typography>
       </div>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <FormControl sx={{ justifyContent: "center", flexDirection: "row" }}>
+          <FormLabel sx={{ position: "relative" }}>
+            <Avatar src={image?.imagePreview} sx={{ width: "7rem", height: "7rem", cursor: "pointer" }}>
+              <AddAPhoto sx={{ width: "2.5rem", height: "2.5rem" }} />
+            </Avatar>
+            {image ? (
+              <IconButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  setImage("");
+                }}
+                sx={{ position: "absolute", top: "-1.5rem", right: "-1.5rem" }}
+              >
+                <Close />
+              </IconButton>
+            ) : (
+              ""
+            )}
+          </FormLabel>
+          <Input
+            type="file"
+            accept="image/*,.png,.jpg,"
+            onChange={(e) => onImageChange(e)}
+            sx={{
+              visibility: "hidden",
+              position: "absolute",
+              width: 1,
+              height: 1,
+              margin: -1,
+              border: 0,
+              padding: 0,
+              whiteSpace: "nowrap",
+              clipPath: "inset(100%)",
+              clip: "rect(0 0 0 0)",
+              overflow: "hidden",
+            }}
+          />
+        </FormControl>
+
+        <FormWrapperLabel errors={errors?.first_name} title="Имя">
+          <Input
+            endDecorator={<Create />}
+            type="text"
+            autoFocus={true}
+            placeholder={"Иван"}
+            {...register("first_name", {
+              required: "Необходимо заполнить",
+              pattern: {
+                value: VALID__NAME,
+                message: "Имя содержит цифры",
+              },
+            })}
+          />
+        </FormWrapperLabel>
+
+        <FormWrapperLabel errors={errors?.last_name} title="Фамилия">
+          <Input
+            endDecorator={<Draw />}
+            type="text"
+            placeholder="Иванов"
+            {...register("last_name", {
+              required: "Необходимо заполнить",
+              pattern: {
+                value: VALID__NAME,
+                message: "Фамилия содержит цифры",
+              },
+            })}
+          />
+        </FormWrapperLabel>
+
+        <AboutUser setValue={setValue} errors={errors} register={register} />
+
+        <Button disabled={!isValid} loading={loadRegistration || loadAuthorization}>
+          Зарегистрироваться
+        </Button>
+      </form>
     </>
   );
 };

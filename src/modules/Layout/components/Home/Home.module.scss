@@ -1,10 +1,6 @@
 .container {
   position: relative;
-  display: flex;
   height: 100vh;
-}
-
-.content {
   width: 100%;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -14,3 +10,4 @@
     grid-template-columns: 1fr;
   }
 }
+

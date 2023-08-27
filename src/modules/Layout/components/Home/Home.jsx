@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import useMatchMedia from "../../../../components/hooks/useMatchMedia"
-import { setTypeDropZone, setVisibleDropZone } from "../../../../redux/slices/dragAndDropSlice"
-import Navigation from "../Navigation/Navigation"
-import s from "./Home.module.scss"
-import { identifyFileExtension } from "./helpers/identifyFileExtension.js"
+import { Grid } from "@mui/joy";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import useMatchMedia from "../../../../components/hooks/useMatchMedia";
+import { setTypeDropZone, setVisibleDropZone } from "../../../../redux/slices/dragAndDropSlice";
+import Navigation from "../Navigation/Navigation";
+import s from "./Home.module.scss";
+import { identifyFileExtension } from "./helpers/identifyFileExtension.js";
 const Home = ({ children }) => {
   const dispatch = useDispatch();
   const chatActive = useSelector((state) => state.navigation.chat);
@@ -44,20 +45,20 @@ const Home = ({ children }) => {
     };
   }, [dragOver]);
 
-  if (isMedia) {
-    return (
-      <div className={s.wrapper}>
-        <div className={s.container}>
-          {!chatActive && <Navigation />}
-          <div className={s.content}>{children}</div>
-        </div>
-      </div>
-    );
-  }
+  // if (isMedia) {
+  //   return (
+  //     <div className={s.wrapper}>
+  //       <div className={s.container}>
+  //         {!chatActive && <Navigation />}
+  //         <div className={s.content}>{children}</div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={s.container}>
-      <div className={s.content}>{children}</div>
+      {children}
     </div>
   );
 };
