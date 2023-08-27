@@ -1,13 +1,24 @@
+import { Sheet, Stack } from "@mui/joy";
 import React from "react";
-import s from "./WrapperBlocks.module.scss";
-const WrapperBlocks = ({ header, children, className, ...props }) => {
-  const classGeneral = className ? `${className} ${s.wrapper}` : s.wrapper;
-
+const WrapperBlocks = ({ header, children, ...props }) => {
   return (
-    <div className={classGeneral} {...props}>
-      {header ? header : null}
+    <Sheet
+      sx={(theme) => ({
+        p: "0.75rem",
+        backgroundColor: "#e9ebee",
+        [theme.getColorSchemeSelector("dark")]: {
+          backgroundColor: "rgba(20 20 20 / 1)",
+        },
+      })}
+      {...props}
+    >
+      {header && (
+        <Stack direction="row" alignItems="center" spacing={2} component={"header"}>
+          {header}
+        </Stack>
+      )}
       {children}
-    </div>
+    </Sheet>
   );
 };
 

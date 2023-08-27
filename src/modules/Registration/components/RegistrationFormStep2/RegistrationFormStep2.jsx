@@ -1,31 +1,30 @@
+import { InfoOutlined } from "@mui/icons-material";
+import { Button, FormControl, FormHelperText, Typography } from "@mui/joy";
+import { useTheme } from "@mui/joy/styles";
 import React, { useEffect, useState } from "react";
 import { PinInput } from "react-input-pin-code";
-import s from "./RegistrationFormStep2.module.scss";
-import axios from "axios";
-import { HOST } from "../../../../components/api/HOST";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setRegistrationSteps } from "../../store/registrationStepsSlice";
-import Text from "../../../../components/ui/Text/Text";
-import { ActionButton } from "../../../../components/ui/Button/ActionButton/ActionButton";
 import { useCheckAuthCodeMutation } from "./api/checkAuthCodeApiSlice";
 
 const RegistrationFormStep2 = () => {
   const [values, setValues] = useState(["", "", "", "", "", ""]);
-  const [errors, setErrors] = useState("");
   const [btnDisable, setBtnDisable] = useState(false);
-  const stepsInfo = useSelector((state) => state.registration.stepsInfo);
+
   const [codeError, setCodeError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [checkAuthCode] = useCheckAuthCodeMutation();
 
+  const theme = useTheme();
+
   useEffect(() => {
     if (!localStorage.getItem("email")) {
       navigate("/registration");
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const val = values.join("");
@@ -41,15 +40,10 @@ const RegistrationFormStep2 = () => {
     const code = values.join("");
     localStorage.setItem("code", code);
     if (!code.length) {
-      setErrors("Пин-код пуст");
+      setCodeError("Пин-код пуст");
       return;
     }
     try {
-      // await axios.get(
-      //   `${HOST}/api/v1/auth/users/check_code/?code=${code}&email=${localStorage.getItem(
-      //     "email",
-      //   )}`,
-      // );
       await checkAuthCode(code).unwrap();
       dispatch(setRegistrationSteps({ code }));
       navigate("/registration/password");
@@ -63,38 +57,48 @@ const RegistrationFormStep2 = () => {
 
   return (
     <>
-      <div className={s.form} onSubmit={onSubmit}>
-        <form noValidate>
-          <div className={s.wrapper__inputs}>
-            <Text className={codeError ? s.error__send : s.description__title}>
-              {codeError
-                ? codeError
-                : `На ${localStorage.getItem("email")} отправлен код активации`}
-            </Text>
-            {errors}
-            <PinInput
-              size="sm"
-              autoFocus={true}
-              values={values}
-              autoTab={true}
-              borderColor={"#434343"}
-              errorBorderColor="red"
-              focusBorderColor="#1a73e8"
-              inputStyle={{ color: "var(--color--text--main)" }}
-              placeholder="●"
-              validBorderColor={"#4bb24b"}
-              aria-label={codeError}
-              required={true}
-              onBlur={() => {
-                setCodeError("");
-              }}
-              onChange={(value, index, values) => setValues(values)}
-            />
-          </div>
-
-          <ActionButton disabled={!btnDisable}>Продолжить</ActionButton>
-        </form>
+      <div>
+        <Typography component="h1" fontSize="xl2" fontWeight="lg">
+          На {localStorage.getItem("email")} отправлен код активации
+        </Typography>
+        <Typography level="body-sm" sx={{ my: 1, mb: 3 }}>
+          Введите код ниже
+        </Typography>
       </div>
+      <form noValidate onSubmit={onSubmit}>
+        <FormControl sx={{ alignItems: "center" }}>
+          <PinInput
+            size="sm"
+            autoFocus={true}
+            values={values}
+            autoTab={true}
+            borderColor={theme.vars.palette.neutral.outlinedBorder}
+            errorBorderColor={theme.vars.palette.danger.outlinedBorder}
+            focusBorderColor={theme.vars.palette.primary.outlinedBorder}
+            inputStyle={{
+              color: theme.vars.palette.neutral.outlinedColor,
+              backgroundColor: theme.vars.palette.background.surface,
+              borderRadius: theme.vars.radius.sm,
+            }}
+            placeholder="●"
+            validBorderColor={theme.vars.palette.success.outlinedBorder}
+            aria-label={codeError}
+            required={true}
+            onBlur={() => {
+              setCodeError("");
+            }}
+            onChange={(value, index, values) => setValues(values)}
+          />
+          {codeError && (
+            <FormHelperText>
+              <InfoOutlined />
+              {codeError}
+            </FormHelperText>
+          )}
+        </FormControl>
+
+        <Button disabled={!btnDisable}>Продолжить</Button>
+      </form>
     </>
   );
 };

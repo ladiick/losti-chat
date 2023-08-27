@@ -1,23 +1,19 @@
+import { Button, Input, Typography } from "@mui/joy";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
-import { ActionButton } from "../../../../components/ui/Button/ActionButton/ActionButton";
-import ActionInput from "../../../../components/ui/ActionInput/ActionInput";
-import NameCompany from "../../../../components/ui/NameCompany/NameCompany";
-import Text from "../../../../components/ui/Text/Text";
 import { VALID__EMAIL } from "../../../../utils/validateForm";
 import { setRegistrationSteps } from "../../store/registrationStepsSlice";
-import s from "./RegistrationFormStep1.module.scss";
 import { useExistEmailMutation } from "./api/checkEmailApiSlice";
 import { useSendCodeMutation } from "./api/sendCodeApiSlice";
+import { Mail } from '@mui/icons-material'
 const RegistrationFormStep1 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const stepsInfo = useSelector((state) => state.registration.stepsInfo);
 
-  const [existEmail] = useExistEmailMutation();
-  const [sendCode] = useSendCodeMutation();
+  const [existEmail, { isLoading: isLoadingExistEmail }] = useExistEmailMutation();
+  const [sendCode, { isLoading: isLoadingSendCOde }] = useSendCodeMutation();
 
   const {
     register,
@@ -50,48 +46,44 @@ const RegistrationFormStep1 = () => {
 
   return (
     <>
-      <NameCompany size={36} title="Регистрация в LOSTI-CHAT" direction="column" />
-
-      <Text
-        style={{
-          textAlign: "center",
-          marginTop: 10,
-        }}
-      >
-        Ваша почта будет использована <br /> для входа в аккаунт
-      </Text>
-      <div className={s.form}>
-        <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <div className={s.wrapper__form}>
-            <FormWrapperLabel title="Электронная почта" errors={errors?.email}>
-              <ActionInput
-                type="email"
-                autoFocus={true}
-                placeholder="example@gmail.com"
-                style={errors?.email ? { borderColor: "red", marginTop: 8 } : { marginTop: 8 }}
-                {...register("email", {
-                  required: "Необходимо заполнить",
-                  pattern: {
-                    value: VALID__EMAIL,
-                    message: "Введите корректный email адрес",
-                  },
-                })}
-              />
-            </FormWrapperLabel>
-          </div>
-          <div>
-            <ActionButton style={{ display: "block", width: "100%" }} disabled={!isValid}>
-              Продолжить
-            </ActionButton>
-
-            <Text className={s.orLogin}>или</Text>
-
-            <ActionButton onClick={() => navigate("/authorization")} className={s.btn__registr}>
-              Войти
-            </ActionButton>
-          </div>
-        </form>
+      <div>
+        <Typography component="h1" fontSize="xl2" fontWeight="lg">
+          Зарегистрируйте свой аккаунт
+        </Typography>
+        <Typography level="body-sm" sx={{ my: 1, mb: 3 }}>
+          Добро пожаловать!
+        </Typography>
       </div>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <FormWrapperLabel title="Электронная почта" errors={errors?.email}>
+          <Input
+            endDecorator={<Mail />}
+            type="email"
+            autoFocus={true}
+            placeholder="example@gmail.com"
+            {...register("email", {
+              required: "Необходимо заполнить",
+              pattern: {
+                value: VALID__EMAIL,
+                message: "Введите корректный email адрес",
+              },
+            })}
+          />
+        </FormWrapperLabel>
+        <div>
+          <Button fullWidth type="submit" disabled={!isValid} loading={isLoadingExistEmail || isLoadingSendCOde}>
+            Продолжить
+          </Button>
+
+          <Typography component={"span"} level={"body-sm"} textAlign={"center"} sx={{ my: "0.75rem" }}>
+            или
+          </Typography>
+
+          <Button fullWidth component={Link} to={"/authorization"} variant="outlined">
+            Войти
+          </Button>
+        </div>
+      </form>
     </>
   );
 };

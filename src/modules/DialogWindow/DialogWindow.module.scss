@@ -22,14 +22,10 @@
 
 
 .emptity__chat {
-  width: 50%;
-  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0 12px 12px 0;
-  border-left: none;
-
+  margin-left: 1.5rem;
 }
 
 .emptity__content {

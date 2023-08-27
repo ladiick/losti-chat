@@ -8,6 +8,7 @@ import { setIndex } from "../../../../redux/slices/peopleSlice";
 import s from "./ListPeople.module.scss";
 import { useGetPeopleQuery } from "./api/peopleApiSlice.js";
 import PeopleItem from "./components/PeopleItem/PeopleItem";
+import { List } from '@mui/joy'
 
 const errorStyles = {
   width: "100%",
@@ -37,7 +38,7 @@ const People = ({ searchValue, setSearch }) => {
     if (isMobile) {
       dispatch(openChatBlock(true));
     }
-    setSearchParams({ dialogs: current__obj.pk });
+    // setSearchParams({ dialogs: current__obj.pk });
     setSearch("");
   };
 
@@ -51,7 +52,7 @@ const People = ({ searchValue, setSearch }) => {
       }
 
       {isError && <span style={errorStyles}>Ошибка, не удалось загрузить диалоги</span>}
-      <div className={s.wrapper__items}>
+      <List className={s.wrapper__items}>
         {people
           ?.filter((people) =>
             people.sender.pk === myId && people.recip.pk !== myId
@@ -82,7 +83,7 @@ const People = ({ searchValue, setSearch }) => {
               />
             ),
           )}
-      </div>
+      </List>
     </div>
   );
 };

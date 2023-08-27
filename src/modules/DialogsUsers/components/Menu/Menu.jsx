@@ -1,43 +1,41 @@
-import { GiHamburgerMenu } from 'react-icons/gi'
-import s from './Menu.module.scss'
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import Typography from '../../../../components/ui/Typography/Typography'
-import { FiBookmark, FiUsers } from "react-icons/fi";
-import { useSearchParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Bookmark, Menu as MenuIcon, People } from "@mui/icons-material";
+import { Dropdown, ListItemDecorator, Menu, MenuButton, MenuItem, Typography } from "@mui/joy";
+import IconButton from "@mui/joy/IconButton";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const HeaderMenu = () => {
+  const myId = useSelector((state) => state.user.aboutUser.id);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const myId = useSelector(state=>state.user.aboutUser.id)
-  const moveFavorite = () => {
-    setSearchParams({'dialogs': myId});
-  }
+  return (
+    <Dropdown>
+      <MenuButton slots={{ root: IconButton }} slotProps={{ root: { variant: "plain" } }}>
+        <MenuIcon />
+      </MenuButton>
 
-	return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <button className={s.header__burgerBtn}>
-          <GiHamburgerMenu  />
-        </button>
-      </DropdownMenu.Trigger>
+      <Menu
+        variant="plain"
+        placement="bottom-start"
+        size={"sm"}
+        sx={(theme) => ({ width: 246, bgcolor: theme.vars.palette.background.backdrop, backdropFilter: "blur(15px)" })}
+      >
+        <MenuItem to={`/?dialogs=${myId}`} component={Link}>
+          <ListItemDecorator>
+            <Bookmark />
+          </ListItemDecorator>
+          Избранное
+        </MenuItem>
+        <MenuItem to={`/friends`} component={Link}>
+          <ListItemDecorator>
+            <People />
+          </ListItemDecorator>
+          Друзья
+        </MenuItem>
 
-      <DropdownMenu.Portal>
-        <DropdownMenu.Content className={s.dropMenu__content} sideOffset={10} alignOffset={6} align="start">
-          <DropdownMenu.Item className={s.dropMenu__item} onClick={moveFavorite}>
-            <FiBookmark />
-            <Typography level="bodyS" weight="medium">
-              Избранное
-            </Typography>
-          </DropdownMenu.Item>
-          <DropdownMenu.Item className={s.dropMenu__item} onClick={moveFavorite}>
-            <FiUsers />
-            <Typography level="bodyS" weight="medium">
-              Друзья
-            </Typography>
-          </DropdownMenu.Item>
-        </DropdownMenu.Content>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+        <Typography sx={{ pt: "0.75rem", userSelect: "none" }} textAlign={"center"} level={"body-xs"}>
+          Losti-Chat Web
+        </Typography>
+      </Menu>
+    </Dropdown>
   );
 };
 

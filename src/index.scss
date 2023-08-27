@@ -46,8 +46,6 @@ code {
   --padding-inlineLayout: 1.5rem;
   --padding-blockLayout: 1.25rem;
 
-
-
   --text--secondary: #888888;
   --text--accent: #1a73e8;
   --text--accent--light: #4986cc;
@@ -69,8 +67,6 @@ code {
 }
 
 body[data-theme="dark"] {
-
-
   --background--body: #0a0a0a;
   --color--text--main: #e1e3e6;
   --background--content: #19191a;
@@ -91,8 +87,6 @@ body[data-theme="dark"] {
 }
 
 body[data-theme="light"] {
-
-
   --background--body: #e9ebee;
   --color--text--main: #000000;
   --background--content: #ffffff;
