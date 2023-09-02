@@ -22,7 +22,6 @@ const AuthorizationForm = () => {
   const [authorization, { isLoading: loadAuthorization }] = useAuthorizationMutation();
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
       const res = await authorization({
         email: data.email,

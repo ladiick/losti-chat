@@ -1,3 +1,4 @@
+import { CssBaseline, GlobalStyles } from "@mui/joy";
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -7,9 +8,7 @@ import "./index.scss";
 import "./normalize.css"; // должен быть сверху
 import { store } from "./redux/store";
 
-
 const theme = extendTheme({
-
   radius: {
     xs: "6px",
     sm: "8px",
@@ -17,13 +16,14 @@ const theme = extendTheme({
     lg: "16px",
     xl: "20px",
   },
-
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <CssVarsProvider theme={theme} >
+    <CssVarsProvider theme={theme} defaultMode="system">
+      <CssBaseline />
+      <GlobalStyles styles={{ body: { overflow: "hidden" } }} />
       <App />
     </CssVarsProvider>
   </Provider>,

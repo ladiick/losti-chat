@@ -1,5 +1,5 @@
 import { KeyboardBackspace } from "@mui/icons-material";
-import { Avatar, Box, Button, CssBaseline, GlobalStyles, Typography, formLabelClasses } from "@mui/joy";
+import { Avatar, Box, Button, CssBaseline, GlobalStyles, Sheet, Typography, formLabelClasses } from "@mui/joy";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../../components/assets/logo.svg";
@@ -19,7 +19,7 @@ const FormWrapper = ({ children }) => {
           },
         }}
       />
-      <Box
+      <Sheet
         sx={(theme) => ({
           width: "clamp(100vw - var(--Cover-width), (var(--Collapsed-breakpoint) - 100vw) * 999, 100vw)",
           transition: "width var(--Transition-duration)",
@@ -29,9 +29,9 @@ const FormWrapper = ({ children }) => {
           display: "flex",
           justifyContent: "flex-end",
           backdropFilter: "blur(4px)",
-          backgroundColor: "#e9ebee",
+          backgroundColor: "rgba(252 252 253 / 0.6)",
           [theme.getColorSchemeSelector("dark")]: {
-            backgroundColor: "rgba(20 20 20 / 1)",
+            backgroundColor: "rgba(18 20 22 / 0.6)",
           },
         })}
       >
@@ -90,7 +90,7 @@ const FormWrapper = ({ children }) => {
             {children}
           </Box>
         </Box>
-      </Box>
+      </Sheet>
       <Box
         sx={(theme) => ({
           height: "100%",

@@ -1,19 +1,16 @@
-import { ArrowBack } from "@mui/icons-material";
-import { IconButton, Stack, Typography } from "@mui/joy";
+import { Stack } from "@mui/joy";
 
-const PanelHeader = ({ title, Icons }) => {
+const PanelHeader = ({ before, children, after, sx }) => {
   return (
-    <>
-      <IconButton>
-        <ArrowBack />
-      </IconButton>
-      <Stack direction="row" alignItems="center" sx={{width:'100%'}}>
-        <Typography flexGrow={1}>{title}</Typography>
-        <Stack direction="row" alignItems="center">
-          {Icons}
-        </Stack>
+    <Stack spacing={2} direction="row" alignItems="center" sx={{ width: "100%", ...sx }}>
+      {before}
+      <Stack direction="row" alignItems="center" flexGrow={1}>
+        {children}
       </Stack>
-    </>
+      <Stack direction="row" alignItems="center">
+        {after}
+      </Stack>
+    </Stack>
   );
 };
 

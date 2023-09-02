@@ -1,22 +1,35 @@
+import { AttachFile, CancelScheduleSend, Send } from "@mui/icons-material";
+import { Box, FormControl, FormLabel, Input, Stack, useTheme } from "@mui/joy";
 import React, { useCallback, useContext, useEffect, useRef } from "react";
-import s from "./BlockInputs.module.scss";
-import { AiOutlinePaperClip } from "react-icons/ai";
 import ContentEditable from "react-contenteditable";
-import { motion } from "framer-motion";
-import { BsSend, BsSendSlash } from "react-icons/bs";
-import sanitizeHtml from "sanitize-html";
-import { useLocation, useSearchParams } from "react-router-dom";
-import BlockForwardMessages from "../BlockForwardMessages/BlockForwardMessages";
 import { useDispatch, useSelector } from "react-redux";
-import BlockAnswerMessage from "../BlockAnswerMessage/BlockAnswerMessage";
+import { useSearchParams } from "react-router-dom";
+import sanitizeHtml from "sanitize-html";
 import _ from "underscore";
-import BlockFilesMessage from "../BlockFilesMessage/BlockFilesMessage";
 import useMatchMedia from "../../../../components/hooks/useMatchMedia";
-import { MyContext } from "../../../Layout/Layout";
 import { sendMessagesOnChat } from "../../../../redux/slices/messageSlice";
+import { MyContext } from "../../../Layout/Layout";
+import BlockAnswerMessage from "../BlockAnswerMessage/BlockAnswerMessage";
+import BlockFilesMessage from "../BlockFilesMessage/BlockFilesMessage";
+import BlockForwardMessages from "../BlockForwardMessages/BlockForwardMessages";
+import PlaceholderInput from "./PlaceholderInput";
+
+const inputHidden = {
+  position: "absolute",
+  width: 1,
+  height: 1,
+  m: -1,
+  border: 0,
+  p: 0,
+  whiteSpace: "nowrap",
+  clipPath: " inset(100%)",
+  clip: "rect(0 0 0 0)",
+  overflow: "hidden",
+};
 
 const BlockInputs = () => {
   const { isMobile } = useMatchMedia();
+  const theme = useTheme();
   const { socket, statusSocket } = useContext(MyContext);
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -45,27 +58,29 @@ const BlockInputs = () => {
     return () => window.removeEventListener("keydown", downRandomKey);
   }, []);
 
-  const onContentChange = useCallback((evt) => {
-    const sanitizeConf = {
-      allowedTags: ["b", "i", "a", "p"],
-      allowedAttributes: { a: ["href"] },
-    };
-    if (evt.currentTarget.innerHTML.length > 20000) {
+  const onContentChange = useCallback(
+    (evt) => {
+      const sanitizeConf = {
+        allowedTags: ["b", "i", "a", "p"],
+        allowedAttributes: { a: ["href"] },
+      };
+      if (evt.currentTarget.innerHTML.length > 20000) {
+        dispatch(
+          sendMessagesOnChat({
+            param: searchParams.get("dialogs"),
+            message: "",
+          }),
+        );
+      }
       dispatch(
         sendMessagesOnChat({
           param: searchParams.get("dialogs"),
-          message: "",
+          message: sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf),
         }),
       );
-    }
-    dispatch(
-      sendMessagesOnChat({
-        param: searchParams.get("dialogs"),
-        message: sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf),
-      }),
-    );
-  }, []);
-  //searchParams.get('dialogs')
+    },
+    [dispatch, searchParams.get("dialogs")],
+  );
   const sendMessage = () => {
     if (content === "" && forwardMessages?.length === 0 && !_.isEmpty(answerMessages)) {
       return;
@@ -116,52 +131,113 @@ const BlockInputs = () => {
   };
 
   return (
-    <div className={s.wrapper__input}>
-      {answerMessages && Object.keys(answerMessages)?.length !== 0 && <BlockAnswerMessage message={answerMessages} />}
-      <div className={s.input}>
-        <div className={s.form__wrapper}>
-          <label className={s.download__file}>
-            <AiOutlinePaperClip />
-            <input type="file" className={s.input__file} multiple={true} onChange={handlerFilesUploader} />
-          </label>
+    <Box mb="1.25rem">
+      <Box
+        bgcolor={theme.vars.palette.background.surface}
+        sx={{
+          width: isMobile ? "100vw" : "calc(100% - 25vh)",
+          m: "0 auto",
+          maxWidth: "50rem",
+          borderRadius: "sm",
+        }}
+      >
+        {answerMessages && Object.keys(answerMessages)?.length !== 0 && <BlockAnswerMessage message={answerMessages} />}
 
-          <div className={s.block__input__message}>
-            <ContentEditable
+        <Stack direction="row" alignItems="center" width="100%">
+          <FormControl sx={{ ml: "0.75rem", alignSelf: "flex-end", height: "3.5rem", justifyContent: "center", flexShrink: 0 }}>
+            <FormLabel
+              sx={{
+                m: 0,
+                cursor: "pointer",
+                "& svg": {
+                  transform: "rotate(45deg)",
+                  width: 30,
+                  height: 30,
+                },
+                "& svg:hover": {
+                  fill: theme.vars.palette.primary.solidBg,
+                },
+              }}
+            >
+              <AttachFile />
+            </FormLabel>
+            <Input type="file" sx={inputHidden} multiple={true} onChange={handlerFilesUploader} />
+          </FormControl>
+
+          <Box
+            position="relative"
+            sx={{
+              flexGrow: 1,
+              py: "1rem",
+              pl: "0.75rem",
+            }}
+          >
+            <Box
+              component={ContentEditable}
               html={content}
               ref={refContentEditable}
               onKeyDown={handlerKeyDown}
               contentEditable={true}
-              className={s.input__message}
               role="textbox"
               onChange={onContentChange}
+              sx={{
+                border: "none",
+                outline: "none",
+                resize: "none",
+                wordBreak: "break-word",
+                wordWrap: "break-word",
+                whiteSpace: "pre-wrap",
+                maxHeight: "12rem",
+                overflowY: "auto",
+                overflowX: "hidden",
+                unicodeBidi: "plaintext",
+                "&::-webkit-scrollbar-track": {
+                  transition: "all .3s",
+                  borderRadius: "sm",
+                },
+                "&::-webkit-scrollbar": {
+                  transition: "all .3s",
+                  width: "6px",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  transition: "all .3s",
+                  borderRadius: "sm",
+                  background: theme.vars.palette.background.level2,
+                },
+              }}
             />
-            {content === "" && (
-              <motion.span
-                initial={{
-                  x: 20,
-                  opacity: 0,
-                }}
-                animate={{
-                  x: 0,
-                  opacity: 1,
-                }}
-                className={s.placeholder}
-              >
-                Напишите сообщение...
-              </motion.span>
+            {content === "" && <PlaceholderInput />}
+          </Box>
+          <Box
+            ref={refSend}
+            onClick={() => sendMessage()}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              alignSelf: "flex-end",
+              height: "3.5rem",
+              width: "3.5rem",
+              flexShrink: 0,
+              "& svg": {
+                width: 30,
+                height: 30,
+              },
+            }}
+          >
+            {statusSocket === "ready" ? (
+              <Send sx={{ fill: theme.vars.palette.primary.solidBg, cursor: "pointer" }} />
+            ) : (
+              <CancelScheduleSend sx={{ fill: theme.vars.palette.danger.plainColor, cursor: "not-allowed" }} />
             )}
-          </div>
+          </Box>
+        </Stack>
 
-          <div ref={refSend} onClick={() => sendMessage()} className={s.button__send}>
-            {statusSocket === "ready" ? <BsSend /> : <BsSendSlash />}
-          </div>
-        </div>
-      </div>
+        {forwardMessages && forwardMessages.length !== 0 && <BlockForwardMessages message={forwardMessages} />}
 
-      {forwardMessages && forwardMessages.length !== 0 && <BlockForwardMessages message={forwardMessages} />}
-
-      {imagesMessages?.length !== 0 && <BlockFilesMessage files={imagesMessages} />}
-    </div>
+        {imagesMessages?.length !== 0 && <BlockFilesMessage files={imagesMessages} />}
+      </Box>
+    </Box>
   );
 };
 

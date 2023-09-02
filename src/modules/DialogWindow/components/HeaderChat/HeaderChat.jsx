@@ -1,18 +1,17 @@
+import { ArrowBack } from "@mui/icons-material";
+import { Avatar, Badge, IconButton, Link as LinkMui, Skeleton, useTheme } from "@mui/joy";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { HOST } from "../../../../components/api/HOST";
 import useMatchMedia from "../../../../components/hooks/useMatchMedia";
-import ActionLink from "../../../../components/ui/ActionLink/ActionLink";
-import ArrowBack from "../../../../components/ui/ArrowBack/ArrowBack";
-import Avatar from "../../../../components/ui/Avatar/Avatar";
-import Text from "../../../../components/ui/Text/Text";
+import PanelHeader from "../../../../components/ui/WrapperBlocks/components/PanelHeader";
 import { openChatBlock } from "../../../../redux/slices/navigationSlice";
-import favorite from "../../../DialogsUsers/components/People/assets/favorite.svg";
 import HeaderForwardMessage from "../HeaderForwardMessage/HeaderForwardMessage";
-import s from "./HeaderChat.module.scss";
 import RightSideBlock from "./RightSideBlock/RightSideBlock";
-import SceletonHeader from "./SceletonHeader";
 const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
+  const theme = useTheme();
+
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const chatActive = useSelector((state) => state.navigation.chat);
@@ -20,48 +19,53 @@ const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
   const { isMobile } = useMatchMedia();
   const [searchParams] = useSearchParams();
 
-  if (isLoading) {
-    return (
-      <header className={s.header}>
-        <SceletonHeader />
-      </header>
-    );
-  }
-
   if (currentMessage?.[searchParams.get("dialogs")]?.length && !isMobile) {
     return <HeaderForwardMessage />;
   }
 
   return (
     <>
-      <header className={s.header}>
-        <div className={s.left__side}>
-          {chatActive && isMobile && (
-            <ArrowBack
+      <PanelHeader
+        sx={{
+          height: "3.5rem",
+          py: "0.75rem",
+          px: isMobile ? 0 : "1rem",
+          borderBottom: "1px solid",
+          borderColor: "divider",
+          bgcolor: theme.vars.palette.background.surface,
+        }}
+        before={
+          isMobile && (
+            <IconButton
               onClick={() => {
-                navigation("/");
+                navigation(-1);
                 dispatch(openChatBlock(false));
               }}
-            />
-          )}
-          <ActionLink to={`/profile/${searchParams.get("dialogs")}`}>
-            {searchParams.get("dialogs") == myId ? (
-              <img src={favorite} alt="logo" />
-            ) : (
-              <Avatar online={peopleCurrent?.online} size={30} image={peopleCurrent.image} />
-            )}
-          </ActionLink>
+            >
+              <ArrowBack />
+            </IconButton>
+          )
+        }
+        after={<RightSideBlock />}
+      >
+        <Badge color="success" badgeInset="14%" invisible={!peopleCurrent.online} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+          <Avatar
+            component={Link}
+            to={`/profile/${searchParams.get("dialogs")}`}
+            alt={peopleCurrent.first_name + peopleCurrent.last_name}
+            src={isLoading ? "" : `${HOST + peopleCurrent.image}`}
+            sx={{ mr: "0.75rem" }}
+          >
+            {isLoading ? <Skeleton loading={isLoading} /> : peopleCurrent?.first_name?.[0]}
+          </Avatar>
+        </Badge>
 
-          <div className={s.person__info}>
-            <ActionLink to={`/profile/${searchParams.get("dialogs")}`} noHover defaultColor size={14} weight={500}>
-              {searchParams.get("dialogs") == myId ? "Избранное" : `${peopleCurrent.first_name} ${peopleCurrent.last_name}`}
-            </ActionLink>
-            <Text style={{ marginLeft: 8, color: "var(--text--secondary)" }}>{peopleCurrent?.online ? "онлайн" : "был в сети ..."}</Text>
-          </div>
-        </div>
-
-        <RightSideBlock />
-      </header>
+        <LinkMui color="neutral" underline="none" level="title-lg" component={Link} to={`/profile/${searchParams.get("dialogs")}`}>
+          <Skeleton loading={isLoading}>
+            {searchParams.get("dialogs") === String(myId) ? "Избранное" : `${peopleCurrent.first_name} ${peopleCurrent.last_name}`}
+          </Skeleton>
+        </LinkMui>
+      </PanelHeader>
     </>
   );
 };
