@@ -1,30 +1,29 @@
-import s from "./Communication.module.scss";
-import Message from "../Message/Message";
-import { useDispatch, useSelector } from "react-redux";
+import { ArrowDownward } from "@mui/icons-material";
+import { Box, CircularProgress, IconButton, useTheme } from "@mui/joy";
 import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { clearMessage, currentMessage, setMessage, setWidthDialogBlock } from "../../../../redux/slices/messageSlice";
-import _ from "underscore";
-import { MyContext } from "../../../Layout/Layout";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { useGetMessageQuery, usePaginationMutation } from "./api/messageApiSlice";
-import { addTimeMessage } from "../../helpers/addTimeMessage";
-import LoaderWrapper from "../../../../components/ui/LoaderWrapper/LoaderWrapper";
-import { FiArrowDown } from "react-icons/fi";
+import _ from "underscore";
+import UseMatchMedia from "../../../../components/hooks/useMatchMedia";
+import { clearMessage, currentMessage, setMessage, setWidthDialogBlock } from "../../../../redux/slices/messageSlice";
 import { helperMessage } from "../../../../utils/utils";
-import Loader from "../../../../components/ui/Loader/Loader";
+import { MyContext } from "../../../Layout/Layout";
+import { addTimeMessage } from "../../helpers/addTimeMessage";
+import Message from "../Message/Message";
+import { useGetMessageQuery, usePaginationMutation } from "./api/messageApiSlice";
 
 const Communication = () => {
   const dispatch = useDispatch();
   const message = useSelector((state) => state.message.message);
   const myId = useSelector((state) => state.user.aboutUser.id);
-
+  const { isMobile } = UseMatchMedia();
   const people = useSelector((state) => state.people.people);
   let { newMessage } = useContext(MyContext);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [scrollButton, setScrollButton] = useState(false);
 
-  const { data, isFetching:isFetchingMessages } = useGetMessageQuery(searchParams.get("dialogs"), {
+  const { data, isFetching: isFetchingMessages } = useGetMessageQuery(searchParams.get("dialogs"), {
     refetchOnMountOrArgChange: true,
   });
 
@@ -125,48 +124,81 @@ const Communication = () => {
   const outputMessages = useMemo(() => {
     return addTimeMessage(message?.results);
   }, [message?.results]);
-  
+
+  const theme = useTheme();
 
   if (isFetchingMessages) {
     return (
-      <div className={s.block__messages}>
-        <LoaderWrapper top={isLoadingPagination ? 1 : 0}>
-          <Loader visible={isFetchingMessages || isLoadingPagination} />
-        </LoaderWrapper>
-      </div>
+      <Box flexGrow={1} position="relative" bgcolor={theme.vars.palette.background.body}>
+        <Box position="absolute" top="50%" left="50%">
+          <CircularProgress />
+        </Box>
+      </Box>
     );
   }
 
   return (
-    <div className={s.block__messages} ref={getBlockMessage}>
-      {outputMessages
-        .map((obj, index, arr) =>
-          helperMessage(arr?.[index], arr?.[index - 1]) ? (
-            <Message
-              key={obj?.type === "Date" ? `${obj.time}_time` : obj.id}
-              obj={obj}
-              margin={true}
-              handlerCurrentMessage={() => handlerCurrentMessage(obj)}
-            />
-          ) : (
-            <Message
-              key={obj?.type === "Date" ? `${obj.time}_time` : obj.id}
-              obj={obj}
-              margin={false}
-              handlerCurrentMessage={() => handlerCurrentMessage(obj)}
-            />
-          ),
-        )
-        .reverse()}
+    <Box
+      bgcolor={theme.vars.palette.background.body}
+      sx={{
+        overflowY: "auto",
+        overflowX: "hidden",
+        height: "100%",
+        "&::-webkit-scrollbar-track": {
+          transition: "all .3s",
+          borderRadius: "sm",
+        },
+        "&::-webkit-scrollbar": {
+          transition: "all .3s",
+          width: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          transition: "all .3s",
+          borderRadius: "sm",
+          background: theme.vars.palette.background.level2,
+        },
+      }}
+    >
+      <Box
+        sx={{
+          width: isMobile ? "100vw" : "calc(100% - 25vh)",
+          m: "0 auto",
+          height: "100%",
+          maxWidth: "50rem",
+        }}
+        flexGrow={1}
+        position="relative"
+        ref={getBlockMessage}
+      >
+        {outputMessages
+          .map((obj, index, arr) =>
+            helperMessage(arr?.[index], arr?.[index - 1]) ? (
+              <Message
+                key={obj?.type === "Date" ? `${obj.time}_time` : obj.id}
+                obj={obj}
+                margin={true}
+                handlerCurrentMessage={() => handlerCurrentMessage(obj)}
+              />
+            ) : (
+              <Message
+                key={obj?.type === "Date" ? `${obj.time}_time` : obj.id}
+                obj={obj}
+                margin={false}
+                handlerCurrentMessage={() => handlerCurrentMessage(obj)}
+              />
+            ),
+          )
+          .reverse()}
 
-      {scrollButton && (
-        <div className={s.button__down} onClick={dialogDown}>
-          <span>
-            <FiArrowDown />
-          </span>
-        </div>
-      )}
-    </div>
+        {scrollButton && (
+          <Box sx={{ width: "100%", position: "sticky", display: "flex", justifyContent: "flex-end", bottom: "0.5rem" }}>
+            <IconButton size="lg" variant="soft" onClick={dialogDown}>
+              <ArrowDownward />
+            </IconButton>
+          </Box>
+        )}
+      </Box>
+    </Box>
   );
 };
 

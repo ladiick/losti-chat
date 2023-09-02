@@ -1,7 +1,7 @@
 import { reTime } from "../../../../../../components/actions/reTime.js";
 import s from "./PeopleItem.module.scss";
 
-import { Avatar, Badge, Chip, ListItem, ListItemButton, Stack, Typography } from "@mui/joy";
+import { Avatar, Badge, Box, Chip, ListItem, ListItemButton, Stack, Typography } from "@mui/joy";
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { HOST } from "../../../../../../components/api/HOST.js";
@@ -35,16 +35,13 @@ const PeopleItem = ({ flag, message, time, handlerPeople, obj, index }) => {
   return (
     <ListItem className={s.main__wrapper} title={obj.first_name + " " + obj.last_name}>
       <ListItemButton
+        selected={activeItem}
         to={`/?dialogs=${obj.pk}`}
         component={Link}
-        end
         onClick={handlerPeople}
         variant="outlined"
         color="primary"
-        sx={(theme) => ({
-          borderRadius: theme.radius.sm,
-          backgroundColor: activeItem && theme.vars.palette.primary.outlinedHoverBg,
-        })}
+        sx={{ borderRadius: "sm" }}
       >
         <Stack direction="row" alignItems="center" width={"100%"}>
           <Badge color="success" badgeInset="14%" invisible={!obj.online} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
@@ -52,10 +49,11 @@ const PeopleItem = ({ flag, message, time, handlerPeople, obj, index }) => {
           </Badge>
           <Stack width={"100%"} sx={{ marginLeft: "0.75rem" }} spacing={0.5}>
             <Stack alignItems={"center"} direction={"row"}>
-              <Typography component={"h3"} level={"bodyM"} flexGrow={1}>
+              <Typography component={"h3"} level={"bodyM"} sx={{ justifyContent: "flex-start" }} noWrap={true}>
                 {obj.first_name} {obj.last_name}
               </Typography>
-              <Typography level={"body-xs"}>{reTime(time)}</Typography>
+              <Box flexGrow={1}/>
+              <Typography level={"body-xs"} flexShrink={0}>{reTime(time)}</Typography>
             </Stack>
             <Stack alignItems={"center"} direction={"row"}>
               <Typography component={"p"} level={"bodyM"} flexGrow={1}>

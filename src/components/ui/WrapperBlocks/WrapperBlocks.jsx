@@ -1,19 +1,10 @@
 import { Sheet, Stack } from "@mui/joy";
 import React from "react";
-const WrapperBlocks = ({ header, children, ...props }) => {
+const WrapperBlocks = ({ header, children, componentHeader, ...props }) => {
   return (
-    <Sheet
-      sx={(theme) => ({
-        p: "0.75rem",
-        backgroundColor: "#e9ebee",
-        [theme.getColorSchemeSelector("dark")]: {
-          backgroundColor: "rgba(20 20 20 / 1)",
-        },
-      })}
-      {...props}
-    >
+    <Sheet {...props}>
       {header && (
-        <Stack direction="row" alignItems="center" spacing={2} component={"header"}>
+        <Stack direction="row" alignItems="center" spacing={2} component={componentHeader}>
           {header}
         </Stack>
       )}

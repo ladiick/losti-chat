@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import s from "./DialogWindow.module.scss";
 import Communication from "./components/Communication/Communication";
 
 import { useGetCurrentPersonQuery } from "../../components/features/currentPeopleApiSlice";
 import useMatchMedia from "../../components/hooks/useMatchMedia";
 
-import Text from "../../components/ui/Text/Text";
 import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
 import { openModalBlock, setOpenDetailedImage } from "../../redux/slices/navigationSlice";
 
-import { IoChatbubblesSharp } from "react-icons/io5";
+import { Forum } from "@mui/icons-material";
+import { Stack, Typography, useTheme } from "@mui/joy";
 import AttachmentsInDialogs from "../AllModals/AttachmentsInDialogs/AttachmentsInDialogs";
 import DetailedImage from "../AllModals/AttachmentsInDialogs/components/DetailedImage/DetailedImage";
 import ViewForwardedMessage from "../AllModals/ViewForwardedMessage/ViewForwardedMessage";
@@ -21,6 +20,7 @@ import HeaderChat from "./components/HeaderChat/HeaderChat";
 import HeaderForwardMessage from "./components/HeaderForwardMessage/HeaderForwardMessage";
 
 const Chat = () => {
+  const theme= useTheme()
   const dispatch = useDispatch();
   const myId = useSelector((state) => state.user.aboutUser.id);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -71,22 +71,21 @@ const Chat = () => {
 
   if (!searchParams.get("dialogs") && !isMobile) {
     return (
-      <WrapperBlocks className={s.emptity__chat}>
-        <div className={s.emptity__content}>
-          <IoChatbubblesSharp size={56} color="var(--text--accent)" />
-          <Text style={{ marginTop: 10 }}>Выберите чат</Text>
-        </div>
+      <WrapperBlocks>
+        <Stack alignItems="center" justifyContent="center" height="100%">
+          <Forum sx={{ width: "3rem", height: "3rem" }} />
+          <Typography>Выберите чат</Typography>
+        </Stack>
       </WrapperBlocks>
     );
   }
 
   return (
-    <WrapperBlocks className={s.wrapper}>
+    <WrapperBlocks sx={{ p: 0, display: "flex", flexDirection: "column", bgcolor: theme.vars.palette.background.body }}>
       <HeaderChat myId={myId} isLoading={isLoading} peopleCurrent={peopleCurrent} />
 
       <DragAndDropFileUpload style={{ display: "contents" }}>
         <Communication />
-
         {currentMessage?.[searchParams.get("dialogs")]?.length && isMobile ? <HeaderForwardMessage /> : <BlockInputs />}
       </DragAndDropFileUpload>
 
