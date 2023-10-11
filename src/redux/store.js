@@ -8,8 +8,7 @@ import registration from "../modules/Registration/store/registrationStepsSlice";
 import { apiSlice } from "../components/api/apiSlice";
 import theme from "../redux/slices/themeSlice";
 import dragAndDrop from './slices/dragAndDropSlice'
-// import {dialogsAPI} from "../components/api/apiSlice";
-
+import pages from './slices/pages'
 export const store = configureStore({
   reducer: {
     user,
@@ -20,6 +19,7 @@ export const store = configureStore({
     registration,
     theme,
     dragAndDrop,
+    pages,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   // message.sendMessageOnCha

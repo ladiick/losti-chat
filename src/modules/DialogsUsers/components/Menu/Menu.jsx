@@ -43,7 +43,9 @@ const HeaderMenu = () => {
           <Sheet component={"header"} sx={{ borderBottom: "1px solid", borderColor: "divider", pb: "0.75rem" }}>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
               <Avatar size="lg" />
-              <IconButton onClick={() => setMode(mode === "dark" ? "light" : "dark")}>{mode === "dark" ? <LightMode /> : <DarkMode />}</IconButton>
+              <IconButton onClick={() => setMode(mode === "dark" ? "light" : "dark")}>
+                {mode === "dark" ? <LightMode /> : <DarkMode />}
+              </IconButton>
             </Stack>
             <Typography component={"h3"} level={"h4"} mt={1}>
               ladick

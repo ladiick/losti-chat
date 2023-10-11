@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Dialogs from "../../Pages/Dialogs/Dialogs";
 import { useGetUserQuery } from "../../components/features/userApiSlice";
 import useWebsocket from "../../components/hooks/useWebsocket";
 import Home from "./components/Home/Home";
@@ -9,7 +9,6 @@ import Home from "./components/Home/Home";
 export const MyContext = React.createContext();
 
 const Layout = () => {
-  const isAuth = useSelector((state) => state.user.isAuth);
   const userAccessToken = useSelector((state) => state.user.tokens.access);
   const [socket, statusSocket, newMessage] = useWebsocket(userAccessToken);
 
@@ -29,7 +28,11 @@ const Layout = () => {
     <>
       <MyContext.Provider value={{ socket, statusSocket, newMessage }}>
         <Home>
-          <Outlet />
+          <Dialogs>
+            <Suspense>
+              <Dialogs />
+            </Suspense>
+          </Dialogs>
         </Home>
       </MyContext.Provider>
 

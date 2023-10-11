@@ -1,68 +1,84 @@
-import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
-import s from './BlockMessage.module.scss'
-import WrapperMessage from "../WrapperMessage/WrapperMessage";
-import {BsCheckCircleFill} from "react-icons/bs";
-import {MdEdit} from "react-icons/md";
-import {FaShare} from "react-icons/fa";
-import {AnimatePresence, motion} from 'framer-motion'
+import { Box, useTheme } from "@mui/joy";
+import React, { useCallback } from "react";
+import { convertTime } from "../../../../../components/actions/convertTime";
+const BlockMessage = React.memo(({ children, activeMessage, time, pos, sx, wrapperStyles,timeStyles, ...props }) => {
+  const theme = useTheme();
+  const scheme = localStorage.getItem("joy-mode");
 
-const BlockMessage = React.memo(({children, activeMessage, time, pos, ...props}) => {
+  const refMessage = useCallback((ref) => {
+    if (ref) {
+      // ref.scrollIntoView(true);
+    }
+  }, []);
 
-
-
-	const refMessage = useCallback((ref) => {
-		if (ref) {
-			ref.scrollIntoView(true)
-		}
-	}, []);
-
-
-	const icons = pos === 'right' ?
-		<>
-			<BsCheckCircleFill/>
-			<MdEdit
-				title='Редактировать'
-				style={{marginLeft: 10, color: 'var(--decription-color)'}}/>
-		</>
-		: pos === 'left' ?
-			<>
-				<BsCheckCircleFill style={{margin: '0 10px'}}/>
-				<FaShare
-					title='Ответить'
-					style={{color: 'var(--decription-color)'}}/>
-			</>
-			:
-			''
-
-	const classNameRecipient =
-		activeMessage
-			? ` ${s.wrapper__message} ${s.wrapper__recipient} ${s.wrapper__recipient__active}`
-			: `${s.wrapper__message} ${s.wrapper__recipient}`
-
-	const classNameSender =
-		activeMessage
-			? ` ${s.wrapper__message} ${s.wrapper__sender} ${s.wrapper__sender__active}`
-			: `${s.wrapper__message} ${s.wrapper__sender}`
-
-	const classNameWrapper = pos === 'right' ? classNameRecipient : pos === 'left' ? classNameSender : ''
-	const classNameIcons = pos === 'right' ? s.current__message__left : pos === 'left' ? s.current__message__right : ''
-
-
-	return (
-
-		<div
-			ref={refMessage}
-			className={classNameWrapper}
-			{...props}>
-			<div className={classNameIcons}>
-				{icons}
-			</div>
-			<WrapperMessage pos={pos} time={time}>
-				{children}
-			</WrapperMessage>
-		</div>
-
-	);
+  return (
+    <Box
+      ref={refMessage}
+      sx={{
+        position: "relative",
+        mb: "0.5rem",
+        textAlign: pos === "right" ? "right" : "left",
+        "&:before": {
+          content: '""',
+          cursor: "pointer",
+          position: "absolute",
+          top: "-0.2rem",
+          bottom: "-0.2rem",
+          left: "-50vw",
+          right: "-50vw",
+          background: "#000",
+          zIndex: "0",
+          opacity: activeMessage ? "0.6" : "0",
+          transition: "all 0.3s",
+        },
+        ...sx,
+      }}
+      {...props}
+    >
+      <Box
+        onClick={(e) => e.stopPropagation()}
+        sx={{
+          userSelect: "text",
+          p: ".3125rem .5rem .375rem",
+          whiteSpace: "pre-line",
+          display: "inline-block",
+          maxWidth: "80%",
+          wordBreak: "break-word",
+          wordWrap: "break-word",
+          position: "relative",
+          borderRadius: pos === "left" ? "16px 16px 16px 4px" : "16px 16px 4px 16px",
+          textAlign: "justify",
+          bgcolor: scheme === "dark" ? theme.vars.palette.neutral.outlinedHoverBg : "#4E73F814",
+          "@media(max-width: 768px)": {
+            maxWidth: "98%",
+          },
+          ...wrapperStyles,
+        }}
+      >
+        {children}
+        <Box
+          sx={{
+            cursor: "pointer",
+            userSelect: 'none',
+            whiteSpace: "nowrap",
+            wordBreak: "normal",
+            fontSize: ".75rem",
+            fontWeight: "600",
+            color: `rgba(${theme.vars.palette.neutral.lightChannel} / 0.6)`,
+            display: "flex",
+            position: "relative",
+            top: "7px",
+            bottom: "auto",
+            float: "right",
+            marginLeft: "0.4375rem",
+            ...timeStyles,
+          }}
+        >
+          {convertTime(time)}
+        </Box>
+      </Box>
+    </Box>
+  );
 });
 
 export default BlockMessage;

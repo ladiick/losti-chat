@@ -26,7 +26,7 @@ const DetailedImage = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { data: imageSrc, isLoading } = useGetImageInMessageQuery(searchParams?.get("photo"));
+  const { data: imageSrc, isLoading } = useGetImageInMessageQuery(searchParams?.get("photo"), { skip: !searchParams?.get("photo") });
 
   const closeFunc = () => {
     if (openFromDialog) {

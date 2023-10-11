@@ -1,13 +1,29 @@
-import s from "./MessageImage.module.scss";
-import React from "react";
-import { useSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setOpenDetailedImage, setOpenFromDialog } from "../../../../../redux/slices/navigationSlice";
-import { useGetImageInMessageQuery } from "../../../../../components/features/getImageInMessageApiSlice";
+import { Box, Skeleton } from "@mui/joy"
+import React, { useMemo } from "react"
+import { useDispatch } from "react-redux"
+import { useSearchParams } from "react-router-dom"
+import { useGetImageInMessageQuery } from "../../../../../components/features/getImageInMessageApiSlice"
+import { setOpenDetailedImage, setOpenFromDialog } from "../../../../../redux/slices/navigationSlice"
+import s from "./MessageImage.module.scss"
 
-const Image = React.memo(({ idImage, attachments, style }) => {
+const Image = React.memo(({ idImage, attachments, style, index, length }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
+
+  const borderRadiusImage = useMemo(() => {
+    if (length === 1) {
+      return '16px 16px 0 0'
+    }
+    if (length === 2) {
+      return index === 0 ? '16px 0 0 0' : index === 1 ? '0 16px 0 0' : ''
+    }
+    if (length > 2) {
+      return index === 0 ? '16px 0 0 0'
+        : index === 1 ? '0 16px 0 0'
+          : index > 2 ? '0' : ""
+    }
+
+  },[index, length])
 
   const { data, isLoading } = useGetImageInMessageQuery(idImage, {
     skip: !idImage,
@@ -29,23 +45,31 @@ const Image = React.memo(({ idImage, attachments, style }) => {
   if (attachments) {
     return (
       <div className={s.wrapper__attachments__images} style={style} onClick={(e) => detailedImage(e)}>
-        <img src={data} alt={"pictures"} loading='lazy'/>
+        <img src={data} alt={"pictures"} loading="lazy" />
       </div>
     );
   }
 
   return (
-    <>
-      {!isLoading ? (
-        <div className={s.wrapper__image} style={style} onClick={(e) => detailedImage(e)}>
-          <img src={data} alt={"pictures"} loading="lazy" />
-        </div>
-      ) : (
-        <div className={s.wrapper__image} style={style} onClick={(e) => detailedImage(e)}>
-          <span className={s.loader}></span>
-        </div>
-      )}
-    </>
+    <Skeleton loading={isLoading} variant="overlay">
+      <Box
+        sx={{
+          display: "inline-block",
+          flex: "1 calc(50% - 0.2rem)",
+          overflow: "hidden",
+          "& img": {
+            overflow: "hidden",
+            maxWidth: "100%",
+            objectFit: "cover",
+            height: "100%",
+            width: "100%",
+            borderRadius: borderRadiusImage,
+          },
+        }}
+      >
+        <img src={data} alt="pictures" onClick={(e) => detailedImage(e)} />
+      </Box>
+    </Skeleton>
   );
 });
 

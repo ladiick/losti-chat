@@ -22,6 +22,9 @@ const initialState = {
   // from which URL the image was opened
 
   openFromDialog: true,
+
+  // search
+  searchValue: ""
 };
 
 export const navigationSlice = createSlice({
@@ -29,6 +32,9 @@ export const navigationSlice = createSlice({
   initialState,
 
   reducers: {
+    setSearchValue(state, action) {
+      state.searchValue = action.payload;
+    },
     openModalBlock(state, action) {
       state.modal.writeFriend = action.payload.writeFriend;
       state.modal.viewForwardMessage = action.payload.viewForwardMessage;
@@ -59,7 +65,7 @@ export const navigationSlice = createSlice({
   },
 });
 
-export const { openModalBlock, openChatBlock, searchFriend, deleteFriend, forwardMessageFlag, setOpenDetailedImage, setOpenFromDialog } =
+export const { openModalBlock, openChatBlock, searchFriend, deleteFriend, forwardMessageFlag, setOpenDetailedImage, setOpenFromDialog, setSearchValue } =
   navigationSlice.actions;
 
 export default navigationSlice.reducer;

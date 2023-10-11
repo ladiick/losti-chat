@@ -1,37 +1,31 @@
 import { Search } from "@mui/icons-material";
-import { Input } from "@mui/joy";
-import { useContext, useState } from "react";
-import useMatchMedia from "../../components/hooks/useMatchMedia";
-import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
+import { CircularProgress, Input } from "@mui/joy";
+import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchValue } from "../../redux/slices/navigationSlice";
 import { MyContext } from "../Layout/Layout";
-import ConnectionLost from "./components/ConnetionLost/ConnectionLost";
 import MainHeader from "./components/MainHeader/MainHeader";
 import People from "./components/People/ListPeople";
 const DialogsUsers = () => {
-  const [searchValue, setSearch] = useState("");
-  const { isMobile } = useMatchMedia();
+  const dispatch = useDispatch();
+  const { searchValue } = useSelector((state) => state.navigation);
   const { statusSocket } = useContext(MyContext);
-
   return (
-    <WrapperBlocks sx={{ width: isMobile ? "100%" : "436px", position: "relative", borderRight: "1px solid", borderColor: "divider" }}>
+    <>
       <MainHeader>
-        {statusSocket === "pending" ? (
-          <ConnectionLost />
-        ) : (
-          <Input
-            fullWidth
-            endDecorator={<Search />}
-            type="text"
-            placeholder="Поиск"
-            value={searchValue}
-            maxLength="30"
-            onChange={({ target: { value } }) => setSearch(value)}
-          />
-        )}
+        <Input
+          fullWidth
+          endDecorator={statusSocket === "pending" ? <CircularProgress color="danger" value={50} size="sm" variant="plain" /> : <Search />}
+          type="text"
+          placeholder={statusSocket === "pending" ? "Соединение..." : "Поиск"}
+          value={searchValue}
+          maxLength="30"
+          onChange={({ target: { value } }) => dispatch(setSearchValue(value))}
+          sx={{ boxShadow: "xs" }}
+        />
       </MainHeader>
-
-      <People searchValue={searchValue} setSearch={setSearch} />
-    </WrapperBlocks>
+      <People />
+    </>
   );
 };
 

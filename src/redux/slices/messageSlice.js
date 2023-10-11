@@ -1,143 +1,113 @@
-import {createSlice} from "@reduxjs/toolkit";
-
-
+import { createSlice } from "@reduxjs/toolkit";
+import _ from "underscore";
 const initialState = {
-	message: {},
-	currentMessage: {},
-	sendMessageOnChat: {},
-	forwardManyMessage: {},
-	widthDialogBlock: null
-}
-
+  message: {},
+  currentMessage: {},
+  sendMessageOnChat: {},
+  forwardManyMessage: {},
+};
 
 export const messageSlice = createSlice({
-	name: 'message',
-	initialState,
+  name: "message",
+  initialState,
 
-	reducers: {
-		addMessage(state, action) {
+  reducers: {
+    addMessage(state, action) {
+      if (_.isEmpty(state.message)) {
+        state.message = { ...action.payload };
+      }
 
-			state.message.next = action.payload.next
+      state.message.next = action.payload.next;
 
-			let indexOldMessage = action.payload.results.findIndex(obj => {
-				if (state.message.results[state.message.results.length - 1].id === obj.id) {
-					return true
-				} else {
-					return false
-				}
+      const indexOldMessage = action.payload.results.findIndex((obj) => {
+        return state.message.results[state.message.results.length - 1].id === obj.id;
+      });
 
-			})
+      if (indexOldMessage !== -1) {
+        state.message.results = [...state.message.results, ...action.payload.results.slice(indexOldMessage + 1)];
+      } else {
+        // Иначе просто добавляем все результаты из action.payload.results
+        state.message.results = [...state.message.results, ...action.payload.results];
+      }
+    },
 
-			if (indexOldMessage !== -1) {
-				state.message.results = [...state.message.results, ...action.payload.results.slice(indexOldMessage + 1, action.payload.length)]
-			} else {
-				state.message.results = [...state.message.results, ...action.payload.results]
-			}
-		},
+    setMessage: (state, action) => {
+      state?.message?.results?.unshift(action?.payload);
+    },
+    currentMessage(state, action) {
+      const { param, obj } = action.payload;
 
-		newMessages(state, action) {
-			state.message = action.payload
-		},
+      if (!(param in state.currentMessage)) {
+        state.currentMessage = {
+          ...state.currentMessage,
+          [param]: [],
+        };
+      }
 
-		setMessage: (state, action) => {
-			state?.message?.results?.unshift(action?.payload)
-		},
-		currentMessage(state, action) {
+      const indexMessage = state.currentMessage[param].findIndex((message) => message.id === obj.id);
 
-			if (action.payload.param in state.currentMessage) {
+      if (indexMessage === -1) {
+        state.currentMessage[param].push(obj);
+        state.currentMessage[param].sort((a, b) => a.id - b.id);
+      } else {
+        state.currentMessage[param].splice(indexMessage, 1);
+      }
+    },
 
-				const indexMessage = state.currentMessage[action.payload.param].findIndex((message, index) => {
-					if (message.id === action.payload.obj.id) {
-						return true
-					}
-				})
+    clearMessage(state, action) {
+      state.currentMessage[action.payload.param] = [];
+    },
 
-				if (indexMessage === -1) {
-					state.currentMessage[action.payload.param].push(action.payload.obj)
-					state.currentMessage[action.payload.param].sort((a, b) => a.id - b.id)
-				} else {
-					state.currentMessage[action.payload.param].splice(indexMessage, 1)
-				}
+    sendMessagesOnChat(state, action) {
+      if (!(action.payload.param in state.sendMessageOnChat)) {
+        state.sendMessageOnChat[action.payload.param] = {
+          sendMessage: "",
+          forwardMessage: [],
+          answerMessage: {},
+          file: [],
+        };
+      }
 
-			} else {
-				state.currentMessage = {
-					...state.currentMessage,
-					[action.payload.param]: []
-				}
-				state.currentMessage[action.payload.param].push(action.payload.obj)
+      if (action.payload.message) {
+        state.sendMessageOnChat[action.payload.param].sendMessage = action.payload.message;
+      } else {
+        state.sendMessageOnChat[action.payload.param].sendMessage = "";
+      }
 
-			}
+      if (action.payload.forwardMessage) {
+        state.sendMessageOnChat[action.payload.param].forwardMessage = action.payload.forwardMessage;
+      }
 
-		},
+      if (action.payload.answerMessage) {
+        state.sendMessageOnChat[action.payload.param].answerMessage = action.payload.answerMessage;
+      }
 
-		clearMessage(state, action) {
-			state.currentMessage[action.payload.param] = []
-		},
+      if (action.payload.file) {
+        state.sendMessageOnChat[action.payload.param].file = [...state.sendMessageOnChat[action.payload.param].file, ...action.payload.file];
+      }
+    },
+    clearForwardMessage(state, action) {
+      state.sendMessageOnChat[action.payload.param].forwardMessage = [];
+    },
+    clearAnswerMessage(state, action) {
+      state.sendMessageOnChat[action.payload.param].answerMessage = {};
+    },
 
-		sendMessagesOnChat(state, action) {
-
-			if (!(action.payload.param in state.sendMessageOnChat)) {
-				state.sendMessageOnChat[action.payload.param] = {
-					sendMessage: '',
-					forwardMessage: [],
-					answerMessage: {},
-					file: [],
-				}
-
-			}
-
-			if (action.payload.message) {
-				state.sendMessageOnChat[action.payload.param].sendMessage = action.payload.message
-			} else {
-				state.sendMessageOnChat[action.payload.param].sendMessage = ''
-			}
-
-			if (action.payload.forwardMessage) {
-
-				state.sendMessageOnChat[action.payload.param].forwardMessage = action.payload.forwardMessage
-
-			}
-
-			if (action.payload.answerMessage) {
-				state.sendMessageOnChat[action.payload.param].answerMessage = action.payload.answerMessage
-			}
-
-			if(action.payload.file){
-				state.sendMessageOnChat[action.payload.param].file = [...state.sendMessageOnChat[action.payload.param].file, ...action.payload.file]
-			}
-
-		},
-		clearForwardMessage(state, action) {
-			state.sendMessageOnChat[action.payload.param].forwardMessage = []
-		},
-		clearAnswerMessage(state, action) {
-			state.sendMessageOnChat[action.payload.param].answerMessage = {}
-		},
-
-		setForwardMessageIfMany(state, action){
-			state.forwardManyMessage = action.payload
-		},
-
-		setWidthDialogBlock(state, action){
-			state.widthDialogBlock = action.payload
-		}
-
-	},
-
-
-})
+    setForwardMessageIfMany(state, action) {
+      state.forwardManyMessage = action.payload;
+    },
+  },
+});
 
 export const {
-	setMessage,
-	addMessage,
-	newMessages,
-	currentMessage,
-	clearMessage,
-	sendMessagesOnChat,
-	clearForwardMessage,
-	clearAnswerMessage,
-	setForwardMessageIfMany,
-	setWidthDialogBlock
-} = messageSlice.actions
+  setMessage,
+  addMessage,
+  currentMessage,
+  clearMessage,
+  sendMessagesOnChat,
+  clearForwardMessage,
+  clearAnswerMessage,
+  setForwardMessageIfMany,
+} = messageSlice.actions;
 
-export default messageSlice.reducer
+export default messageSlice.reducer;
