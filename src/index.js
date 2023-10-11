@@ -7,21 +7,40 @@ import App from "./App";
 import "./index.scss";
 import "./normalize.css"; // должен быть сверху
 import { store } from "./redux/store";
+import { colorPalette } from './colorPalette'
 
 const theme = extendTheme({
+  colorSchemes: {
+    light: {
+      palette: {
+        ...colorPalette,
+        background: {
+          body: "var(--joy-palette-neutral-300)",
+        },
+      },
+    },
+    dark: {
+      palette: {
+        ...colorPalette,
+        background: {
+          body: "#101010",
+        },
+      },
+    },
+  },
   radius: {
-    xs: "6px",
-    sm: "8px",
-    md: "12px",
-    lg: "16px",
-    xl: "20px",
+    xs: "10px",
+    sm: "12px",
+    md: "16px",
+    lg: "20px",
+    xl: "24px",
   },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <CssVarsProvider theme={theme} defaultMode="system">
+    <CssVarsProvider theme={theme} defaultMode="dark">
       <CssBaseline />
       <GlobalStyles styles={{ body: { overflow: "hidden" } }} />
       <App />

@@ -1,29 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
-import useMatchMedia from "../../../../../components/hooks/useMatchMedia";
-import { outputOfImagesInMessage } from "../../../../../utils/outputAttachmentsPhotos";
+import { Box } from "@mui/joy";
+import React from "react";
 import Image from "./Image";
-import s from "./MessageImage.module.scss";
-const MessageImage = React.memo(({ images }) => {
-  const containerWidth = useRef();
-  const [generalImages, setGeneralImages] = useState([]);
-  const { isMobile } = useMatchMedia();
-  useEffect(() => {
-    if (images) {
-      setGeneralImages(outputOfImagesInMessage(images, isMobile ? document.body.clientWidth : 580*0.7));
-    }
-  }, [images, isMobile]);
-
-  useEffect(() => {
-    containerWidth?.current?.scrollIntoView(true);
-  }, [containerWidth?.current?.clientWidth]);
-
+const MessageImage = ({ images }) => {
   return (
-    <div className={s.wrapper__images} ref={containerWidth}>
-      {generalImages?.map((image) => (
-        <Image key={image?.id} style={{ width: image.width, height: image.height }} idImage={image?.id} />
+    <Box
+      sx={{
+        flexShrink: "1",
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "0.2rem",
+      }}
+    >
+      {images?.map((image, index) => (
+        <Image key={image?.id} index={index} idImage={image?.id} length={images.length} />
       ))}
-    </div>
+    </Box>
   );
-});
+};
 
 export default MessageImage;

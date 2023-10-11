@@ -3,12 +3,12 @@ import { useSearchParams } from "react-router-dom";
 import useMatchMedia from "../../../../components/hooks/useMatchMedia";
 import Loader from "../../../../components/ui/Loader/Loader";
 import LoaderWrapper from "../../../../components/ui/LoaderWrapper/LoaderWrapper";
-import { openChatBlock } from "../../../../redux/slices/navigationSlice";
+import { openChatBlock, setSearchValue } from "../../../../redux/slices/navigationSlice";
 import { setIndex } from "../../../../redux/slices/peopleSlice";
 import s from "./ListPeople.module.scss";
 import { useGetPeopleQuery } from "./api/peopleApiSlice.js";
 import PeopleItem from "./components/PeopleItem/PeopleItem";
-import { List } from '@mui/joy'
+import { List, Typography } from '@mui/joy'
 
 const errorStyles = {
   width: "100%",
@@ -21,12 +21,11 @@ const errorStyles = {
   transform: "translate(-50%,-50%)",
 };
 
-const People = ({ searchValue, setSearch }) => {
+const People = () => {
   const dispatch = useDispatch();
   const myId = useSelector((state) => state.user.aboutUser.id);
-  const [, setSearchParams] = useSearchParams();
   const people = useSelector((state) => state.people.people);
-
+  const {searchValue} = useSelector(state=>state.navigation)
   //*request
   const { isLoading, isError } = useGetPeopleQuery();
   //*request
@@ -39,7 +38,7 @@ const People = ({ searchValue, setSearch }) => {
       dispatch(openChatBlock(true));
     }
     // setSearchParams({ dialogs: current__obj.pk });
-    setSearch("");
+    dispatch(setSearchValue(""));
   };
 
   return (
@@ -51,7 +50,7 @@ const People = ({ searchValue, setSearch }) => {
       : null
       }
 
-      {isError && <span style={errorStyles}>Ошибка, не удалось загрузить диалоги</span>}
+      {isError && <Typography color='danger'>Ошибка, не удалось загрузить диалоги</Typography>}
       <List className={s.wrapper__items}>
         {people
           ?.filter((people) =>
@@ -69,8 +68,6 @@ const People = ({ searchValue, setSearch }) => {
                 time={obj.time}
                 handlerPeople={() => handlerPeople(obj.recip, index)}
                 obj={obj?.recip}
-                obj2={obj}
-                index={index}
               />
             ) : (
               <PeopleItem
@@ -79,7 +76,6 @@ const People = ({ searchValue, setSearch }) => {
                 time={obj.time}
                 handlerPeople={() => handlerPeople(obj.sender, index)}
                 obj={obj?.sender}
-                index={index}
               />
             ),
           )}
@@ -89,18 +85,3 @@ const People = ({ searchValue, setSearch }) => {
 };
 
 export default People;
-
-// : obj.sender.pk === myId && obj.recip.pk === myId ? (
-//               <PeopleItem
-//                 key={0}
-//                 id={obj.sender.pk}
-//                 firstName={"Избранное"}
-//                 lastName={""}
-//                 message={obj.message}
-//                 time={obj.time}
-//                 img={favorite}
-//                 handlerPeople={() => handlerPeople(obj.sender, index)}
-//                 obj={obj.sender}
-//                 index={index}
-//               />
-//             )
