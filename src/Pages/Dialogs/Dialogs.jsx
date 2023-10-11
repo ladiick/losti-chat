@@ -3,16 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import DialogWindow from "../../modules/DialogWindow/DialogWindow";
 
-import DialogsUsers from "../../modules/DialogsUsers/DialogsUsers";
 import useMatchMedia from "../../components/hooks/useMatchMedia";
-import { openChatBlock } from "../../redux/slices/navigationSlice";
 import WhoForwardMessage from "../../modules/AllModals/WhoForwardMessage/WhoForwardMessage";
+import DialogsUsers from "../../modules/DialogsUsers/DialogsUsers";
+import LeftColumn from "../../modules/LeftColumn/LeftColumn";
+import MiddleColumn from "../../modules/MiddleColumn/MiddleColumn";
+import { openChatBlock } from "../../redux/slices/navigationSlice";
 
 const Dialogs = () => {
   const chatActive = useSelector((state) => state.navigation.chat);
   const dispatch = useDispatch();
   const { isMobile } = useMatchMedia();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const forwardMessageFlag = useSelector((state) => state.navigation.forwardMessageFlag);
 
   useEffect(() => {
@@ -30,16 +32,14 @@ const Dialogs = () => {
       <>
         {!chatActive && <DialogsUsers />}
         {chatActive && <DialogWindow />}
-        {forwardMessageFlag && <WhoForwardMessage />}
       </>
     );
   }
 
   return (
     <>
-      <DialogsUsers />
-      <DialogWindow />
-      {forwardMessageFlag && <WhoForwardMessage />}
+      <LeftColumn />
+      <MiddleColumn />
     </>
   );
 };

@@ -10,7 +10,6 @@ export const getImageInMessageApiSlice = apiSlice.injectEndpoints({
 		})
 	})
 })
-// prepareHeaders: (headers) => headers.set("responseType", "blob")
 
 export const {
 	useGetImageInMessageQuery

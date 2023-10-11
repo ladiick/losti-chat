@@ -5,7 +5,6 @@ const PlaceholderInput = () => {
     <Box
       position="absolute"
       top="1rem"
-      left="0.75rem"
       sx={{ userSelect: "none", cursor: "text", pointerEvents: "none" }}
       component={motion.span}
       initial={{

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import MyFriends from "../../modules/Friends/components/MyFriends/MyFriends";
-import "react-toastify/dist/ReactToastify.css";
-import s from "./Friends.module.scss";
-import FriendRequests from "../../modules/Friends/components/FriendRequests/FriendRequests";
 import { Outlet, useLocation } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import useMatchMedia from "../../components/hooks/useMatchMedia";
+import FriendRequests from "../../modules/Friends/components/FriendRequests/FriendRequests";
+import MyFriends from "../../modules/Friends/components/MyFriends/MyFriends";
 import NavigateFriends from "../../modules/Friends/components/NavigateFriends/NavigateFriends";
 import PossibleFriends from "../../modules/Friends/components/PossibleFriends/PossibleFriends";
-import useMatchMedia from "../../components/hooks/useMatchMedia";
+import s from "./Friends.module.scss";
 
 const Friends = () => {
   const location = useLocation();
@@ -30,7 +30,7 @@ const Friends = () => {
   };
 
   return (
-    <div className={s.friend__page}>
+    <div className={s.friend__page} style={{ position: "fixed", right: 0, top: 0, bottom: 0 }}>
       <div className={s.wrapper__friends}>{ifOutlet()}</div>
       <div className={s.nav__block}>
         {!isMobile && <NavigateFriends />}

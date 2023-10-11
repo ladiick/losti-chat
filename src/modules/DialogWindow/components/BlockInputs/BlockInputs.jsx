@@ -1,88 +1,37 @@
-import { AttachFile, CancelScheduleSend, Send } from "@mui/icons-material";
-import { Box, FormControl, FormLabel, Input, Stack, useTheme } from "@mui/joy";
-import React, { useCallback, useContext, useEffect, useRef } from "react";
-import ContentEditable from "react-contenteditable";
+import { Box, Stack, useTheme } from "@mui/joy";
+import React, { useCallback, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import sanitizeHtml from "sanitize-html";
+
 import _ from "underscore";
-import useMatchMedia from "../../../../components/hooks/useMatchMedia";
-import { sendMessagesOnChat } from "../../../../redux/slices/messageSlice";
-import { MyContext } from "../../../Layout/Layout";
 import BlockAnswerMessage from "../BlockAnswerMessage/BlockAnswerMessage";
 import BlockFilesMessage from "../BlockFilesMessage/BlockFilesMessage";
-import BlockForwardMessages from "../BlockForwardMessages/BlockForwardMessages";
-import PlaceholderInput from "./PlaceholderInput";
-
-const inputHidden = {
-  position: "absolute",
-  width: 1,
-  height: 1,
-  m: -1,
-  border: 0,
-  p: 0,
-  whiteSpace: "nowrap",
-  clipPath: " inset(100%)",
-  clip: "rect(0 0 0 0)",
-  overflow: "hidden",
-};
+import ButtonSendMessage from "./components/ButtonSendMessage/ButtonSendMessage";
+import InputContentEditable from "./components/InputContentEditable/InputContentEditable";
+import InputUploadFiles from "./components/InputUploadFiles/InputUploadFiles";
+import SmileMenu from "./components/SmileMenu/SmileMenu";
+import ToolBar from "./components/ToolBar/ToolBar";
+import { MyContext } from '../../../Layout/Layout'
+import { sendMessagesOnChat } from '../../../../redux/slices/messageSlice'
 
 const BlockInputs = () => {
-  const { isMobile } = useMatchMedia();
   const theme = useTheme();
-  const { socket, statusSocket } = useContext(MyContext);
+  const [searchParams] = useSearchParams();
+  const currentMessageLength = useSelector((state) => state.message?.currentMessage?.[searchParams.get("dialogs")]?.length);
+  const { socket } = useContext(MyContext);
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const forwardMessages = useSelector((state) => state.message.sendMessageOnChat?.[searchParams.get("dialogs")]?.forwardMessage);
+  const content = useSelector((state) => state.message.sendMessageOnChat?.[searchParams.get("dialogs")]?.sendMessage || "");
 
   const answerMessages = useSelector((state) => state.message.sendMessageOnChat?.[searchParams.get("dialogs")]?.answerMessage || {});
 
   const imagesMessages = useSelector((state) => state.message.sendMessageOnChat?.[searchParams.get("dialogs")]?.file || []);
 
-  const content = useSelector((state) => state.message.sendMessageOnChat?.[searchParams.get("dialogs")]?.sendMessage || "");
+  const forwardMessages = useSelector((state) => state.message.sendMessageOnChat?.[searchParams.get("dialogs")]?.forwardMessage);
 
-  const refSend = useRef();
 
-  const refContentEditable = useRef("");
-
-  const downRandomKey = ({ key }) => {
-    if (/^[a-zа-яё0-9]$/i.test(key)) {
-      refContentEditable?.current?.el?.current?.focus();
-    }
-  };
-
-  useEffect(() => {
-    refContentEditable?.current?.el?.current?.focus();
-    window.addEventListener("keydown", downRandomKey);
-    return () => window.removeEventListener("keydown", downRandomKey);
-  }, []);
-
-  const onContentChange = useCallback(
-    (evt) => {
-      const sanitizeConf = {
-        allowedTags: ["b", "i", "a", "p"],
-        allowedAttributes: { a: ["href"] },
-      };
-      if (evt.currentTarget.innerHTML.length > 20000) {
-        dispatch(
-          sendMessagesOnChat({
-            param: searchParams.get("dialogs"),
-            message: "",
-          }),
-        );
-      }
-      dispatch(
-        sendMessagesOnChat({
-          param: searchParams.get("dialogs"),
-          message: sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf),
-        }),
-      );
-    },
-    [dispatch, searchParams.get("dialogs")],
-  );
-  const sendMessage = () => {
-    if (content === "" && forwardMessages?.length === 0 && !_.isEmpty(answerMessages)) {
+  const sendMessage = useCallback(() => {
+    if (content === "" && _.isEmpty(forwardMessages) && _.isEmpty(answerMessages)) {
       return;
     }
 
@@ -108,135 +57,60 @@ const BlockInputs = () => {
         answerMessage: {},
       }),
     );
-  };
-  const handlerKeyDown = (e) => {
-    // if(isMobile){
-    //     console.log(e)
-    //
-    // }
-    if (!e.shiftKey && e.key === "Enter") {
-      e.preventDefault();
-      refSend?.current?.click();
-    }
-  };
-
-  const handlerFilesUploader = (file) => {
-    console.log(file.target.files);
-    dispatch(
-      sendMessagesOnChat({
-        param: searchParams.get("dialogs"),
-        file: file.target.files,
-      }),
-    );
-  };
+  }, [answerMessages, content, dispatch, forwardMessages, searchParams, socket]);
 
   return (
-    <Box mb="1.25rem">
-      <Box
-        bgcolor={theme.vars.palette.background.surface}
+    <Box
+      mb="1.25rem"
+      px="1rem"
+      sx={{
+        "@media (max-width: 768px)": {
+          mb: "0",
+          px: "0",
+        },
+      }}
+    >
+      <Stack
+        direction="row"
         sx={{
-          width: isMobile ? "100vw" : "calc(100% - 25vh)",
-          m: "0 auto",
           maxWidth: "50rem",
-          borderRadius: "sm",
+          width: currentMessageLength ? "80%" :"100%",
+          m: "0 auto",
+          gap: "0.5rem",
+          transition: 'all .3s',
+          "@media (min-width: 1276px)": {
+            width: "calc(100% - 25vh)",
+          },
         }}
       >
-        {answerMessages && Object.keys(answerMessages)?.length !== 0 && <BlockAnswerMessage message={answerMessages} />}
+        <Box
+          bgcolor={theme.vars.palette.background.surface}
+          sx={{
+            width: "100%",
+            m: "0",
+            borderRadius: "sm",
+            "@media (max-width: 768px)": {
+              borderRadius: "0",
+            },
+          }}
+        >
+          {!_.isEmpty(answerMessages) && <BlockAnswerMessage message={answerMessages} />}
 
-        <Stack direction="row" alignItems="center" width="100%">
-          <FormControl sx={{ ml: "0.75rem", alignSelf: "flex-end", height: "3.5rem", justifyContent: "center", flexShrink: 0 }}>
-            <FormLabel
-              sx={{
-                m: 0,
-                cursor: "pointer",
-                "& svg": {
-                  transform: "rotate(45deg)",
-                  width: 30,
-                  height: 30,
-                },
-                "& svg:hover": {
-                  fill: theme.vars.palette.primary.solidBg,
-                },
-              }}
-            >
-              <AttachFile />
-            </FormLabel>
-            <Input type="file" sx={inputHidden} multiple={true} onChange={handlerFilesUploader} />
-          </FormControl>
-
-          <Box
-            position="relative"
-            sx={{
-              flexGrow: 1,
-              py: "1rem",
-              pl: "0.75rem",
-            }}
-          >
-            <Box
-              component={ContentEditable}
-              html={content}
-              ref={refContentEditable}
-              onKeyDown={handlerKeyDown}
-              contentEditable={true}
-              role="textbox"
-              onChange={onContentChange}
-              sx={{
-                border: "none",
-                outline: "none",
-                resize: "none",
-                wordBreak: "break-word",
-                wordWrap: "break-word",
-                whiteSpace: "pre-wrap",
-                maxHeight: "12rem",
-                overflowY: "auto",
-                overflowX: "hidden",
-                unicodeBidi: "plaintext",
-                "&::-webkit-scrollbar-track": {
-                  transition: "all .3s",
-                  borderRadius: "sm",
-                },
-                "&::-webkit-scrollbar": {
-                  transition: "all .3s",
-                  width: "6px",
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  transition: "all .3s",
-                  borderRadius: "sm",
-                  background: theme.vars.palette.background.level2,
-                },
-              }}
-            />
-            {content === "" && <PlaceholderInput />}
-          </Box>
-          <Box
-            ref={refSend}
-            onClick={() => sendMessage()}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              alignSelf: "flex-end",
-              height: "3.5rem",
-              width: "3.5rem",
-              flexShrink: 0,
-              "& svg": {
-                width: 30,
-                height: 30,
-              },
-            }}
-          >
-            {statusSocket === "ready" ? (
-              <Send sx={{ fill: theme.vars.palette.primary.solidBg, cursor: "pointer" }} />
+          <Stack direction="row" alignItems="center" width="100%" sx={{ minHeight: "3.5rem" }}>
+            {currentMessageLength ? (
+              <ToolBar />
             ) : (
-              <CancelScheduleSend sx={{ fill: theme.vars.palette.danger.plainColor, cursor: "not-allowed" }} />
+              <>
+                <InputUploadFiles />
+                <InputContentEditable sendMessage={sendMessage} />
+                <SmileMenu />
+              </>
             )}
-          </Box>
-        </Stack>
-
-        {forwardMessages && forwardMessages.length !== 0 && <BlockForwardMessages message={forwardMessages} />}
-
-        {imagesMessages?.length !== 0 && <BlockFilesMessage files={imagesMessages} />}
-      </Box>
+          </Stack>
+          {!_.isEmpty(imagesMessages) && <BlockFilesMessage files={imagesMessages} />}
+        </Box>
+        {!currentMessageLength && <ButtonSendMessage sendMessage={sendMessage} />}
+      </Stack>
     </Box>
   );
 };

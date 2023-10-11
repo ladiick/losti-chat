@@ -2,7 +2,7 @@ import { Stack } from "@mui/joy";
 
 const PanelHeader = ({ before, children, after, sx }) => {
   return (
-    <Stack spacing={2} direction="row" alignItems="center" sx={{ width: "100%", ...sx }}>
+    <Stack spacing={1} direction="row" alignItems="center" sx={{ width: "100%", ...sx }}>
       {before}
       <Stack direction="row" alignItems="center" flexGrow={1}>
         {children}

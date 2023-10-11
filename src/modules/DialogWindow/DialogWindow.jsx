@@ -17,10 +17,10 @@ import ViewForwardedMessage from "../AllModals/ViewForwardedMessage/ViewForwarde
 import BlockInputs from "./components/BlockInputs/BlockInputs";
 import DragAndDropFileUpload from "./components/DragAndDropFileUpload/DragAndDropFileUpload";
 import HeaderChat from "./components/HeaderChat/HeaderChat";
-import HeaderForwardMessage from "./components/HeaderForwardMessage/HeaderForwardMessage";
+import WhoForwardMessage from '../AllModals/WhoForwardMessage/WhoForwardMessage'
 
 const Chat = () => {
-  const theme= useTheme()
+  const theme = useTheme();
   const dispatch = useDispatch();
   const myId = useSelector((state) => state.user.aboutUser.id);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -71,7 +71,7 @@ const Chat = () => {
 
   if (!searchParams.get("dialogs") && !isMobile) {
     return (
-      <WrapperBlocks>
+      <WrapperBlocks sx={{height: "100%"}}>
         <Stack alignItems="center" justifyContent="center" height="100%">
           <Forum sx={{ width: "3rem", height: "3rem" }} />
           <Typography>Выберите чат</Typography>
@@ -81,17 +81,18 @@ const Chat = () => {
   }
 
   return (
-    <WrapperBlocks sx={{ p: 0, display: "flex", flexDirection: "column", bgcolor: theme.vars.palette.background.body }}>
+    <WrapperBlocks sx={{ p: 0, height: "100%", display: "flex", flexDirection: "column", bgcolor: theme.vars.palette.background.body }}>
       <HeaderChat myId={myId} isLoading={isLoading} peopleCurrent={peopleCurrent} />
 
       <DragAndDropFileUpload style={{ display: "contents" }}>
         <Communication />
-        {currentMessage?.[searchParams.get("dialogs")]?.length && isMobile ? <HeaderForwardMessage /> : <BlockInputs />}
+        <BlockInputs />
       </DragAndDropFileUpload>
 
       {viewForwardMessage && <ViewForwardedMessage />}
       {viewAttachmentsInDialogs && <AttachmentsInDialogs />}
-      {viewDetailedImage && <DetailedImage />}
+      <DetailedImage />
+      <WhoForwardMessage />
     </WrapperBlocks>
   );
 };

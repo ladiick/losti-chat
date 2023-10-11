@@ -1,27 +1,19 @@
 import { ArrowBack } from "@mui/icons-material";
 import { Avatar, Badge, IconButton, Link as LinkMui, Skeleton, useTheme } from "@mui/joy";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { HOST } from "../../../../components/api/HOST";
 import useMatchMedia from "../../../../components/hooks/useMatchMedia";
 import PanelHeader from "../../../../components/ui/WrapperBlocks/components/PanelHeader";
 import { openChatBlock } from "../../../../redux/slices/navigationSlice";
-import HeaderForwardMessage from "../HeaderForwardMessage/HeaderForwardMessage";
 import RightSideBlock from "./RightSideBlock/RightSideBlock";
 const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
   const theme = useTheme();
-
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  const chatActive = useSelector((state) => state.navigation.chat);
-  const currentMessage = useSelector((state) => state.message.currentMessage);
   const { isMobile } = useMatchMedia();
   const [searchParams] = useSearchParams();
-
-  if (currentMessage?.[searchParams.get("dialogs")]?.length && !isMobile) {
-    return <HeaderForwardMessage />;
-  }
 
   return (
     <>
@@ -29,7 +21,7 @@ const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
         sx={{
           height: "3.5rem",
           py: "0.75rem",
-          px: isMobile ? 0 : "1rem",
+          px: "1rem",
           borderBottom: "1px solid",
           borderColor: "divider",
           bgcolor: theme.vars.palette.background.surface,
@@ -52,7 +44,7 @@ const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
           <Avatar
             component={Link}
             to={`/profile/${searchParams.get("dialogs")}`}
-            alt={peopleCurrent.first_name + peopleCurrent.last_name}
+            alt={`${peopleCurrent.first_name + peopleCurrent.last_name}`}
             src={isLoading ? "" : `${HOST + peopleCurrent.image}`}
             sx={{ mr: "0.75rem" }}
           >

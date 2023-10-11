@@ -25,13 +25,13 @@ const useWebsocket = (userAccessToken) => {
 
     const closeHandler = () => {
       console.log("соединение разорванно");
-
+      setStatusSocket("pending");
       // toast.error("Соединение разорвано,\n пытаюсь подключится", optionsNotification);
 
       const token = updateAccessToken(refresh);
       localStorage.setItem("accessToken", token.access);
       dispatch(setUserAccessToken(token.access));
-
+      
       setTimeout(() => {
         createChannel();
       }, 3000);

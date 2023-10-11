@@ -7,10 +7,10 @@ import { clearForwardMessage } from "../../../../redux/slices/messageSlice";
 import { openModalBlock } from "../../../../redux/slices/navigationSlice";
 import { changeDeclination } from "../../../../components/actions/changeDeclination";
 import CloseButton from "../../../../components/ui/CloseButton/CloseButton";
-import { convertTime } from "../../../../components/actions/convertTime";
+import { Box, Stack, Typography } from '@mui/joy'
 
 const BlockForwardMessages = ({ message }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const dispatch = useDispatch();
   const closeForward = () => {
@@ -40,12 +40,11 @@ const BlockForwardMessages = ({ message }) => {
   }
 
   return (
-    <div className={s.wrapper__forward__msg}>
-      <div className={s.forward__content}>
-        <Text className={s.name__time} weight="strong">
+    <Box>
+      <Stack>
+        <Typography color="primary">
           {message?.[0]?.sender?.first_name + " " + message?.[0]?.sender?.last_name}
-          <Text className={s.message__time}>{convertTime(message?.[0]?.time)}</Text>
-        </Text>
+        </Typography>
 
         {message?.[0]?.message ? (
           <Text className={s.message__forward} onClick={viewForwardedMessage}>
@@ -56,9 +55,9 @@ const BlockForwardMessages = ({ message }) => {
             {changeDeclination(message?.length, "message")}
           </Text>
         )}
-      </div>
+      </Stack>
       <CloseButton className={s.close__btn} onClick={() => closeForward()} />
-    </div>
+    </Box>
   );
 };
 
