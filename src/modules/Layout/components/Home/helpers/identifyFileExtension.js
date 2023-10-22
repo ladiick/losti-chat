@@ -6,11 +6,11 @@ export const identifyFileExtension = (files) => {
     const itIsImage = files[0].type.includes(imageExtensions);
     const itIsDocument = documentExtensions.some((ext) => files[0].type.includes(ext));
 
-		if (itIsImage) {
-			return 'image'
+    if (itIsImage) {
+      return "image";
     }
-		if (itIsDocument) {
-			return 'document'
+    if (itIsDocument) {
+      return "document";
     }
   } else {
     let image = false;
@@ -28,10 +28,10 @@ export const identifyFileExtension = (files) => {
       }
     }
 
-		if ((image && document) || document) {
-			return "document";
-		} else if (image) {
-			return "image";
+    if ((image && document) || document) {
+      return "document";
+    } else if (image) {
+      return "image";
     }
   }
 };

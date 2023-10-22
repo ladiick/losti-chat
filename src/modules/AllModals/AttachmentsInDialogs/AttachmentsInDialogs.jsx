@@ -1,22 +1,22 @@
-import React, { useState } from "react";
 import { Dialog, Tab } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import s from "./AttachmentsInDialogs.module.scss";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openModalBlock, setOpenFromDialog } from "../../../redux/slices/navigationSlice";
 import { useSearchParams } from "react-router-dom";
 import Text from "../../../components/ui/Text/Text";
+import { openModalBlock, setOpenFromDialog } from "../../../redux/slices/navigationSlice";
+import s from "./AttachmentsInDialogs.module.scss";
 
-import OutputImage from "./components/OutputImage/OutputImage";
-import { variantsAnimationModal } from "../../../utils/variantsAnimationModal";
 import CloseButton from "../../../components/ui/CloseButton/CloseButton";
+import { variantsAnimationModal } from "../../../utils/variantsAnimationModal";
+import OutputImage from "./components/OutputImage/OutputImage";
 
 const AttachmentsInDialogs = () => {
   const open = useSelector((state) => state.navigation.modal.viewAttachmentsInDialogs);
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [tabItems, setTabItems] = useState([
+  const [tabItems] = useState([
     {
       title: "Фотографии",
       type: "photo",
@@ -48,13 +48,27 @@ const AttachmentsInDialogs = () => {
     <AnimatePresence>
       {open && (
         <Dialog as="div" initialFocus={false} open={open} onClose={closeFunc}>
-          <motion.div initial={"hidden"} animate={"visible"} exit={"exit"} variants={variantsAnimationModal} className={"dialog__overlay"}>
+          <motion.div
+            initial={"hidden"}
+            animate={"visible"}
+            exit={"exit"}
+            variants={variantsAnimationModal}
+            className={"dialog__overlay"}
+          >
             <Dialog.Panel className={s.wrapper__content}>
               <Tab.Group>
                 <Tab.List className={s.header}>
                   <div>
                     {tabItems?.map((item) => (
-                      <Tab key={item.title} onClick={item.onClick} className={searchParams?.get("history")?.includes(item?.type) ? s.tab__selected : s.tab}>
+                      <Tab
+                        key={item.title}
+                        onClick={item.onClick}
+                        className={
+                          searchParams?.get("history")?.includes(item?.type)
+                            ? s.tab__selected
+                            : s.tab
+                        }
+                      >
                         <Text style={{ cursor: "pointer" }}>{item.title}</Text>
                       </Tab>
                     ))}

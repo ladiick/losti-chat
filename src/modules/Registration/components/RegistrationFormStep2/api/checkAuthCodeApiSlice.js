@@ -4,9 +4,7 @@ export const checkAuthCodeApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     checkAuthCode: builder.mutation({
       query: (code) => ({
-        url: `/auth/users/check_code/?code=${code}&email=${localStorage.getItem(
-          "email",
-        )}`,
+        url: `/auth/users/check_code/?code=${code}&email=${localStorage.getItem("email")}`,
         method: "GET",
       }),
     }),

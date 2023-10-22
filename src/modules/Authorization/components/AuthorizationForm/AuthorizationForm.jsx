@@ -72,7 +72,11 @@ const AuthorizationForm = () => {
 
         <FormWrapperLabel title={"Пароль"} errors={errors?.password}>
           <Input
-            endDecorator={<IconButton onClick={() => setVisibilityPass((pre) => !pre)}>{visibilityPass ? <Visibility /> : <VisibilityOff />}</IconButton>}
+            endDecorator={
+              <IconButton onClick={() => setVisibilityPass((pre) => !pre)}>
+                {visibilityPass ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            }
             type={visibilityPass ? "text" : "password"}
             placeholder={visibilityPass ? "Password" : "••••••••"}
             {...register("password", {
@@ -99,15 +103,32 @@ const AuthorizationForm = () => {
         </Box>
 
         <div>
-          <Button endDecorator={<Login />} type={"submit"} fullWidth disabled={!isValid} loading={loadAuthorization}>
+          <Button
+            endDecorator={<Login />}
+            type={"submit"}
+            fullWidth
+            disabled={!isValid}
+            loading={loadAuthorization}
+          >
             Войти
           </Button>
 
-          <Typography component={"span"} level={"body-sm"} textAlign={"center"} sx={{ my: "0.75rem" }}>
+          <Typography
+            component={"span"}
+            level={"body-sm"}
+            textAlign={"center"}
+            sx={{ my: "0.75rem" }}
+          >
             или
           </Typography>
 
-          <Button endDecorator={<Add />} component={Link} to={"/registration"} fullWidth variant="outlined">
+          <Button
+            endDecorator={<Add />}
+            component={Link}
+            to={"/registration"}
+            fullWidth
+            variant="outlined"
+          >
             Зарегистрироваться
           </Button>
         </div>

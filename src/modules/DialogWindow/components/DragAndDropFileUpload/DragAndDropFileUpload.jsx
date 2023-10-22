@@ -5,9 +5,9 @@ import { TbFiles } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Text from "../../../../components/ui/Text/Text";
-import s from "./DragAndDropFileUpload.module.scss";
 import { setDragOver, setVisibleDropZone } from "../../../../redux/slices/dragAndDropSlice";
-import { sendMessagesOnChat } from "../../../../redux/slices/messageSlice";
+import { onChangeFileDialog } from "../../../../redux/slices/messageSlice";
+import s from "./DragAndDropFileUpload.module.scss";
 
 const DragAndDropFileUpload = ({ children, style }) => {
   const visibleDragAndDrop = useSelector((state) => state.dragAndDrop.visibleDropZone);
@@ -16,9 +16,7 @@ const DragAndDropFileUpload = ({ children, style }) => {
   const dragOver = useSelector((state) => state.dragAndDrop.dragOver);
 
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const file = useSelector((state) => state.message.sendMessageOnChat?.[searchParams.get("dialogs")]?.file);
+  const [searchParams] = useSearchParams();
 
   const dragStartHandler = useCallback((e) => {
     e.preventDefault();
@@ -38,8 +36,8 @@ const DragAndDropFileUpload = ({ children, style }) => {
     dispatch(setVisibleDropZone(false));
     dispatch(setDragOver(false));
     dispatch(
-      sendMessagesOnChat({
-        param: searchParams.get("dialogs"),
+      onChangeFileDialog({
+        id: searchParams.get("dialogs"),
         file,
       }),
     );
@@ -60,7 +58,10 @@ const DragAndDropFileUpload = ({ children, style }) => {
         {({ getRootProps, getInputProps }) => (
           <div {...getRootProps()} className={s.content__drop} style={style}>
             <input {...getInputProps()} />
-            <div className={s.overlay__drop} style={visibleDragAndDrop ? { display: "flex" } : { display: "none" }}>
+            <div
+              className={s.overlay__drop}
+              style={visibleDragAndDrop ? { display: "flex" } : { display: "none" }}
+            >
               <div
                 className={s.over__drop}
                 style={
@@ -72,7 +73,11 @@ const DragAndDropFileUpload = ({ children, style }) => {
                     : {}
                 }
               >
-                {typeDropZone === "image" ? <BsCamera size={106} /> : <TbFiles size={106} strokeWidth={0.5} />}
+                {typeDropZone === "image" ? (
+                  <BsCamera size={106} />
+                ) : (
+                  <TbFiles size={106} strokeWidth={0.5} />
+                )}
 
                 <Text
                   style={{

@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 import DialogWindow from "../../modules/DialogWindow/DialogWindow";
 
 import useMatchMedia from "../../components/hooks/useMatchMedia";
-import WhoForwardMessage from "../../modules/AllModals/WhoForwardMessage/WhoForwardMessage";
 import DialogsUsers from "../../modules/DialogsUsers/DialogsUsers";
 import LeftColumn from "../../modules/LeftColumn/LeftColumn";
 import MiddleColumn from "../../modules/MiddleColumn/MiddleColumn";
@@ -15,13 +14,12 @@ const Dialogs = () => {
   const dispatch = useDispatch();
   const { isMobile } = useMatchMedia();
   const [searchParams] = useSearchParams();
-  const forwardMessageFlag = useSelector((state) => state.navigation.forwardMessageFlag);
 
   useEffect(() => {
     if (searchParams.get("dialogs")) {
       dispatch(openChatBlock(true));
     }
-  }, [searchParams.get("dialogs")]);
+  }, [dispatch, searchParams.get("dialogs")]);
 
   useEffect(() => {
     document.title = "Сообщения";

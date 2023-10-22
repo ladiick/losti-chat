@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import Dialogs from "../../Pages/Dialogs/Dialogs";
@@ -29,9 +29,7 @@ const Layout = () => {
       <MyContext.Provider value={{ socket, statusSocket, newMessage }}>
         <Home>
           <Dialogs>
-            <Suspense>
-              <Dialogs />
-            </Suspense>
+            <Dialogs />
           </Dialogs>
         </Home>
       </MyContext.Provider>

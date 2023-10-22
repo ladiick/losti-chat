@@ -1,29 +1,29 @@
-import { Box, Skeleton } from "@mui/joy"
-import React, { useMemo } from "react"
-import { useDispatch } from "react-redux"
-import { useSearchParams } from "react-router-dom"
-import { useGetImageInMessageQuery } from "../../../../../components/features/getImageInMessageApiSlice"
-import { setOpenDetailedImage, setOpenFromDialog } from "../../../../../redux/slices/navigationSlice"
-import s from "./MessageImage.module.scss"
+import { Box, Skeleton } from "@mui/joy";
+import React, { useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { useGetImageInMessageQuery } from "../../../../../components/features/getImageInMessageApiSlice";
+import {
+  setOpenDetailedImage,
+  setOpenFromDialog,
+} from "../../../../../redux/slices/navigationSlice";
+import s from "./MessageImage.module.scss";
 
-const Image = React.memo(({ idImage, attachments, style, index, length }) => {
+const Image = ({ idImage, attachments, style, index, length }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
   const borderRadiusImage = useMemo(() => {
     if (length === 1) {
-      return '16px 16px 0 0'
+      return "16px 16px 0 0";
     }
     if (length === 2) {
-      return index === 0 ? '16px 0 0 0' : index === 1 ? '0 16px 0 0' : ''
+      return index === 0 ? "16px 0 0 0" : index === 1 ? "0 16px 0 0" : "";
     }
     if (length > 2) {
-      return index === 0 ? '16px 0 0 0'
-        : index === 1 ? '0 16px 0 0'
-          : index > 2 ? '0' : ""
+      return index === 0 ? "16px 0 0 0" : index === 1 ? "0 16px 0 0" : index > 2 ? "0" : "";
     }
-
-  },[index, length])
+  }, [index, length]);
 
   const { data, isLoading } = useGetImageInMessageQuery(idImage, {
     skip: !idImage,
@@ -44,7 +44,11 @@ const Image = React.memo(({ idImage, attachments, style, index, length }) => {
 
   if (attachments) {
     return (
-      <div className={s.wrapper__attachments__images} style={style} onClick={(e) => detailedImage(e)}>
+      <div
+        className={s.wrapper__attachments__images}
+        style={style}
+        onClick={(e) => detailedImage(e)}
+      >
         <img src={data} alt={"pictures"} loading="lazy" />
       </div>
     );
@@ -63,6 +67,7 @@ const Image = React.memo(({ idImage, attachments, style, index, length }) => {
             objectFit: "cover",
             height: "100%",
             width: "100%",
+            cursor: "pointer",
             borderRadius: borderRadiusImage,
           },
         }}
@@ -71,6 +76,6 @@ const Image = React.memo(({ idImage, attachments, style, index, length }) => {
       </Box>
     </Skeleton>
   );
-});
+};
 
-export default Image;
+export default React.memo(Image);

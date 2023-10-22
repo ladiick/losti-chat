@@ -1,48 +1,58 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { forwardMessageFlag } from "../../../redux/slices/navigationSlice";
+import { setForwardModal } from "../../../redux/slices/navigationSlice";
 
 import { useSearchParams } from "react-router-dom";
-import useMatchMedia from "../../../components/hooks/useMatchMedia";
-import { clearMessage, sendMessagesOnChat } from "../../../redux/slices/messageSlice";
+import { clearSelectMessages, selectedMessages } from "../../../redux/slices/messageSlice";
 import { setIndex } from "../../../redux/slices/peopleSlice";
 import { useGetPeopleQuery } from "../../DialogsUsers/components/People/api/peopleApiSlice";
-// import ModalDialog from "../../../components/ui/Modal/ModalDialog";
-import { Bookmark, Close } from "@mui/icons-material";
+
+import { Close } from "@mui/icons-material";
 import { CircularProgress, IconButton, Input, List, Modal, ModalDialog, Stack } from "@mui/joy";
 import PeopleItem from "../../DialogsUsers/components/People/components/PeopleItem/PeopleItem";
+import { MyContext } from "../../Layout/Layout";
 
-const WhoForwardMessage = () => {
+const ForwardMessageModal = () => {
   const dispatch = useDispatch();
   const [searchValue, setSearch] = useState("");
-  const isVisible = useSelector((state) => state.navigation.forwardMessageFlag);
-
+  const { socket } = useContext(MyContext);
   const { data: people = [], isLoading } = useGetPeopleQuery();
-
+  const openModal = useSelector((state) => state.navigation.forwardModal);
   const myId = useSelector((state) => state.user.aboutUser.id);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
-  const forwardMessage = useSelector((state) => state.message.currentMessage[searchParams?.get("dialogs")]);
+  const forwardMessage = useSelector((state) => selectedMessages(state));
+
   const closeFunc = () => {
-    dispatch(forwardMessageFlag(false));
+    dispatch(setForwardModal(false));
   };
-  const handlerPeople = (current__obj, index) => {
+
+  const handlerPeople = (currentObj, index) => {
     dispatch(setIndex(index));
-    setSearchParams({ dialogs: current__obj.pk });
-    setSearch("");
-    dispatch(
-      sendMessagesOnChat({
-        param: current__obj.pk,
-        forwardMessage,
+    setSearchParams({ dialogs: currentObj.pk });
+    socket?.send(
+      JSON.stringify({
+        request_id: new Date().getTime(),
+        message: "",
+        action: "create_dialog_message",
+        forward: forwardMessage.length ? forwardMessage?.map((a) => a.id) : [],
+        answer: {},
+        recipient: currentObj.pk,
       }),
     );
-    dispatch(clearMessage({ param: searchParams?.get("dialogs") }));
-    dispatch(forwardMessageFlag(false));
+    // dispatch(
+    //   sendMessagesOnChat({
+    //     param: currentObj.pk,
+    //     forwardMessage,
+    //   }),
+    // );
+    dispatch(clearSelectMessages());
+    dispatch(setForwardModal(false));
   };
 
   return (
     <Modal
-      open={isVisible}
+      open={openModal}
       onClose={() => closeFunc()}
       sx={{
         display: "flex",
@@ -65,7 +75,7 @@ const WhoForwardMessage = () => {
             <Close />
           </IconButton>
         </Stack>
-        <List sx={{gap: '0.5rem'}}>
+        <List sx={{ gap: "0.5rem" }}>
           {isLoading && <CircularProgress size="sm" variant="plain" />}
           <PeopleItem
             key={"favorite"}
@@ -110,4 +120,4 @@ const WhoForwardMessage = () => {
   );
 };
 
-export default WhoForwardMessage;
+export default ForwardMessageModal;

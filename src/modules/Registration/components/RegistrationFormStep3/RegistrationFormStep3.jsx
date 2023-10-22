@@ -49,7 +49,11 @@ const RegistrationFormStep3 = () => {
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <FormWrapperLabel title="Пароль" errors={errors?.password}>
           <Input
-            endDecorator={<IconButton onClick={() => setVisibilityPass((pre) => !pre)}>{visibilityPass ? <Visibility /> : <VisibilityOff />}</IconButton>}
+            endDecorator={
+              <IconButton onClick={() => setVisibilityPass((pre) => !pre)}>
+                {visibilityPass ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            }
             type={visibilityPass ? "text" : "password"}
             autoFocus={true}
             placeholder="••••••••"

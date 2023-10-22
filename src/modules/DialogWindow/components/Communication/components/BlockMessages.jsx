@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { currentMessage } from "../../../../../redux/slices/messageSlice";
+import { selectMessages } from "../../../../../redux/slices/messageSlice";
 import { helperMessage } from "../../../../../utils/utils";
 import Message from "../../Message/Message";
 
@@ -12,7 +12,7 @@ const BlockMessages = ({ block }) => {
 
   const handlerCurrentMessage = useCallback(
     (obj) => {
-      dispatch(currentMessage({ param, obj }));
+      dispatch(selectMessages({ obj }));
     },
     [dispatch, param],
   );
@@ -28,11 +28,22 @@ const BlockMessages = ({ block }) => {
       {block?.messages
         .map((obj, index, arr) =>
           helperMessage(arr?.[index], arr?.[index - 1]) ? (
-            <Message key={obj.id} obj={obj} margin={true} handlerCurrentMessage={() => handlerCurrentMessage(obj)} />
+            <Message
+              key={obj.id}
+              obj={obj}
+              margin={true}
+              handlerCurrentMessage={() => handlerCurrentMessage(obj)}
+            />
           ) : (
-            <Message key={obj.id} obj={obj} margin={false} handlerCurrentMessage={() => handlerCurrentMessage(obj)} />
+            <Message
+              key={obj.id}
+              obj={obj}
+              margin={false}
+              handlerCurrentMessage={() => handlerCurrentMessage(obj)}
+            />
           ),
-        ).reverse()}
+        )
+        .reverse()}
     </div>
   );
 };

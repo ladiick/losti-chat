@@ -2,7 +2,20 @@ export const reTime = (time) => {
   const currentTime = new Date();
   const messageTime = new Date(time);
 
-  const arrMonth = ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
+  const arrMonth = [
+    "янв",
+    "фев",
+    "мар",
+    "апр",
+    "май",
+    "июн",
+    "июл",
+    "авг",
+    "сен",
+    "окт",
+    "ноя",
+    "дек",
+  ];
 
   if (
     currentTime.getDate() === messageTime.getDate() &&
@@ -24,7 +37,9 @@ export const reTime = (time) => {
   }
 
   if (currentTime.getFullYear() === messageTime.getFullYear() - 1) {
-    return `${messageTime.getDate()} ${arrMonth[messageTime.getMonth()]} ${messageTime.getFullYear()}`;
+    return `${messageTime.getDate()} ${
+      arrMonth[messageTime.getMonth()]
+    } ${messageTime.getFullYear()}`;
   } else {
     return `${messageTime.getDate()} ${arrMonth[messageTime.getMonth()]}`;
   }

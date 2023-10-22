@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/joy";
 import React from "react";
 import { reTime } from "../../../../../components/actions/reTime";
-const MessageDate = React.memo(({ message }) => {
+const MessageDate = ({ message }) => {
   return (
     <Box
       sx={{
@@ -31,6 +31,6 @@ const MessageDate = React.memo(({ message }) => {
       </Typography>
     </Box>
   );
-});
+};
 
-export default MessageDate;
+export default React.memo(MessageDate);

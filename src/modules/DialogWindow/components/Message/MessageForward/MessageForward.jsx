@@ -1,12 +1,12 @@
 import React from "react";
-import s from "./MessageForward.module.scss";
-import Text from "../../../../../components/ui/Text/Text";
 import { useDispatch } from "react-redux";
+import { convertTime } from "../../../../../components/actions/convertTime";
+import ActionLink from "../../../../../components/ui/ActionLink/ActionLink";
+import Text from "../../../../../components/ui/Text/Text";
 import { setForwardMessageIfMany } from "../../../../../redux/slices/messageSlice";
 import { openModalBlock } from "../../../../../redux/slices/navigationSlice";
 import { helperMessage } from "../../../../../utils/utils";
-import ActionLink from "../../../../../components/ui/ActionLink/ActionLink";
-import { convertTime } from "../../../../../components/actions/convertTime";
+import s from "./MessageForward.module.scss";
 
 const MessageForward = ({ forward, count, view }) => {
   const dispatch = useDispatch();
@@ -49,7 +49,11 @@ const MessageForward = ({ forward, count, view }) => {
             ) : obj?.forward?.length !== 0 && count < 3 ? (
               <MessageForward forward={obj} count={count + 1} />
             ) : obj?.forward?.length !== 0 ? (
-              <Text style={{ display: "block" }} type={"button"} onClick={(e) => openManyForward(e, obj)}>
+              <Text
+                style={{ display: "block" }}
+                type={"button"}
+                onClick={(e) => openManyForward(e, obj)}
+              >
                 Пересланное сообщение
               </Text>
             ) : (

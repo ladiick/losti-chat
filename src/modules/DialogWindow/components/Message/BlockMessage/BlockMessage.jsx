@@ -1,19 +1,22 @@
 import { Box, useTheme } from "@mui/joy";
-import React, { useCallback } from "react";
+import React from "react";
 import { convertTime } from "../../../../../components/actions/convertTime";
-const BlockMessage = React.memo(({ children, activeMessage, time, pos, sx, wrapperStyles,timeStyles, ...props }) => {
+
+const BlockMessage = ({
+  children,
+  activeMessage,
+  time,
+  pos,
+  sx,
+  wrapperStyles,
+  timeStyles,
+  ...props
+}) => {
   const theme = useTheme();
   const scheme = localStorage.getItem("joy-mode");
 
-  const refMessage = useCallback((ref) => {
-    if (ref) {
-      // ref.scrollIntoView(true);
-    }
-  }, []);
-
   return (
     <Box
-      ref={refMessage}
       sx={{
         position: "relative",
         mb: "0.5rem",
@@ -59,7 +62,7 @@ const BlockMessage = React.memo(({ children, activeMessage, time, pos, sx, wrapp
         <Box
           sx={{
             cursor: "pointer",
-            userSelect: 'none',
+            userSelect: "none",
             whiteSpace: "nowrap",
             wordBreak: "normal",
             fontSize: ".75rem",
@@ -79,6 +82,6 @@ const BlockMessage = React.memo(({ children, activeMessage, time, pos, sx, wrapp
       </Box>
     </Box>
   );
-});
+};
 
-export default BlockMessage;
+export default React.memo(BlockMessage);

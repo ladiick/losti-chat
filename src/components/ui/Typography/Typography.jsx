@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Typography.module.scss";
 
-const Typography = React.memo(({ as, level = "h1", weight = "regular", color, children, ...props }) => {
+const Typography = ({ as, level = "h1", weight = "regular", color, children, ...props }) => {
   const tag = {
     h1: "h1",
     h2: "h2",
@@ -31,13 +31,13 @@ const Typography = React.memo(({ as, level = "h1", weight = "regular", color, ch
     caption: s[`caption__${weight}`],
   };
 
-  const Tag = `${as ? as : tag[level]}`;
+  const Tag = `${as || tag[level]}`;
 
   return (
     <Tag className={`${s.general} ${fontStyle[level]} ${colors[color || "neutral"]}`} {...props}>
       {children}
     </Tag>
   );
-});
+};
 
-export default Typography;
+export default React.memo(Typography);

@@ -2,7 +2,7 @@ import { AttachFile } from "@mui/icons-material";
 import { FormControl, FormLabel, Input, useTheme } from "@mui/joy";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { sendMessagesOnChat } from "../../../../../../redux/slices/messageSlice";
+import { onChangeFileDialog } from "../../../../../../redux/slices/messageSlice";
 const inputHidden = {
   position: "absolute",
   width: 1,
@@ -23,25 +23,27 @@ const InputUploadFiles = () => {
   const handlerFilesUploader = (file) => {
     console.log(file.target.files);
     dispatch(
-      sendMessagesOnChat({
-        param: searchParams.get("dialogs"),
+      onChangeFileDialog({
+        id: searchParams.get("dialogs"),
         file: file.target.files,
       }),
     );
   };
   return (
-    <FormControl sx={{
-      width: '3.5rem',
-      height: "3.5rem",
-      justifyContent: "center",
-      alignItems: 'center',
-      flexShrink: 0
-    }}>
+    <FormControl
+      sx={{
+        width: "3.5rem",
+        height: "3.5rem",
+        justifyContent: "center",
+        alignItems: "center",
+        flexShrink: 0,
+      }}
+    >
       <FormLabel
         sx={{
           m: 0,
           cursor: "pointer",
-          alignSelf: 'center',
+          alignSelf: "center",
           "& svg": {
             transform: "rotate(45deg)",
           },

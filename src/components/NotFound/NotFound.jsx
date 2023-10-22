@@ -1,1 +1,30 @@
-import React from 'react';import s from './NotFound.module.scss'import notFound from '../assets/notFound.svg'const NotFound = () => {    return (        <div className={s.notFound}>            <div className={s.notFound__content}>                <img src={notFound} alt='not found'/>                <span>Страница не найдена</span>            </div>        </div>    );};export default NotFound;
+import { ErrorOutline, OpenInNew } from "@mui/icons-material";
+import { Box, IconButton, Sheet, Typography } from "@mui/joy";
+import React from "react";
+import { Link } from "react-router-dom";
+
+const NotFound = () => {
+  return (
+    <Sheet
+      color="neutral"
+      sx={{ height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center" }}
+    >
+      <Box textAlign="center">
+        <ErrorOutline color="warning" sx={{ width: "20rem", height: "20rem" }} />
+        <Typography
+          color="warning"
+          level="h1"
+          endDecorator={
+            <IconButton color="primary" size="lg" variant="solid" component={Link} to="/">
+              <OpenInNew />
+            </IconButton>
+          }
+        >
+          Страница не найдена
+        </Typography>
+      </Box>
+    </Sheet>
+  );
+};
+
+export default NotFound;

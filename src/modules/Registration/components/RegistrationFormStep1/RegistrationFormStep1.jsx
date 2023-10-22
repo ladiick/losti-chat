@@ -1,3 +1,4 @@
+import { Mail } from "@mui/icons-material";
 import { Button, Input, Typography } from "@mui/joy";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -7,7 +8,6 @@ import { VALID__EMAIL } from "../../../../utils/validateForm";
 import { setRegistrationSteps } from "../../store/registrationStepsSlice";
 import { useExistEmailMutation } from "./api/checkEmailApiSlice";
 import { useSendCodeMutation } from "./api/sendCodeApiSlice";
-import { Mail } from '@mui/icons-material'
 const RegistrationFormStep1 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -71,11 +71,21 @@ const RegistrationFormStep1 = () => {
           />
         </FormWrapperLabel>
         <div>
-          <Button fullWidth type="submit" disabled={!isValid} loading={isLoadingExistEmail || isLoadingSendCOde}>
+          <Button
+            fullWidth
+            type="submit"
+            disabled={!isValid}
+            loading={isLoadingExistEmail || isLoadingSendCOde}
+          >
             Продолжить
           </Button>
 
-          <Typography component={"span"} level={"body-sm"} textAlign={"center"} sx={{ my: "0.75rem" }}>
+          <Typography
+            component={"span"}
+            level={"body-sm"}
+            textAlign={"center"}
+            sx={{ my: "0.75rem" }}
+          >
             или
           </Typography>
 

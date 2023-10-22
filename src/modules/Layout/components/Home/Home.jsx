@@ -46,7 +46,6 @@ const Home = ({ children }) => {
     };
   }, [dragOver, onDragLeave, onDragStart]);
 
-
   return (
     <Box
       sx={{

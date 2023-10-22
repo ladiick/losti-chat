@@ -4,16 +4,18 @@ import ContentEditable from "react-contenteditable";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import sanitizeHtml from "sanitize-html";
+import UseMatchMedia from "../../../../../../components/hooks/useMatchMedia";
 import CustomScroll from "../../../../../../components/ui/CustomScroll/CustomScroll";
-import { sendMessagesOnChat } from "../../../../../../redux/slices/messageSlice";
+import { onChangeTextDialog, textMessage } from "../../../../../../redux/slices/messageSlice";
 import PlaceholderInput from "./PlaceholderInput";
 
-const InputContentEditable = ({ sendMessage }) => {
+const InputContentEditable = ({ sendMessage, setSendEnter, sendDownEnter }) => {
   const dispatch = useDispatch();
   const refContentEditable = useRef("");
   const [searchParams] = useSearchParams();
-  const content = useSelector((state) => state.message.sendMessageOnChat?.[searchParams.get("dialogs")]?.sendMessage || "");
-
+  const param = searchParams.get("dialogs");
+  const content = useSelector((state) => textMessage(state, param));
+  const { isMobile } = UseMatchMedia();
   const onContentChange = useCallback(
     (evt) => {
       const sanitizeConf = {
@@ -22,38 +24,42 @@ const InputContentEditable = ({ sendMessage }) => {
       };
       if (evt.currentTarget.innerHTML.length > 20000) {
         dispatch(
-          sendMessagesOnChat({
-            param: searchParams.get("dialogs"),
-            message: "",
+          onChangeTextDialog({
+            id: param,
+            text: "",
           }),
         );
       }
       dispatch(
-        sendMessagesOnChat({
-          param: searchParams.get("dialogs"),
-          message: sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf),
+        onChangeTextDialog({
+          id: param,
+          text: sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf),
         }),
       );
     },
-    [dispatch, searchParams],
+    [dispatch, param],
   );
 
-  const handleDownEnterKey = (e) => {
-    if (!e.shiftKey && e.key === "Enter") {
-      sendMessage();
-    }
-  };
+  const handleDownEnterKey = useCallback(
+    (e) => {
+      if (e.key === "Enter" && !e.shiftKey && !isMobile) {
+        e.preventDefault();
+        setSendEnter(true);
+      }
+    },
+    [isMobile, setSendEnter],
+  );
 
   useEffect(() => {
-    const downRandomKey = ({ key }) => {
-      if (/^[a-zа-яё0-9]$/i.test(key)) {
-        refContentEditable?.current?.el?.current?.focus();
+    const downRandomKey = (e) => {
+      if (/^[a-zа-яё0-9]$/i.test(e.key)) {
+        refContentEditable.current?.el?.current?.focus();
       }
     };
-    refContentEditable?.current?.el?.current?.focus();
+    refContentEditable.current?.el?.current?.focus();
     window.addEventListener("keydown", downRandomKey);
     return () => window.removeEventListener("keydown", downRandomKey);
-  }, []);
+  }, [content]);
 
   return (
     <Box

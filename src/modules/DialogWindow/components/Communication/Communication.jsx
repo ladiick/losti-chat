@@ -1,26 +1,27 @@
 import { ArrowDownward } from "@mui/icons-material";
-import { Box, CircularProgress, IconButton, useColorScheme, useTheme } from "@mui/joy";
+import { Box, CircularProgress, IconButton, useTheme } from "@mui/joy";
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import useInfiniteScroll from "react-infinite-scroll-hook";
+import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import _ from "underscore";
 import CustomScroll from "../../../../components/ui/CustomScroll/CustomScroll";
-import { clearMessage } from "../../../../redux/slices/messageSlice";
+import { clearSelectMessages } from "../../../../redux/slices/messageSlice";
 import { useGetMessageQuery } from "./api/messageApiSlice";
 import ListMessages from "./components/ListMessages";
 
 const Communication = () => {
   const dispatch = useDispatch();
-  const message = useSelector((state) => state.message.message);
   const theme = useTheme();
   const [searchParams] = useSearchParams();
   const [scrollButton, setScrollButton] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const param = searchParams.get("dialogs");
-  const { mode } = useColorScheme();
-  const refBlockMessage = useRef();
-  const refBlockScroll = useRef();
+  const [messages, setMessages] = useState([]);
+  const scrollableRootRef = useRef(null);
+  const lastScrollDistanceToBottomRef = useRef();
 
-  const { isFetching: isFetchingMessages } = useGetMessageQuery(
+  const { data, isFetching: isFetchingMessages } = useGetMessageQuery(
     { id: param, page: currentPage },
     {
       refetchOnMountOrArgChange: true,
@@ -28,58 +29,86 @@ const Communication = () => {
   );
 
   useEffect(() => {
+    setCurrentPage(1);
+    setMessages([]);
     return () => {
-      dispatch(clearMessage({ param }));
+      setCurrentPage(1);
+      setMessages([]);
+      dispatch(clearSelectMessages());
     };
   }, [dispatch, param]);
 
-  const dialogDown = () => {
-    refBlockMessage.current.scrollTop = refBlockMessage.current.scrollHeight;
-  };
+  useEffect(() => {
+    if (data?.results.length) {
+      if (currentPage !== 1) {
+        const mergedDataArray = [];
 
-  const scrollHandler = useCallback(
-    (e) => {
-      if (e.target.scrollTop < 200 && message.next) {
-        setCurrentPage((pre) => pre + 1);
-        refBlockMessage.current.removeEventListener("scroll", scrollHandler);
+        [...data?.results, ...messages].forEach((item) => {
+          const existingItem = mergedDataArray.find((mergedItem) => mergedItem.date === item.date);
+
+          if (!_.isEmpty(existingItem)) {
+            existingItem.messages = existingItem.messages
+              .concat(item.messages)
+              .sort((a, b) => b.id - a.id);
+          } else {
+            mergedDataArray.push({ date: item.date, messages: item.messages });
+          }
+        });
+
+        setMessages(mergedDataArray);
+      } else {
+        setMessages(data?.results);
       }
-      if (e.target.scrollTop + e.target.clientHeight < e.target.scrollHeight) {
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.results]);
+
+  const [infiniteScroll, { rootRef }] = useInfiniteScroll({
+    loading: isFetchingMessages,
+    hasNextPage: !!data?.next,
+    onLoadMore: () => setCurrentPage((pre) => pre + 1),
+  });
+
+  useLayoutEffect(() => {
+    const scrollableRoot = scrollableRootRef.current;
+    const lastScrollDistanceToBottom = lastScrollDistanceToBottomRef.current ?? 0;
+    if (scrollableRoot) {
+      scrollableRoot.scrollTop = scrollableRoot.scrollHeight - lastScrollDistanceToBottom;
+    }
+  }, [messages, rootRef]);
+
+  const rootRefSetter = useCallback(
+    (node) => {
+      rootRef(node);
+      scrollableRootRef.current = node;
+    },
+    [rootRef],
+  );
+
+  const dialogDown = useCallback(() => {
+    scrollableRootRef.current.style.scrollBehavior = "smooth";
+    scrollableRootRef.current.scrollTop = scrollableRootRef.current.scrollHeight;
+    scrollableRootRef.current.style.scrollBehavior = "auto";
+  }, []);
+
+  const handleRootScroll = useCallback(() => {
+    const rootNode = scrollableRootRef.current;
+    if (rootNode) {
+      const scrollDistanceToBottom = rootNode.scrollHeight - rootNode.scrollTop;
+      lastScrollDistanceToBottomRef.current = scrollDistanceToBottom;
+      if (rootNode.scrollTop + rootNode.clientHeight < rootNode.scrollHeight - 200) {
         setScrollButton(true);
       } else {
         setScrollButton(false);
       }
-    },
-    [message.next],
-  );
-    console.log("refBlockScroll", refBlockScroll?.current?.scrollHeight);
-    console.log("refBlockMessage", refBlockMessage?.current?.scrollHeight);
-  useEffect(() => {
-    const scrollToBottom = () => {
-      console.log(refBlockMessage.current.scrollTop, refBlockScroll.current.scrollHeight);
-      refBlockScroll.current.scrollTop = refBlockScroll.current.scrollHeight;
-    };
+    }
+  }, []);
 
-    // Запланируйте прокрутку вниз на следующем кадре анимации
-    if (refBlockScroll.current) window.requestAnimationFrame(scrollToBottom);
-
-    // Отмените планирование после первой отрисовки
-    return () => {
-      window.cancelAnimationFrame(scrollToBottom);
-    };
-  }, [refBlockScroll.current]);
-
-  useEffect(() => {
-    refBlockMessage?.current?.addEventListener("scroll", scrollHandler);
-    return () => {
-      refBlockMessage?.current?.removeEventListener("scroll", scrollHandler);
-    };
-  }, [message, refBlockMessage, dispatch, scrollHandler]);
-
-  if (isFetchingMessages && currentPage === 1) {
+  if (isFetchingMessages && currentPage === 1 && !messages.length) {
     return (
       <Box flexGrow={1} position="relative" bgcolor={theme.vars.palette.background.body}>
         <Box position="absolute" top="50%" left="50%">
-          <CircularProgress size="sm" />
+          <CircularProgress size="sm" variant="plain" />
         </Box>
       </Box>
     );
@@ -95,13 +124,15 @@ const Communication = () => {
           mb: "0.5rem",
           px: "1rem",
           position: "relative",
-          background: mode === "light" ? "linear-gradient(150deg, rgba(51,144,236,1) 45%, rgba(145,198,246,1) 76%);" : theme.vars.palette.background.body,
+          transition: "all 0.3s",
+          background: theme.vars.palette.background.body,
           ...CustomScroll,
         }}
-        ref={refBlockMessage}
+        ref={rootRefSetter}
+        onScroll={handleRootScroll}
       >
-        {isFetchingMessages && currentPage > 1 && (
-          <Box position="absolute" top="5%" left="50%" zIndex={10}>
+        {!!data.next && (
+          <Box position="absolute" top="5%" left="50%" zIndex={10} ref={infiniteScroll}>
             <CircularProgress size="sm" />
           </Box>
         )}
@@ -117,9 +148,8 @@ const Communication = () => {
             },
           }}
           flexGrow={1}
-          ref={refBlockScroll}
         >
-          {<ListMessages />}
+          <ListMessages messages={messages} setMessages={setMessages} data={data} />
         </Box>
       </Box>
       {scrollButton && (
