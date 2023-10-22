@@ -4,10 +4,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
+import { colorPalette } from "./colorPalette";
 import "./index.scss";
 import "./normalize.css"; // должен быть сверху
 import { store } from "./redux/store";
-import { colorPalette } from './colorPalette'
 
 const theme = extendTheme({
   colorSchemes: {

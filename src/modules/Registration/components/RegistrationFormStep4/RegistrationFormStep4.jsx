@@ -94,7 +94,10 @@ const RegistrationFormStep4 = () => {
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <FormControl sx={{ justifyContent: "center", flexDirection: "row" }}>
           <FormLabel sx={{ position: "relative" }}>
-            <Avatar src={image?.imagePreview} sx={{ width: "7rem", height: "7rem", cursor: "pointer" }}>
+            <Avatar
+              src={image?.imagePreview}
+              sx={{ width: "7rem", height: "7rem", cursor: "pointer" }}
+            >
               <AddAPhoto sx={{ width: "2.5rem", height: "2.5rem" }} />
             </Avatar>
             {image ? (

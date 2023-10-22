@@ -1,24 +1,71 @@
 import React from "react";
 
-import BlockMessage from "../BlockMessage/BlockMessage";
-import MessageForward from "../MessageForward/MessageForward";
-import Text from "../../../../../components/ui/Text/Text";
+import { Typography } from "@mui/joy";
 import _ from "underscore";
+import BlockMessage from "../BlockMessage/BlockMessage";
+import MessageAnswer from "../MessageAnswer/MessageAnswer";
+import MessageForward from "../MessageForward/MessageForward";
 import MessageImage from "../MessageImage/MessageImage";
-import BlockAnswerMessage from "../../BlockAnswerMessage/BlockAnswerMessage";
 
-const MessageSender = React.memo(({ activeMessage, obj, handlerCurrentMessage, margin }) => {
+const MessageSender = ({ activeMessage, obj, handlerCurrentMessage, margin }) => {
+  if (!_.isEmpty(obj?.images)) {
+    return (
+      <BlockMessage
+        sx={{
+          mb: margin ? "0.5rem" : "1rem",
+        }}
+        wrapperStyles={{
+          p: 0,
+          mb: "0.5rem",
+        }}
+        timeStyles={{
+          position: "absolute",
+          top: "auto",
+          bottom: "0.5rem",
+          right: "0.5rem",
+          m: 0,
+        }}
+        pos="left"
+        time={obj?.time}
+        activeMessage={activeMessage}
+        onClick={handlerCurrentMessage}
+      >
+        <MessageImage images={obj?.images} />
+        {obj?.message && (
+          <Typography
+            component="span"
+            sx={{
+              p: ".3125rem .5rem .375rem",
+              display: "inline-block",
+            }}
+          >
+            {obj?.message}
+          </Typography>
+        )}
+      </BlockMessage>
+    );
+  }
   return (
-    <BlockMessage style={margin ? {} : { marginBottom: 15 }} activeMessage={activeMessage} pos={"left"} time={obj?.time} onClick={handlerCurrentMessage}>
-      {obj?.message && <Text>{obj?.message}</Text>}
+    <BlockMessage
+      sx={{ mb: margin ? "0.5rem" : "1rem" }}
+      activeMessage={activeMessage}
+      pos="left"
+      time={obj?.time}
+      onClick={handlerCurrentMessage}
+    >
+      {!_.isEmpty(obj?.answer) && <MessageAnswer answer={obj?.answer} obj={obj?.answer?.sender} />}
 
-      {obj?.images?.length !== 0 && <MessageImage images={obj?.images} />}
+      {obj?.message && (
+        <Typography component="span" display="inline-block">
+          {obj?.message}
+        </Typography>
+      )}
 
-      {obj?.forward?.length !== 0 && <MessageForward forward={obj} count={0} />}
+      {!_.isEmpty(obj?.images) && <MessageImage images={obj?.images} />}
 
-      {!_.isEmpty(obj?.answer) && <BlockAnswerMessage message={obj} answer />}
+      {!_.isEmpty(obj?.forward) && <MessageForward forward={obj} count={0} />}
     </BlockMessage>
   );
-});
+};
 
-export default MessageSender;
+export default React.memo(MessageSender);

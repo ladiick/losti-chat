@@ -40,7 +40,12 @@ const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
         }
         after={<RightSideBlock />}
       >
-        <Badge color="success" badgeInset="14%" invisible={!peopleCurrent.online} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+        <Badge
+          color="success"
+          badgeInset="14%"
+          invisible={!peopleCurrent.online}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        >
           <Avatar
             component={Link}
             to={`/profile/${searchParams.get("dialogs")}`}
@@ -52,9 +57,17 @@ const HeaderChat = ({ isLoading, myId, peopleCurrent }) => {
           </Avatar>
         </Badge>
 
-        <LinkMui color="neutral" underline="none" level="title-lg" component={Link} to={`/profile/${searchParams.get("dialogs")}`}>
+        <LinkMui
+          color="neutral"
+          underline="none"
+          level="title-lg"
+          component={Link}
+          to={`/profile/${searchParams.get("dialogs")}`}
+        >
           <Skeleton loading={isLoading}>
-            {searchParams.get("dialogs") === String(myId) ? "Избранное" : `${peopleCurrent.first_name} ${peopleCurrent.last_name}`}
+            {searchParams.get("dialogs") === String(myId)
+              ? "Избранное"
+              : `${peopleCurrent.first_name} ${peopleCurrent.last_name}`}
           </Skeleton>
         </LinkMui>
       </PanelHeader>

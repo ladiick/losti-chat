@@ -15,7 +15,13 @@ const DialogsUsers = () => {
       <MainHeader>
         <Input
           fullWidth
-          endDecorator={statusSocket === "pending" ? <CircularProgress color="danger" value={50} size="sm" variant="plain" /> : <Search />}
+          endDecorator={
+            statusSocket === "pending" ? (
+              <CircularProgress color="danger" value={50} size="sm" variant="plain" />
+            ) : (
+              <Search />
+            )
+          }
           type="text"
           placeholder={statusSocket === "pending" ? "Соединение..." : "Поиск"}
           value={searchValue}

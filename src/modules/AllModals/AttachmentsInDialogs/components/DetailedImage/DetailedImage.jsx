@@ -1,23 +1,12 @@
-import React from "react";
+import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { setOpenDetailedImage } from "../../../../../redux/slices/navigationSlice";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import { useGetImageInMessageQuery } from "../../../../../components/features/getImageInMessageApiSlice";
+import { setOpenDetailedImage } from "../../../../../redux/slices/navigationSlice";
 import { variantsAnimationModal } from "../../../../../utils/variantsAnimationModal";
 import s from "./DetailedImage.module.scss";
-import { Dialog } from "@headlessui/react";
-import { useGetImageInMessageQuery } from "../../../../../components/features/getImageInMessageApiSlice";
-import LoaderWrapper from "../../../../../components/ui/LoaderWrapper/LoaderWrapper";
-import Loader from "../../../../../components/ui/Loader/Loader";
-import CloseButton from "../../../../../components/ui/CloseButton/CloseButton";
-
-const styleCloseBtn = {
-  position: "fixed",
-  right: 20,
-  top: 20,
-  width: 32,
-  height: 32,
-};
 
 const DetailedImage = () => {
   const open = useSelector((state) => state.navigation.openDetailedImage);
@@ -26,7 +15,9 @@ const DetailedImage = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { data: imageSrc, isLoading } = useGetImageInMessageQuery(searchParams?.get("photo"), { skip: !searchParams?.get("photo") });
+  const { data: imageSrc, isLoading } = useGetImageInMessageQuery(searchParams?.get("photo"), {
+    skip: !searchParams?.get("photo"),
+  });
 
   const closeFunc = () => {
     if (openFromDialog) {
@@ -41,7 +32,13 @@ const DetailedImage = () => {
   return (
     <AnimatePresence>
       <Dialog as="div" initialFocus={false} open={open} onClose={closeFunc}>
-        <motion.div initial={"hidden"} animate={"visible"} exit={"exit"} variants={variantsAnimationModal} className={"dialog__overlay"}>
+        <motion.div
+          initial={"hidden"}
+          animate={"visible"}
+          exit={"exit"}
+          variants={variantsAnimationModal}
+          className={"dialog__overlay"}
+        >
           <Dialog.Panel className={s.wrapper__content}>
             {isLoading ? (
               <div
@@ -52,15 +49,15 @@ const DetailedImage = () => {
                   borderRadius: "var(--borderRadiusBlock)",
                 }}
               >
-                <LoaderWrapper>
+                {/* <LoaderWrapper>
                   <Loader visible={isLoading} />
-                </LoaderWrapper>
+                </LoaderWrapper> */}
               </div>
             ) : (
               <img src={imageSrc} className={s.detailed__image} alt={""} />
             )}
           </Dialog.Panel>
-          <CloseButton style={styleCloseBtn} onClick={closeFunc} />
+          {/* <CloseButton style={styleCloseBtn} onClick={closeFunc} /> */}
         </motion.div>
       </Dialog>
     </AnimatePresence>

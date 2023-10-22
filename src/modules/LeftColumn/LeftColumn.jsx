@@ -1,5 +1,5 @@
 import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
-import DialogsUsers from '../DialogsUsers/DialogsUsers'
+import DialogsUsers from "../DialogsUsers/DialogsUsers";
 const LeftColumn = () => {
   return (
     <WrapperBlocks
@@ -16,7 +16,7 @@ const LeftColumn = () => {
         },
       }}
     >
-     <DialogsUsers/>
+      <DialogsUsers />
     </WrapperBlocks>
   );
 };

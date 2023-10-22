@@ -14,11 +14,12 @@ const AboutUser = ({ errors, register, setValue }) => {
         <Input
           endDecorator={<CalendarMonth />}
           sx={{
-            "input[type='date']::-webkit-inner-spin-button, input[type='date']::-webkit-calendar-picker-indicator": {
-              display: "none",
-              "-webkit-appearance": "none",
-              background: "transparent",
-            },
+            "input[type='date']::-webkit-inner-spin-button, input[type='date']::-webkit-calendar-picker-indicator":
+              {
+                display: "none",
+                "-webkit-appearance": "none",
+                background: "transparent",
+              },
           }}
           type="date"
           {...register("birth_date", {
@@ -37,7 +38,11 @@ const AboutUser = ({ errors, register, setValue }) => {
       </FormWrapperLabel>
 
       <FormWrapperLabel defaultValue="male" errors={errors?.gender} title="Пол">
-        <RadioGroup onChange={toggleRadio} orientation="horizontal" sx={{ justifyContent: "center" }}>
+        <RadioGroup
+          onChange={toggleRadio}
+          orientation="horizontal"
+          sx={{ justifyContent: "center" }}
+        >
           <Radio
             type="radio"
             value="m"

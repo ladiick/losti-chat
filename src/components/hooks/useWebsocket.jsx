@@ -31,7 +31,7 @@ const useWebsocket = (userAccessToken) => {
       const token = updateAccessToken(refresh);
       localStorage.setItem("accessToken", token.access);
       dispatch(setUserAccessToken(token.access));
-      
+
       setTimeout(() => {
         createChannel();
       }, 3000);
@@ -43,7 +43,9 @@ const useWebsocket = (userAccessToken) => {
       ws?.removeEventListener("close", closeHandler);
       ws?.close();
 
-      ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/?token=${localStorage.getItem("accessToken")}`);
+      ws = new WebSocket(
+        `ws://127.0.0.1:8000/ws/chat/?token=${localStorage.getItem("accessToken")}`,
+      );
 
       ws?.addEventListener("close", closeHandler);
       setSocket(ws);
@@ -58,7 +60,7 @@ const useWebsocket = (userAccessToken) => {
   }, [isAuth, userAccessToken]);
 
   useEffect(() => {
-    let openHandler = () => {
+    const openHandler = () => {
       setStatusSocket("ready");
     };
 
@@ -75,14 +77,29 @@ const useWebsocket = (userAccessToken) => {
       if (eventData.action === "friend") {
         if (eventData.data.type === "friend_request") {
           await updateFriendRequests();
-          toast.success(`Заявка в друзья от ${eventData.data.user.first_name + " " + eventData.data.user.last_name}`, optionsNotification);
+          toast.success(
+            `Заявка в друзья от ${
+              eventData.data.user.first_name + " " + eventData.data.user.last_name
+            }`,
+            optionsNotification,
+          );
         }
         if (eventData.data.type === "friend_accepted") {
           await updateFriends();
-          toast.success(`Заявка в друзья принята ${eventData.data.user.first_name + " " + eventData.data.user.last_name}`, optionsNotification);
+          toast.success(
+            `Заявка в друзья принята ${
+              eventData.data.user.first_name + " " + eventData.data.user.last_name
+            }`,
+            optionsNotification,
+          );
         }
         if (eventData.data.type === "friend_denied") {
-          toast.error(`Ваша заявка в друзья отклонена ${eventData.data.user.first_name + " " + eventData.data.user.last_name} `, optionsNotification);
+          toast.error(
+            `Ваша заявка в друзья отклонена ${
+              eventData.data.user.first_name + " " + eventData.data.user.last_name
+            } `,
+            optionsNotification,
+          );
         }
         if (eventData.data.type === "friend_canceled") {
           // в будущем
@@ -92,7 +109,7 @@ const useWebsocket = (userAccessToken) => {
         }
       } else {
         const newMessage2 = eventData.data;
-        dispatch(updatePeople({ data: newMessage2, myId: myId }));
+        dispatch(updatePeople({ data: newMessage2, myId }));
         setNewMessage(newMessage2);
       }
     };

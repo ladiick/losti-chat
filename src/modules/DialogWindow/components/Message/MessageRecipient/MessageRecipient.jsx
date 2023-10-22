@@ -1,12 +1,12 @@
-import { Typography } from "@mui/joy"
-import React from "react"
-import _ from "underscore"
-import BlockAnswerMessage from "../../BlockAnswerMessage/BlockAnswerMessage"
-import BlockMessage from "../BlockMessage/BlockMessage"
-import MessageForward from "../MessageForward/MessageForward"
-import MessageImage from "../MessageImage/MessageImage"
+import { Typography } from "@mui/joy";
+import React from "react";
+import _ from "underscore";
+import BlockMessage from "../BlockMessage/BlockMessage";
+import MessageAnswer from "../MessageAnswer/MessageAnswer";
+import MessageForward from "../MessageForward/MessageForward";
+import MessageImage from "../MessageImage/MessageImage";
 
-const MessageRecipient = React.memo(({ activeMessage, obj, handlerCurrentMessage, margin }) => {
+const MessageRecipient = ({ activeMessage, obj, handlerCurrentMessage, margin }) => {
   if (!_.isEmpty(obj?.images)) {
     return (
       <BlockMessage
@@ -45,7 +45,17 @@ const MessageRecipient = React.memo(({ activeMessage, obj, handlerCurrentMessage
     );
   }
   return (
-    <BlockMessage sx={{ mb: margin ? "0.5rem" : "1rem" }} pos={"right"} time={obj?.time} activeMessage={activeMessage} onClick={handlerCurrentMessage}>
+    <BlockMessage
+      sx={{ mb: margin ? "0.5rem" : "1rem" }}
+      pos={"right"}
+      time={obj?.time}
+      activeMessage={activeMessage}
+      onClick={handlerCurrentMessage}
+    >
+      {!_.isEmpty(obj?.answer) && (
+        <MessageAnswer answer={obj?.answer} obj={obj?.answer?.recipient} />
+      )}
+
       {obj?.message && (
         <Typography component="span" display="inline-block">
           {obj?.message}
@@ -55,10 +65,8 @@ const MessageRecipient = React.memo(({ activeMessage, obj, handlerCurrentMessage
       {!_.isEmpty(obj?.images) && <MessageImage images={obj?.images} />}
 
       {!_.isEmpty(obj?.forward) && <MessageForward forward={obj} count={0} />}
-
-      {!_.isEmpty(obj?.answer) && <BlockAnswerMessage message={obj?.answer} answer />}
     </BlockMessage>
   );
-});
+};
 
-export default MessageRecipient;
+export default React.memo(MessageRecipient);

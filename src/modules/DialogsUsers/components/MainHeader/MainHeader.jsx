@@ -7,7 +7,13 @@ const MainHeader = ({ children }) => {
       direction="row"
       alignItems="center"
       spacing={2}
-      sx={{ borderBottom: "1px solid", borderColor: "divider", p: "0.75rem", height: "3.5rem" }}
+      sx={{
+        borderBottom: "1px solid",
+        borderColor: "divider",
+        p: "0.75rem",
+        height: "3.5rem",
+        boxShadow: "sm",
+      }}
     >
       <Menu />
       {children}

@@ -7,7 +7,7 @@ export const authorizationApiSlice = apiSlice.injectEndpoints({
         url: "/token/",
         method: "post",
         body: data,
-      })
+      }),
     }),
   }),
 });

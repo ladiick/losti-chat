@@ -6,7 +6,10 @@ export const friendsRequestsApiSlice = apiSlice.injectEndpoints({
       query: () => "/friends/requests/",
       providesTags: (result) =>
         result
-          ? [...result.map(({ id }) => ({ type: "addFriendsRequests", id })), { type: "addFriendsRequests", id: "LIST" }]
+          ? [
+              ...result.map(({ id }) => ({ type: "addFriendsRequests", id })),
+              { type: "addFriendsRequests", id: "LIST" },
+            ]
           : [{ type: "addFriendsRequests", id: "LIST" }],
     }),
     updateFriendRequests: builder.mutation({
@@ -16,4 +19,5 @@ export const friendsRequestsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetFriendsRequestsQuery, useUpdateFriendRequestsMutation } = friendsRequestsApiSlice;
+export const { useGetFriendsRequestsQuery, useUpdateFriendRequestsMutation } =
+  friendsRequestsApiSlice;

@@ -7,11 +7,11 @@ const initialState = {
     viewAttachmentsInDialogs: false,
   },
 
-  //modal
+  // modal
 
   openDetailedImage: false,
 
-  forwardMessageFlag: false,
+  forwardModal: false,
   answerMessageFlag: false,
   deleteFriend: false,
   deleteFriendObj: {},
@@ -24,7 +24,7 @@ const initialState = {
   openFromDialog: true,
 
   // search
-  searchValue: ""
+  searchValue: "",
 };
 
 export const navigationSlice = createSlice({
@@ -50,8 +50,8 @@ export const navigationSlice = createSlice({
       state.deleteFriend = action.payload.flag;
       state.deleteFriendObj = action.payload.obj;
     },
-    forwardMessageFlag(state, action) {
-      state.forwardMessageFlag = action.payload;
+    setForwardModal(state, action) {
+      state.forwardModal = action.payload;
     },
     answerMessageFlag(state, action) {
       state.answerMessageFlag = action.payload;
@@ -65,7 +65,15 @@ export const navigationSlice = createSlice({
   },
 });
 
-export const { openModalBlock, openChatBlock, searchFriend, deleteFriend, forwardMessageFlag, setOpenDetailedImage, setOpenFromDialog, setSearchValue } =
-  navigationSlice.actions;
+export const {
+  openModalBlock,
+  openChatBlock,
+  searchFriend,
+  deleteFriend,
+  setForwardModal,
+  setOpenDetailedImage,
+  setOpenFromDialog,
+  setSearchValue,
+} = navigationSlice.actions;
 
 export default navigationSlice.reducer;

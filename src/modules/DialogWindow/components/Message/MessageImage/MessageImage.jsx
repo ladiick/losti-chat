@@ -9,6 +9,7 @@ const MessageImage = ({ images }) => {
         display: "flex",
         flexWrap: "wrap",
         gap: "0.2rem",
+        padding: "0.2rem",
       }}
     >
       {images?.map((image, index) => (

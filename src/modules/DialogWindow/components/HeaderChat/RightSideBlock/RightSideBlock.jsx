@@ -1,39 +1,40 @@
 import { Delete, Image, MoreVert } from "@mui/icons-material";
 import { Dropdown, IconButton, ListItemDecorator, Menu, MenuButton, MenuItem } from "@mui/joy";
 import React from "react";
-import { BsTrash3 } from "react-icons/bs";
-import { HiOutlinePhotograph } from "react-icons/hi";
-import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import { openModalBlock } from "../../../../../redux/slices/navigationSlice";
+import { useSelector } from "react-redux";
 
 const RightSideBlock = () => {
-  const dispatch = useDispatch();
-  const viewAttachmentsInDialogs = useSelector((state) => state.navigation.modal.viewAttachmentsInDialogs);
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const dispatch = useDispatch();
+  const viewAttachmentsInDialogs = useSelector(
+    (state) => state.navigation.modal.viewAttachmentsInDialogs,
+  );
+  // const [searchParams, setSearchParams] = useSearchParams();
 
-  const items = [
-    {
-      title: "Показать вложения",
-      icon: <HiOutlinePhotograph />,
-      func: () => {
-        setSearchParams({
-          dialogs: searchParams.get("dialogs"),
-          history: `${searchParams.get("dialogs")}_photo`,
-        });
-        dispatch(openModalBlock({ viewAttachmentsInDialogs: true }));
-      },
-    },
-    {
-      title: "Очистить диалог",
-      icon: <BsTrash3 />,
-    },
-  ];
+  // const items = [
+  //   {
+  //     title: "Показать вложения",
+  //     icon: <HiOutlinePhotograph />,
+  //     func: () => {
+  //       setSearchParams({
+  //         dialogs: searchParams.get("dialogs"),
+  //         history: `${searchParams.get("dialogs")}_photo`,
+  //       });
+  //       dispatch(openModalBlock({ viewAttachmentsInDialogs: true }));
+  //     },
+  //   },
+  //   {
+  //     title: "Очистить диалог",
+  //     icon: <BsTrash3 />,
+  //   },
+  // ];
 
   return (
     <Dropdown>
       <>
-        <MenuButton slots={{ root: IconButton }} slotProps={{ root: { variant: "plain", color: "neutral" } }}>
+        <MenuButton
+          slots={{ root: IconButton }}
+          slotProps={{ root: { variant: "plain", color: "neutral" } }}
+        >
           <MoreVert />
         </MenuButton>
 

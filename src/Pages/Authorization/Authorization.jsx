@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import FormWrapper from "../../components/FormWrapper/FormWrapper";
-import AuthorizationForm from '../../modules/Authorization/components/AuthorizationForm/AuthorizationForm'
+import AuthorizationForm from "../../modules/Authorization/components/AuthorizationForm/AuthorizationForm";
 
 const Authorization = () => {
   useEffect(() => {

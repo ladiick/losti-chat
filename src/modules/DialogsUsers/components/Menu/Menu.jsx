@@ -1,5 +1,23 @@
-import { Bookmark, DarkMode, HelpOutline, LightMode, Menu, People, Settings } from "@mui/icons-material";
-import { Avatar, IconButton, List, Modal, Sheet, Stack, Typography, modalClasses, useColorScheme } from "@mui/joy";
+import {
+  Bookmark,
+  DarkMode,
+  HelpOutline,
+  LightMode,
+  Menu,
+  People,
+  Settings,
+} from "@mui/icons-material";
+import {
+  Avatar,
+  IconButton,
+  List,
+  Modal,
+  Sheet,
+  Stack,
+  Typography,
+  modalClasses,
+  useColorScheme,
+} from "@mui/joy";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -40,7 +58,10 @@ const HeaderMenu = () => {
             transition: "transform 0.3s ease",
           }}
         >
-          <Sheet component={"header"} sx={{ borderBottom: "1px solid", borderColor: "divider", pb: "0.75rem" }}>
+          <Sheet
+            component={"header"}
+            sx={{ borderBottom: "1px solid", borderColor: "divider", pb: "0.75rem" }}
+          >
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
               <Avatar size="lg" />
               <IconButton onClick={() => setMode(mode === "dark" ? "light" : "dark")}>
@@ -66,7 +87,11 @@ const HeaderMenu = () => {
             </MenuItem>
           </List>
 
-          <Typography sx={{ pt: "0.75rem", userSelect: "none" }} textAlign={"center"} level={"body-xs"}>
+          <Typography
+            sx={{ pt: "0.75rem", userSelect: "none" }}
+            textAlign={"center"}
+            level={"body-xs"}
+          >
             Losti-Chat Web
           </Typography>
         </Sheet>

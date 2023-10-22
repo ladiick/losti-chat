@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import user from "./slices/userSlice";
-import people from "./slices/peopleSlice";
-import message from "./slices/messageSlice";
-import navigation from "./slices/navigationSlice";
+import { apiSlice } from "../components/api/apiSlice";
 import friends from "../modules/Friends/slices/friendsSlice";
 import registration from "../modules/Registration/store/registrationStepsSlice";
-import { apiSlice } from "../components/api/apiSlice";
 import theme from "../redux/slices/themeSlice";
-import dragAndDrop from './slices/dragAndDropSlice'
-import pages from './slices/pages'
+import dragAndDrop from "./slices/dragAndDropSlice";
+import message from "./slices/messageSlice";
+import navigation from "./slices/navigationSlice";
+import pages from "./slices/pages";
+import people from "./slices/peopleSlice";
+import user from "./slices/userSlice";
 export const store = configureStore({
   reducer: {
     user,
@@ -22,12 +22,11 @@ export const store = configureStore({
     pages,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
-  // message.sendMessageOnCha
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ["message/sendMessagesOnChat"],
-        ignoredPaths: ["message.sendMessageOnChat"],
+        ignoredActions: ["message/dialogs"],
+        ignoredPaths: ["message/dialogs"],
       },
     }).concat(apiSlice.middleware),
 });
