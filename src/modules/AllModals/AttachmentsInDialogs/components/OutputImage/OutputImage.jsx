@@ -1,12 +1,12 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import Image from "../../../../DialogWindow/components/Message/MessageImage/Image";
+// import Image from "../../../../DialogWindow/components/Message/MessageImage/Image";
 import { useGetAttachmentsImagesQuery } from "../../api/attachmentsImagesApiSlice";
 import s from "./OutputImage.module.scss";
 const OutputImage = () => {
   const [searchParams] = useSearchParams();
   const {
-    data: images,
+    // data: images,
     isLoading,
     isFetching,
   } = useGetAttachmentsImagesQuery(searchParams?.get("dialogs"));
@@ -17,9 +17,9 @@ const OutputImage = () => {
 
   return (
     <div className={s.output__images}>
-      {images?.map((image, index) => (
+      {/* {images?.map((image, index) => (
         <Image attachments={true} key={image?.id} idImage={image?.id} />
-      ))}
+      ))} */}
     </div>
   );
 };

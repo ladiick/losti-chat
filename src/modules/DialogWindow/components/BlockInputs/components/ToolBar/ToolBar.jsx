@@ -26,18 +26,18 @@ const ToolBar = () => {
       }),
     );
     dispatch(clearSelectMessages());
-    dispatch(clearForwardMessage({ param: searchParams.get("dialogs") }));
+    dispatch(clearForwardMessage({ param }));
   };
 
   const forwardMessage = () => {
     dispatch(setForwardModal(true));
-    dispatch(clearAnswerMessage({ param: searchParams.get("dialogs") }));
+    dispatch(clearAnswerMessage({ param }));
   };
 
   const clearSelectMessage = () => {
     dispatch(clearSelectMessages());
-    dispatch(clearForwardMessage({ param: searchParams.get("dialogs") }));
-    dispatch(clearAnswerMessage({ param: searchParams.get("dialogs") }));
+    dispatch(clearForwardMessage({ param }));
+    dispatch(clearAnswerMessage({ param }));
   };
 
   return (

@@ -16,12 +16,13 @@ const ForwardMessageModal = () => {
   const dispatch = useDispatch();
   const [searchValue, setSearch] = useState("");
   const { socket } = useContext(MyContext);
-  const { data: people = [], isLoading } = useGetPeopleQuery();
   const openModal = useSelector((state) => state.navigation.forwardModal);
   const myId = useSelector((state) => state.user.aboutUser.id);
   const [, setSearchParams] = useSearchParams();
 
   const forwardMessage = useSelector((state) => selectedMessages(state));
+
+  const { data: people = [], isLoading } = useGetPeopleQuery();
 
   const closeFunc = () => {
     dispatch(setForwardModal(false));

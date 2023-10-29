@@ -38,7 +38,7 @@ const AuthorizationForm = () => {
         setError("email", {
           message: "Неверная почта или пароль",
         });
-        setError("password", {});
+        setError("password", { message: "Неверная почта или пароль" });
       }
     }
   };

@@ -9,13 +9,13 @@ import {
 } from "@mui/icons-material";
 import {
   Avatar,
+  DialogContent,
+  Drawer,
   IconButton,
   List,
-  Modal,
   Sheet,
   Stack,
   Typography,
-  modalClasses,
   useColorScheme,
 } from "@mui/joy";
 import { useState } from "react";
@@ -31,33 +31,14 @@ const HeaderMenu = () => {
       <IconButton onClick={() => setIsOpenMenu((open) => !open)}>
         <Menu />
       </IconButton>
-      <Modal
+      <Drawer
+        size="sm"
+        variant="outlined"
         open={isOpenMenu}
         onClose={() => setIsOpenMenu((open) => !open)}
         keepMounted
-        sx={{
-          transitionProperty: "visibility",
-          transitionDelay: isOpenMenu ? "0s" : "300ms",
-          [`& .${modalClasses.backdrop}`]: {
-            opacity: isOpenMenu ? 1 : 0,
-            transition: "opacity 0.3s ease",
-          },
-        }}
       >
-        <Sheet
-          sx={{
-            px: 2,
-            py: "0.75rem",
-            boxSizing: "border-box",
-            position: "fixed",
-            overflow: "auto",
-            width: "clamp(356px, 30vw, 400px)",
-            height: "100%",
-            left: 0,
-            transform: isOpenMenu ? "translateX(0)" : "translateX(-100%)",
-            transition: "transform 0.3s ease",
-          }}
-        >
+        <DialogContent sx={{ px: 2, py: "0.75rem" }}>
           <Sheet
             component={"header"}
             sx={{ borderBottom: "1px solid", borderColor: "divider", pb: "0.75rem" }}
@@ -94,8 +75,8 @@ const HeaderMenu = () => {
           >
             Losti-Chat Web
           </Typography>
-        </Sheet>
-      </Modal>
+        </DialogContent>
+      </Drawer>
     </>
   );
 };

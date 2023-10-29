@@ -71,12 +71,12 @@ const BlockInputs = () => {
         direction="row"
         sx={{
           maxWidth: "50rem",
-          width: selectedMessage.length ? "80%" : "100%",
+          width: selectedMessage.length ? "70%" : "100%",
           m: "0 auto",
           gap: "0.5rem",
-          transition: "all .3s",
+          transition: "all 0.3s",
           "@media (min-width: 1276px)": {
-            width: "calc(100% - 25vh)",
+            width: selectedMessage.length ? "calc(100% - 45vw)" : "calc(100% - 25vw)",
           },
         }}
       >

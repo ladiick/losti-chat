@@ -12,8 +12,15 @@ const MessageImage = ({ images }) => {
         padding: "0.2rem",
       }}
     >
-      {images?.map((image, index) => (
-        <Image key={image?.id} index={index} idImage={image?.id} length={images.length} />
+      {images?.map((image, index, arr) => (
+        <Image
+          key={image?.id}
+          index={index}
+          idImage={image?.id}
+          length={images.length}
+          allImages={arr}
+          size={{ width: image.width, height: image.height }}
+        />
       ))}
     </Box>
   );

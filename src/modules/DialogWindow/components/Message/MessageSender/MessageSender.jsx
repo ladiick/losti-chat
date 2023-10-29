@@ -56,7 +56,7 @@ const MessageSender = ({ activeMessage, obj, handlerCurrentMessage, margin }) =>
       {!_.isEmpty(obj?.answer) && <MessageAnswer answer={obj?.answer} obj={obj?.answer?.sender} />}
 
       {obj?.message && (
-        <Typography component="span" display="inline-block">
+        <Typography component="span" display="inline-block" sx={{ color: "white" }}>
           {obj?.message}
         </Typography>
       )}

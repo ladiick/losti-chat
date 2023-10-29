@@ -1,7 +1,6 @@
+import { Description, PhotoCamera } from "@mui/icons-material";
 import React, { useCallback } from "react";
 import Dropzone from "react-dropzone";
-import { BsCamera } from "react-icons/bs";
-import { TbFiles } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Text from "../../../../components/ui/Text/Text";
@@ -74,9 +73,9 @@ const DragAndDropFileUpload = ({ children, style }) => {
                 }
               >
                 {typeDropZone === "image" ? (
-                  <BsCamera size={106} />
+                  <PhotoCamera size={106} />
                 ) : (
-                  <TbFiles size={106} strokeWidth={0.5} />
+                  <Description size={106} strokeWidth={0.5} />
                 )}
 
                 <Text
