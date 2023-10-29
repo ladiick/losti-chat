@@ -1,8 +1,7 @@
-import { Box, Stack, Typography, useTheme } from "@mui/joy";
+import { Box, Stack, Typography } from "@mui/joy";
 import React from "react";
 
 const MessageAnswer = ({ answer, obj }) => {
-  const { vars } = useTheme();
   return (
     <Box
       sx={{
@@ -25,9 +24,7 @@ const MessageAnswer = ({ answer, obj }) => {
         <Typography color="primary" level="body-sm">
           {obj.first_name} {obj.last_name}
         </Typography>
-        <Typography level="body-sm" sx={{ color: vars.palette.neutral["200"] }}>
-          {answer.message}
-        </Typography>
+        <Typography sx={{ color: "white" }}>{answer.message}</Typography>
       </Stack>
     </Box>
   );

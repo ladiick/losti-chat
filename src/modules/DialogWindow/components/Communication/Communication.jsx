@@ -21,12 +21,10 @@ const Communication = () => {
   const scrollableRootRef = useRef(null);
   const lastScrollDistanceToBottomRef = useRef();
 
-  const { data, isFetching: isFetchingMessages } = useGetMessageQuery(
-    { id: param, page: currentPage },
-    {
-      refetchOnMountOrArgChange: true,
-    },
-  );
+  const { data, isFetching: isFetchingMessages } = useGetMessageQuery({
+    id: param,
+    page: currentPage,
+  });
 
   useEffect(() => {
     setCurrentPage(1);

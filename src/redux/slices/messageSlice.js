@@ -3,6 +3,11 @@ const initialState = {
   dialogs: {},
   selectedMessages: [],
   forwardManyMessage: {},
+  imagesDetailed: {
+    isOpen: false,
+    images: [],
+    currentIndex: null,
+  },
 };
 
 export const messageSlice = createSlice({
@@ -63,6 +68,14 @@ export const messageSlice = createSlice({
     setForwardMessageIfMany(state, action) {
       state.forwardManyMessage = action.payload;
     },
+    setImagesDetailed(state, action) {
+      const { isOpen, images, currentIndex } = action.payload;
+      state.imagesDetailed = {
+        isOpen,
+        images,
+        currentIndex,
+      };
+    },
   },
 });
 
@@ -77,6 +90,7 @@ export const {
   clearForwardMessage,
   clearAnswerMessage,
   setForwardMessageIfMany,
+  setImagesDetailed,
 } = messageSlice.actions;
 
 export default messageSlice.reducer;
@@ -87,7 +101,14 @@ const messageSelectors = {
   answerMessage: (state, id) => state.message.dialogs[id]?.answer ?? {},
   fileMessage: (state, id) => state.message.dialogs[id]?.file ?? [],
   selectedMessages: (state) => state.message.selectedMessages ?? [],
+  imagesDetailed: (state) => state.message.imagesDetailed,
 };
 
-export const { textMessage, forwardMessage, answerMessage, fileMessage, selectedMessages } =
-  messageSelectors;
+export const {
+  textMessage,
+  forwardMessage,
+  answerMessage,
+  fileMessage,
+  selectedMessages,
+  imagesDetailed,
+} = messageSelectors;

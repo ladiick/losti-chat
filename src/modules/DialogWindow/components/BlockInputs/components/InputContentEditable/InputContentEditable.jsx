@@ -92,7 +92,7 @@ const InputContentEditable = ({ sendMessage, setSendEnter, sendDownEnter }) => {
           ...CustomScroll,
         }}
       />
-      {content === "" && <PlaceholderInput />}
+      <PlaceholderInput />
     </Box>
   );
 };

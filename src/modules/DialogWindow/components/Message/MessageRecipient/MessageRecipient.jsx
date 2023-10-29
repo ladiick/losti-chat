@@ -57,7 +57,7 @@ const MessageRecipient = ({ activeMessage, obj, handlerCurrentMessage, margin })
       )}
 
       {obj?.message && (
-        <Typography component="span" display="inline-block">
+        <Typography component="span" display="inline-block" sx={{ color: "white" }}>
           {obj?.message}
         </Typography>
       )}
