@@ -21,7 +21,6 @@ const InputUploadFiles = () => {
 
   const dispatch = useDispatch();
   const handlerFilesUploader = (file) => {
-    console.log(file.target.files);
     dispatch(
       onChangeFileDialog({
         id: searchParams.get("dialogs"),
@@ -37,6 +36,7 @@ const InputUploadFiles = () => {
         justifyContent: "center",
         alignItems: "center",
         flexShrink: 0,
+        [theme.breakpoints.down("sm")]: { height: "2.875rem", width: "2.875rem" },
       }}
     >
       <FormLabel

@@ -11,7 +11,6 @@ const initialState = {
 
   openDetailedImage: false,
 
-  forwardModal: false,
   answerMessageFlag: false,
   deleteFriend: false,
   deleteFriendObj: {},
@@ -25,6 +24,7 @@ const initialState = {
 
   // search
   searchValue: "",
+  // modals new
 };
 
 export const navigationSlice = createSlice({
@@ -49,9 +49,6 @@ export const navigationSlice = createSlice({
     deleteFriend(state, action) {
       state.deleteFriend = action.payload.flag;
       state.deleteFriendObj = action.payload.obj;
-    },
-    setForwardModal(state, action) {
-      state.forwardModal = action.payload;
     },
     answerMessageFlag(state, action) {
       state.answerMessageFlag = action.payload;

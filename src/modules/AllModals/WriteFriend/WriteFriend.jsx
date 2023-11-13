@@ -5,7 +5,7 @@ import { openModalBlock } from "../../../redux/slices/navigationSlice.js";
 import { setFriendsCurrent } from "../../Friends/slices/friendsSlice.js";
 import { toast } from "react-toastify";
 import Text from "../../../components/ui/Text/Text";
-import { MyContext } from "../../Layout/Layout";
+import { MyContext } from "../../../Pages/Layout/Layout";
 import { optionsNotification } from "../../../components/actions/optionsNotification";
 import ModalDialog from "../../../components/ui/Modal/ModalDialog";
 import Avatar from "../../../components/ui/Avatar/Avatar";
@@ -66,7 +66,14 @@ const WriteFriend = () => {
         </div>
       </div>
       <form className={s.form}>
-        <textarea value={textArea} maxLength="4000" onChange={(e) => setTextArea(e.target.value)} cols="40" rows="8" ref={refTextArea} />
+        <textarea
+          value={textArea}
+          maxLength="4000"
+          onChange={(e) => setTextArea(e.target.value)}
+          cols="40"
+          rows="8"
+          ref={refTextArea}
+        />
         <ActionButton onClick={onSubmit} style={{ marginTop: 20, alignSelf: "flex-end" }}>
           Отправить
         </ActionButton>

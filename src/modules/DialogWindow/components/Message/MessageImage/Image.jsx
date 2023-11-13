@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Skeleton } from "@mui/joy";
+import { Box, Skeleton } from "@mui/joy";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useGetImageInMessageQuery } from "../../../../../components/features/getImageInMessageApiSlice";
@@ -66,52 +66,40 @@ const Image = ({ idImage, size, style, detailed, index, length, allImages }) => 
 
   return (
     <Skeleton
-      loading={!data && isFetching}
+      loading={isFetching}
+      variant="inline"
       sx={{
-        maxHeight: length === 1 ? 432 : 320,
+        maxHeight: 432,
         width: size.width,
         height: size.height,
         flex: "1 calc(50% - 0.2rem)",
         overflow: "hidden",
-        position: "static",
-        borderRadius: "sm",
+        borderRadius: borderRadiusImage({ length, index }),
         transition: "all 0.3s",
-        "&:before": {
-          position: "static",
-        },
-        "& *": {
-          visibility: "visible",
-        },
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
       }}
     >
-      {!data && isFetching ? (
-        <CircularProgress variant="plain" size="sm" />
-      ) : (
-        <Box
-          onClick={detailedImage}
-          sx={{
-            display: "inline-block",
-            flex: "1 calc(50% - 0.2rem)",
+      <Box
+        onClick={detailedImage}
+        sx={{
+          display: "inline-block",
+          // flex: "1 calc(50% - 0.2rem)",
+          // overflow: "hidden",
+          width: size.width,
+          height: size.height,
+          "& img": {
             overflow: "hidden",
-            maxHeight: 432,
-            "& img": {
-              overflow: "hidden",
-              maxWidth: "100%",
-              objectFit: "cover",
-              height: "100%",
-              width: "100%",
-              cursor: "pointer",
-              borderRadius: borderRadiusImage({ length, index }),
-            },
-            ...style,
-          }}
-        >
-          <img src={data} alt="pictures" loading="lazy" />
-        </Box>
-      )}
+            maxWidth: "100%",
+            objectFit: "cover",
+            height: "100%",
+            width: "100%",
+            cursor: "pointer",
+            borderRadius: borderRadiusImage({ length, index }),
+          },
+          ...style,
+        }}
+      >
+        <img src={data} alt="pictures" />
+      </Box>
     </Skeleton>
   );
 };

@@ -3,7 +3,7 @@ import { Box, IconButton, Stack, Typography } from "@mui/joy";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { clearAnswerMessage } from "../../../../redux/slices/messageSlice";
+import { clearAnswerMessage } from "../../../../../../redux/slices/messageSlice";
 const BlockAnswerMessage = ({ message }) => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();

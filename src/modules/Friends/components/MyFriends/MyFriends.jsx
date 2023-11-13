@@ -35,7 +35,8 @@ function MyFriends() {
         className={s.wrapper}
       >
         <div className={s.friends__empty}>
-          У вас нет друзей! <span onClick={() => dispatch(searchFriend(true))}>Cкорее добавьте их</span>
+          У вас нет друзей!{" "}
+          <span onClick={() => dispatch(searchFriend(true))}>Cкорее добавьте их</span>
         </div>
       </motion.div>
     );

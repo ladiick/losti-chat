@@ -1,6 +1,6 @@
 import React from "react";
 
-const BlockFilesMessage = ({ files }) => {
+const AddFIlesModal = ({ files }) => {
   // const [image, setImage] = useState("");
 
   // const onImageChange = event => {
@@ -20,4 +20,4 @@ const BlockFilesMessage = ({ files }) => {
   return <div></div>;
 };
 
-export default BlockFilesMessage;
+export default AddFIlesModal;

@@ -4,6 +4,19 @@ import { useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { imagesDetailed, setImagesDetailed } from "../../../redux/slices/messageSlice";
 import Image from "../components/Message/MessageImage/Image";
+import { keyframes } from "@mui/system";
+
+const overlay = keyframes`
+  from {
+    backdrop-filter: blur(8px);
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+`;
+
 const IconBtn = {
   top: 0,
   bottom: 0,
@@ -22,8 +35,16 @@ const IconBtn = {
     },
   },
 };
+const content = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
-const DetailedImage = () => {
+const DetailedImageModal = () => {
   const dispatch = useDispatch();
   const { isOpen, images, currentIndex } = useSelector((state) => imagesDetailed(state));
   const [imageIndex, setImageIndex] = useState(0);
@@ -92,7 +113,13 @@ const DetailedImage = () => {
   );
 
   return (
-    <Modal open={isOpen} onClose={closeFunc}>
+    <Modal
+      open={isOpen}
+      onClose={closeFunc}
+      sx={{
+        animation: `${overlay} 300ms`,
+      }}
+    >
       <Box
         sx={{
           display: "grid",
@@ -127,6 +154,7 @@ const DetailedImage = () => {
               display: "flex",
               width: "100%",
               height: "100%",
+              animation: `${content} 300ms`,
             }}
           >
             {imagesWithCurrentIndexFirst.map((url, index) => (
@@ -187,4 +215,4 @@ const DetailedImage = () => {
   );
 };
 
-export default DetailedImage;
+export default DetailedImageModal;

@@ -1,6 +1,16 @@
+import { Suspense, lazy, useState } from "react";
+import { useSelector } from "react-redux";
 import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
+import { pageSelector } from "../../redux/slices/pages";
 import DialogsUsers from "../DialogsUsers/DialogsUsers";
+import MainHeader from "./components/MainHeader";
+
+const Friends = lazy(() => import("../Friends/Friends"));
+
 const LeftColumn = () => {
+  const { friends } = useSelector((state) => pageSelector(state));
+  const [searchValue, setSearchValue] = useState("");
+
   return (
     <WrapperBlocks
       sx={{
@@ -16,7 +26,13 @@ const LeftColumn = () => {
         },
       }}
     >
-      <DialogsUsers />
+      <MainHeader searchValue={searchValue} setSearchValue={setSearchValue} />
+      <DialogsUsers searchValue={searchValue} />
+      {friends !== null && (
+        <Suspense>
+          <Friends />
+        </Suspense>
+      )}
     </WrapperBlocks>
   );
 };

@@ -1,13 +1,12 @@
 import { CancelScheduleSend, Send } from "@mui/icons-material";
-import { IconButton, useTheme } from "@mui/joy";
+import { IconButton } from "@mui/joy";
 import { memo, useContext, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { answerMessage, textMessage } from "../../../../../../redux/slices/messageSlice";
-import { MyContext } from "../../../../../Layout/Layout";
+import { MyContext } from "../../../../../../Pages/Layout/Layout";
 
 const ButtonSendMessage = ({ sendMessage, setSendEnter, sendDownEnter }) => {
-  const theme = useTheme();
   const refSend = useRef();
   const [searchParams] = useSearchParams();
   const param = searchParams.get("dialogs");
@@ -34,16 +33,11 @@ const ButtonSendMessage = ({ sendMessage, setSendEnter, sendDownEnter }) => {
       color={disabledBtn ? "neutral" : "primary"}
       disabled={disabledBtn}
       variant="solid"
+      bgcolor="surface"
+      circle
+      size="xxl"
       sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        alignSelf: "flex-end",
-        height: "3.5rem",
-        width: "3.5rem",
         flexShrink: 0,
-        borderRadius: "50%",
-        backgroundColor: theme.vars.palette.background.surface,
       }}
     >
       {statusSocket === "ready" ? <Send /> : <CancelScheduleSend />}

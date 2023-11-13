@@ -1,18 +1,21 @@
 import { Box } from "@mui/joy";
 import React from "react";
 import Image from "./Image";
+import { resizeImages } from "../../../helpers/helpersMessage";
 const MessageImage = ({ images }) => {
   return (
     <Box
       sx={{
-        flexShrink: "1",
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "0.2rem",
-        padding: "0.2rem",
+        // flexShrink: "1",
+        // display: "flex",
+        // flexWrap: "wrap",
+        // gap: "0.2rem",
+        // padding: "0.2rem",
+        maxWidth: 480,
+        maxHeight: 432,
       }}
     >
-      {images?.map((image, index, arr) => (
+      {resizeImages(images)?.map((image, index, arr) => (
         <Image
           key={image?.id}
           index={index}

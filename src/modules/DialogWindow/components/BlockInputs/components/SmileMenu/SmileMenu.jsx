@@ -1,7 +1,8 @@
 import { SentimentSatisfied } from "@mui/icons-material";
-import { Box } from "@mui/joy";
+import { Box, useTheme } from "@mui/joy";
 
 const SmileMenu = () => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -11,6 +12,7 @@ const SmileMenu = () => {
         justifyContent: "center",
         alignItems: "center",
         flexShrink: 0,
+        [theme.breakpoints.down("sm")]: { width: "2.875rem", height: "2.875rem" },
       }}
     >
       <SentimentSatisfied />

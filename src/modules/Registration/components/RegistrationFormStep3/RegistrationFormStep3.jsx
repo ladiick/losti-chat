@@ -14,10 +14,10 @@ const RegistrationFormStep3 = () => {
   const [visibilityPass, setVisibilityPass] = useState(false);
 
   useEffect(() => {
-    // if (!localStorage.getItem("email")) {
-    //   navigate("/registration");
-    // }
-  }, []);
+    if (!localStorage.getItem("email")) {
+      navigate("/registration");
+    }
+  }, [navigate]);
 
   const {
     register,

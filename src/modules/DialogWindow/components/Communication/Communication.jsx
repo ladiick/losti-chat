@@ -4,11 +4,11 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import _ from "underscore";
 import CustomScroll from "../../../../components/ui/CustomScroll/CustomScroll";
 import { clearSelectMessages } from "../../../../redux/slices/messageSlice";
-import { useGetMessageQuery } from "./api/messageApiSlice";
+import { useGetMessageQuery } from "../../api/messageApiSlice";
 import ListMessages from "./components/ListMessages";
+import _ from "underscore";
 
 const Communication = () => {
   const dispatch = useDispatch();
@@ -64,6 +64,7 @@ const Communication = () => {
   const [infiniteScroll, { rootRef }] = useInfiniteScroll({
     loading: isFetchingMessages,
     hasNextPage: !!data?.next,
+    rootMargin: "400px 0px 0px 0px",
     onLoadMore: () => setCurrentPage((pre) => pre + 1),
   });
 
@@ -134,7 +135,6 @@ const Communication = () => {
             <CircularProgress size="sm" />
           </Box>
         )}
-
         <Box
           sx={{
             width: "100%",
@@ -153,15 +153,12 @@ const Communication = () => {
       {scrollButton && (
         <Box sx={{ position: "absolute", bottom: "5.5rem", right: "1rem" }}>
           <IconButton
+            size="xxl"
             variant="solid"
             color="primary"
             onClick={dialogDown}
-            sx={{
-              height: "3.5rem",
-              width: "3.5rem",
-              borderRadius: "50%",
-              backgroundColor: theme.vars.palette.background.surface,
-            }}
+            bgcolor="surface"
+            circle
           >
             <ArrowDownward />
           </IconButton>
