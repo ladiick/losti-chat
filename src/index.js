@@ -28,6 +28,57 @@ const theme = extendTheme({
       },
     },
   },
+  components: {
+    JoyButton: {
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          ...(ownerState.bgcolor === "surface" && {
+            backgroundColor: theme.vars.palette.background.surface,
+          }),
+          ...(ownerState.circle === true && {
+            borderRadius: `50%`,
+          }),
+          ...(ownerState.size === "xxl" && {
+            [theme.breakpoints.down("sm")]: {
+              width: "2.875rem",
+              height: "2.875rem",
+            },
+            [theme.breakpoints.up("sm")]: {
+              width: "3.5rem",
+              height: "3.5rem",
+            },
+          }),
+        }),
+      },
+    },
+    JoyIconButton: {
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          ...(ownerState.bgcolor === "surface" && {
+            backgroundColor: theme.vars.palette.background.surface,
+          }),
+          ...(ownerState.circle === true && {
+            borderRadius: `50%`,
+          }),
+          ...(ownerState.size === "xxl" && {
+            [theme.breakpoints.down("sm")]: {
+              width: "2.875rem",
+              height: "2.875rem",
+            },
+            [theme.breakpoints.up("sm")]: {
+              width: "3.5rem",
+              height: "3.5rem",
+            },
+          }),
+        }),
+      },
+    },
+    JoyCircularProgress: {
+      defaultProps: {
+        size: "sm",
+      },
+    },
+  },
   radius: {
     xs: "10px",
     sm: "12px",

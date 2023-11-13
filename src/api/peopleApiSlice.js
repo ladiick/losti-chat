@@ -1,5 +1,5 @@
-import { apiSlice } from "../../../../../components/api/apiSlice";
-import { addPeople } from "../../../../../redux/slices/peopleSlice";
+import { apiSlice } from "../components/api/apiSlice";
+import { addPeople } from "../redux/slices/peopleSlice";
 
 export const peopleApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

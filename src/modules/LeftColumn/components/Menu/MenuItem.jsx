@@ -1,8 +1,8 @@
 import { ListItem, ListItemButton, ListItemDecorator, Typography } from "@mui/joy";
 
-const MenuItem = ({ to, component, children, icon }) => {
+const MenuItem = ({ onClick, children, icon }) => {
   return (
-    <ListItem to={to} component={component}>
+    <ListItem onClick={onClick}>
       <ListItemButton sx={{ borderRadius: "sm", wordWrap: "break-word" }}>
         <ListItemDecorator>{icon}</ListItemDecorator>
         <Typography>{children}</Typography>

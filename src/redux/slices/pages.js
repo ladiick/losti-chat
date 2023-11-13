@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  friends: false,
+  friends: null,
   settings: false,
   notification: false,
 };
@@ -11,8 +11,8 @@ export const pages = createSlice({
   initialState,
 
   reducers: {
-    showFriendsPage(state) {
-      state.friends = !state.friends;
+    showFriendsPage(state, action) {
+      state.friends = action.payload;
     },
     showSettingsPage(state) {
       state.settings = !state.settings;
@@ -26,3 +26,5 @@ export const pages = createSlice({
 export const { showFriendsPage, showSettingsPage, showNotificationPage } = pages.actions;
 
 export default pages.reducer;
+
+export const pageSelector = (state) => state.pages;

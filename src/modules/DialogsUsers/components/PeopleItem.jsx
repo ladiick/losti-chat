@@ -1,11 +1,11 @@
-import { reTime } from "../../../../../../components/actions/reTime.js";
+import { reTime } from "../../../components/actions/reTime.js";
 
 import { Bookmark, Reply } from "@mui/icons-material";
 import { Avatar, Badge, Box, Chip, ListItem, ListItemButton, Stack, Typography } from "@mui/joy";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
-import { HOST } from "../../../../../../components/api/HOST.js";
+import { HOST } from "../../../components/api/HOST.js";
 
 const PeopleItem = ({ flag, message, handlerPeople, time, obj }) => {
   const [searchParams] = useSearchParams();
@@ -59,6 +59,7 @@ const PeopleItem = ({ flag, message, handlerPeople, time, obj }) => {
             badgeInset="14%"
             invisible={!obj.online}
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            sx={{ zIndex: 0 }}
           >
             <Avatar alt={obj.first_name + obj.last_name} src={`${HOST + obj.image}`} size="lg" />
           </Badge>

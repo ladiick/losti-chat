@@ -1,7 +1,6 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import Communication from "./components/Communication/Communication";
 
 import { useGetCurrentPersonQuery } from "../../components/features/currentPeopleApiSlice";
 import useMatchMedia from "../../components/hooks/useMatchMedia";
@@ -11,38 +10,33 @@ import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
 import { Forum } from "@mui/icons-material";
 import { Stack, Typography, useTheme } from "@mui/joy";
 import { imagesDetailed, setDialog } from "../../redux/slices/messageSlice";
-import AttachmentsInDialogs from "../AllModals/AttachmentsInDialogs/AttachmentsInDialogs";
 
-import ViewForwardedMessage from "../AllModals/ViewForwardedMessage/ViewForwardedMessage";
+import { modalsSelectors } from "../../redux/slices/modalsSlice";
 import BlockInputs from "./components/BlockInputs/BlockInputs";
+import Communication from "./components/Communication/Communication";
 import DragAndDropFileUpload from "./components/DragAndDropFileUpload/DragAndDropFileUpload";
 import HeaderChat from "./components/HeaderChat/HeaderChat";
 
+const ViewForwardedMessage = lazy(() => import("./Modal/ViewForwardedMessage"));
 const ForwardMessageModal = lazy(() => import("./Modal/ForwardMessageModal"));
-
-const DetailedImage = lazy(() => import("./Modal/DetailedImage"));
+const DetailedImageModal = lazy(() => import("./Modal/DetailedImageModal"));
 
 const Chat = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const myId = useSelector((state) => state.user.aboutUser.id);
-  const { isOpen: isOpenDetailedImage } = useSelector((state) => imagesDetailed(state));
   const [searchParams, setSearchParams] = useSearchParams();
-  const viewForwardMessage = useSelector((state) => state.navigation.modal.viewForwardMessage);
 
-  const viewAttachmentsInDialogs = useSelector(
-    (state) => state.navigation.modal.viewAttachmentsInDialogs,
-  );
+  const { isOpen: isOpenDetailedImage } = useSelector((state) => imagesDetailed(state));
+  const { isOpenForwardModal } = useSelector((state) => modalsSelectors(state));
+  const { isOpenDetailedForwardModal } = useSelector((state) => modalsSelectors(state));
 
   const { isMobile } = useMatchMedia();
   const param = searchParams.get("dialogs");
 
-  const { data: peopleCurrent = {}, isLoading } = useGetCurrentPersonQuery(
-    searchParams.get("dialogs"),
-    {
-      skip: param && myId ? String(param) === String(myId) : true,
-    },
-  );
+  const { data: peopleCurrent = {}, isLoading } = useGetCurrentPersonQuery(param, {
+    skip: param && myId ? String(param) === String(myId) : true,
+  });
 
   useEffect(() => {
     if (param) dispatch(setDialog({ id: param }));
@@ -84,23 +78,25 @@ const Chat = () => {
       }}
     >
       <HeaderChat myId={myId} isLoading={isLoading} peopleCurrent={peopleCurrent} />
-
       <DragAndDropFileUpload style={{ display: "contents" }}>
         <Communication />
         <BlockInputs />
       </DragAndDropFileUpload>
-
-      {viewForwardMessage && <ViewForwardedMessage />}
-      {viewAttachmentsInDialogs && <AttachmentsInDialogs />}
-
-      {isOpenDetailedImage && (
+      {isOpenDetailedForwardModal && (
         <Suspense>
-          <DetailedImage />
+          <ViewForwardedMessage />
         </Suspense>
       )}
-      <Suspense>
-        <ForwardMessageModal />
-      </Suspense>
+      {isOpenDetailedImage && (
+        <Suspense>
+          <DetailedImageModal />
+        </Suspense>
+      )}
+      {isOpenForwardModal && (
+        <Suspense>
+          <ForwardMessageModal />
+        </Suspense>
+      )}
     </WrapperBlocks>
   );
 };

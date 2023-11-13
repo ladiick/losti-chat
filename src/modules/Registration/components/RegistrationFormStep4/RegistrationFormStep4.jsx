@@ -3,6 +3,7 @@ import { Avatar, Button, FormControl, FormLabel, IconButton, Input, Typography }
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import FormWrapperLabel from "../../../../components/FormWrapper/FormWrapperLabel/FormWrapperLabel";
 import useImageView from "../../../../components/hooks/useImageView";
 import { VALID__NAME } from "../../../../utils/validateForm";
@@ -12,6 +13,7 @@ import AboutUser from "./components/AboutUser/AboutUser";
 
 const RegistrationFormStep4 = () => {
   const stepsInfo = useSelector((state) => state.registration.stepsInfo);
+  const navigate = useNavigate();
 
   const [image, onImageChange, setImage] = useImageView();
 
@@ -19,10 +21,10 @@ const RegistrationFormStep4 = () => {
   const [authorization, { isLoading: loadAuthorization }] = useAuthorizationMutation();
 
   useEffect(() => {
-    // if (!stepsInfo.password) {
-    //   navigate("/registration/password");
-    // }
-  }, []);
+    if (!stepsInfo.password) {
+      navigate("/registration/password");
+    }
+  }, [navigate, stepsInfo.password]);
 
   const {
     register,

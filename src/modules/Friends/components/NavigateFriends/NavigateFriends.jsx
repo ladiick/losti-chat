@@ -1,18 +1,16 @@
 import React, { useMemo } from "react";
-import { useGetFriendsRequestsQuery } from "../../api/friendsRequestsApiSlice";
-import NavigationWrapper from "../../../../components/ui/Navigation/components/NavigationWrapper/NavigationWrapper";
 import ListItems from "../../../../components/ui/Navigation/components/ListItems/ListItems";
+import NavigationItem from "../../../../components/ui/Navigation/components/NavigationItem/NavigationItem";
+import NavigationWrapper from "../../../../components/ui/Navigation/components/NavigationWrapper/NavigationWrapper";
 import WrapperBlocks from "../../../../components/ui/WrapperBlocks/WrapperBlocks";
-import { listItems } from './helpers/listItems'
-import NavigationItem from '../../../../components/ui/Navigation/components/NavigationItem/NavigationItem'
+import { useGetFriendsRequestsQuery } from "../../api/friendsRequestsApiSlice";
+import { listItems } from "./helpers/listItems";
 const NavigateFriends = () => {
   const { data: friendRequests = [] } = useGetFriendsRequestsQuery();
 
-  
   const navItems = useMemo(() => {
     return listItems(friendRequests?.length);
   }, [friendRequests]);
-
 
   return (
     <WrapperBlocks style={{ marginBottom: "var(--marginBlock)" }}>

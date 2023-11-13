@@ -13,11 +13,66 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   <link rel="apple-touch-icon" href="logo.svg" />
   <title>LOSTI-CHAT</title>
+  <style>
+    .loader{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 1s;
+      background-color: #171717;
+      z-index: 100;
+    }
+    .loader_hidden{
+      top: 110vh;
+      visibility: hidden;
+    }
+    .logo{
+      width: 98px;
+      height: 98px;
+      animation: logoAnimate 1s;
+    }
+    .title{
+      font-family: "Inter";
+      color: #ffffff;
+      animation: titleAnimate 1s;
+    }
+    @keyframes logoAnimate{
+        from {
+          opacity: 0;
+          transform: rotate(0) scale(0);
+
+        }
+        to {
+          opacity: 1;
+          transform: rotate(360deg) scale(1);
+        }
+      }
+      @keyframes titleAnimate{
+        from {
+          opacity: 0;
+          transform: translateY(300%);
+        }
+        to{
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+  </style>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <!-- <div class="loader">
+    <img src="logo.svg" class="logo">
+    <h1 class="title">Welcome to LOSTI-CHAT</h1>
+  </div> -->
 </body>
 
 </html>

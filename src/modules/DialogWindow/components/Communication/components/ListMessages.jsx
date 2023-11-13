@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import _ from "underscore";
-import { MyContext } from "../../../../Layout/Layout";
+import { MyContext } from "../../../../../Pages/Layout/Layout";
 import { addNewMessage } from "../../../helpers/helpersMessage";
 import BlockMessages from "./BlockMessages";
 

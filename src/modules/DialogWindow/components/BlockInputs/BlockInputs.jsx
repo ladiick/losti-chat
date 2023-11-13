@@ -1,4 +1,4 @@
-import { Box, Stack, useTheme } from "@mui/joy";
+import { Box, Sheet, Stack, useTheme } from "@mui/joy";
 import React, { useCallback, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
@@ -7,14 +7,12 @@ import _ from "underscore";
 import {
   answerMessage,
   clearDialog,
-  fileMessage,
   forwardMessage,
   selectedMessages,
   textMessage,
 } from "../../../../redux/slices/messageSlice";
-import { MyContext } from "../../../Layout/Layout";
-import BlockAnswerMessage from "../BlockAnswerMessage/BlockAnswerMessage";
-import BlockFilesMessage from "../BlockFilesMessage/BlockFilesMessage";
+import { MyContext } from "../../../../Pages/Layout/Layout";
+import BlockAnswerMessage from "./components/BlockAnswerMessage/BlockAnswerMessage";
 import ButtonSendMessage from "./components/ButtonSendMessage/ButtonSendMessage";
 import InputContentEditable from "./components/InputContentEditable/InputContentEditable";
 import InputUploadFiles from "./components/InputUploadFiles/InputUploadFiles";
@@ -30,10 +28,8 @@ const BlockInputs = () => {
   const selectedMessage = useSelector((state) => selectedMessages(state));
   const content = useSelector((state) => textMessage(state, param));
   const answerMessages = useSelector((state) => answerMessage(state, param));
-  const imagesMessages = useSelector((state) => fileMessage(state, param));
   const forwardMessages = useSelector((state) => forwardMessage(state, param));
   const [sendDownEnter, setSendEnter] = useState(false);
-
   const sendMessage = useCallback(() => {
     if (content === "" && _.isEmpty(forwardMessages) && _.isEmpty(answerMessages)) {
       return;
@@ -80,20 +76,24 @@ const BlockInputs = () => {
           },
         }}
       >
-        <Box
-          bgcolor={theme.vars.palette.background.surface}
+        <Sheet
           sx={{
             width: "100%",
             m: "0",
             borderRadius: "sm",
-            "@media (max-width: 768px)": {
-              borderRadius: "0",
-            },
           }}
         >
           {!_.isEmpty(answerMessages) && <BlockAnswerMessage message={answerMessages} />}
 
-          <Stack direction="row" alignItems="center" width="100%" sx={{ minHeight: "3.5rem" }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            width="100%"
+            sx={{
+              minHeight: "3.5rem",
+              [theme.breakpoints.down("sm")]: { minHeight: "2.875rem" },
+            }}
+          >
             {selectedMessage.length ? (
               <ToolBar />
             ) : (
@@ -108,8 +108,7 @@ const BlockInputs = () => {
               </>
             )}
           </Stack>
-          {!_.isEmpty(imagesMessages) && <BlockFilesMessage files={imagesMessages} />}
-        </Box>
+        </Sheet>
         {!selectedMessage.length && (
           <ButtonSendMessage
             sendMessage={sendMessage}

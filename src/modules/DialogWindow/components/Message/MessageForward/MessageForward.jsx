@@ -1,10 +1,10 @@
 import { Reply } from "@mui/icons-material";
-import { Box, Link as MuiLink, Stack, Typography } from "@mui/joy";
+import { Box, Button, Link as MuiLink, Stack, Typography } from "@mui/joy";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setForwardMessageIfMany } from "../../../../../redux/slices/messageSlice";
-import { openModalBlock } from "../../../../../redux/slices/navigationSlice";
+import { setDetailedForwardModal } from "../../../../../redux/slices/modalsSlice";
 import { helperMessage } from "../../../../../utils/utils";
 const MessageForward = ({ forward, count, view }) => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const MessageForward = ({ forward, count, view }) => {
   const openManyForward = (e, obj) => {
     e.stopPropagation();
     dispatch(setForwardMessageIfMany(obj));
-    dispatch(openModalBlock({ viewForwardMessage: true }));
+    dispatch(setDetailedForwardModal(true));
   };
 
   return (
@@ -71,9 +71,21 @@ const MessageForward = ({ forward, count, view }) => {
             ) : obj?.forward?.length !== 0 && count < 3 ? (
               <MessageForward forward={obj} count={count + 1} />
             ) : obj?.forward?.length !== 0 ? (
-              <MuiLink component="button" color="primary" onClick={(e) => openManyForward(e, obj)}>
-                Пересланное сообщение
-              </MuiLink>
+              <Button
+                component="button"
+                color="primary"
+                variant="soft"
+                onClick={(e) => openManyForward(e, obj)}
+                size="sm"
+                sx={{
+                  position: "relative",
+                  top: "1rem",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                }}
+              >
+                Подробнее
+              </Button>
             ) : (
               ""
             )}

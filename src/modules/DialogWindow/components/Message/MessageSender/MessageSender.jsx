@@ -1,11 +1,24 @@
 import React from "react";
 
-import { Typography } from "@mui/joy";
+import { Link, Typography } from "@mui/joy";
+import { keyframes } from "@mui/system";
 import _ from "underscore";
+import { addProtocolIfMissing, isLink } from "../../../helpers/helpersMessage";
 import BlockMessage from "../BlockMessage/BlockMessage";
 import MessageAnswer from "../MessageAnswer/MessageAnswer";
 import MessageForward from "../MessageForward/MessageForward";
 import MessageImage from "../MessageImage/MessageImage";
+
+const inAnimation = keyframes`
+  from {
+    transform: translate(20px, 20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+`;
 
 const MessageSender = ({ activeMessage, obj, handlerCurrentMessage, margin }) => {
   if (!_.isEmpty(obj?.images)) {
@@ -13,6 +26,7 @@ const MessageSender = ({ activeMessage, obj, handlerCurrentMessage, margin }) =>
       <BlockMessage
         sx={{
           mb: margin ? "0.5rem" : "1rem",
+          animation: `${inAnimation} 300ms`,
         }}
         wrapperStyles={{
           p: 0,
@@ -37,6 +51,7 @@ const MessageSender = ({ activeMessage, obj, handlerCurrentMessage, margin }) =>
             sx={{
               p: ".3125rem .5rem .375rem",
               display: "inline-block",
+              color: "white",
             }}
           >
             {obj?.message}
@@ -47,7 +62,10 @@ const MessageSender = ({ activeMessage, obj, handlerCurrentMessage, margin }) =>
   }
   return (
     <BlockMessage
-      sx={{ mb: margin ? "0.5rem" : "1rem" }}
+      sx={{
+        mb: margin ? "0.5rem" : "1rem",
+        animation: `${inAnimation} 300ms`,
+      }}
       activeMessage={activeMessage}
       pos="left"
       time={obj?.time}
@@ -55,11 +73,14 @@ const MessageSender = ({ activeMessage, obj, handlerCurrentMessage, margin }) =>
     >
       {!_.isEmpty(obj?.answer) && <MessageAnswer answer={obj?.answer} obj={obj?.answer?.sender} />}
 
-      {obj?.message && (
-        <Typography component="span" display="inline-block" sx={{ color: "white" }}>
-          {obj?.message}
-        </Typography>
-      )}
+      {obj?.message &&
+        (isLink(obj?.message) ? (
+          <Link href={addProtocolIfMissing(obj?.message)}>{obj?.message}</Link>
+        ) : (
+          <Typography component="span" display="inline-block" sx={{ color: "white" }}>
+            {obj?.message}
+          </Typography>
+        ))}
 
       {!_.isEmpty(obj?.images) && <MessageImage images={obj?.images} />}
 

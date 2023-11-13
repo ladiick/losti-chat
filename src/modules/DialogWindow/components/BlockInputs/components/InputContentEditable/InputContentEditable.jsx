@@ -1,4 +1,4 @@
-import { Box } from "@mui/joy";
+import { Box, useTheme } from "@mui/joy";
 import { memo, useCallback, useEffect, useRef } from "react";
 import ContentEditable from "react-contenteditable";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { onChangeTextDialog, textMessage } from "../../../../../../redux/slices/
 import PlaceholderInput from "./PlaceholderInput";
 
 const InputContentEditable = ({ sendMessage, setSendEnter, sendDownEnter }) => {
+  const theme = useTheme();
   const dispatch = useDispatch();
   const refContentEditable = useRef("");
   const [searchParams] = useSearchParams();
@@ -67,6 +68,7 @@ const InputContentEditable = ({ sendMessage, setSendEnter, sendDownEnter }) => {
       sx={{
         flexGrow: 1,
         py: "1rem",
+        [theme.breakpoints.down("sm")]: { py: 0 },
       }}
     >
       <Box

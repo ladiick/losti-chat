@@ -52,3 +52,51 @@ export const addNewMessage = (preMessage, newMessage) => {
   }
   return updateMessages;
 };
+
+export const isLink = (text) => {
+  const urlRegex = /[-a-zA-Z0-9@:%_+.~#?&/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&/=]*)?/gi;
+  return urlRegex.test(text);
+};
+export const addProtocolIfMissing = (url, defaultProtocol = "http://") => {
+  if (!url.match(/^(http:\/\/|https:\/\/)/i)) {
+    return defaultProtocol + url;
+  }
+  return url;
+};
+
+export const resizeImages = (images) => {
+  const minWidth = 192;
+  const minHeight = 80;
+  const maxWidth = 480;
+  const maxHeight = 432;
+
+  const resizedImages = [];
+
+  for (const image of images) {
+    const { height, width } = image;
+
+    let newHeight = height;
+    let newWidth = width;
+
+    // Уменьшаем пропорционально по высоте, если нужно
+    if (height > maxHeight) {
+      const scale = maxHeight / height;
+      newHeight = Math.round(height * scale);
+      newWidth = Math.round(width * scale);
+    }
+
+    // Уменьшаем пропорционально по ширине, если нужно
+    if (newWidth > maxWidth) {
+      const scale = maxWidth / newWidth;
+      newWidth = Math.round(newWidth * scale);
+      newHeight = Math.round(newHeight * scale);
+    }
+
+    // Минимальные размеры
+    newWidth = Math.max(newWidth, minWidth);
+    newHeight = Math.max(newHeight, minHeight);
+
+    resizedImages.push({ ...image, height: newHeight, width: newWidth });
+  }
+  return resizedImages;
+};

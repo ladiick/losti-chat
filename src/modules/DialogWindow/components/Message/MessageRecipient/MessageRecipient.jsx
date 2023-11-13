@@ -1,10 +1,23 @@
-import { Typography } from "@mui/joy";
+import { Link, Typography } from "@mui/joy";
 import React from "react";
 import _ from "underscore";
+import { addProtocolIfMissing, isLink } from "../../../helpers/helpersMessage";
 import BlockMessage from "../BlockMessage/BlockMessage";
 import MessageAnswer from "../MessageAnswer/MessageAnswer";
 import MessageForward from "../MessageForward/MessageForward";
 import MessageImage from "../MessageImage/MessageImage";
+import { keyframes } from "@mui/system";
+
+const inAnimation = keyframes`
+  from {
+    transform: translate(-20px, 20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+`;
 
 const MessageRecipient = ({ activeMessage, obj, handlerCurrentMessage, margin }) => {
   if (!_.isEmpty(obj?.images)) {
@@ -12,6 +25,7 @@ const MessageRecipient = ({ activeMessage, obj, handlerCurrentMessage, margin })
       <BlockMessage
         sx={{
           mb: margin ? "0.5rem" : "1rem",
+          animation: `${inAnimation} 300ms`,
         }}
         wrapperStyles={{
           p: 0,
@@ -24,7 +38,7 @@ const MessageRecipient = ({ activeMessage, obj, handlerCurrentMessage, margin })
           right: "0.5rem",
           m: 0,
         }}
-        pos={"right"}
+        pos="right"
         time={obj?.time}
         activeMessage={activeMessage}
         onClick={handlerCurrentMessage}
@@ -36,6 +50,7 @@ const MessageRecipient = ({ activeMessage, obj, handlerCurrentMessage, margin })
             sx={{
               p: ".3125rem .5rem .375rem",
               display: "inline-block",
+              color: "white",
             }}
           >
             {obj?.message}
@@ -46,7 +61,10 @@ const MessageRecipient = ({ activeMessage, obj, handlerCurrentMessage, margin })
   }
   return (
     <BlockMessage
-      sx={{ mb: margin ? "0.5rem" : "1rem" }}
+      sx={{
+        mb: margin ? "0.5rem" : "1rem",
+        animation: `${inAnimation} 300ms`,
+      }}
       pos={"right"}
       time={obj?.time}
       activeMessage={activeMessage}
@@ -56,11 +74,14 @@ const MessageRecipient = ({ activeMessage, obj, handlerCurrentMessage, margin })
         <MessageAnswer answer={obj?.answer} obj={obj?.answer?.recipient} />
       )}
 
-      {obj?.message && (
-        <Typography component="span" display="inline-block" sx={{ color: "white" }}>
-          {obj?.message}
-        </Typography>
-      )}
+      {obj?.message &&
+        (isLink(obj?.message) ? (
+          <Link href={addProtocolIfMissing(obj?.message)}>{obj?.message}</Link>
+        ) : (
+          <Typography component="span" display="inline-block" sx={{ color: "white" }}>
+            {obj?.message}
+          </Typography>
+        ))}
 
       {!_.isEmpty(obj?.images) && <MessageImage images={obj?.images} />}
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import Dialogs from "../../Pages/Dialogs/Dialogs";
 import { useGetUserQuery } from "../../components/features/userApiSlice";
 import useWebsocket from "../../components/hooks/useWebsocket";
+import LeftColumn from "../../modules/LeftColumn/LeftColumn";
+import MiddleColumn from "../../modules/MiddleColumn/MiddleColumn";
 import Home from "./components/Home/Home";
-
 export const MyContext = React.createContext();
 
 const Layout = () => {
@@ -20,6 +20,10 @@ const Layout = () => {
     setDataAttribute(localStorage.getItem("theme"));
   }, []);
 
+  useEffect(() => {
+    document.title = "Сообщения";
+  }, []);
+
   // if (!localStorage.getItem("accessToken") || localStorage.getItem("accessToken") === "undefined") {
   //   window.location.href = "/logout";
   // }
@@ -28,9 +32,8 @@ const Layout = () => {
     <>
       <MyContext.Provider value={{ socket, statusSocket, newMessage }}>
         <Home>
-          <Dialogs>
-            <Dialogs />
-          </Dialogs>
+          <LeftColumn />
+          <MiddleColumn />
         </Home>
       </MyContext.Provider>
 

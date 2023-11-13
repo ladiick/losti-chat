@@ -10,7 +10,7 @@ import {
   selectedMessages,
   onChangeAnswerDialog,
 } from "../../../../../../redux/slices/messageSlice";
-import { setForwardModal } from "../../../../../../redux/slices/navigationSlice";
+import { setForwardModal } from "../../../../../../redux/slices/modalsSlice.js";
 
 const ToolBar = () => {
   const selectedMessage = useSelector((state) => selectedMessages(state));
@@ -32,6 +32,7 @@ const ToolBar = () => {
   const forwardMessage = () => {
     dispatch(setForwardModal(true));
     dispatch(clearAnswerMessage({ param }));
+    window.history.pushState({}, null, null);
   };
 
   const clearSelectMessage = () => {
