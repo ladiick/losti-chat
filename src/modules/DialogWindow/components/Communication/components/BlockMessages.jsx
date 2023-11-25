@@ -1,23 +1,20 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
 import { selectMessages } from "../../../../../redux/slices/messageSlice";
 import { helperMessage } from "../../../../../utils/utils";
 import Message from "../../Message/Message";
 
-const BlockMessages = ({ block }) => {
+const BlockMessages = ({ block, style }) => {
   const dispatch = useDispatch();
-  const [searchParams] = useSearchParams();
-  const param = searchParams.get("dialogs");
 
   const handlerCurrentMessage = useCallback(
     (obj) => {
       dispatch(selectMessages({ obj }));
     },
-    [dispatch, param],
+    [dispatch],
   );
   return (
-    <div>
+    <div style={style}>
       <Message
         key={`${block?.date}_time`}
         obj={{

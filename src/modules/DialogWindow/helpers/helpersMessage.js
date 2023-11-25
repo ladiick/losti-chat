@@ -1,3 +1,36 @@
+export function processMessages(messages) {
+  if (!Array.isArray(messages) || messages.length === 0) {
+    console.error("Invalid input: Please provide a non-empty array of messages.");
+    return [];
+  }
+
+  // Создаем новый массив для обработанных сообщений
+  const processedMessages = [];
+
+  // Итерируем по отсортированному массиву
+  for (let i = 0; i < messages.length; i++) {
+    const currentMessage = messages[i];
+    const previousMessage = processedMessages[processedMessages.length - 1];
+
+    // Если это первое сообщение или дата текущего сообщения отличается от предыдущего
+    if (
+      !previousMessage ||
+      new Date(currentMessage.time).getDate() !== new Date(previousMessage.time).getDate()
+    ) {
+      // Добавляем объект с типом "Date"
+      processedMessages.push({
+        type: "Date",
+        time: currentMessage.time,
+        message: currentMessage.time,
+      });
+    }
+
+    // Добавляем текущее сообщение в обработанный массив
+    processedMessages.push(currentMessage);
+  }
+  return processedMessages;
+}
+
 export const addTimeMessage = (messages = []) => {
   if (messages.length === 0) {
     return [];

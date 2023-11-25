@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
 import { selectedMessages } from "../../../../redux/slices/messageSlice";
 import MessageDate from "./MessageDate/MessageDate";
 import MessageRecipient from "./MessageRecipient/MessageRecipient";
@@ -8,12 +7,9 @@ import MessageSender from "./MessageSender/MessageSender";
 
 const Message = ({ obj, handlerCurrentMessage, margin }) => {
   const selectedMessage = useSelector((state) => selectedMessages(state));
-  const [searchParams] = useSearchParams();
   const myId = useSelector((state) => state.user.aboutUser.id);
-  const param = searchParams.get("dialogs");
 
-  const activeMessage = useMemo(() => selectedMessage.includes(obj), [param, obj, selectedMessage]);
-
+  const activeMessage = useMemo(() => selectedMessage.includes(obj), [obj, selectedMessage]);
   if (obj?.recip?.pk === myId) {
     return (
       <MessageSender

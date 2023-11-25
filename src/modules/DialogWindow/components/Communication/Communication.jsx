@@ -1,14 +1,21 @@
 import { ArrowDownward } from "@mui/icons-material";
 import { Box, CircularProgress, IconButton, useTheme } from "@mui/joy";
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import useInfiniteScroll from "react-infinite-scroll-hook";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import CustomScroll from "../../../../components/ui/CustomScroll/CustomScroll";
-import { clearSelectMessages } from "../../../../redux/slices/messageSlice";
-import { useGetMessageQuery } from "../../api/messageApiSlice";
-import ListMessages from "./components/ListMessages";
+import { Virtuoso } from "react-virtuoso";
 import _ from "underscore";
+import { MyContext } from "../../../../Pages/Layout/Layout";
+import { clearSelectMessages, selectMessages } from "../../../../redux/slices/messageSlice";
+import { useGetMessageQuery } from "../../api/messageApiSlice";
+import { addNewMessage } from "../../helpers/helpersMessage";
+import ListMessages from "./components/ListMessages";
+
+function findPeopleIndex(people, chat) {
+  return people.findIndex((obj) => {
+    return _.isEqual([obj.sender.pk, obj.recip.pk].sort(), chat);
+  });
+}
 
 const Communication = () => {
   const dispatch = useDispatch();
@@ -18,8 +25,11 @@ const Communication = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const param = searchParams.get("dialogs");
   const [messages, setMessages] = useState([]);
-  const scrollableRootRef = useRef(null);
-  const lastScrollDistanceToBottomRef = useRef();
+  const { newMessage } = useContext(MyContext);
+  const people = useSelector((state) => state.people.people);
+  const myId = useSelector((state) => state.user.aboutUser.id);
+  const [firstItemIndex, setFirstItemIndex] = useState(500);
+  const virtuoso = useRef(null);
 
   const { data, isFetching: isFetchingMessages } = useGetMessageQuery({
     id: param,
@@ -37,22 +47,23 @@ const Communication = () => {
   }, [dispatch, param]);
 
   useEffect(() => {
-    if (data?.results.length) {
+    if (data?.results?.length) {
       if (currentPage !== 1) {
-        const mergedDataArray = [];
+        let mergedDataArray = [];
 
-        [...data?.results, ...messages].forEach((item) => {
-          const existingItem = mergedDataArray.find((mergedItem) => mergedItem.date === item.date);
+        // [...data?.results, ...messages].forEach((item) => {
+        //   const existingItem = mergedDataArray.find((mergedItem) => mergedItem.date === item.date);
 
-          if (!_.isEmpty(existingItem)) {
-            existingItem.messages = existingItem.messages
-              .concat(item.messages)
-              .sort((a, b) => b.id - a.id);
-          } else {
-            mergedDataArray.push({ date: item.date, messages: item.messages });
-          }
-        });
-
+        //   if (!_.isEmpty(existingItem)) {
+        //     existingItem.messages = existingItem.messages
+        //       .concat(item.messages)
+        //       .sort((a, b) => b.id - a.id);
+        //   } else {
+        //     mergedDataArray.push({ date: item.date, messages: item.messages });
+        //   }
+        // });
+        mergedDataArray = [...data?.results, ...messages];
+        setFirstItemIndex((pre) => pre - data?.results?.length);
         setMessages(mergedDataArray);
       } else {
         setMessages(data?.results);
@@ -61,49 +72,42 @@ const Communication = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.results]);
 
-  const [infiniteScroll, { rootRef }] = useInfiniteScroll({
-    loading: isFetchingMessages,
-    hasNextPage: !!data?.next,
-    rootMargin: "400px 0px 0px 0px",
-    onLoadMore: () => setCurrentPage((pre) => pre + 1),
-  });
+  useEffect(() => {
+    if (newMessage) {
+      const arr1 = [newMessage.recip.pk, newMessage.sender.pk].sort((a, b) => a - b);
+      const chat = [myId, Number(param)].sort((a, b) => a - b);
+      const ind = findPeopleIndex(people, chat);
 
-  useLayoutEffect(() => {
-    const scrollableRoot = scrollableRootRef.current;
-    const lastScrollDistanceToBottom = lastScrollDistanceToBottomRef.current ?? 0;
-    if (scrollableRoot) {
-      scrollableRoot.scrollTop = scrollableRoot.scrollHeight - lastScrollDistanceToBottom;
-    }
-  }, [messages, rootRef]);
-
-  const rootRefSetter = useCallback(
-    (node) => {
-      rootRef(node);
-      scrollableRootRef.current = node;
-    },
-    [rootRef],
-  );
-
-  const dialogDown = useCallback(() => {
-    scrollableRootRef.current.style.scrollBehavior = "smooth";
-    scrollableRootRef.current.scrollTop = scrollableRootRef.current.scrollHeight;
-    scrollableRootRef.current.style.scrollBehavior = "auto";
-  }, []);
-
-  const handleRootScroll = useCallback(() => {
-    const rootNode = scrollableRootRef.current;
-    if (rootNode) {
-      const scrollDistanceToBottom = rootNode.scrollHeight - rootNode.scrollTop;
-      lastScrollDistanceToBottomRef.current = scrollDistanceToBottom;
-      if (rootNode.scrollTop + rootNode.clientHeight < rootNode.scrollHeight - 200) {
-        setScrollButton(true);
-      } else {
-        setScrollButton(false);
+      if (ind !== -1) {
+        const arr2 = [people[ind].recip.pk, people[ind].sender.pk].sort();
+        const isEqual = _.isEqual(arr1, arr2);
+        if (isEqual) {
+          setMessages((pre) => addNewMessage(pre, newMessage));
+        }
       }
     }
-  }, []);
+  }, [dispatch, myId, newMessage, people, setMessages, param]);
 
-  if (isFetchingMessages && currentPage === 1 && !messages.length) {
+  const handlerCurrentMessage = useCallback(
+    (obj) => {
+      dispatch(selectMessages({ obj }));
+    },
+    [dispatch],
+  );
+  const prependItems = useCallback(() => {
+    if (data?.next) {
+      setCurrentPage((pre) => pre + 1);
+    }
+    return false;
+  }, [data?.next]);
+
+  const itemContent = useCallback((index, item) => {
+    return (
+      <ListMessages message={item} handlerCurrentMessage={handlerCurrentMessage} key={index} />
+    );
+  }, []);
+  console.log("render", virtuoso);
+  if (isFetchingMessages && currentPage === 1 && !messages?.length) {
     return (
       <Box flexGrow={1} position="relative" bgcolor={theme.vars.palette.background.body}>
         <Box position="absolute" top="50%" left="50%">
@@ -115,55 +119,50 @@ const Communication = () => {
 
   return (
     <>
+      <Virtuoso
+        alignToBottom
+        style={{
+          height: "100%",
+          overflowX: "hidden",
+          overscrollBehavior: "contain",
+        }}
+        firstItemIndex={firstItemIndex}
+        data={messages}
+        startReached={prependItems}
+        initialTopMostItemIndex={messages?.length - 1}
+        itemContent={itemContent}
+        // increaseViewportBy={{ top: 400 }}
+        rangeChanged={(item) => setScrollButton(item.startIndex <= 515)}
+        ref={virtuoso}
+      />
+
       <Box
         sx={{
-          overflowY: "auto",
-          overflowX: "hidden",
-          height: "100%",
-          mb: "0.5rem",
-          px: "1rem",
-          position: "relative",
+          position: "absolute",
+          bottom: "5.5rem",
+          right: "1rem",
+          opacity: scrollButton ? 1 : 0,
           transition: "all 0.3s",
-          background: theme.vars.palette.background.body,
-          ...CustomScroll,
         }}
-        ref={rootRefSetter}
-        onScroll={handleRootScroll}
       >
-        {!!data.next && (
-          <Box position="absolute" top="5%" left="50%" zIndex={10} ref={infiniteScroll}>
-            <CircularProgress size="sm" />
-          </Box>
-        )}
-        <Box
-          sx={{
-            width: "100%",
-            m: "0 auto",
-            maxWidth: "50rem",
-            minHeight: "100%",
-            "@media (min-width: 1276px)": {
-              width: "calc(100% - 25vh)",
-            },
+        <IconButton
+          size="xxl"
+          variant="solid"
+          color="primary"
+          onClick={() => {
+            virtuoso.current.scrollToIndex({
+              index: 500,
+              align: "end",
+              behavior: "smooth",
+            });
+            return false;
           }}
-          flexGrow={1}
+          bgcolor="surface"
+          circle
         >
-          <ListMessages messages={messages} setMessages={setMessages} data={data} />
-        </Box>
+          <ArrowDownward />
+        </IconButton>
       </Box>
-      {scrollButton && (
-        <Box sx={{ position: "absolute", bottom: "5.5rem", right: "1rem" }}>
-          <IconButton
-            size="xxl"
-            variant="solid"
-            color="primary"
-            onClick={dialogDown}
-            bgcolor="surface"
-            circle
-          >
-            <ArrowDownward />
-          </IconButton>
-        </Box>
-      )}
     </>
   );
 };
