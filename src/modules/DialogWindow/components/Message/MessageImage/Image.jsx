@@ -81,24 +81,32 @@ const Image = ({ idImage, size, style, detailed, index, length, allImages }) => 
       <Box
         onClick={detailedImage}
         sx={{
-          display: "inline-block",
-          // flex: "1 calc(50% - 0.2rem)",
-          // overflow: "hidden",
+          position: "absolute",
+          top: 0,
+          left: 0,
           width: size.width,
           height: size.height,
-          "& img": {
-            overflow: "hidden",
-            maxWidth: "100%",
-            objectFit: "cover",
-            height: "100%",
-            width: "100%",
-            cursor: "pointer",
-            borderRadius: borderRadiusImage({ length, index }),
-          },
-          ...style,
         }}
       >
-        <img src={data} alt="pictures" />
+        <Box
+          sx={{
+            position: "relative",
+            top: 0,
+            left: 0,
+            "& img": {
+              display: "block",
+              userSelect: "none",
+              objectFit: "cover",
+              height: "100%",
+              width: "100%",
+              cursor: "pointer",
+              borderRadius: borderRadiusImage({ length, index }),
+            },
+            ...style,
+          }}
+        >
+          <img src={data} alt="pictures" />
+        </Box>
       </Box>
     </Skeleton>
   );

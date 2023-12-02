@@ -6,13 +6,13 @@ const MessageImage = ({ images }) => {
   return (
     <Box
       sx={{
-        // flexShrink: "1",
-        // display: "flex",
-        // flexWrap: "wrap",
-        // gap: "0.2rem",
-        // padding: "0.2rem",
         maxWidth: 480,
         maxHeight: 432,
+        minHeight: 80,
+        minWidth: 192,
+        overflow: "hidden",
+        position: "relative",
+        margin: "auto",
       }}
     >
       {resizeImages(images)?.map((image, index, arr) => (

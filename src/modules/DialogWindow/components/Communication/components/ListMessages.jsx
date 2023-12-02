@@ -1,4 +1,5 @@
 // import { helperMessage } from "../../../../../utils/utils";
+import { memo } from "react";
 import Message from "../../Message/Message";
 
 const ListMessages = ({ message, handlerCurrentMessage }) => (
@@ -38,4 +39,4 @@ const ListMessages = ({ message, handlerCurrentMessage }) => (
   </>
 );
 
-export default ListMessages;
+export default memo(ListMessages);

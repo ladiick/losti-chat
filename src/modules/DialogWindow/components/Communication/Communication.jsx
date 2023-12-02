@@ -1,11 +1,12 @@
 import { ArrowDownward } from "@mui/icons-material";
 import { Box, CircularProgress, IconButton, useTheme } from "@mui/joy";
-import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import _ from "underscore";
 import { MyContext } from "../../../../Pages/Layout/Layout";
+import CustomScroll from "../../../../components/ui/CustomScroll/CustomScroll";
 import { clearSelectMessages, selectMessages } from "../../../../redux/slices/messageSlice";
 import { useGetMessageQuery } from "../../api/messageApiSlice";
 import { addNewMessage } from "../../helpers/helpersMessage";
@@ -17,11 +18,11 @@ function findPeopleIndex(people, chat) {
   });
 }
 
-const Communication = () => {
+function Communication() {
   const dispatch = useDispatch();
   const theme = useTheme();
   const [searchParams] = useSearchParams();
-  const [scrollButton, setScrollButton] = useState(false);
+  const [scrollButton] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const param = searchParams.get("dialogs");
   const [messages, setMessages] = useState([]);
@@ -50,19 +51,7 @@ const Communication = () => {
     if (data?.results?.length) {
       if (currentPage !== 1) {
         let mergedDataArray = [];
-
-        // [...data?.results, ...messages].forEach((item) => {
-        //   const existingItem = mergedDataArray.find((mergedItem) => mergedItem.date === item.date);
-
-        //   if (!_.isEmpty(existingItem)) {
-        //     existingItem.messages = existingItem.messages
-        //       .concat(item.messages)
-        //       .sort((a, b) => b.id - a.id);
-        //   } else {
-        //     mergedDataArray.push({ date: item.date, messages: item.messages });
-        //   }
-        // });
-        mergedDataArray = [...data?.results, ...messages];
+        mergedDataArray = [...(data?.results ?? []), ...messages];
         setFirstItemIndex((pre) => pre - data?.results?.length);
         setMessages(mergedDataArray);
       } else {
@@ -97,16 +86,55 @@ const Communication = () => {
   const prependItems = useCallback(() => {
     if (data?.next) {
       setCurrentPage((pre) => pre + 1);
+      return true;
     }
     return false;
   }, [data?.next]);
 
-  const itemContent = useCallback((index, item) => {
+  const itemContent = useCallback(
+    (index, item) => {
+      return (
+        <ListMessages
+          message={item}
+          handlerCurrentMessage={handlerCurrentMessage}
+          key={`${index}__${item?.id}`}
+        />
+      );
+    },
+    [handlerCurrentMessage],
+  );
+
+  const Scroller = forwardRef(function Scroller(props, ref) {
     return (
-      <ListMessages message={item} handlerCurrentMessage={handlerCurrentMessage} key={index} />
+      <Box
+        ref={ref}
+        sx={{
+          overflowX: "hidden",
+          height: "100%",
+          ...CustomScroll,
+        }}
+        {...props}
+      />
     );
-  }, []);
-  console.log("render", virtuoso);
+  });
+
+  const List = forwardRef(function List(props, ref) {
+    return (
+      <Box
+        ref={ref}
+        sx={{
+          width: "100%",
+          m: "0 auto",
+          maxWidth: "50rem",
+          "@media (min-width: 1276px)": {
+            width: "calc(100% - 25vh)",
+          },
+        }}
+        {...props}
+      />
+    );
+  });
+
   if (isFetchingMessages && currentPage === 1 && !messages?.length) {
     return (
       <Box flexGrow={1} position="relative" bgcolor={theme.vars.palette.background.body}>
@@ -120,22 +148,20 @@ const Communication = () => {
   return (
     <>
       <Virtuoso
-        alignToBottom
-        style={{
+        styles={{
           height: "100%",
-          overflowX: "hidden",
-          overscrollBehavior: "contain",
+          background: theme.vars.palette.background.body,
         }}
-        firstItemIndex={firstItemIndex}
+        // overscan={20}
+        // increaseViewportBy={40}
+        firstItemIndex={Math.min(firstItemIndex, 0)}
         data={messages}
         startReached={prependItems}
         initialTopMostItemIndex={messages?.length - 1}
         itemContent={itemContent}
-        // increaseViewportBy={{ top: 400 }}
-        rangeChanged={(item) => setScrollButton(item.startIndex <= 515)}
         ref={virtuoso}
+        components={{ Scroller, List }}
       />
-
       <Box
         sx={{
           position: "absolute",
@@ -152,7 +178,7 @@ const Communication = () => {
           onClick={() => {
             virtuoso.current.scrollToIndex({
               index: 500,
-              align: "end",
+              align: "start",
               behavior: "smooth",
             });
             return false;
@@ -165,6 +191,6 @@ const Communication = () => {
       </Box>
     </>
   );
-};
+}
 
 export default Communication;

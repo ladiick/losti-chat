@@ -23,6 +23,7 @@
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.42.0",
     "react-input-pin-code": "^1.2.0",
+    "react-photo-album": "^2.3.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
@@ -56,6 +57,7 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^8.52.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.25.2",
