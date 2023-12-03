@@ -8,7 +8,7 @@ import s from "./PossibleFriends.module.scss";
 import PossibleFriendsItem from "./components/PossibleFriendsItem/PossibleFriendsItem";
 const PossibleFriends = () => {
   const { data: possibleFriends = [] } = useGetPossibleFriendsQuery();
-  const [acceptFriendRequests, { isError }] = useAcceptFriendRequestsMutation();
+  const [acceptFriendRequests] = useAcceptFriendRequestsMutation();
 
   const handlerPeople = async (index, obj) => {
     try {
@@ -18,7 +18,6 @@ const PossibleFriends = () => {
 
       toast.success("Заявка отправлена", optionsNotification);
     } catch (err) {
-      console.log(err);
       toast.error("Ошибка, заявка не отправлена, попробуйте позже", optionsNotification);
     }
   };
@@ -30,7 +29,12 @@ const PossibleFriends = () => {
     <WrapperBlocks title={"Возможные друзья"}>
       <div className={s.block__scroll}>
         {possibleFriends?.map((obj, index) => (
-          <PossibleFriendsItem key={obj.possible_friend.pk} obj={obj} index={index} handlerPeople={() => handlerPeople(index, obj)} />
+          <PossibleFriendsItem
+            key={obj.possible_friend.pk}
+            obj={obj}
+            index={index}
+            handlerPeople={() => handlerPeople(index, obj)}
+          />
         ))}
       </div>
     </WrapperBlocks>

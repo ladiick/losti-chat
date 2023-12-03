@@ -1,11 +1,10 @@
+import { Button } from "@mui/joy";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import s from "./DeleteFriendModal.module.scss";
-import { deleteFriend } from "../../../redux/slices/navigationSlice";
-import Text from "../../../components/ui/Text/Text";
-import { useDeleteFriendsMutation } from "../../Friends/api/friendsApiSlice";
 import ModalDialog from "../../../components/ui/Modal/ModalDialog";
-import { ActionButton } from "../../../components/ui/Button/ActionButton/ActionButton";
+import Text from "../../../components/ui/Text/Text";
+import { deleteFriend } from "../../../redux/slices/navigationSlice";
+import { useDeleteFriendsMutation } from "../api/friendsApiSlice";
 
 const DeleteFriendModal = () => {
   const dispatch = useDispatch();
@@ -18,7 +17,12 @@ const DeleteFriendModal = () => {
   };
 
   return (
-    <ModalDialog noFooter closeFunc={() => dispatch(deleteFriend({ flag: false, obj: {} }))} open={deleteFriendFlag} title={"Подтвердите удаление"}>
+    <ModalDialog
+      noFooter
+      closeFunc={() => dispatch(deleteFriend({ flag: false, obj: {} }))}
+      open={deleteFriendFlag}
+      title={"Подтвердите удаление"}
+    >
       <Text>
         Вы точно хотите удалить{" "}
         <Text style={{ textDecoration: "underline" }} weight={"strong"}>
@@ -26,18 +30,18 @@ const DeleteFriendModal = () => {
         </Text>{" "}
         из друзей?
       </Text>
-      <div className={s.wrapper__btn}>
-        <ActionButton
-          style={{
-            background: "#EA2B3EFF",
-            color: "var(--color--text--main)",
-            marginRight: 15,
-          }}
+      <div>
+        <Button
+          // style={{
+          //   background: "#EA2B3EFF",
+          //   color: "var(--color--text--main)",
+          //   marginRight: 15,
+          // }}
           onClick={deleteFriendFunc}
         >
           Удалить
-        </ActionButton>
-        <ActionButton onClick={() => dispatch(deleteFriend({ flag: false, obj: {} }))}>Закрыть</ActionButton>
+        </Button>
+        <Button onClick={() => dispatch(deleteFriend({ flag: false, obj: {} }))}>Закрыть</Button>
       </div>
     </ModalDialog>
 

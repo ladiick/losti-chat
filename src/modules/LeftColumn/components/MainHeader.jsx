@@ -1,38 +1,13 @@
-import { ArrowBack, Menu as MenuIcon, Search } from "@mui/icons-material";
-import { CircularProgress, IconButton, Input, MenuButton, Stack } from "@mui/joy";
-import { keyframes } from "@mui/system";
+import { Search } from "@mui/icons-material";
+import { CircularProgress, Input, Stack } from "@mui/joy";
 import { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { MyContext } from "../../../Pages/Layout/Layout";
-import { pageSelector, showFriendsPage } from "../../../redux/slices/pages";
 import Menu from "./Menu/Menu";
+import { LeftColumnContext } from "../LeftColumn";
 
-const menuButton = keyframes`
-  from {
-    transform: rotate(-90deg);
-  }
-  to {
-    transform: rotate(0);
-  }
-`;
-const arrowBack = keyframes`
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0);
-  }
-`;
-
-const MainHeader = ({ searchValue, setSearchValue }) => {
+const MainHeader = () => {
   const { statusSocket } = useContext(MyContext);
-  const { friends } = useSelector((state) => pageSelector(state));
-  const dispatch = useDispatch();
-
-  const closeFriendPage = () => {
-    dispatch(showFriendsPage(false));
-    setTimeout(() => dispatch(showFriendsPage(null)), 200);
-  };
+  const { searchValue, setSearchValue } = useContext(LeftColumnContext);
 
   return (
     <Stack
@@ -48,26 +23,7 @@ const MainHeader = ({ searchValue, setSearchValue }) => {
         boxShadow: "sm",
       }}
     >
-      <Menu>
-        {friends ? (
-          <MenuButton
-            slots={{ root: IconButton }}
-            slotProps={{ root: { variant: "outlined", color: "neutral" } }}
-            onClick={closeFriendPage}
-            sx={{ animation: `${arrowBack} 300ms forwards` }}
-          >
-            <ArrowBack />
-          </MenuButton>
-        ) : (
-          <MenuButton
-            slots={{ root: IconButton }}
-            slotProps={{ root: { variant: "outlined", color: "neutral" } }}
-            sx={friends === false && { animation: `${menuButton} 300ms forwards` }}
-          >
-            <MenuIcon />
-          </MenuButton>
-        )}
-      </Menu>
+      <Menu />
       <Input
         fullWidth
         endDecorator={

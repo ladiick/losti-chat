@@ -1,31 +1,30 @@
-import { Box } from "@mui/joy";
 import React from "react";
+import PhotoAlbum from "react-photo-album";
 import Image from "./Image";
-import { resizeImages } from "../../../helpers/helpersMessage";
+import { Box } from "@mui/joy";
+
 const MessageImage = ({ images }) => {
   return (
-    <Box
-      sx={{
-        maxWidth: 480,
-        maxHeight: 432,
-        minHeight: 80,
-        minWidth: 192,
-        overflow: "hidden",
-        position: "relative",
-        margin: "auto",
-      }}
-    >
-      {resizeImages(images)?.map((image, index, arr) => (
-        <Image
-          key={image?.id}
-          index={index}
-          idImage={image?.id}
-          length={images.length}
-          allImages={arr}
-          size={{ width: image.width, height: image.height }}
-        />
-      ))}
-    </Box>
+    <PhotoAlbum
+      padding={4}
+      spacing={0}
+      photos={images.map((image) => ({
+        ...image,
+        src: image.image,
+        key: image.id,
+      }))}
+      targetRowHeight={200}
+      layout="rows"
+      // onClick={({ index }) => setIndex(index)}
+      renderContainer={({ containerProps, children, containerRef }) => (
+        <Box sx={{ maxHeight: 432, maxWidth: 480 }} ref={containerRef} {...containerProps}>
+          {children}
+        </Box>
+      )}
+      renderPhoto={({ imageProps, photo }) => (
+        <Image idImage={photo?.id} imageProps={imageProps} photo={photo} />
+      )}
+    />
   );
 };
 

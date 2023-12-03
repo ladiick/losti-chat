@@ -1,67 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setFriendsCurrent } from "../../slices/friendsSlice.js";
-import { deleteFriend, openModalBlock } from "../../../../redux/slices/navigationSlice";
+import { deleteFriend } from "../../../../redux/slices/navigationSlice";
 import BtnRequestsFriend from "./components/BtnRequestsFriend/BtnRequestsFriend";
-import s from "./FriendsItem.module.scss";
 
-import { BiMessageRounded } from "react-icons/bi";
+import { Message, PersonRemove } from "@mui/icons-material";
+import { Avatar, Box, IconButton, ListItem, ListItemButton, Typography } from "@mui/joy";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import ActionLink from "../../../../components/ui/ActionLink/ActionLink";
-import Avatar from "../../../../components/ui/Avatar/Avatar";
-import MenuFriends from "./components/MenuFriends/MenuFriends.jsx";
-import useMatchMedia from "../../../../components/hooks/useMatchMedia.jsx";
-import Text from "../../../../components/ui/Text/Text.jsx";
+
+const toggleIconClosed = {
+  rotate: 360,
+  scale: 1,
+  transition: {
+    duration: 0.2,
+  },
+};
+
+const toggleIconOpen = {
+  rotate: 0,
+  scale: 1,
+  transition: {
+    duration: 0.2,
+  },
+};
 
 const FriendsItem = ({ obj, requests, handlerCancel, handlerAccept, index }) => {
   const dispatch = useDispatch();
+  const [visibleIcon, setVisibleIcon] = useState();
 
-  const { isMobile } = useMatchMedia();
+  const visibleIconHover = () => {
+    setVisibleIcon((pre) => !pre);
+  };
 
-  const deleteFriendFunc = () => {
+  const deleteFriendFunc = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     dispatch(deleteFriend({ flag: true, obj: obj.friend }));
   };
 
-  const openWriteBox = () => {
-    dispatch(openModalBlock({ writeFriend: true }));
-    dispatch(setFriendsCurrent(obj));
-  };
-
   return (
-    <div className={s.wrapper__item}>
-      <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
-        <Link to={`/profile/${obj.friend.pk}`}>
-          <Avatar
-            image={obj?.friend?.image}
-            online={obj?.friend?.online}
-            sizeIndicator={{ right: 6 }}
-            size={{
-              width: isMobile ? 44 : 80,
-              height: isMobile ? 44 : 80,
-            }}
-          />
-        </Link>
-        <div className={s.info__user}>
-          <ActionLink to={`/profile/${obj.friend.pk}`}>
-            {obj.friend.first_name} {obj.friend.last_name}
-          </ActionLink>
+    <ListItem
+      component={motion.div}
+      initial={{ left: -100, opacity: 0 }}
+      animate={{ left: 0, opacity: 1 }}
+    >
+      <ListItemButton
+        sx={{ display: "flex", gap: "4", borderRadius: "sm" }}
+        component={Link}
+        to={`/?dialogs=${obj.friend.pk}`}
+      >
+        <Avatar src={obj?.friend?.image} alt={obj?.friend?.image} size="lg" />
+        <Typography
+          color="primary"
+          width="100%"
+          endDecorator={
+            <IconButton
+              onClick={deleteFriendFunc}
+              component={motion.button}
+              onHoverStart={visibleIconHover}
+              onHoverEnd={visibleIconHover}
+              variant={visibleIcon ? "outlined" : "plain"}
+              title={visibleIcon ? "Удалить из друзей" : "Написать сообщение"}
+              color={visibleIcon ? "danger" : "neutral"}
+              sx={{
+                "&:hover": {
+                  bgcolor: "transparent",
+                },
+              }}
+            >
+              <Box
+                sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+                component={motion.div}
+                initial={false}
+                animate={visibleIcon ? toggleIconOpen : toggleIconClosed}
+              >
+                {visibleIcon ? <PersonRemove /> : <Message />}
+              </Box>
+            </IconButton>
+          }
+          sx={{
+            "& span": {
+              margin: "0 0 0 auto",
+            },
+          }}
+        >
+          {obj.friend.first_name} {obj.friend.last_name}
+        </Typography>
 
-          {requests !== "requests" ? (
-            <Text type={"button"} className={s.writeAMessage} onClick={openWriteBox}>
-              {isMobile ? <BiMessageRounded /> : "Написать сообщение"}{" "}
-            </Text>
-          ) : (
-            <BtnRequestsFriend handlerCancel={handlerCancel} handlerAccept={handlerAccept} />
-          )}
-        </div>
-      </div>
-      {/*{requests !== 'requests'*/}
-      {/*    && <ActionButton*/}
-      {/*        second*/}
-      {/*        onClick={deleteFriendFunc}>Удалить из друзей</ActionButton>*/}
-      {/*}*/}
-      <MenuFriends friend={obj} />
-    </div>
+        {requests === "requests" && (
+          <BtnRequestsFriend handlerCancel={handlerCancel} handlerAccept={handlerAccept} />
+        )}
+      </ListItemButton>
+    </ListItem>
   );
 };
 

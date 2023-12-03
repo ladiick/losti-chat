@@ -1,17 +1,19 @@
 import { Box, CircularProgress, List, Typography } from "@mui/joy";
+import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetPeopleQuery } from "../../api/peopleApiSlice.js";
 import useMatchMedia from "../../components/hooks/useMatchMedia.jsx";
 import CustomScroll from "../../components/ui/CustomScroll/CustomScroll.jsx";
-import { openChatBlock, setSearchValue } from "../../redux/slices/navigationSlice.js";
+import { openChatBlock } from "../../redux/slices/navigationSlice.js";
 import { setIndex } from "../../redux/slices/peopleSlice.js";
 import PeopleItem from "./components/PeopleItem.jsx";
+import { LeftColumnContext } from "../LeftColumn/LeftColumn.jsx";
 
 const DialogsUsers = () => {
   const dispatch = useDispatch();
   const myId = useSelector((state) => state.user.aboutUser.id);
   const people = useSelector((state) => state.people.people);
-  const { searchValue } = useSelector((state) => state.navigation);
+  const { searchValue, setSearchValue } = useContext(LeftColumnContext);
 
   const { isLoading, isError } = useGetPeopleQuery();
 

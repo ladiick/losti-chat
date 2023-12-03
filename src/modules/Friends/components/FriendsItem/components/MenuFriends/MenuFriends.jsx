@@ -1,10 +1,10 @@
+import { MoreHoriz } from "@mui/icons-material";
 import React, { useState } from "react";
-import { BsThreeDots } from "react-icons/bs";
 import { useDispatch } from "react-redux";
+import MenuOnHover from "../../../../../../components/ui/MenuOnHover/MenuOnHover";
+import Text from "../../../../../../components/ui/Text/Text";
 import { deleteFriend } from "../../../../../../redux/slices/navigationSlice";
 import s from "./MenuFriends.module.scss";
-import MenuOnHover from '../../../../../../components/ui/MenuOnHover/MenuOnHover'
-import Text from '../../../../../../components/ui/Text/Text'
 const MenuFriends = ({ friend }) => {
   const [onHovered, setOnHovered] = useState();
   const dispatch = useDispatch();
@@ -17,7 +17,12 @@ const MenuFriends = ({ friend }) => {
       style={{ right: 0 }}
       onHovered={setOnHovered}
       className={s.wrapper__menu}
-      onHover={<BsThreeDots color={onHovered ? "var(--color--text--main)" : "var(--icon--secondary)"} size={24} />}
+      onHover={
+        <MoreHoriz
+          color={onHovered ? "var(--color--text--main)" : "var(--icon--secondary)"}
+          size={24}
+        />
+      }
     >
       <ul className={s.list}>
         <li className={s.item}>

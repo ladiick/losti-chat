@@ -29,7 +29,7 @@ function Communication() {
   const { newMessage } = useContext(MyContext);
   const people = useSelector((state) => state.people.people);
   const myId = useSelector((state) => state.user.aboutUser.id);
-  const [firstItemIndex, setFirstItemIndex] = useState(500);
+  const [firstItemIndex, setFirstItemIndex] = useState(0);
   const virtuoso = useRef(null);
 
   const { data, isFetching: isFetchingMessages } = useGetMessageQuery({
@@ -37,15 +37,14 @@ function Communication() {
     page: currentPage,
   });
 
-  useEffect(() => {
-    setCurrentPage(1);
-    setMessages([]);
-    return () => {
+  useEffect(
+    () => () => {
       setCurrentPage(1);
       setMessages([]);
       dispatch(clearSelectMessages());
-    };
-  }, [dispatch, param]);
+    },
+    [dispatch, param],
+  );
 
   useEffect(() => {
     if (data?.results?.length) {
@@ -104,9 +103,10 @@ function Communication() {
     [handlerCurrentMessage],
   );
 
-  const Scroller = forwardRef(function Scroller(props, ref) {
+  const CustomScrollbar = forwardRef(function Scroller(props, ref) {
     return (
       <Box
+        component="div"
         ref={ref}
         sx={{
           overflowX: "hidden",
@@ -126,6 +126,7 @@ function Communication() {
           width: "100%",
           m: "0 auto",
           maxWidth: "50rem",
+          overflow: "hidden",
           "@media (min-width: 1276px)": {
             width: "calc(100% - 25vh)",
           },
@@ -150,17 +151,24 @@ function Communication() {
       <Virtuoso
         styles={{
           height: "100%",
+          overflowX: "hidden",
           background: theme.vars.palette.background.body,
         }}
-        // overscan={20}
-        // increaseViewportBy={40}
         firstItemIndex={Math.min(firstItemIndex, 0)}
         data={messages}
         startReached={prependItems}
         initialTopMostItemIndex={messages?.length - 1}
+        totalCount={Math.max(messages?.length, 1)}
         itemContent={itemContent}
         ref={virtuoso}
-        components={{ Scroller, List }}
+        components={{ List, Scroller: CustomScrollbar }}
+        followOutput={(isAtBottom) => {
+          if (isAtBottom) {
+            return "smooth";
+          } else {
+            return false;
+          }
+        }}
       />
       <Box
         sx={{

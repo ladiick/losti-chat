@@ -1,10 +1,8 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import s from "./ActionInput.module.scss";
 
 const ActionInput = React.forwardRef((props, ref) => {
   const { icon, style, ...propsInput } = props;
-
-
 
   // const inputControl = isControlFocus ? `${s.input__control} ${s.input__controlFocused}` : s.input__control;
 
