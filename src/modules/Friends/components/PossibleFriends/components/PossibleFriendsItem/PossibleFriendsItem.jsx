@@ -1,33 +1,31 @@
+import { Avatar, IconButton, ListItem, ListItemButton, Stack, Typography } from "@mui/joy";
 import React from "react";
-import s from "./PossibleFriendsItem.module.scss";
-import BtnAddFriend from "../../../BtnAddFriend/BtnAddFriend";
-import Avatar from "../../../../../../components/ui/Avatar/Avatar";
 import { Link } from "react-router-dom";
 import { changeDeclination } from "../../../../../../components/actions/changeDeclination";
-import Text from "../../../../../../components/ui/Text/Text";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
-const PossibleFriendsItem = ({ obj, handlerPeople, index }) => {
+const PossibleFriendsItem = ({ obj, handlerPeople }) => {
   return (
-    <div className={s.wrapper__people}>
-      <Link to={`/profile/${obj.possible_friend.pk}`} className={s.about__user}>
-        <Avatar
-          noOnline={obj?.possible_friend?.online}
-          sizeIndicator={{ width: 12, height: 12 }}
-          style={{ width: 48, height: 48, fontSize: 20 }}
-          image={obj?.possible_friend?.image}
-          name={{ firstName: obj.possible_friend?.first_name, lastName: obj.possible_friend?.last_name }}
-          index={index}
-        />
-
-        <div className={s.user__info}>
-          <Text pointer>
-            {obj.possible_friend.first_name} {obj.possible_friend.last_name}
-          </Text>
-          <span className={s.NumFriend}>{changeDeclination(obj.count, "posFriend")}</span>
-        </div>
-      </Link>
-      <BtnAddFriend handlerPeople={handlerPeople} />
-    </div>
+    <ListItem>
+      <ListItemButton
+        sx={{ display: "flex", gap: "4", borderRadius: "sm" }}
+        component={Link}
+        to={`/?dialogs=${obj.possible_friend.pk}`}
+      >
+        <Avatar src={obj?.possible_friend?.image} alt={obj?.possible_friend?.image} size="lg" />
+        <Stack direction="row" alignItems="center" justifyContent="space-between" width="100%">
+          <div>
+            <Typography color="primary">
+              {obj.possible_friend.first_name} {obj.possible_friend.last_name}
+            </Typography>
+            <Typography level="body-md">{changeDeclination(obj.count, "posFriend")}</Typography>
+          </div>
+          <IconButton onClick={handlerPeople} variant="outlined" title="Добавить в друзья">
+            <PersonAddIcon />
+          </IconButton>
+        </Stack>
+      </ListItemButton>
+    </ListItem>
   );
 };
 

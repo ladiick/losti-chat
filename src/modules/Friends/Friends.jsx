@@ -5,16 +5,20 @@ import { useDispatch } from "react-redux";
 import useHistoryPopState from "../../components/hooks/useHistoryPopState";
 import { showFriendsPage } from "../../redux/slices/pages";
 import { useGetFriendsQuery } from "./api/friendsApiSlice";
+import { useGetPossibleFriendsQuery } from "./api/friendsPossibleFriendsApiSlice";
+import { useGetFriendsRequestsQuery } from "./api/friendsRequestsApiSlice";
 import FriendRequests from "./components/FriendRequests/FriendRequests";
 import MyFriends from "./components/MyFriends/MyFriends";
-import { useGetFriendsRequestsQuery } from "./api/friendsRequestsApiSlice";
+import PossibleFriends from "./components/PossibleFriends/PossibleFriends";
 
 const Friends = () => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);
-  const { data: allFriends, isFetching } = useGetFriendsQuery();
+  const { data: allFriends = [], isFetching } = useGetFriendsQuery();
   const { data: friendRequests = [], isFetching: friendRequestsFetching } =
     useGetFriendsRequestsQuery();
+  const { data: possibleFriends = [], isFetching: possibleFriendsFetching } =
+    useGetPossibleFriendsQuery();
 
   useEffect(() => {
     document.title = "Друзья";
@@ -40,7 +44,6 @@ const Friends = () => {
       }}
     >
       <Tabs
-        disableUnderline
         defaultValue={0}
         onChange={(event, value) => setSelected(value)}
         value={selected}
@@ -62,7 +65,6 @@ const Friends = () => {
         }}
       >
         <TabList
-          disableUnderline
           sx={{
             py: 0.5,
             px: "0.75rem",
@@ -85,7 +87,7 @@ const Friends = () => {
                 }}
               >
                 <Box zIndex={2}>{el}</Box>
-                <Skeleton loading={isFetching || friendRequestsFetching}>
+                <Skeleton loading={isFetching || friendRequestsFetching || possibleFriendsFetching}>
                   <Chip
                     size="sm"
                     variant={index === selected ? "soft" : "solid"}
@@ -94,6 +96,7 @@ const Friends = () => {
                   >
                     {index === 0 && allFriends?.length}
                     {index === 1 && friendRequests?.length}
+                    {index === 2 && possibleFriends?.length}
                   </Chip>
                 </Skeleton>
                 {index === selected && (
@@ -134,6 +137,9 @@ const Friends = () => {
         </TabPanel>
         <TabPanel sx={{ p: "0.75rem", height: "100%" }} value={1}>
           <FriendRequests data={friendRequests} isFetching={friendRequestsFetching} />
+        </TabPanel>
+        <TabPanel sx={{ p: "0.75rem", height: "100%" }} value={2}>
+          <PossibleFriends data={possibleFriends} isFetching={possibleFriendsFetching} />
         </TabPanel>
       </Tabs>
     </Sheet>

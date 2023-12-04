@@ -1,16 +1,16 @@
+import { Box, List, Typography } from "@mui/joy";
+import { motion } from "framer-motion";
 import React from "react";
 import { toast } from "react-toastify";
 import { optionsNotification } from "../../../../components/actions/optionsNotification";
-import WrapperBlocks from "../../../../components/ui/WrapperBlocks/WrapperBlocks";
+import CustomScroll from "../../../../components/ui/CustomScroll/CustomScroll";
 import { useAcceptFriendRequestsMutation } from "../../api/friendsApiSlice";
-import { useGetPossibleFriendsQuery } from "../../api/friendsPossibleFriendsApiSlice";
-import s from "./PossibleFriends.module.scss";
 import PossibleFriendsItem from "./components/PossibleFriendsItem/PossibleFriendsItem";
-const PossibleFriends = () => {
-  const { data: possibleFriends = [] } = useGetPossibleFriendsQuery();
+
+const PossibleFriends = ({ data, isFetching }) => {
   const [acceptFriendRequests] = useAcceptFriendRequestsMutation();
 
-  const handlerPeople = async (index, obj) => {
+  const handlerPeople = async (obj) => {
     try {
       await acceptFriendRequests({
         second_user: obj.possible_friend.pk,
@@ -21,23 +21,45 @@ const PossibleFriends = () => {
       toast.error("Ошибка, заявка не отправлена, попробуйте позже", optionsNotification);
     }
   };
-  if (possibleFriends.length === 0) {
-    return;
+  if (data.length === 0) {
+    return (
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "70%",
+        }}
+      >
+        <Typography
+          textAlign="center"
+          level="h4"
+          component={motion.h3}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+        >
+          У вас нет возможных друзей
+        </Typography>
+      </Box>
+    );
   }
 
   return (
-    <WrapperBlocks title={"Возможные друзья"}>
-      <div className={s.block__scroll}>
-        {possibleFriends?.map((obj, index) => (
-          <PossibleFriendsItem
-            key={obj.possible_friend.pk}
-            obj={obj}
-            index={index}
-            handlerPeople={() => handlerPeople(index, obj)}
-          />
-        ))}
-      </div>
-    </WrapperBlocks>
+    <List
+      sx={{ overflowY: "auto", gap: "4", ...CustomScroll }}
+      component={motion.div}
+      initial={{ left: -100, opacity: 0 }}
+      animate={{ left: 0, opacity: 1 }}
+    >
+      {data?.map((obj) => (
+        <PossibleFriendsItem
+          key={obj.possible_friend.pk}
+          obj={obj}
+          handlerPeople={() => handlerPeople(obj)}
+        />
+      ))}
+    </List>
   );
 };
 

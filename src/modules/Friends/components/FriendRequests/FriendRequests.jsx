@@ -1,4 +1,5 @@
-import { Box, Typography } from "@mui/joy";
+import { Box, CircularProgress, List, Typography } from "@mui/joy";
+import { motion } from "framer-motion";
 import React from "react";
 import { toast } from "react-toastify";
 import { optionsNotification } from "../../../../components/actions/optionsNotification";
@@ -7,8 +8,9 @@ import {
   useCancelFriendRequestsMutation,
 } from "../../api/friendsApiSlice";
 import FriendsItem from "../FriendsItem/FriendsItem";
+import CustomScroll from "../../../../components/ui/CustomScroll/CustomScroll";
 
-const FriendRequests = ({ data }) => {
+const FriendRequests = ({ data, isFetching }) => {
   //* requests*
   const [acceptFriendRequests] = useAcceptFriendRequestsMutation();
   const [cancelFriendRequests] = useCancelFriendRequestsMutation();
@@ -46,26 +48,30 @@ const FriendRequests = ({ data }) => {
           width: "70%",
         }}
       >
-        <Typography textAlign="center" level="h4">
+        <Typography
+          textAlign="center"
+          level="h4"
+          component={motion.h3}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+        >
           У вас нет заявок в друзья
         </Typography>
       </Box>
     );
   }
 
-  return (
-    <>
-      {/* {allRequests === "allRequests" ? (
-        data.map((obj, index) => (
-          <FriendsItem
-            key={obj.pk}
-            obj={obj}
-            requests={"requests"}
-            handlerAccept={() => handlerAccept(obj, index)}
-            handlerCancel={() => handlerCancel(obj, index)}
-          />
-        ))
-      ) : ( */}
+  return isFetching ? (
+    <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+      <CircularProgress variant="plain" size="sm" sx={{ margin: "auto" }} />
+    </Box>
+  ) : (
+    <List
+      sx={{ overflowY: "auto", gap: "4", ...CustomScroll }}
+      component={motion.div}
+      initial={{ left: -100, opacity: 0 }}
+      animate={{ left: 0, opacity: 1 }}
+    >
       {data.map((obj, index) => (
         <FriendsItem
           key={obj.pk}
@@ -75,14 +81,7 @@ const FriendRequests = ({ data }) => {
           handlerCancel={() => handlerCancel(obj, index)}
         />
       ))}
-      {/* <FriendsItem
-        obj={data[0]}
-        requests={"requests"}
-        handlerAccept={() => handlerAccept(data[0], 0)}
-        handlerCancel={() => handlerCancel(data[0], 0)}
-      /> */}
-      {/* )} */}
-    </>
+    </List>
   );
 };
 
