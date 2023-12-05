@@ -24,7 +24,7 @@ const toggleIconOpen = {
   },
 };
 
-const FriendsItem = ({ obj, requests, handlerCancel, handlerAccept, index }) => {
+const FriendsItem = ({ obj, requests, handlerCancel, handlerAccept }) => {
   const dispatch = useDispatch();
   const [visibleIcon, setVisibleIcon] = useState();
 

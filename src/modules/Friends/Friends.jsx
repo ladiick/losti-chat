@@ -1,6 +1,18 @@
-import { Box, Chip, Sheet, Skeleton, Tab, TabList, TabPanel, Tabs, tabClasses } from "@mui/joy";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { Create } from "@mui/icons-material";
+import {
+  Box,
+  Chip,
+  IconButton,
+  Sheet,
+  Skeleton,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  tabClasses,
+} from "@mui/joy";
+import { AnimatePresence, motion } from "framer-motion";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import useHistoryPopState from "../../components/hooks/useHistoryPopState";
 import { showFriendsPage } from "../../redux/slices/pages";
@@ -11,9 +23,13 @@ import FriendRequests from "./components/FriendRequests/FriendRequests";
 import MyFriends from "./components/MyFriends/MyFriends";
 import PossibleFriends from "./components/PossibleFriends/PossibleFriends";
 
+const FindFriendsModal = lazy(() => import("./Modal/FindFriendsModal"));
+
 const Friends = () => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);
+  const [findModal, setFindModal] = useState(false);
+
   const { data: allFriends = [], isFetching } = useGetFriendsQuery();
   const { data: friendRequests = [], isFetching: friendRequestsFetching } =
     useGetFriendsRequestsQuery();
@@ -142,6 +158,29 @@ const Friends = () => {
           <PossibleFriends data={possibleFriends} isFetching={possibleFriendsFetching} />
         </TabPanel>
       </Tabs>
+      <IconButton
+        variant="solid"
+        color="primary"
+        circle
+        size="xxl"
+        onClick={() => setFindModal(true)}
+        component={motion.button}
+        sx={{
+          position: "absolute",
+          bottom: "20px",
+          right: "20px",
+          zIndex: 100,
+        }}
+      >
+        <Create />
+      </IconButton>
+      <AnimatePresence>
+        {findModal && (
+          <Suspense>
+            <FindFriendsModal isOpen={findModal} setIsOpen={setFindModal} />
+          </Suspense>
+        )}
+      </AnimatePresence>
     </Sheet>
   );
 };

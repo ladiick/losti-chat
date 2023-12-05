@@ -1,25 +1,24 @@
+import { Search } from "@mui/icons-material";
+import { Box, CircularProgress, Input, List } from "@mui/joy";
 import React, { useEffect, useState } from "react";
-import s from "./FriendsFind.module.scss";
-import AllPeopleItem from "./components/AllPeopleItem/AllPeopleItem";
-import { useGetAllPeopleQuery } from "../../api/findPeopleApiSlice";
-import { useAcceptFriendRequestsMutation } from "../../api/friendsApiSlice";
 import { toast } from "react-toastify";
 import { optionsNotification } from "../../../../components/actions/optionsNotification";
-import useMatchMedia from "../../../../components/hooks/useMatchMedia";
-import WrapperBlocks from '../../../../components/ui/WrapperBlocks/WrapperBlocks'
-import SearchBlock from '../../../../components/ui/SearchBlock/SearchBlock'
+import CustomScroll from "../../../../components/ui/CustomScroll/CustomScroll";
+import { useGetAllPeopleQuery } from "../../api/findPeopleApiSlice";
+import { useAcceptFriendRequestsMutation } from "../../api/friendsApiSlice";
+import AllPeopleItem from "./components/AllPeopleItem/AllPeopleItem";
+
 const FriendsFind = () => {
   const [searchValue, setSearch] = useState("");
-  const { isMobile } = useMatchMedia();
 
-  const { data: allPeople = [] } = useGetAllPeopleQuery();
-  const [acceptFriendRequests, { isError }] = useAcceptFriendRequestsMutation();
+  const { data: allPeople = [], isFetching } = useGetAllPeopleQuery();
+  const [acceptFriendRequests] = useAcceptFriendRequestsMutation();
 
   useEffect(() => {
     document.title = "Поиск друзей";
   }, []);
 
-  const handlerPeople = async (index, obj) => {
+  const handlerPeople = async (obj) => {
     try {
       await acceptFriendRequests({
         second_user: obj.pk,
@@ -32,16 +31,38 @@ const FriendsFind = () => {
   };
 
   return (
-    <WrapperBlocks title={"Поиск друзей"}>
-      <SearchBlock searchValue={searchValue} setSearch={setSearch} />
-      <div className={s.list__allpeople}>
-        {allPeople
-          ?.filter((obj) => obj.first_name.toLowerCase().includes(searchValue.toLowerCase()) || obj.last_name.toLowerCase().includes(searchValue.toLowerCase()))
-          .map((obj, index) => (
-            <AllPeopleItem key={obj.pk} obj={obj} index={index} handlerPeople={() => handlerPeople(index, obj)} />
-          ))}
-      </div>
-    </WrapperBlocks>
+    <>
+      <Input
+        value={searchValue}
+        onChange={(e) => setSearch(e.target.value)}
+        endDecorator={<Search />}
+      />
+
+      {isFetching ? (
+        <Box
+          sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+        >
+          <CircularProgress variant="plain" size="sm" sx={{ margin: "auto" }} />
+        </Box>
+      ) : (
+        <List sx={{ overflowY: "auto", gap: "4", maxHeight: "calc(100% - 36px)", ...CustomScroll }}>
+          {allPeople
+            ?.filter(
+              (obj) =>
+                obj.first_name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                obj.last_name.toLowerCase().includes(searchValue.toLowerCase()),
+            )
+            .map((obj, index) => (
+              <AllPeopleItem
+                key={obj.pk}
+                obj={obj}
+                index={index}
+                handlerPeople={() => handlerPeople(obj)}
+              />
+            ))}
+        </List>
+      )}
+    </>
   );
 };
 

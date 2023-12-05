@@ -1,36 +1,28 @@
+import { PersonAdd } from "@mui/icons-material";
+import { Avatar, IconButton, ListItem, ListItemButton, Stack, Typography } from "@mui/joy";
 import React from "react";
 import { Link } from "react-router-dom";
-import BtnAddFriend from "../../../BtnAddFriend/BtnAddFriend";
-import s from "./AllPeopleItem.module.scss";
-import Avatar from "../../../../../../components/ui/Avatar/Avatar";
-const AllPeopleItem = ({ obj, handlerPeople, index }) => {
-  return (
-    <div className={s.wrapper__people}>
-      <div className={s.about__user}>
-        <Link to={`/profile/${obj?.pk}`}>
-          <Avatar
-            image={obj?.image}
-            name={{ firstName: obj?.first_name, lastName: obj?.last_name }}
-            index={index}
-            style={{
-              width: 140,
-              height: 140,
-              fontSize: 32,
-              borderRadius: 8,
-            }}
-          />
-        </Link>
-        <div className={s.wrapper__link}>
-          <Link to={`/profile/${obj?.pk}`}>
-            <span>
-              {obj?.first_name} {obj?.last_name}
-            </span>
-          </Link>
 
-          <BtnAddFriend style={{ padding: 0, background: "transparent" }} handlerPeople={handlerPeople} />
-        </div>
-      </div>
-    </div>
+const AllPeopleItem = ({ obj, handlerPeople }) => {
+  return (
+    <ListItem>
+      <ListItemButton
+        sx={{ display: "flex", gap: "4", borderRadius: "sm" }}
+        component={Link}
+        to={`/?dialogs=${obj?.possible_friend?.pk}`}
+      >
+        <Avatar src={obj?.image} alt={obj?.first_name + " " + obj?.last_name} size="lg" />
+        <Stack direction="row" alignItems="center" justifyContent="space-between" width="100%">
+          <Typography color="primary">
+            {obj?.first_name} {obj?.last_name}
+          </Typography>
+
+          <IconButton onClick={handlerPeople} variant="outlined" title="Добавить в друзья">
+            <PersonAdd />
+          </IconButton>
+        </Stack>
+      </ListItemButton>
+    </ListItem>
   );
 };
 
