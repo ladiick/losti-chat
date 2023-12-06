@@ -20,6 +20,7 @@ import HeaderChat from "./components/HeaderChat/HeaderChat";
 const ViewForwardedMessage = lazy(() => import("./Modal/ViewForwardedMessage"));
 const ForwardMessageModal = lazy(() => import("./Modal/ForwardMessageModal"));
 const DetailedImageModal = lazy(() => import("./Modal/DetailedImageModal"));
+// const RightColumn = lazy(() => import("../RightColumn/RightColumn"));
 
 const Chat = () => {
   const theme = useTheme();
@@ -68,36 +69,39 @@ const Chat = () => {
   }
 
   return (
-    <WrapperBlocks
-      sx={{
-        p: 0,
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        bgcolor: theme.vars.palette.background.body,
-      }}
-    >
-      <HeaderChat myId={myId} isLoading={isLoading} peopleCurrent={peopleCurrent} />
-      <DragAndDropFileUpload style={{ display: "contents" }}>
-        <Communication />
-        <BlockInputs />
-      </DragAndDropFileUpload>
-      {isOpenDetailedForwardModal && (
-        <Suspense>
-          <ViewForwardedMessage />
-        </Suspense>
-      )}
-      {isOpenDetailedImage && (
-        <Suspense>
-          <DetailedImageModal />
-        </Suspense>
-      )}
-      {isOpenForwardModal && (
-        <Suspense>
-          <ForwardMessageModal />
-        </Suspense>
-      )}
-    </WrapperBlocks>
+    <>
+      <WrapperBlocks
+        sx={{
+          p: 0,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          bgcolor: theme.vars.palette.background.body,
+        }}
+      >
+        <HeaderChat myId={myId} isLoading={isLoading} peopleCurrent={peopleCurrent} />
+        <DragAndDropFileUpload style={{ display: "contents" }}>
+          <Communication />
+          <BlockInputs />
+        </DragAndDropFileUpload>
+        {isOpenDetailedForwardModal && (
+          <Suspense>
+            <ViewForwardedMessage />
+          </Suspense>
+        )}
+        {isOpenDetailedImage && (
+          <Suspense>
+            <DetailedImageModal />
+          </Suspense>
+        )}
+        {isOpenForwardModal && (
+          <Suspense>
+            <ForwardMessageModal />
+          </Suspense>
+        )}
+      </WrapperBlocks>
+      {/* <RightColumn /> */}
+    </>
   );
 };
 

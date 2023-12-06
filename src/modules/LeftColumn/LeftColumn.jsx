@@ -1,16 +1,19 @@
 import { AnimatePresence } from "framer-motion";
-import { createContext, useState } from "react";
+import { Suspense, createContext, lazy, useState } from "react";
 import { useSelector } from "react-redux";
 import WrapperBlocks from "../../components/ui/WrapperBlocks/WrapperBlocks";
 import { pageSelector } from "../../redux/slices/pages";
 import DialogsUsers from "../DialogsUsers/DialogsUsers";
-import Friends from "../Friends/Friends";
 import MainHeader from "./components/MainHeader";
+
+const Friends = lazy(() => import("../Friends/Friends"));
+const Settings = lazy(() => import("../Settings/Settings"));
 
 export const LeftColumnContext = createContext();
 
 const LeftColumn = () => {
   const { friends } = useSelector((state) => pageSelector(state));
+  const { settings } = useSelector((state) => pageSelector(state));
   const [searchValue, setSearchValue] = useState("");
 
   return (
@@ -31,7 +34,18 @@ const LeftColumn = () => {
       <LeftColumnContext.Provider value={{ searchValue, setSearchValue }}>
         <MainHeader />
         <DialogsUsers />
-        <AnimatePresence>{friends && <Friends />}</AnimatePresence>
+        <AnimatePresence>
+          {friends && (
+            <Suspense>
+              <Friends />
+            </Suspense>
+          )}
+          {settings && (
+            <Suspense>
+              <Settings />
+            </Suspense>
+          )}
+        </AnimatePresence>
       </LeftColumnContext.Provider>
     </WrapperBlocks>
   );

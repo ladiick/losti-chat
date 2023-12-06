@@ -1,15 +1,23 @@
 import { ArrowDownward } from "@mui/icons-material";
-import { Box, CircularProgress, IconButton, useTheme } from "@mui/joy";
-import React, { forwardRef, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { Box, CircularProgress, IconButton } from "@mui/joy";
+import React, {
+  Fragment,
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import _ from "underscore";
 import { MyContext } from "../../../../Pages/Layout/Layout";
-import CustomScroll from "../../../../components/ui/CustomScroll/CustomScroll";
 import { clearSelectMessages, selectMessages } from "../../../../redux/slices/messageSlice";
 import { useGetMessageQuery } from "../../api/messageApiSlice";
 import { addNewMessage } from "../../helpers/helpersMessage";
+import styles from "./Communication.module.scss";
 import ListMessages from "./components/ListMessages";
 
 function findPeopleIndex(people, chat) {
@@ -20,17 +28,16 @@ function findPeopleIndex(people, chat) {
 
 function Communication() {
   const dispatch = useDispatch();
-  const theme = useTheme();
   const [searchParams] = useSearchParams();
   const [scrollButton] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const param = searchParams.get("dialogs");
   const [messages, setMessages] = useState([]);
   const { newMessage } = useContext(MyContext);
   const people = useSelector((state) => state.people.people);
   const myId = useSelector((state) => state.user.aboutUser.id);
   const [firstItemIndex, setFirstItemIndex] = useState(0);
   const virtuoso = useRef(null);
+  const param = searchParams.get("dialogs");
 
   const { data, isFetching: isFetchingMessages } = useGetMessageQuery({
     id: param,
@@ -39,6 +46,7 @@ function Communication() {
 
   useEffect(
     () => () => {
+      setFirstItemIndex(0);
       setCurrentPage(1);
       setMessages([]);
       dispatch(clearSelectMessages());
@@ -82,13 +90,13 @@ function Communication() {
     },
     [dispatch],
   );
+
   const prependItems = useCallback(() => {
-    if (data?.next) {
+    if (data?.next && !isFetchingMessages) {
       setCurrentPage((pre) => pre + 1);
-      return true;
     }
     return false;
-  }, [data?.next]);
+  }, [data?.next, isFetchingMessages]);
 
   const itemContent = useCallback(
     (index, item) => {
@@ -102,21 +110,6 @@ function Communication() {
     },
     [handlerCurrentMessage],
   );
-
-  const CustomScrollbar = forwardRef(function Scroller(props, ref) {
-    return (
-      <Box
-        component="div"
-        ref={ref}
-        sx={{
-          overflowX: "hidden",
-          height: "100%",
-          ...CustomScroll,
-        }}
-        {...props}
-      />
-    );
-  });
 
   const List = forwardRef(function List(props, ref) {
     return (
@@ -138,7 +131,7 @@ function Communication() {
 
   if (isFetchingMessages && currentPage === 1 && !messages?.length) {
     return (
-      <Box flexGrow={1} position="relative" bgcolor={theme.vars.palette.background.body}>
+      <Box flexGrow={1} position="relative" bgcolor="background.body">
         <Box position="absolute" top="50%" left="50%">
           <CircularProgress size="sm" variant="plain" />
         </Box>
@@ -147,24 +140,20 @@ function Communication() {
   }
 
   return (
-    <>
+    <Fragment key={param}>
       <Virtuoso
-        styles={{
-          height: "100%",
-          overflowX: "hidden",
-          background: theme.vars.palette.background.body,
-        }}
+        className={styles.scroll}
         firstItemIndex={Math.min(firstItemIndex, 0)}
         data={messages}
         startReached={prependItems}
         initialTopMostItemIndex={messages?.length - 1}
-        totalCount={Math.max(messages?.length, 1)}
+        totalCount={messages?.length}
         itemContent={itemContent}
         ref={virtuoso}
-        components={{ List, Scroller: CustomScrollbar }}
+        components={{ List }}
         followOutput={(isAtBottom) => {
           if (isAtBottom) {
-            return "smooth";
+            return true;
           } else {
             return false;
           }
@@ -197,7 +186,7 @@ function Communication() {
           <ArrowDownward />
         </IconButton>
       </Box>
-    </>
+    </Fragment>
   );
 }
 

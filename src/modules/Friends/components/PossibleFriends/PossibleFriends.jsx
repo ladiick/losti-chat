@@ -7,7 +7,7 @@ import CustomScroll from "../../../../components/ui/CustomScroll/CustomScroll";
 import { useAcceptFriendRequestsMutation } from "../../api/friendsApiSlice";
 import PossibleFriendsItem from "./components/PossibleFriendsItem/PossibleFriendsItem";
 
-const PossibleFriends = ({ data, isFetching }) => {
+const PossibleFriends = ({ data }) => {
   const [acceptFriendRequests] = useAcceptFriendRequestsMutation();
 
   const handlerPeople = async (obj) => {
@@ -46,12 +46,7 @@ const PossibleFriends = ({ data, isFetching }) => {
   }
 
   return (
-    <List
-      sx={{ overflowY: "auto", gap: "4", ...CustomScroll }}
-      component={motion.div}
-      initial={{ left: -100, opacity: 0 }}
-      animate={{ left: 0, opacity: 1 }}
-    >
+    <List sx={{ overflowY: "auto", gap: "4px", ...CustomScroll }}>
       {data?.map((obj) => (
         <PossibleFriendsItem
           key={obj.possible_friend.pk}

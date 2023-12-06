@@ -13,7 +13,7 @@ const DialogsUsers = () => {
   const dispatch = useDispatch();
   const myId = useSelector((state) => state.user.aboutUser.id);
   const people = useSelector((state) => state.people.people);
-  const { searchValue, setSearchValue } = useContext(LeftColumnContext);
+  const { searchValue } = useContext(LeftColumnContext);
 
   const { isLoading, isError } = useGetPeopleQuery();
 
@@ -24,7 +24,6 @@ const DialogsUsers = () => {
     if (isMobile) {
       dispatch(openChatBlock(true));
     }
-    dispatch(setSearchValue(""));
   };
 
   if (isLoading || isError) {

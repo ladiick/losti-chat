@@ -41,8 +41,8 @@ const FriendsItem = ({ obj, requests, handlerCancel, handlerAccept }) => {
   return (
     <ListItem
       component={motion.div}
-      initial={{ left: -100, opacity: 0 }}
-      animate={{ left: 0, opacity: 1 }}
+      initial={{ top: -100, opacity: 0 }}
+      animate={{ top: 0, opacity: 1 }}
     >
       <ListItemButton
         sx={{ display: "flex", gap: "4", borderRadius: "sm" }}

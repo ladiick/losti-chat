@@ -66,12 +66,7 @@ const FriendRequests = ({ data, isFetching }) => {
       <CircularProgress variant="plain" size="sm" sx={{ margin: "auto" }} />
     </Box>
   ) : (
-    <List
-      sx={{ overflowY: "auto", gap: "4", ...CustomScroll }}
-      component={motion.div}
-      initial={{ left: -100, opacity: 0 }}
-      animate={{ left: 0, opacity: 1 }}
-    >
+    <List sx={{ overflowY: "auto", gap: "4px", ...CustomScroll }}>
       {data.map((obj, index) => (
         <FriendsItem
           key={obj.pk}

@@ -3,10 +3,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { changeDeclination } from "../../../../../../components/actions/changeDeclination";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { motion } from "framer-motion";
 
 const PossibleFriendsItem = ({ obj, handlerPeople }) => {
   return (
-    <ListItem>
+    <ListItem
+      component={motion.div}
+      initial={{ top: -100, opacity: 0 }}
+      animate={{ top: 0, opacity: 1 }}
+    >
       <ListItemButton
         sx={{ display: "flex", gap: "4", borderRadius: "sm" }}
         component={Link}

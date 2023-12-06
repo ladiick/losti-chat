@@ -32,6 +32,7 @@ const FindFriendsModal = ({ isOpen, setIsOpen }) => {
           display: "flex",
           flexDirection: "column",
           gap: "4px",
+          outline: "none",
         }}
       >
         <FriendsFind />

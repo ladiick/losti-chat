@@ -29,7 +29,7 @@ const Friends = () => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);
   const [findModal, setFindModal] = useState(false);
-
+  const [visibleFindButton, setVisibleFindButton] = useState(false);
   const { data: allFriends = [], isFetching } = useGetFriendsQuery();
   const { data: friendRequests = [], isFetching: friendRequestsFetching } =
     useGetFriendsRequestsQuery();
@@ -44,12 +44,21 @@ const Friends = () => {
     dispatch(showFriendsPage(false));
   });
 
+  const toggleVisibleFindButtonStart = () => {
+    setVisibleFindButton(true);
+  };
+  const toggleVisibleFindButtonEnd = () => {
+    setVisibleFindButton(false);
+  };
+
   return (
     <Sheet
       component={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ left: -100, opacity: 0 }}
+      animate={{ left: 0, opacity: 1 }}
+      exit={{ left: -100, opacity: 0 }}
+      onHoverStart={toggleVisibleFindButtonStart}
+      onHoverEnd={toggleVisibleFindButtonEnd}
       sx={{
         position: "absolute",
         top: "3.5rem",
@@ -165,6 +174,17 @@ const Friends = () => {
         size="xxl"
         onClick={() => setFindModal(true)}
         component={motion.button}
+        initial={{ bottom: 0, opacity: 0 }}
+        title="Написать новое сообщение"
+        animate={
+          visibleFindButton
+            ? {
+                bottom: "20px",
+                opacity: 1,
+              }
+            : { bottom: 0, opacity: 0 }
+        }
+        transition={{ type: "spring", duration: 0.3 }}
         sx={{
           position: "absolute",
           bottom: "20px",

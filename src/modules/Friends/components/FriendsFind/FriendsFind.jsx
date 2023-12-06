@@ -1,5 +1,5 @@
 import { Search } from "@mui/icons-material";
-import { Box, CircularProgress, Input, List } from "@mui/joy";
+import { Box, CircularProgress, Input, List, Typography } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { optionsNotification } from "../../../../components/actions/optionsNotification";
@@ -32,6 +32,7 @@ const FriendsFind = () => {
 
   return (
     <>
+      <Typography sx={{ mb: "0.25rem" }}>Новое сообщение</Typography>
       <Input
         value={searchValue}
         onChange={(e) => setSearch(e.target.value)}
@@ -45,7 +46,15 @@ const FriendsFind = () => {
           <CircularProgress variant="plain" size="sm" sx={{ margin: "auto" }} />
         </Box>
       ) : (
-        <List sx={{ overflowY: "auto", gap: "4", maxHeight: "calc(100% - 36px)", ...CustomScroll }}>
+        <List
+          sx={{
+            overflowY: "auto",
+            gap: "4px",
+            pr: "0.5rem",
+            maxHeight: "calc(100% - 36px)",
+            ...CustomScroll,
+          }}
+        >
           {allPeople
             ?.filter(
               (obj) =>

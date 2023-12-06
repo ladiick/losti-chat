@@ -44,12 +44,11 @@ const PeopleItem = ({ flag, message, handlerPeople, time, obj }) => {
   }
 
   return (
-    <ListItem title={obj.first_name + " " + obj.last_name} variant="plain">
+    <ListItem title={obj.first_name + " " + obj.last_name} variant="plain" onClick={handlerPeople}>
       <ListItemButton
         selected={activeItem}
         to={`/?dialogs=${obj.pk}`}
         component={Link}
-        onClick={handlerPeople}
         color="neutral"
         sx={{ borderRadius: "sm" }}
       >

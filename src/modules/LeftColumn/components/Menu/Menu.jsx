@@ -1,12 +1,18 @@
 import { ArrowBack, Bookmark, HelpOutline, Menu, People, Settings } from "@mui/icons-material";
-import { Box, IconButton, ListItemDecorator, Sheet, Typography, useTheme } from "@mui/joy";
+import { Box, IconButton, List, Sheet, Typography, useTheme } from "@mui/joy";
 import { useState } from "react";
 // import { useDispatch } from "react-redux";
 // import { showFriendsPage } from "../../../../redux/slices/pages";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { pageSelector, showFriendsPage } from "../../../../redux/slices/pages";
+import {
+  closePages,
+  pageSelector,
+  showFriendsPage,
+  showSettingsPage,
+} from "../../../../redux/slices/pages";
+import MenuItem from "./MenuItem";
 
 const toggleIconClosed = {
   rotate: 180,
@@ -22,9 +28,9 @@ const toggleIconOpen = {
   },
 };
 
-const HeaderMenu = ({ children }) => {
+const HeaderMenu = () => {
   const myId = useSelector((state) => state.user.aboutUser.id);
-  const { friends } = useSelector((state) => pageSelector(state));
+  const { friends, settings } = useSelector((state) => pageSelector(state));
   const dispatch = useDispatch();
   const [dropdown, setDropdown] = useState(false);
   const theme = useTheme();
@@ -35,28 +41,36 @@ const HeaderMenu = ({ children }) => {
     window.history.pushState({}, null, null);
   };
 
-  const closeFriendPage = () => {
-    dispatch(showFriendsPage(false));
+  const openSettings = () => {
+    setDropdown((pre) => !pre);
+    dispatch(showSettingsPage(true));
+    window.history.pushState({}, null, null);
+  };
+
+  const togglePage = () => {
+    if (friends || settings) {
+      setDropdown(false);
+      dispatch(closePages());
+    } else {
+      setDropdown(true);
+    }
   };
 
   return (
     <Box sx={{ position: "relative" }}>
-      <IconButton
-        variant="outlined"
-        onClick={() => {
-          friends && closeFriendPage();
-          !friends && setDropdown((pre) => !pre);
-        }}
-      >
+      <IconButton variant="outlined" onClick={togglePage}>
         <Box
           sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
           component={motion.div}
-          initial={toggleIconClosed}
-          animate={friends ? toggleIconOpen : toggleIconClosed}
+          initial={false}
+          animate={friends || settings ? toggleIconOpen : toggleIconClosed}
         >
-          {friends ? <ArrowBack /> : <Menu />}
+          {friends || settings ? <ArrowBack /> : <Menu />}
         </Box>
       </IconButton>
+      {dropdown && (
+        <Box sx={{ position: "fixed", inset: 0, zIndex: 30 }} onClick={() => setDropdown(false)} />
+      )}
       <Sheet
         color="neutral"
         sx={{
@@ -87,31 +101,20 @@ const HeaderMenu = ({ children }) => {
         }
         transition={{ type: "Tween", duration: "0.25" }}
       >
-        <MenuItem to={`/?dialogs=${myId}`} component={Link}>
-          <ListItemDecorator>
-            <Bookmark />
-          </ListItemDecorator>
-          Избранное
-        </MenuItem>
-        <MenuItem onClick={openFriends}>
-          <ListItemDecorator>
-            <People />
-          </ListItemDecorator>
-          Друзья
-        </MenuItem>
-        <MenuItem to={`/settings`} component={Link}>
-          <ListItemDecorator>
-            <Settings />
-          </ListItemDecorator>
-          Настройки
-        </MenuItem>
-        <MenuItem to={`#`} component={Link}>
-          <ListItemDecorator>
-            <HelpOutline />
-          </ListItemDecorator>
-          Возможности Losti-Chat
-        </MenuItem>
-
+        <List sx={{ p: "0.5rem" }}>
+          <MenuItem to={`/?dialogs=${myId}`} component={Link} icon={<Bookmark />}>
+            Избранное
+          </MenuItem>
+          <MenuItem onClick={openFriends} icon={<People />}>
+            Друзья
+          </MenuItem>
+          <MenuItem onClick={openSettings} icon={<Settings />}>
+            Настройки
+          </MenuItem>
+          <MenuItem to={`#`} component={Link} icon={<HelpOutline />}>
+            Возможности Losti-Chat
+          </MenuItem>
+        </List>
         <Typography sx={{ pt: "0.75rem", userSelect: "none" }} textAlign="center" level="body-xs">
           Losti-Chat Web
         </Typography>
@@ -119,22 +122,5 @@ const HeaderMenu = ({ children }) => {
     </Box>
   );
 };
-
-const MenuItem = ({ children, ...props }) => (
-  <Box
-    {...props}
-    sx={{
-      display: "flex",
-      gap: "16px",
-      alignItems: "center",
-      padding: "8px 16px",
-      cursor: "pointer",
-      transition: "all .3s",
-      "&:hover": { background: "rgba(0,0,0,0.4)" },
-    }}
-  >
-    {children}
-  </Box>
-);
 
 export default HeaderMenu;
